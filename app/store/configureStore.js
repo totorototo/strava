@@ -26,7 +26,7 @@ export default function configureStore() {
             realtime: true, port: 8000
         });
 
-    const store = createStore(reducers, /* preloadedState, */ composeEnhancers(
+    const store = createStore(reducers, /* preloadedState, */ compose(
         applyMiddleware(...middleware),
         // other store enhancers if any
     ));

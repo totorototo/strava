@@ -12,7 +12,7 @@ import { Provider, connect } from 'react-redux'
 //TODO: refacto -> move to /route/index.js
 const Scenes = Actions.create(
     <Scene key="root" hideNavBar={true}>
-        <Scene key="login" component={LoginContainer}/>
+        <Scene key="login" component={LoginContainer} hideNavBar={true}/>
         <Scene key="home" component={HomeContainer}/>
     </Scene>
 );
