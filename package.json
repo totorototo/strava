@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "http": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8081 tcp:8081",
     "remotedev": "remotedev --hostname=localhost --port=8000",
     "test": "jest"
   },
