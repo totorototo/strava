@@ -1,20 +1,16 @@
 import * as restConstants from '../constants/rest'
 
-export const dataset = (endpoint, resource, method, token, body, language) => {
+export const dataset = (endpoint, resource, method, token, body, contentType) => {
 
     let url = endpoint + resource;
     let headers = new Headers();
-
-    if ((method === restConstants.METHODS.POST || method === restConstants.METHODS.PUT) && body) {
-        headers.append('Content-Type', restConstants.APPLICATION_TYPE.JSON);
-    }
 
     headers.append('Accept', 'application/json');
     headers.append('Origin', '*');
     headers.append('Cache-Control', 'no-cache');
 
-    if (language) {
-        headers.append('Accept-Language', language);
+    if(contentType && body && ((method === restConstants.METHODS.POST || method === restConstants.METHODS.PUT))){
+        headers.append('Content-Type', contentType);
     }
 
     if (token) {
@@ -35,6 +31,7 @@ export const dataset = (endpoint, resource, method, token, body, language) => {
             reject()
         }, 30000);
 
+        console.log('url: ' + url);
         fetch(url, params).then(response => {
 
             if (200 <= response.status && response.status <= 299) {

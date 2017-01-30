@@ -6,17 +6,17 @@ export function login() {
     }
 }
 
-export function getTemporaryAcessToken(access_token){
+export function getTemporaryAcessToken(temporary_access_token){
     return{
         type: types.GET_TEMPORARY_ACCESS_TOKEN,
-        access_token
+        temporary_access_token
     }
 }
 
-export function getAccessToken(token){
+export function getAccessToken(access_token){
     return{
         type: types.GET_ACCESS_TOKEN,
-        token
+        access_token
     }
 }
 

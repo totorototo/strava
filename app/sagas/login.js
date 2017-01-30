@@ -24,19 +24,26 @@ function* logout(){
     }
 }
 
-function* authorize(access_token) {
+function* authorize(temporary_access_token) {
     try {
 
+        //TODO: use config file to retrieve client id + client secret.
+        let formData  = new FormData();
+        formData.append('client_id', '15688');
+        formData.append('client_secret', '');
+        formData.append('code', temporary_access_token);
+
         //1- convert access-token
-        const response = yield(dataset, rest.API_ENDPOINT, rest.RESOURCES.OAUTH, rest.METHODS.POST);
+        const response = yield call(dataset, rest.API_ENDPOINT, rest.RESOURCES.OAUTH, rest.METHODS.POST, null, formData, rest.APPLICATION_TYPE.FORM_DATA);
 
         //2- store token
-        yield put(login.getAccessToken(response.token));
+        let token = response.data.content.access_token;
+        yield put(login.getAccessToken(token));
 
         //3- route application
-        yield call(Actions.home);
+        yield call(Actions.localhost);
 
-        return response.token;
+        return token;
     }
     catch (error) {
         throw error;
@@ -65,6 +72,5 @@ export function* authenticationFlowSaga() {
         }
     }
     catch (error) {
-        //TODO: cancellation task?
     }
 }

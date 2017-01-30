@@ -3,6 +3,8 @@ import{Linking} from 'react-native';
 
 import configureStore from './store/configureStore';
 
+import * as login from './actions/login'
+
 //temp
 import { Actions, Router, Scene } from 'react-native-router-flux'
 import HomeContainer from './routes/home/containers/HomeContainer'
@@ -10,6 +12,9 @@ import LoginContainer from './routes/login/containers/LoginContainer'
 
 
 import { Provider, connect } from 'react-redux'
+
+
+const store = configureStore();
 
 //TODO: use react navigation instead.
 const Scenes = Actions.create(
@@ -27,20 +32,17 @@ function handleOpenURL(url) {
     if(url != null){
         let myRegexp = /(?:&code=)(\w*)/g;
         let match = myRegexp.exec(url);
-
-        //dispatch action - access token -> saga
+        store.dispatch(login.getTemporaryAcessToken(match[1]));
     }
 }
 
 Linking.addEventListener('url',(event) => handleOpenURL(event.url));
 
+
 export default class App extends Component {
 
     constructor() {
         super();
-        this.state = {
-            store: configureStore(),
-        };
     }
 
     componentDidMount() {
@@ -55,7 +57,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <Provider store={this.state.store}>
+            <Provider store={store}>
                 <ConnectedRouter scenes={Scenes}/>
             </Provider>
         );
