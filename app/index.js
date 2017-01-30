@@ -27,7 +27,6 @@ function handleOpenURL(url) {
     if(url != null){
         let myRegexp = /(?:&code=)(\w*)/g;
         let match = myRegexp.exec(url);
-        console.log(match[1]);
 
         //dispatch action - access token -> saga
     }
