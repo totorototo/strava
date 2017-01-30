@@ -3,7 +3,7 @@ export const API_ENDPOINT = 'https://www.strava.com/api';
 
 // resources
 export const RESOURCES = {
-    OAUTH: '/v3/oauth',
+    OAUTH: '/oauth/token',
     ATHLETE: '/v3/athlete',
     ACTIVITIES: '/v3/activities',
     CLUBS: '/v3/clubs',

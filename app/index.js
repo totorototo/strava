@@ -19,7 +19,7 @@ const Scenes = Actions.create(
     </Scene>
 );
 
-//TODO: AppContainer?
+//TODO: use react navigation instead.
 const ConnectedRouter = connect()(Router);
 
 function handleOpenURL(url) {
@@ -44,7 +44,6 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-
         let url = Linking.getInitialURL()
             .then(handleOpenURL)
             .catch(err => console.error('An error occurred', err));
