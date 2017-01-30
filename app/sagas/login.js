@@ -1,8 +1,8 @@
 //redux-saga
 import {put, select, call} from 'redux-saga/effects'
 
-//services
-import {dataset} from '../services/dataset'
+//helpers
+import {dataset} from '../helpers/dataset'
 
 import {Actions} from 'react-native-router-flux';
 

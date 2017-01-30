@@ -11,7 +11,7 @@ import LoginContainer from './routes/login/containers/LoginContainer'
 
 import { Provider, connect } from 'react-redux'
 
-//TODO: refacto -> move to /route/index.js
+//TODO: use react navigation instead.
 const Scenes = Actions.create(
     <Scene key="root" hideNavBar={true}>
         <Scene key="login" component={LoginContainer} hideNavBar={true}/>
@@ -25,9 +25,11 @@ const ConnectedRouter = connect()(Router);
 function handleOpenURL(url) {
 
     if(url != null){
-        let arr = url.split(/&code=/);
-        let token = arr[1];
-        Actions.localhost();
+        let myRegexp = /(?:&code=)(\w*)/g;
+        let match = myRegexp.exec(url);
+        console.log(match[1]);
+
+        //dispatch action - access token -> saga
     }
 }
 
