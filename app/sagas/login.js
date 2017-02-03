@@ -1,9 +1,6 @@
 //redux-saga
 import {put, select, call, take} from 'redux-saga/effects'
 
-//helpers
-import {dataset} from '../helpers/dataset'
-
 //router
 import {Actions} from 'react-native-router-flux';
 
@@ -11,8 +8,10 @@ import {Actions} from 'react-native-router-flux';
 import * as login from '../actions/login';
 
 //constants
-import * as rest from '../constants/rest'
 import * as types from '../constants/actionTypes'
+
+//service
+import {fetchToken} from './../services/login'
 
 function* logout(){
     try{
@@ -34,10 +33,10 @@ function* authorize(temporary_access_token) {
         formData.append('code', temporary_access_token);
 
         //1- convert access-token
-        const response = yield call(dataset, rest.API_ENDPOINT, rest.RESOURCES.OAUTH, rest.METHODS.POST, null, formData, rest.APPLICATION_TYPE.FORM_DATA);
+        const response = yield call(fetchToken, formData);
 
         //2- store token
-        let token = response.data.content.access_token;
+        let token = response.data.access_token;
         yield put(login.getAccessToken(token));
 
         //3- route application

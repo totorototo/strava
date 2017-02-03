@@ -9,6 +9,7 @@ let INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&respon
 
 export default class Login extends Component {
 
+    //TODO: to be fixed....
     onShouldStartLoadWithRequest = (event) => {
         if(this.refs != null){
             if(!event.url.startsWith('strava://localhost')){
@@ -28,9 +29,6 @@ export default class Login extends Component {
                 ref={WEBVIEW_REF}
                 source={{uri: INITIAL_URI}}
                 style={{marginTop: 20}}
-                onNavigationStateChange={this.onShouldStartLoadWithRequest}
-                onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
-
             />
         );
     }
