@@ -9,18 +9,17 @@ let INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&respon
 
 export default class Login extends Component {
 
-    //TODO: to be fixed....
     onShouldStartLoadWithRequest = (event) => {
-        if(this.refs != null){
-            if(!event.url.startsWith('strava://localhost')){
-                return true;
-            }else{
-                this.refs[WEBVIEW_REF].stopLoading();            //Some reference to your WebView to make it stop loading that URL
-                return false;
-            }
-        }
+        // if(this.refs != null){
+        //     if(!event.url.startsWith('strava://localhost')){
+        //         return true;
+        //     }else{
+        //         this.refs[WEBVIEW_REF].stopLoading();            //Some reference to your WebView to make it stop loading that URL
+        //         return false;
+        //     }
+        // }
         return true;
-    }
+    };
 
     render() {
 
@@ -29,6 +28,9 @@ export default class Login extends Component {
                 ref={WEBVIEW_REF}
                 source={{uri: INITIAL_URI}}
                 style={{marginTop: 20}}
+                onNavigationStateChange={this.onShouldStartLoadWithRequest}
+                onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
+
             />
         );
     }
