@@ -6,6 +6,7 @@ import {Actions} from 'react-native-router-flux';
 
 //actions
 import * as login from '../actions/login';
+import * as athlete from '../actions/athlete'
 
 //constants
 import * as types from '../constants/actionTypes'
@@ -39,7 +40,11 @@ function* authorize(temporary_access_token) {
         let token = response.data.access_token;
         yield put(login.getAccessToken(token));
 
-        //3- route application
+        //3- get athlete details
+        let details = response.data.athlete;
+        yield put(athlete.getAthleteDetails(details));
+
+        //4- route application
         yield call(Actions.localhost);
 
         return token;
