@@ -1,7 +1,10 @@
-'use strict';
-
+//react
 import React, {Component} from 'react';
+
+//react-native
 import {View, Text} from 'react-native';
+
+//rnrf
 import { Actions } from 'react-native-router-flux';
 
 export default class Home extends Component {
