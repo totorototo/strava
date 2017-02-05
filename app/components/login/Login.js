@@ -1,27 +1,25 @@
 // react
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 // react-native
-import { View, Text, Linking, WebView } from 'react-native';
+import { WebView } from 'react-native';
 
 // rnrf
 // import { Actions } from 'react-native-router-flux';
 
-const WEBVIEW_REF = 'webview';
 const INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&response_type=code&redirect_uri=strava://localhost&scope=public';
 
 export default class Login extends Component {
 
-  onShouldStartLoadWithRequest = event =>
-    // if(this.refs != null){
-    //     if(!event.url.startsWith('strava://localhost')){
-    //         return true;
-    //     }else{
-    //         this._webView.stopLoading();
-    // Some reference to your WebView to make it stop loading that URL
-    //         return false;
-    //     }
+  onShouldStartLoadWithRequest = (event) => {
+    // if (this.refs != null) {
+    //   if (!event.url.startsWith('strava://localhost')) {
+    //     return true;
+    //   }
+    //   this._webView.stopLoading();
+    //   return false;
     // }
-    true;
+    return true;
+  };
 
   render() {
     return (
@@ -38,6 +36,3 @@ export default class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-};
