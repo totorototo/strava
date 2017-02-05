@@ -17,7 +17,7 @@ export default class Login extends Component {
         //     if(!event.url.startsWith('strava://localhost')){
         //         return true;
         //     }else{
-        //         this.refs[WEBVIEW_REF].stopLoading();            //Some reference to your WebView to make it stop loading that URL
+        //         this._webView.stopLoading();            //Some reference to your WebView to make it stop loading that URL
         //         return false;
         //     }
         // }
@@ -28,7 +28,7 @@ export default class Login extends Component {
 
        return (
             <WebView
-                ref={WEBVIEW_REF}
+                ref={(ref)=>{this._webView = ref}}
                 source={{uri: INITIAL_URI}}
                 style={{marginTop: 20}}
                 onNavigationStateChange={this.onShouldStartLoadWithRequest}
