@@ -22,13 +22,13 @@ function* signout() {
   }
 }
 
-function* authorize(temporary_access_token) {
+function* authorize(temporaryAccessToken) {
   try {
     // TODO: use config file to retrieve client id + client secret.
     const formData = new FormData();
     formData.append('client_id', '15688');
     formData.append('client_secret', '');
-    formData.append('code', temporary_access_token);
+    formData.append('code', temporaryAccessToken);
 
     // 1- convert access-token
     const response = yield call(fetchToken, formData);
@@ -54,8 +54,8 @@ export function* authenticationFlowSaga() {
   try {
     // eslint-disable no-constant-condition
     while (true) {
-      const { temporary_access_token } = yield take(GET_TEMPORARY_ACCESS_TOKEN);
-      let token = yield call(authorize, temporary_access_token);
+      const { temporaryAccessToken } = yield take(GET_TEMPORARY_ACCESS_TOKEN);
+      let token = yield call(authorize, temporaryAccessToken);
       if (token) {
         let userSignedOut;
         while (!userSignedOut) {
