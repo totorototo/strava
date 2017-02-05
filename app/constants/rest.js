@@ -1,9 +1,9 @@
 // api endpoint
-export const API_ENDPOINT = 'https://www.strava.com/api';
+export const API_ENDPOINT = 'https://www.strava.com';
 
 // resources
 export const RESOURCES = {
-    OAUTH: '/v3/oauth',
+    OAUTH: '/oauth/token',
     ATHLETE: '/v3/athlete',
     ACTIVITIES: '/v3/activities',
     CLUBS: '/v3/clubs',
@@ -22,5 +22,6 @@ export const METHODS = {
 // application type
 export const APPLICATION_TYPE = {
     JSON: 'application/json',
-    'OCTET_STREAM': 'application/octet-stream'
+    OCTET_STREAM: 'application/octet-stream',
+    FORM_DATA: 'multipart/form-data'
 };
