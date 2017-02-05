@@ -1,12 +1,12 @@
 //redux-saga
-import {put, select, call, take} from 'redux-saga/effects'
+import {put, call, take} from 'redux-saga/effects'
 
 //router
 import {Actions} from 'react-native-router-flux';
 
 //actions
-import * as login from '../actions/login';
-import * as athlete from '../actions/athlete'
+import {getAccessToken} from '../actions/login';
+import {getAthleteDetails} from '../actions/athlete'
 
 //constants
 import * as types from '../constants/actionTypes'
@@ -38,11 +38,11 @@ function* authorize(temporary_access_token) {
 
         //2- store token
         let token = response.data.access_token;
-        yield put(login.getAccessToken(token));
+        yield put(getAccessToken(token));
 
         //3- get athlete details
         let details = response.data.athlete;
-        yield put(athlete.getAthleteDetails(details));
+        yield put(getAthleteDetails(details));
 
         //4- route application
         yield call(Actions.localhost);
