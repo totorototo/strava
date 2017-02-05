@@ -1,9 +1,10 @@
 //react
 import React, {Component, PropTypes} from 'react';
+
+//rnrf
 import {Router} from 'react-native-router-flux';
-import {Provider} from 'react-redux';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+
+import {Provider, connect} from 'react-redux';
 
 class AppContainer extends Component {
 
@@ -29,15 +30,4 @@ class AppContainer extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect()(AppContainer);
