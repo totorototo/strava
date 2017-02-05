@@ -9,7 +9,7 @@ import {getAccessToken, logout} from '../actions/login';
 import {getAthleteDetails} from '../actions/athlete'
 
 //constants
-import * as types from '../constants/actionTypes'
+import {LOGOUT, GET_TEMPORARY_ACCESS_TOKEN} from '../constants/actionTypes'
 
 //service
 import {fetchToken} from './../services/login'
@@ -62,14 +62,14 @@ export function* authenticationFlowSaga() {
 
         while (true) {
 
-            const {temporary_access_token} = yield take(types.GET_TEMPORARY_ACCESS_TOKEN);
+            const {temporary_access_token} = yield take(GET_TEMPORARY_ACCESS_TOKEN);
             let token = yield call(authorize, temporary_access_token);
 
             if (token) {
                 let userSignedOut;
                 while (!userSignedOut) {
 
-                    yield take(types.LOGOUT);
+                    yield take(LOGOUT);
                     userSignedOut = true;
                     token = null;
 
