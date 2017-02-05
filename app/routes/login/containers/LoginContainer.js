@@ -1,30 +1,19 @@
 // react
 import React, { Component, PropTypes } from 'react';
+
+// redux
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// actions
-import * as loginActions from '../../../actions/login';
+
+// components
 import Login from '../../../components/login/Login';
 
 class LoginContainer extends Component {
 
   render() {
-    const { loginActions } = this.props;
-
     return (
-      <Login login={loginActions.login} />
+      <Login />
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    loginActions: bindActionCreators(loginActions, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect()(LoginContainer);
