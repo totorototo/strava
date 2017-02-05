@@ -17,8 +17,8 @@ const store = configureStore();
 
 // TODO: use react navigation or react-router v4 instead.
 const Scenes = Actions.create(
-  <Scene key="root" hideNavBar>
-    <Scene key="login" component={LoginContainer} hideNavBar />
+  <Scene key="root" hideNavBar={true}>
+    <Scene key="login" component={LoginContainer} hideNavBar={true} />
     <Scene key="localhost" component={HomeContainer} />
   </Scene>,
 );
@@ -40,7 +40,7 @@ export default class App extends Component {
 
   componentDidMount() {
     // eslint-disable-statement no-console
-    const url = Linking.getInitialURL()
+    Linking.getInitialURL()
       .then(handleOpenURL)
       .catch(err => console.error('An error occurred', err));
   }
