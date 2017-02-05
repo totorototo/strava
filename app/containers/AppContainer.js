@@ -1,33 +1,32 @@
-//react
-import React, {Component, PropTypes} from 'react';
+// react
+import React, { Component, PropTypes } from 'react';
 
-//rnrf
-import {Router} from 'react-native-router-flux';
+// rnrf
+import { Router } from 'react-native-router-flux';
 
-import {Provider, connect} from 'react-redux';
+import { Provider, connect } from 'react-redux';
 
 class AppContainer extends Component {
 
-    static propTypes = {
-        store: PropTypes.object.isRequired,
-        scenes: PropTypes.object.isRequired
-    };
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+    scenes: PropTypes.object.isRequired,
+  };
 
-    componentWillReceiveProps(nextProps) {
-    }
+  // componentWillReceiveProps(nextProps) {
+  // }
 
-    render() {
+  render() {
+    const { scenes, store } = this.props;
 
-        const {scenes, store} = this.props;
-
-        return (
-            <Provider store={store}>
-                <Router>
-                    {scenes}
-                </Router>
-            </Provider>
-        );
-    }
+    return (
+      <Provider store={store}>
+        <Router>
+          {scenes}
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default connect()(AppContainer);
