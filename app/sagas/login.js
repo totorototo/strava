@@ -5,7 +5,7 @@ import {put, call, take} from 'redux-saga/effects'
 import {Actions} from 'react-native-router-flux';
 
 //actions
-import {getAccessToken} from '../actions/login';
+import {getAccessToken, logout} from '../actions/login';
 import {getAthleteDetails} from '../actions/athlete'
 
 //constants
@@ -14,10 +14,13 @@ import * as types from '../constants/actionTypes'
 //service
 import {fetchToken} from './../services/login'
 
-function* logout(){
+function* signout(){
     try{
         //1- redirect to login component
         yield call(Actions.login);
+
+        //2- update state
+        yield put(logout());
 
     }catch (error){
         throw error;
@@ -70,11 +73,12 @@ export function* authenticationFlowSaga() {
                     userSignedOut = true;
                     token = null;
 
-                    yield call(logout);
+                    yield call(signout);
                 }
             }
         }
     }
     catch (error) {
+        yield call(signout);
     }
 }
