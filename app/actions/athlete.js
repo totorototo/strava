@@ -1,8 +1,8 @@
-import * as types from "../constants/actionTypes";
+import {GET_ATHLETE_DETAILS} from "../constants/actionTypes";
 
 export function getAthleteDetails(details) {
     return {
-        type: types.GET_ATHLETE_DETAILS,
+        type: GET_ATHLETE_DETAILS,
         details
     }
 }
