@@ -1,6 +1,4 @@
-
-
-export const callApi = ({endpoint, headers, body}) => {
+export const callJSONApi = ({endpoint, headers, body}) => {
 
     let params = {
         method: endpoint.httpVerb,
