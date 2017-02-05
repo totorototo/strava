@@ -1,4 +1,7 @@
-export const callJSONApi = ({endpoint, headers, body}) => {
+//constants
+import {API_ENDPOINT, APPLICATION_TYPE, METHODS} from '../constants/rest'
+
+export const callJSONApi = ({endpoint = {url: API_ENDPOINT , httpVerb: METHODS.GET}, headers = new Headers({'Content-Type': APPLICATION_TYPE.JSON}), body = {}}) => {
 
     let params = {
         method: endpoint.httpVerb,
