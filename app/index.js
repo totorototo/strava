@@ -1,9 +1,12 @@
+//react-native
 import React, {Component} from 'react';
 import{Linking} from 'react-native';
 
-import configureStore from './store/configureStore';
+//redux
+import {Provider, connect} from 'react-redux'
 
-import * as login from './actions/login'
+//actions
+import {getTemporaryAcessToken} from './actions/login'
 
 //temp
 import { Actions, Router, Scene } from 'react-native-router-flux'
@@ -11,12 +14,13 @@ import HomeContainer from './routes/home/containers/HomeContainer'
 import LoginContainer from './routes/login/containers/LoginContainer'
 
 
-import { Provider, connect } from 'react-redux'
+//store
+import configureStore from './store/configureStore';
 
 
 const store = configureStore();
 
-//TODO: use react navigation instead.
+//TODO: use react navigation or react-router v4 instead.
 const Scenes = Actions.create(
     <Scene key="root" hideNavBar={true}>
         <Scene key="login" component={LoginContainer} hideNavBar={true}/>
@@ -24,7 +28,6 @@ const Scenes = Actions.create(
     </Scene>
 );
 
-//TODO: use react navigation instead.
 const ConnectedRouter = connect()(Router);
 
 function handleOpenURL(url) {
@@ -32,7 +35,7 @@ function handleOpenURL(url) {
     if(url != null){
         let myRegexp = /(?:&code=)(\w*)/g;
         let match = myRegexp.exec(url);
-        store.dispatch(login.getTemporaryAcessToken(match[1]));
+        store.dispatch(getTemporaryAcessToken(match[1]));
     }
 }
 
