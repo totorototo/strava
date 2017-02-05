@@ -1,7 +1,10 @@
-'use strict';
+//react
 import React, {Component, PropTypes} from 'react';
 
+//react-native
 import {View, Text, Linking, WebView} from 'react-native';
+
+//rnrf
 import {Actions} from 'react-native-router-flux';
 
 let WEBVIEW_REF = 'webview';
