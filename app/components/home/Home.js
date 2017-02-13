@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // react-native
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 
 // rnrf
 import { Actions } from 'react-native-router-flux';

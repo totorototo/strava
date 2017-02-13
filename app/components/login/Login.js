@@ -1,7 +1,7 @@
 // react
 import React, { Component } from 'react';
 // react-native
-import { WebView, StyleSheet } from 'react-native';
+import { WebView } from 'react-native';
 
 const styles = require('./Styles');
 
