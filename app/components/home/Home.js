@@ -2,16 +2,20 @@
 import React, { Component } from 'react';
 
 // react-native
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 // rnrf
 import { Actions } from 'react-native-router-flux';
+
+
+// styles
+const styles = require('./Styles');
 
 export default class Home extends Component {
 
   render() {
     return (
-      <View style={{ margin: 128 }}>
+      <View style={styles.home}>
         <Text onPress={Actions.login}>This is home!</Text>
       </View>
     );
