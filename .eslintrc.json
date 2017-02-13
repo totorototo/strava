@@ -1,0 +1,43 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "react",
+    "react-native",
+    "jsx-a11y",
+    "import"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "window": false,
+    "navigator": false,
+    "fetch": false,
+    "FormData": false,
+    "Headers": false,
+    "it": false,
+    "tree": false
+  },
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js"
+        ]
+      }
+    ],
+    "import/prefer-default-export": 0,
+    "jsx-a11y/no-marquee": 0,
+    "react/prefer-stateless-function": 0,
+    "react-native/no-unused-styles": 2,
+    "react-native/split-platform-components": 2,
+    "react-native/no-inline-styles": 2,
+    "react-native/no-color-literals": 2
+  },
+  "parser": "babel-eslint"
+}
