@@ -1,11 +1,11 @@
-//redux-saga
-import {fork} from 'redux-saga/effects'
+// redux-saga
+import { fork } from 'redux-saga/effects';
 
-//sagas
-import {authenticationFlowSaga} from './login'
+// sagas
+import { authenticationFlowSaga } from './login';
 
 export default function* root() {
-    yield [
-        fork (authenticationFlowSaga)
-    ]
+  yield [
+    fork(authenticationFlowSaga),
+  ];
 }
