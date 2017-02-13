@@ -1,7 +1,7 @@
 // redux
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'remote-redux-devtools';
+// import { composeWithDevTools } from 'remote-redux-devtools';
 // reducers
 import reducers from '../reducers';
 // sagas
@@ -14,14 +14,14 @@ export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
   const middleware = [sagaMiddleware];
 
-  const composeEnhancers = composeWithDevTools(
-    {
-      name: 'configuration agent',
-      hostname: 'localhost',
-      maxAge: 20,
-      realtime: true,
-      port: 8000,
-    });
+  // const composeEnhancers = composeWithDevTools(
+  //   {
+  //     name: 'configuration agent',
+  //     hostname: 'localhost',
+  //     maxAge: 20,
+  //     realtime: true,
+  //     port: 8000,
+  //   });
 
   const store = createStore(reducers, /* preloadedState, */ compose(
     applyMiddleware(...middleware),
