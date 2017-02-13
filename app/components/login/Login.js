@@ -15,7 +15,7 @@ export default class Login extends Component {
     //   if (!event.url.startsWith('strava://localhost')) {
     //     return true;
     //   }
-    //   this._webView.stopLoading();
+    //   this.webView.stopLoading();
     //   return false;
     // }
     return true;
@@ -25,7 +25,7 @@ export default class Login extends Component {
     return (
       <WebView
         ref={(ref) => {
-          this._webView = ref;
+          this.webView = ref;
         }}
         source={{ uri: INITIAL_URI }}
         style={{ marginTop: 20 }}
