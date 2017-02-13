@@ -1,7 +1,9 @@
 // react
 import React, { Component } from 'react';
 // react-native
-import { WebView } from 'react-native';
+import { WebView, StyleSheet } from 'react-native';
+
+const styles = require('./Styles');
 
 // rnrf
 // import { Actions } from 'react-native-router-flux';
@@ -10,7 +12,8 @@ const INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&resp
 
 export default class Login extends Component {
 
-  onShouldStartLoadWithRequest = (event) => {
+  // TODO: event should be passed as parameter.
+  onShouldStartLoadWithRequest = () => {
     // if (this.refs != null) {
     //   if (!event.url.startsWith('strava://localhost')) {
     //     return true;
@@ -28,11 +31,10 @@ export default class Login extends Component {
           this.webView = ref;
         }}
         source={{ uri: INITIAL_URI }}
-        style={{ marginTop: 20 }}
+        style={styles.login}
         onNavigationStateChange={this.onShouldStartLoadWithRequest}
         onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
       />
     );
   }
 }
-
