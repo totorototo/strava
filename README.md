@@ -22,3 +22,10 @@ react-native run-ios                   # Start ios application
 or
 react-native run-android               # Start android application
 ```
+
+# References
+
+Strava API: https://strava.github.io/api/
+
+Strava Labs: http://labs.strava.com/
+
