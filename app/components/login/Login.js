@@ -13,7 +13,8 @@ const INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&resp
 export default class Login extends Component {
 
   // TODO: event should be passed as parameter.
-  onShouldStartLoadWithRequest = () => {
+  onShouldStartLoadWithRequest = () => true;
+    // {
     // if (this.refs != null) {
     //   if (!event.url.startsWith('strava://localhost')) {
     //     return true;
@@ -21,8 +22,8 @@ export default class Login extends Component {
     //   this.webView.stopLoading();
     //   return false;
     // }
-    return true;
-  };
+    // return true;
+  // };
 
   render() {
     return (
