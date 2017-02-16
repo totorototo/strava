@@ -360,6 +360,10 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
+autobind-decorator@^1.3.2:
+  version "1.3.4"
+  resolved "http://repository-artifactory.lectra.com/artifactory/api/npm/npm-virtual/autobind-decorator/-/autobind-decorator-1.3.4.tgz#b67560e6bbbb68a35c049c82d6351ea0e82d820d"
+
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -2520,7 +2524,7 @@ hoek@4.x.x:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.1.0.tgz#4a4557460f69842ed463aa00628cc26d2683afa7"
 
-hoist-non-react-statics@^1.0.3:
+hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
@@ -3975,6 +3979,12 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
+path-to-regexp@^1.7.0:
+  version "1.7.0"
+  resolved "http://repository-artifactory.lectra.com/artifactory/api/npm/npm-virtual/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
+  dependencies:
+    isarray "0.0.1"
+
 path-type@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-1.1.0.tgz#59c44f7ee491da704da415da5a4070ba4f8fe441"
@@ -4188,6 +4198,17 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
+react-native-dismiss-keyboard@1.0.0:
+  version "1.0.0"
+  resolved "http://repository-artifactory.lectra.com/artifactory/api/npm/npm-virtual/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
+
+react-native-drawer-layout@^1.1.0:
+  version "1.1.1"
+  resolved "http://repository-artifactory.lectra.com/artifactory/api/npm/npm-virtual/react-native-drawer-layout/-/react-native-drawer-layout-1.1.1.tgz#71aa76793e2a8ee451c3e9d0b76b6092d881899c"
+  dependencies:
+    autobind-decorator "^1.3.2"
+    react-native-dismiss-keyboard "1.0.0"
+
 react-native-experimental-navigation@0.26.x:
   version "0.26.10"
   resolved "https://registry.yarnpkg.com/react-native-experimental-navigation/-/react-native-experimental-navigation-0.26.10.tgz#355e37929a2bfb84088dca331f34bc575297df68"
@@ -4207,6 +4228,10 @@ react-native-router-flux@^3.37.0:
     react-native-experimental-navigation "0.26.x"
     react-native-tabs "^1.0.9"
     react-static-container "1.0.1"
+
+react-native-tab-view@^0.0.55:
+  version "0.0.55"
+  resolved "http://repository-artifactory.lectra.com/artifactory/api/npm/npm-virtual/react-native-tab-view/-/react-native-tab-view-0.0.55.tgz#6e82c50f916b46e0a5af2f9748e6aca36d58f7ad"
 
 react-native-tabs@^1.0.9:
   version "1.0.9"
@@ -4292,6 +4317,17 @@ react-native@0.40.0:
     xcode "^0.8.9"
     xmldoc "^0.4.0"
     yargs "^6.4.0"
+
+react-navigation@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "http://repository-artifactory.lectra.com/artifactory/api/npm/npm-virtual/react-navigation/-/react-navigation-1.0.0-beta.5.tgz#28f0cf6e9ab12e25f927dbc63efa51cf7d5ab8a5"
+  dependencies:
+    clamp "^1.0.1"
+    fbjs "^0.8.5"
+    hoist-non-react-statics "^1.2.0"
+    path-to-regexp "^1.7.0"
+    react-native-drawer-layout "^1.1.0"
+    react-native-tab-view "^0.0.55"
 
 react-proxy@^1.1.7:
   version "1.1.8"
