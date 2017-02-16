@@ -6,6 +6,6 @@ import HomeContainer from './home/containers/HomeContainer';
 
 export const AppNavigator = StackNavigator({
   Login: { screen: LoginContainer },
-  Home: { screen: HomeContainer },
+  localhost: { screen: HomeContainer },
 });
 
