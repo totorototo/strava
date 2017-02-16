@@ -25,6 +25,7 @@ const Scenes = Actions.create(
 
 const ConnectedRouter = connect()(Router);
 
+// TODO: to be moved. (route, deeplink, component).
 function handleOpenURL(url) {
   if (url != null) {
     const myRegexp = /(?:&code=)(\w*)/g;
