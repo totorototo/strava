@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import routes from './routes';
 import login from './login';
 import athlete from './athlete';
+import navigation from './navigation';
 
 export default combineReducers({
-  routes,
   login,
   athlete,
+  navigation,
 });
