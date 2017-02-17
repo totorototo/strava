@@ -1,13 +1,16 @@
-// react
-// import { Platform } from 'react-native';
-
 // React navigation
 import { StackNavigator } from 'react-navigation';
 
-import LoginContainer from './login/containers/LoginContainer';
-import HomeContainer from './home/containers/HomeContainer';
+import Login from './../components/login/Login';
+import Home from './../components/home/Home';
 
-export const AppNavigator = StackNavigator({
-  Login: { screen: LoginContainer },
-  localhost: { screen: HomeContainer, path: 'localhost/*' },
-});
+
+export const AppNavigator = StackNavigator(
+  {
+    Login: { screen: Login },
+    localhost: { screen: Home, path: 'localhost/*' },
+  },
+  {
+    cardStyle: { flex: 1 },
+  },
+);

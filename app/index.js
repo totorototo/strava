@@ -32,10 +32,10 @@ Linking.addEventListener('url', event => handleOpenURL(event.url));
 export default class App extends Component {
 
   componentDidMount() {
-      // eslint-disable no-console
+    // eslint-disable no-console
     Linking.getInitialURL()
-          .then(handleOpenURL)
-          .catch(err => console.error('An error occurred', err));
+      .then(handleOpenURL)
+      .catch(err => console.error('An error occurred', err));
   }
 
   componentWillUnmount() {

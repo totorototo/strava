@@ -2,38 +2,49 @@
 import React, { Component } from 'react';
 
 // react-native
-import { WebView } from 'react-native';
+import { View, WebView } from 'react-native';
 
-const styles = require('./Styles');
+import styles from './styles';
 
 const INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&response_type=code&redirect_uri=strava://localhost&scope=public';
 
 export default class Login extends Component {
 
-  // TODO: event should be passed as parameter.
-  onShouldStartLoadWithRequest = () => true;
-    // {
-    // if (this.refs != null) {
-    //   if (!event.url.startsWith('strava://localhost')) {
-    //     return true;
-    //   }
-    //   this.webView.stopLoading();
-    //   return false;
-    // }
-    // return true;
-  // };
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: true,
+    };
+  }
+
+  onShouldStartLoadWithRequest = (url) => {
+    if (this.webView != null) {
+      if (!url.startsWith('strava://localhost')) {
+        this.setState(() => ({ visible: true }));
+      } else {
+        this.setState(() => ({ visible: false }));
+      }
+    }
+    return true;
+  };
 
   render() {
+    const currentStyles = [styles.login];
+    if (!this.state.visible) {
+      currentStyles.push(styles.hide);
+    }
+
     return (
-      <WebView
-        ref={(ref) => {
-          this.webView = ref;
-        }}
-        source={{ uri: INITIAL_URI }}
-        style={styles.login}
-        onNavigationStateChange={this.onShouldStartLoadWithRequest}
-        onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
-      />
+      <View style={currentStyles}>
+        <WebView
+          ref={(ref) => {
+            this.webView = ref;
+          }}
+          source={{ uri: INITIAL_URI }}
+          onNavigationStateChange={event => this.onShouldStartLoadWithRequest(event.url)}
+          onShouldStartLoadWithRequest={event => this.onShouldStartLoadWithRequest(event.url)}
+        />
+      </View>
     );
   }
 }
