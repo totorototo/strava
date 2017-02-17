@@ -11,4 +11,3 @@ export const AppNavigator = StackNavigator({
   Login: { screen: LoginContainer },
   localhost: { screen: HomeContainer, path: 'localhost/*' },
 });
-
