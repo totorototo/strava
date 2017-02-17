@@ -1,19 +1,23 @@
 // redux-saga
 import { put, call, take } from 'redux-saga/effects';
-// router
-import { Actions } from 'react-native-router-flux';
+
+// navigation
+import { NavigationActions } from 'react-navigation';
+
 // actions
 import { getAccessToken, logout } from '../actions/login';
 import { getAthleteDetails } from '../actions/athlete';
+
 // constants
 import { LOGOUT, GET_TEMPORARY_ACCESS_TOKEN } from '../constants/actionTypes';
+
 // service
 import { fetchToken } from './../services/login';
 
 function* signout() {
   try {
     // 1- redirect to login component
-    yield call(Actions.login);
+    yield put(NavigationActions.navigate({ routeName: 'Login' }));
 
     // 2- update state
     yield put(logout());
@@ -42,7 +46,7 @@ function* authorize(temporaryAccessToken) {
     yield put(getAthleteDetails(details));
 
     // 4- route application
-    yield call(Actions.localhost);
+    yield put(NavigationActions.navigate({ routeName: 'localhost' }));
 
     return token;
   } catch (error) {

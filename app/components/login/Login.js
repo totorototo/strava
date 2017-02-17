@@ -1,12 +1,10 @@
 // react
 import React, { Component } from 'react';
+
 // react-native
 import { WebView } from 'react-native';
 
 const styles = require('./Styles');
-
-// rnrf
-// import { Actions } from 'react-native-router-flux';
 
 const INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&response_type=code&redirect_uri=strava://localhost&scope=public';
 
