@@ -11,9 +11,9 @@ import { addNavigationHelpers } from 'react-navigation';
 import { AppNavigator } from '../routes/index';
 
 const AppWithNavigationState = connect(state => ({
-  nav: state.nav,
-}))(({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+  navigation: state.navigation,
+}))(({ dispatch, navigation }) => (
+  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: navigation })} />
 ));
 
 export default AppWithNavigationState;
