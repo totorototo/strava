@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { getTemporaryAcessToken } from './actions/login';
 
 // Container
-import AppWithNavigationState from './containers/AppContainer';
+import AppWithNavigationState from './containers/AppWithNavigationState';
 
 // store
 import configureStore from './store/configureStore';
@@ -18,6 +18,7 @@ const store = configureStore();
 
 function handleOpenURL(url) {
   if (url != null) {
+    // retrieve token from url using a regexp.
     const myRegexp = /(?:&code=)(\w*)/g;
     const match = myRegexp.exec(url);
     store.dispatch(getTemporaryAcessToken(match[1]));
