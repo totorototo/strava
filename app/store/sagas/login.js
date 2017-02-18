@@ -12,7 +12,7 @@ import { getAthleteDetails } from '../actions/athlete';
 import { LOGOUT, GET_TEMPORARY_ACCESS_TOKEN } from '../constants/actionTypes';
 
 // service
-import { fetchToken } from './../services/login';
+import { fetchToken } from '../services/login';
 
 function* signout() {
   try {

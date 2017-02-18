@@ -1,5 +1,5 @@
 // constants
-import { GET_ATHLETE_DETAILS } from './../constants/actionTypes';
+import { GET_ATHLETE_DETAILS } from '../../constants/actionTypes';
 
 const initialState = {
   athlete: {},

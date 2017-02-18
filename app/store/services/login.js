@@ -2,7 +2,7 @@
 import { API_ENDPOINT, APPLICATION_TYPE, RESOURCES, METHODS } from '../constants/rest';
 
 // helper
-import { callJSONApi } from '../helpers/api';
+import { callJSONApi } from './helpers/api';
 
 
 export const fetchToken = (formData) => {
