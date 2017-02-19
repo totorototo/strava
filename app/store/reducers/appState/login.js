@@ -1,5 +1,5 @@
 // constants
-import { GET_ACCESS_TOKEN } from './../constants/actionTypes';
+import { GET_ACCESS_TOKEN } from '../../constants/actionTypes';
 
 const initialState = {
   access_token: '',
