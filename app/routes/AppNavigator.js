@@ -6,7 +6,8 @@ import Home from './screens/home/Home';
 const AppNavigator = StackNavigator(
   {
     Login: { screen: Login },
-    localhost: { screen: Home, path: 'localhost/*' },
+    Authenticate: { screen: Home, path: 'localhost' },
+    Home: { screen: Home },
   },
   { cardStyle: { flex: 1 } },
 );
