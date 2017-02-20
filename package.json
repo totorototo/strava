@@ -6,13 +6,15 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "http": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8081 tcp:8081",
+    "http": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8097 tcp:8097",
     "remotedev": "remotedev --hostname=localhost --port=8000",
     "test": "jest",
-    "lint": "eslint --quiet app"
+    "lint": "eslint --quiet app",
+    "devtools": "react-devtools"
   },
   "dependencies": {
     "react": "~15.4.0-rc.4",
+    "react-devtools": "^2.0.12",
     "react-native": "0.41.2",
     "react-navigation": "^1.0.0-beta.5",
     "react-redux": "^5.0.2",
