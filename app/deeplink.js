@@ -8,7 +8,14 @@ export function subcribe(store) {
   function handleOpenURL(url) {
     if (url != null && url.startsWith('strava://')) {
       const relativeUrl = url.substring(Platform.OS === 'android' ? 'strava://strava/'.length : 'strava;//'.length);
-      store.dispatch(NavigationActions.navigate({ routeName: 'localhost', params: {state: '', code: '31305d0d2312fc4d95479f54c53b16ba486f84c9'} }));
+      const tokenRegexp = /(?:&code=)(\w*)/g;
+      const tokenMatch = tokenRegexp.exec(relativeUrl);
+      if (tokenMatch && tokenMatch.length > 1) {
+        store.dispatch(NavigationActions.navigate({
+          routeName: 'Home',
+          params: { state: '', code: tokenMatch[1] },
+        }));
+      }
     }
   }
 
