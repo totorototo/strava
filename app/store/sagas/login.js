@@ -45,9 +45,6 @@ function* authorize(temporaryAccessToken) {
     const details = response.data.athlete;
     yield put(getAthleteDetails(details));
 
-    // 4- route application
-    yield put(NavigationActions.navigate({ routeName: 'localhost' }));
-
     return token;
   } catch (error) {
     throw error;
