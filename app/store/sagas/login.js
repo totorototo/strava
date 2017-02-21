@@ -9,7 +9,7 @@ import { getAccessToken, logout } from '../actions/login';
 import { getAthleteDetails } from '../actions/athlete';
 
 // constants
-import { LOGOUT, GET_TEMPORARY_ACCESS_TOKEN } from '../constants/actionTypes';
+import { LOGOUT } from '../constants/actionTypes';
 
 // service
 import { fetchToken } from '../services/login';
@@ -55,16 +55,18 @@ export function* authenticationFlowSaga() {
   try {
     // eslint-disable no-constant-condition
     while (true) {
-      const { temporaryAccessToken } = yield take(GET_TEMPORARY_ACCESS_TOKEN);
-      let token = yield call(authorize, temporaryAccessToken);
-      if (token) {
-        let userSignedOut;
-        while (!userSignedOut) {
-          yield take(LOGOUT);
-          userSignedOut = true;
-          token = null;
+      const navigation = yield take('Navigation/NAVIGATE');
+      if (navigation.routeName === 'Home' && navigation.params.code !== undefined) {
+        let token = yield call(authorize, navigation.params.code);
+        if (token) {
+          let userSignedOut;
+          while (!userSignedOut) {
+            yield take(LOGOUT);
+            userSignedOut = true;
+            token = null;
 
-          yield call(signout);
+            yield call(signout);
+          }
         }
       }
     }
