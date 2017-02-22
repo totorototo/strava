@@ -1,4 +1,5 @@
 // react-native
+import 'react-devtools'; // Put it first!
 import React, { Component } from 'react';
 // redux
 import { Provider } from 'react-redux';
