@@ -1,5 +1,7 @@
 # strava
 
+Android: [![Build Status](https://www.bitrise.io/app/a416933328198685.svg?token=0-NdeRg6y57BlLMUX0VIRg)](https://www.bitrise.io/app/a416933328198685)
+
 Strava is a React Native application consuming Strava RESTFul web service.
 This application was designed for 'bitos' and 'bidochons' in order to complete successfully the 10th 'Grand Raid des Pyrénées'.
 
@@ -28,4 +30,6 @@ react-native run-android               # Start android application
 Strava API: https://strava.github.io/api/
 
 Strava Labs: http://labs.strava.com/
+
+
 
