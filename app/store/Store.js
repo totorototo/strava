@@ -15,6 +15,7 @@ export default class Store {
   constructor({
     rootReducer = defaultOptions.rootReducer,
     startingSaga = defaultOptions.startingSaga,
+    preloadedState = {},
     sagaMonitor,
   } = defaultOptions) {
     const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
@@ -30,7 +31,8 @@ export default class Store {
     //   });
 
     let store = createStore(
-      rootReducer, /* preloadedState, */
+      rootReducer,
+      preloadedState,
       compose(
         applyMiddleware(...middleware),
         // other store enhancers if any

@@ -13,6 +13,7 @@
     "devtools": "react-devtools"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "react": "~15.4.0-rc.4",
     "react-devtools": "^2.0.12",
     "react-native": "0.41.2",
@@ -35,12 +36,15 @@
     "eslint-plugin-prettier": "^2.0.0",
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-react-native": "^2.2.1",
-    "jest": "18.1.0",
+    "jest": "^19.0.2",
     "prettier": "^0.15.0",
     "react-test-renderer": "~15.4.0-rc.4",
     "remotedev-server": "^0.3.0-beta-3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testMatch": [
+      "**/?(*.)(test).js?(x)"
+    ]
   }
 }
