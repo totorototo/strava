@@ -1,6 +1,8 @@
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import set from 'lodash/set';
+import merge from 'lodash/merge';
+import { combineReducers } from 'redux';
 
 function isValidNode(node) {
   return isPlainObject(node);
@@ -19,7 +21,7 @@ function isLeaf(node) {
 }
 
 
-export default function combineReducersTree(tree) {
+export default function combineReducersTree(tree, initAction = { type: '@@redux/INIT' }) {
   const reversedTree = {
     // action1: { scope1: reducer, scope2: reducer },
     '*': {},
@@ -51,10 +53,10 @@ export default function combineReducersTree(tree) {
 
   reverseTree(tree);
   // return reversedTree;
-  function recursiveProcess(state = {}, action, task) {
-    if (typeof task === 'function') {
-      console.log('did task');
-      return task(state, action);
+  function recursiveProcess(state, action, task, isInit = false) {
+    if (typeof task === 'function' || (isInit && isLeaf(task))) {
+      // console.log("hello", task, action, isInit ? task.reducer(state, action) : task(state, action))
+      return isInit ? task.reducer(state, action) : task(state, action);
     } else if (!isPlainObject(task)) {
       // reversedTree (task) must contain only plain object and reducer
       console.warn(`unhandled action ${action.type}`);
@@ -64,19 +66,22 @@ export default function combineReducersTree(tree) {
       .reduce(
         (accu, [key, subtask]) => {
           accu[key] = recursiveProcess(
-            state[key],
+            isPlainObject(state) ? state[key] : {},
             action,
             subtask,
+            isInit,
           );
           return accu;
         }
-        , {},
+        , { ...state },
       );
   }
 
+// todo optmization no avoid merge on each action
   return (state, action) => recursiveProcess(
     state,
     action,
-    { ...reversedTree[action], ...reversedTree['*'] },
+    initAction.type === action.type ? tree : merge({}, reversedTree[action.type], reversedTree['*']),
+    initAction.type === action.type,
   );
 }

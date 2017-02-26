@@ -5,14 +5,14 @@ import { put, call, take } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
 
 // actions
-import { getAccessToken, logout } from '../actions/login';
-import { getAthleteDetails } from '../actions/athlete';
+import { getAccessToken, logout } from '../../actions/login';
+import { getAthleteDetails } from '../../actions/athlete';
 
 // constants
-import { LOGOUT } from '../constants/actionTypes';
+import { LOGOUT } from '../../constants/actionTypes';
 
 // service
-import { fetchToken } from '../services/login';
+import { fetchToken } from '../../services/login';
 
 function* signout() {
   try {

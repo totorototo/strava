@@ -1,5 +1,5 @@
 // sagas
-import { authenticationFlowSaga } from './login';
+import { authenticationFlowSaga } from './appSagas/login';
 
 export default [
   authenticationFlowSaga,

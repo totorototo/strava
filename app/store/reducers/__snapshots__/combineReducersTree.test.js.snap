@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`combineReducerTree It can dispatch a scpecific action 1`] = `
+Object {
+  "common": Object {
+    "container": Object {
+      "collapsableSidebar": "some data after ACTION1",
+    },
+  },
+  "groceryManagement": Object {
+    "data": Object {
+      "groceries": "some data after ACTION1",
+    },
+  },
+  "listManagement": Object {
+    "data": Object {
+      "lists": "some data after ACTION1",
+    },
+  },
+}
+`;
+
+exports[`combineReducerTree It can dispatch a scpecific action with a previous state 1`] = `
+Object {
+  "basket": "a basket that shouldn't be touched",
+  "building": Object {
+    "appartment1": "it s my home must not touch it",
+  },
+  "common": Object {
+    "container": Object {
+      "collapsableSidebar": "some data after ACTION1",
+    },
+  },
+  "groceryManagement": Object {
+    "data": Object {
+      "groceries": "some data after ACTION1",
+    },
+  },
+  "listManagement": Object {
+    "data": Object {
+      "lists": "some data after ACTION1",
+    },
+  },
+}
+`;
+
+exports[`combineReducerTree It can init state with init action 1`] = `
+Object {
+  "common": Object {
+    "container": Object {
+      "application": undefined,
+      "collapsableSidebar": undefined,
+    },
+  },
+  "groceryManagement": Object {
+    "container": Object {
+      "currentList": undefined,
+    },
+    "data": Object {
+      "groceries": undefined,
+    },
+  },
+  "listManagement": Object {
+    "container": Object {
+      "groceryListsEdit": undefined,
+    },
+    "data": Object {
+      "lists": undefined,
+    },
+  },
+}
+`;
+
+exports[`combineReducerTree Previous state is not alterated by action and immutability principle are respected 1`] = `
+Object {
+  "basket": "a basket that shouldn't be touched",
+  "building": Object {
+    "appartment1": "it s my home must not touch it",
+  },
+  "common": Object {
+    "container": Object {
+      "collapsableSidebar": "some data after ACTION1",
+    },
+  },
+  "groceryManagement": Object {
+    "data": Object {
+      "groceries": "some data after ACTION1",
+    },
+  },
+  "listManagement": Object {
+    "data": Object {
+      "lists": "some data after ACTION1",
+    },
+  },
+}
+`;
