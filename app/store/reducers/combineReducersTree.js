@@ -53,9 +53,9 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
 
   reverseTree(tree);
   // return reversedTree;
-  function recursiveProcess(state, action, task, isInit = false) {
+  function recursiveProcess(state, action, task) {
+    const isInit = initAction.type === action.type;
     if (typeof task === 'function' || (isInit && isLeaf(task))) {
-      // console.log("hello", task, action, isInit ? task.reducer(state, action) : task(state, action))
       return isInit ? task.reducer(state, action) : task(state, action);
     } else if (!isPlainObject(task)) {
       // reversedTree (task) must contain only plain object and reducer
@@ -82,6 +82,5 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
     state,
     action,
     initAction.type === action.type ? tree : merge({}, reversedTree[action.type], reversedTree['*']),
-    initAction.type === action.type,
   );
 }
