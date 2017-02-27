@@ -4,15 +4,22 @@ exports[`combineReducerTree It can dispatch a scpecific action 1`] = `
 Object {
   "common": Object {
     "container": Object {
+      "application": undefined,
       "collapsableSidebar": "some data after ACTION1",
     },
   },
   "groceryManagement": Object {
+    "container": Object {
+      "currentList": undefined,
+    },
     "data": Object {
       "groceries": "some data after ACTION1",
     },
   },
   "listManagement": Object {
+    "container": Object {
+      "groceryListsEdit": undefined,
+    },
     "data": Object {
       "lists": "some data after ACTION1",
     },
@@ -28,15 +35,22 @@ Object {
   },
   "common": Object {
     "container": Object {
+      "application": undefined,
       "collapsableSidebar": "some data after ACTION1",
     },
   },
   "groceryManagement": Object {
+    "container": Object {
+      "currentList": undefined,
+    },
     "data": Object {
       "groceries": "some data after ACTION1",
     },
   },
   "listManagement": Object {
+    "container": Object {
+      "groceryListsEdit": undefined,
+    },
     "data": Object {
       "lists": "some data after ACTION1",
     },
@@ -79,15 +93,22 @@ Object {
   },
   "common": Object {
     "container": Object {
+      "application": undefined,
       "collapsableSidebar": "some data after ACTION1",
     },
   },
   "groceryManagement": Object {
+    "container": Object {
+      "currentList": undefined,
+    },
     "data": Object {
       "groceries": "some data after ACTION1",
     },
   },
   "listManagement": Object {
+    "container": Object {
+      "groceryListsEdit": undefined,
+    },
     "data": Object {
       "lists": "some data after ACTION1",
     },

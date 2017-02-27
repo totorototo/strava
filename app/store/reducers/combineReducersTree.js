@@ -27,6 +27,8 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
     '*': {},
   };
 
+  let hasBeenInitialized = false;
+
   function reverseTree(subTree, scope = '') {
     Object.entries(subTree)
       .forEach(
@@ -56,30 +58,47 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
   function recursiveProcess(state, action, task) {
     const isInit = initAction.type === action.type;
     if (isLeaf(task)) {
-      return task.reducer(state, action);
+      const newState = task.reducer(state, action);
+      return { value: newState, hasChanged: newState !== state };
     } else if (!isPlainObject(task)) {
       // reversedTree (task) must contain only plain object and reducer
-      throw new Error("unexpected");
+      throw new Error('unexpected');
     }
-    return Object.entries(task)
-      .reduce(
-        (accu, [key, subtask]) => {
-          accu[key] = recursiveProcess(
-            isPlainObject(state) ? state[key] : {},
-            action,
-            subtask,
-            isInit,
-          );
-          return accu;
-        }
-        , { ...state },
-      );
+    const resultValue = Object.entries(task).reduce(
+      (accu, [key, subtask]) => {
+        const temp = recursiveProcess(
+          isPlainObject(state) ? state[key] : {},
+          action,
+          subtask,
+          isInit,
+        );
+        accu.value[key] = temp.value;
+        accu.hasChanged = accu.hasChanged || temp.hasChanged;
+        return accu;
+      }
+      , { value: { ...state }, hasChanged: false },
+    );
+    return {
+      ...resultValue,
+      hasChanged: resultValue.hasChanged || resultValue.value !== state,
+    };
   }
 
 // todo optmization no avoid merge on each action
-  return (state, action) => recursiveProcess(
-    state,
-    action,
-    initAction.type === action.type ? tree : merge({}, reversedTree[action.type], reversedTree['*']),
-  );
+  return (state, action) => {
+    let temp = { value: state, hasChanged: false };
+    if (!hasBeenInitialized || initAction.type === action.type) {
+      temp = recursiveProcess(
+        state,
+        initAction,
+        tree,
+      );
+    }
+    temp = recursiveProcess(
+      temp.value,
+      action,
+      merge({}, reversedTree[action.type], reversedTree['*']),
+    );
+    return temp.hasChanged ? temp.value : state;
+  };
 }
