@@ -1,8 +1,8 @@
+/* eslint no-param-reassign: "off" */
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
 import set from 'lodash/set';
 import merge from 'lodash/merge';
-import { combineReducers } from 'redux';
 
 function isValidNode(node) {
   return isPlainObject(node);
@@ -73,7 +73,8 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
           isInit,
         );
         accu.value[key] = temp.value;
-        accu.hasChanged = accu.hasChanged || temp.hasChanged;
+        accu.hasChanged = accu.hasChanged ||
+          temp.hasChanged;
         return accu;
       }
       , { value: { ...state }, hasChanged: false },
@@ -93,6 +94,7 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
         initAction,
         tree,
       );
+      hasBeenInitialized = true;
     }
     temp = recursiveProcess(
       temp.value,

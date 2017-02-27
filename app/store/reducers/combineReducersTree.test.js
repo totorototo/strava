@@ -78,15 +78,23 @@ describe('combineReducerTree', () => {
   it('Previous state is not alterated by action and immutability principle are respected', () => {
     const a = combineReducersTree(data);
     const initialStateBefore = JSON.stringify(initialState);
-    const newState = a(initialState, { type: 'ACTION1', data: 'some data after ACTION1' });
+    const newState = a(
+      initialState,
+      { type: 'ACTION1', data: 'some data after ACTION1' },
+    );
     const initialStateAfter = JSON.stringify(initialState);
     expect(initialStateBefore).toBe(initialStateAfter);
     expect(initialState).not.toBe(newState);
-    expect(initialState.building.appartment1).toBe(newState.building.appartment1);
-    expect(initialState.building.appartment1).toBe(newState.building.appartment1);
+    expect(initialState.building.appartment1)
+      .toBe(newState.building.appartment1);
+    expect(initialState.building.appartment1)
+      .toBe(newState.building.appartment1);
     expect(newState).toMatchSnapshot();
-    expect(initialState.groceryManagement.data.groceries).not.toBe(newState.groceryManagement.data.groceries);
-    expect(initialState.groceryManagement).not.toBe(newState.groceryManagement);
-    expect(initialState.basket).toBe(newState.basket);
+    expect(initialState.groceryManagement.data.groceries)
+      .not.toBe(newState.groceryManagement.data.groceries);
+    expect(initialState.groceryManagement)
+      .not.toBe(newState.groceryManagement);
+    expect(initialState.basket)
+      .toBe(newState.basket);
   });
 });
