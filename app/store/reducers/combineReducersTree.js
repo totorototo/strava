@@ -38,11 +38,11 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
                   if (reversedTree[action] === undefined) {
                     reversedTree[action] = {};
                   }
-                  set(reversedTree[action], scope, subTree.reducer);
+                  set(reversedTree[action], scope, subTree);
                 },
               );
             } else {
-              set(reversedTree['*'], scope, subTree.reducer);
+              set(reversedTree['*'], scope, subTree);
             }
           } else if (isValidNode(subTree)) {
             reverseTree(node, scope.length === 0 ? key : `${scope}.${key}`);
@@ -55,12 +55,11 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
   // return reversedTree;
   function recursiveProcess(state, action, task) {
     const isInit = initAction.type === action.type;
-    if (typeof task === 'function' || (isInit && isLeaf(task))) {
-      return isInit ? task.reducer(state, action) : task(state, action);
+    if (isLeaf(task)) {
+      return task.reducer(state, action);
     } else if (!isPlainObject(task)) {
       // reversedTree (task) must contain only plain object and reducer
-      console.warn(`unhandled action ${action.type}`);
-      return state;
+      throw new Error("unexpected");
     }
     return Object.entries(task)
       .reduce(
