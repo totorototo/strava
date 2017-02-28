@@ -8,7 +8,7 @@
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "http": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8097 tcp:8097",
     "remotedev": "remotedev --hostname=localhost --port=8000",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint --quiet app",
     "devtools": "react-devtools"
   },
@@ -42,6 +42,7 @@
     "remotedev-server": "^0.3.0-beta-3"
   },
   "jest": {
+    "coverageReporters": ["json", "html"],
     "preset": "react-native",
     "testMatch": [
       "**/?(*.)(test).js?(x)"
