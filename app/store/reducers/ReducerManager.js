@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import combineReducersTree from './combineReducersTree';
+import combineReducersTree from '../helpers/combineReducersTree';
 
 export default class ReducerManager {
   scopeReducerMap = {}
