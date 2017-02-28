@@ -56,7 +56,6 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
   reverseTree(tree);
   // return reversedTree;
   function recursiveProcess(state, action, task) {
-    const isInit = initAction.type === action.type;
     if (isLeaf(task)) {
       const newState = task.reducer(state, action);
       return { value: newState, hasChanged: newState !== state };
@@ -70,7 +69,6 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
           isPlainObject(state) ? state[key] : {},
           action,
           subtask,
-          isInit,
         );
         accu.value[key] = temp.value;
         accu.hasChanged = accu.hasChanged ||
@@ -84,6 +82,7 @@ export default function combineReducersTree(tree, initAction = { type: '@@redux/
       hasChanged: resultValue.hasChanged || resultValue.value !== state,
     };
   }
+
 
 // todo optmization no avoid merge on each action
   return (state, action) => {
