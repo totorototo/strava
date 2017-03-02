@@ -6,9 +6,9 @@ export function getAthleteGear() {
   };
 }
 
-export function retrieveAthleteGear(details) {
+export function retrieveAthleteGear(gear) {
   return {
     type: RETRIEVE_ATHLETE_GEAR,
-    details,
+    gear,
   };
 }

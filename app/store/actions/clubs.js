@@ -6,9 +6,9 @@ export function getAthleteClubs() {
   };
 }
 
-export function retrieveAthleteClubs(list) {
+export function retrieveAthleteClubs(clubs) {
   return {
     type: RETRIEVE_ATHLETE_CLUBS,
-    list,
+    clubs,
   };
 }

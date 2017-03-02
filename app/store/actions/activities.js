@@ -6,9 +6,9 @@ export function getAthleteActivities() {
   };
 }
 
-export function retrieveAthleteActivities(list) {
+export function retrieveAthleteActivities(activities) {
   return {
     type: RETRIEVE_ATHLETE_ACTIVITIES,
-    list,
+    activities,
   };
 }

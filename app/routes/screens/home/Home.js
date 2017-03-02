@@ -22,8 +22,8 @@ class Home extends Component {
     const { athlete } = this.props;
     return (
       <View style={styles.home}>
-        <Text>{ athlete.details.firstname }</Text>
-        <Text>{ athlete.details.lastname }</Text>
+        <Text>{ athlete.firstname }</Text>
+        <Text>{ athlete.lastname }</Text>
       </View>
     );
   }

@@ -1,19 +1,17 @@
 // constants
 import { RETRIEVE_ATHLETE_DETAILS } from '../../constants/actionTypes';
 
-const initialState = {
-  details: {},
-};
+const initialState = {};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case RETRIEVE_ATHLETE_DETAILS:
 
-      return Object.assign({}, state, {
-        details: action.details,
-      });
+      return Object.assign({}, state,
+        action.details,
+      );
 
-        // ...other actions
+    // ...other actions
 
     default:
       return state;
