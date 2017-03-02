@@ -2,7 +2,7 @@
 import { GET_ACCESS_TOKEN } from '../../constants/actionTypes';
 
 const initialState = {
-  access_token: '',
+  accessToken: '',
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
     case GET_ACCESS_TOKEN:
 
       return Object.assign({}, state, {
-        access_token: action.access_token,
+        accessToken: action.accessToken,
       });
 
         // ...other actions

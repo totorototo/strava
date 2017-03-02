@@ -2,7 +2,7 @@
 import { GET_ATHLETE_DETAILS } from '../../constants/actionTypes';
 
 const initialState = {
-  athlete: {},
+  details: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
     case GET_ATHLETE_DETAILS:
 
       return Object.assign({}, state, {
-        athlete: action.details,
+        details: action.details,
       });
 
         // ...other actions
