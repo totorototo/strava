@@ -1,7 +1,7 @@
 // redux
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-// import { composeWithDevTools } from 'remote-redux-devtools';
+import { composeWithDevTools } from 'remote-redux-devtools';
 // reducers
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
@@ -20,18 +20,18 @@ export default class Store {
     const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
     const middleware = [sagaMiddleware];
 
-    // const composeEnhancers = composeWithDevTools(
-    //   {
-    //     name: 'configuration agent',
-    //     hostname: 'localhost',
-    //     maxAge: 20,
-    //     realtime: true,
-    //     port: 8000,
-    //   });
+    const composeEnhancers = composeWithDevTools(
+      {
+        name: 'configuration agent',
+        hostname: 'localhost',
+        maxAge: 20,
+        realtime: true,
+        port: 8000,
+      });
 
     let store = createStore(
       rootReducer, /* preloadedState, */
-      compose(
+      composeEnhancers(
         applyMiddleware(...middleware),
         // other store enhancers if any
       ),
