@@ -1,7 +1,7 @@
 // constants
 import { RETRIEVE_ATHLETE_GEAR } from '../../constants/actionTypes';
 
-const initialState = {};
+const initialState = [];
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
