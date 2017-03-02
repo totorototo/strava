@@ -1,8 +1,8 @@
 import { RETRIEVE_ATHLETE_GEAR } from '../constants/actionTypes';
 
-export function retrieveAthleteGear(gear) {
+export function retrieveAthleteGear(details) {
   return {
     type: RETRIEVE_ATHLETE_GEAR,
-    gear,
+    details,
   };
 }

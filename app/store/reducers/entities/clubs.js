@@ -2,7 +2,7 @@
 import { RETRIEVE_ATHLETE_CLUBS } from '../../constants/actionTypes';
 
 const initialState = {
-  clubs: [],
+  list: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
     case RETRIEVE_ATHLETE_CLUBS:
 
       return Object.assign({}, state, {
-        clubs: action.clubs,
+        list: action.list,
       });
 
     // ...other actions
