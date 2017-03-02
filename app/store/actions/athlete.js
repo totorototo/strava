@@ -1,8 +1,8 @@
-import { GET_ATHLETE_DETAILS } from '../constants/actionTypes';
+import { RETRIEVE_ATHLETE_DETAILS } from '../constants/actionTypes';
 
-export function getAthleteDetails(details) {
+export function retrieveAthleteDetails(details) {
   return {
-    type: GET_ATHLETE_DETAILS,
+    type: RETRIEVE_ATHLETE_DETAILS,
     details,
   };
 }
