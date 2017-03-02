@@ -1,19 +1,19 @@
 // constants
-import { RETRIEVE_ATHLETE_DETAILS } from '../../constants/actionTypes';
+import { RETRIEVE_ATHLETE_CLUBS } from '../../constants/actionTypes';
 
 const initialState = {
-  details: {},
+  clubs: [],
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case RETRIEVE_ATHLETE_DETAILS:
+    case RETRIEVE_ATHLETE_CLUBS:
 
       return Object.assign({}, state, {
-        details: action.details,
+        clubs: action.clubs,
       });
 
-        // ...other actions
+    // ...other actions
 
     default:
       return state;
