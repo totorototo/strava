@@ -12,7 +12,7 @@ import { getAthleteDetails } from '../actions/athlete';
 import { LOGOUT } from '../constants/actionTypes';
 
 // service
-import { fetchToken } from '../services/login';
+import { authenticate } from '../services/login';
 
 function* signout() {
   try {
@@ -28,14 +28,8 @@ function* signout() {
 
 function* authorize(temporaryAccessToken) {
   try {
-    // TODO: use config file to retrieve client id + client secret.
-    const formData = new FormData();
-    formData.append('client_id', '15688');
-    formData.append('client_secret', '');
-    formData.append('code', temporaryAccessToken);
-
     // 1- convert access-token
-    const response = yield call(fetchToken, formData);
+    const response = yield call(authenticate, temporaryAccessToken);
 
     // 2- store token
     const token = response.data.access_token;

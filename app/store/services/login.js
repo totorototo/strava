@@ -5,7 +5,13 @@ import { API_ENDPOINT, APPLICATION_TYPE, RESOURCES, METHODS } from '../constants
 import { callJSONApi } from './helpers/api';
 
 
-export const fetchToken = (formData) => {
+export const authenticate = (temporaryAccessToken) => {
+  // TODO: use config file to retrieve client id + client secret.
+  const formData = new FormData();
+  formData.append('client_id', '15688');
+  formData.append('client_secret', '');
+  formData.append('code', temporaryAccessToken);
+
   const headers = new Headers();
   headers.append('Accept', 'application/json');
   headers.append('Origin', '*');
