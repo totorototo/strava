@@ -5,8 +5,8 @@ import { put, call, take } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
 
 // actions
-import { getAccessToken, logout } from '../actions/login';
-import { getAthleteDetails } from '../actions/athlete';
+import { retrieveAccessToken, logout } from '../actions/login';
+import { retrieveAthleteDetails } from '../actions/athlete';
 
 // constants
 import { LOGOUT } from '../constants/actionTypes';
@@ -33,11 +33,11 @@ function* authorize(temporaryAccessToken) {
 
     // 2- store token
     const token = response.data.access_token;
-    yield put(getAccessToken(token));
+    yield put(retrieveAccessToken(token));
 
     // 3- get athlete details
     const details = response.data.athlete;
-    yield put(getAthleteDetails(details));
+    yield put(retrieveAthleteDetails(details));
 
     return token;
   } catch (error) {
