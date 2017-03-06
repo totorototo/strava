@@ -17,10 +17,10 @@ import { retrieveAthleteClubs } from '../actions/athlete';
 function* getClubs() {
   try {
     const token = yield select(getToken);
-    const clubs = yield call(getAthleteClubs, token);
-    yield put(retrieveAthleteClubs(clubs));
+    const response = yield call(getAthleteClubs, token);
+    yield put(retrieveAthleteClubs(response.data));
   } catch (error) {
-    yield put();
+    throw error;
   }
 }
 
