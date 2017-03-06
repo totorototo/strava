@@ -6,7 +6,7 @@ export const callJSONApi = ({ endpoint = { url: API_ENDPOINT, httpVerb: METHODS.
     method: endpoint.httpVerb,
     headers,
     mode: 'cors',
-    body,
+    body: endpoint.httpVerb === METHODS.GET ? undefined : body,
     timeout: 100,
   };
 
