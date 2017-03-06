@@ -1,4 +1,5 @@
 // redux-saga
+import { takeEvery } from 'redux-saga';
 import { put, call, select } from 'redux-saga/effects';
 
 // service
@@ -8,9 +9,12 @@ import { getAthleteClubs } from '../services/athlete';
 import getToken from '../selectors/token';
 
 // actions
+import { GET_ATHLETE_CLUBS } from '../constants/actionTypes';
+
+// actions
 import { retrieveAthleteClubs } from '../actions/athlete';
 
-export function* getClubs() {
+function* getClubs() {
   try {
     const token = yield select(getToken);
     const clubs = yield call(getAthleteClubs, token);
@@ -18,4 +22,11 @@ export function* getClubs() {
   } catch (error) {
     yield put();
   }
+}
+
+
+export function* athleteSaga() {
+  yield [
+    takeEvery(GET_ATHLETE_CLUBS, getClubs),
+  ];
 }
