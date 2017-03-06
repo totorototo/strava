@@ -14,7 +14,7 @@ export const getAthleteClubs = (token) => {
 
   const request = {
     endpoint: {
-      url: API_ENDPOINT + RESOURCES.CLUBS,
+      url: API_ENDPOINT + RESOURCES.ATHLETE_CLUB,
       httpVerb: METHODS.GET,
     },
     headers,
