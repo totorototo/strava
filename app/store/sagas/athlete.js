@@ -18,8 +18,10 @@ import { retrieveAthleteClubs, retrieveAthleteStats } from '../actions/athlete';
 function* getClubs() {
   try {
     const token = yield select(getToken);
-    const clubs = yield call(getAthleteClubs, token);
-    yield put(retrieveAthleteClubs(clubs));
+    const { response, error } = yield call(getAthleteClubs, token);
+    if (!error) {
+      yield put(retrieveAthleteClubs(response));
+    }
   } catch (error) {
     throw error;
   }
@@ -29,8 +31,10 @@ function* getStats() {
   try {
     const token = yield select(getToken);
     const id = yield select(getAthleteID);
-    const stats = yield call(getAthleteStats, token, id);
-    yield put(retrieveAthleteStats(stats));
+    const { response, error } = yield call(getAthleteStats, token, id);
+    if (!error) {
+      yield put(retrieveAthleteStats(response));
+    }
   } catch (error) {
     throw error;
   }
