@@ -14,8 +14,8 @@ export const getAthleteClubs = (token) => {
   };
   return callJSONApi(request)
     .then(
-      response => (response.data),
-      error => (error),
+      response => ({ response: response.data }),
+      error => ({ error }),
   );
 };
 
@@ -28,8 +28,8 @@ export const getAthleteStats = (token, id) => {
     token,
   };
   return callJSONApi(request)
-     .then(
-         response => (response.data),
-         error => (error),
-     );
+    .then(
+      response => ({ response: response.data }),
+      error => ({ error }),
+    );
 };
