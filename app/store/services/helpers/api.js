@@ -2,12 +2,11 @@
 import { API_ENDPOINT, APPLICATION_TYPE, METHODS } from '../../constants/rest';
 
 export const callJSONApi = ({ endpoint = { url: API_ENDPOINT, httpVerb: METHODS.GET }, token = '', parameters = {} }) => {
-  const contentType = METHODS.GET ? APPLICATION_TYPE.JSON : APPLICATION_TYPE.FORM_DATA;
   const headers = new Headers();
   headers.append('Accept', 'application/json');
   headers.append('Origin', '*');
   headers.append('Cache-Control', 'no-cache');
-  headers.append('Content-Type', contentType);
+  headers.append('Content-Type', APPLICATION_TYPE.JSON);
   if (token.length) {
     headers.append('Authorization', `Bearer ${token}`);
   }
