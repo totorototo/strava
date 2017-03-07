@@ -18,3 +18,18 @@ export const getAthleteClubs = (token) => {
       error => (error),
   );
 };
+
+export const getAthleteStats = (token, id) => {
+  const request = {
+    endpoint: {
+      url: `${API_ENDPOINT + RESOURCES.ATHLETE}/${id}/${RESOURCES.STATS}`,
+      httpVerb: METHODS.GET,
+    },
+    token,
+  };
+  return callJSONApi(request)
+     .then(
+         response => (response.data),
+         error => (error),
+     );
+};
