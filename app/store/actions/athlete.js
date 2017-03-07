@@ -1,7 +1,5 @@
 import {
     RETRIEVE_ATHLETE_DETAILS,
-    GET_ATHLETE_ACTIVITIES,
-    RETRIEVE_ATHLETE_ACTIVITIES,
     GET_ATHLETE_CLUBS,
     RETRIEVE_ATHLETE_CLUBS,
     GET_ATHLETE_GEAR,
@@ -12,19 +10,6 @@ export function retrieveAthleteDetails(details) {
   return {
     type: RETRIEVE_ATHLETE_DETAILS,
     details,
-  };
-}
-
-export function getAthleteActivities() {
-  return {
-    type: GET_ATHLETE_ACTIVITIES,
-  };
-}
-
-export function retrieveAthleteActivities(activities) {
-  return {
-    type: RETRIEVE_ATHLETE_ACTIVITIES,
-    activities,
   };
 }
 
