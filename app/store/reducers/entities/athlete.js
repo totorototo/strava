@@ -1,7 +1,6 @@
 // constants
 import {
   RETRIEVE_ATHLETE_DETAILS,
-  RETRIEVE_ATHLETE_ACTIVITIES,
   RETRIEVE_ATHLETE_CLUBS,
   RETRIEVE_ATHLETE_GEAR,
 } from '../../constants/actionTypes';
@@ -15,12 +14,6 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state,
         action.details,
       );
-
-    case RETRIEVE_ATHLETE_ACTIVITIES:
-
-      return Object.assign({}, state, {
-        activities: action.activities,
-      });
 
     case RETRIEVE_ATHLETE_CLUBS:
 
