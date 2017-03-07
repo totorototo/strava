@@ -6,7 +6,8 @@ import { NavigationActions } from 'react-navigation';
 
 // actions
 import { retrieveAccessToken, logout } from '../actions/login';
-import { retrieveAthleteDetails, getAthleteClubs } from '../actions/athlete';
+import { retrieveAthleteDetails, getAthleteClubs, getAthleteStats } from '../actions/athlete';
+import { getAthleteActivities } from '../actions/activities';
 
 // constants
 import { LOGOUT } from '../constants/actionTypes';
@@ -40,6 +41,10 @@ function* authorize(temporaryAccessToken) {
     yield put(retrieveAthleteDetails(details));
 
     yield put(getAthleteClubs());
+
+    yield put(getAthleteActivities());
+
+    yield put(getAthleteStats());
 
     return token;
   } catch (error) {
