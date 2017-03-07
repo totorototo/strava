@@ -12,5 +12,9 @@ export const getAthleteClubs = (token) => {
     },
     token,
   };
-  return callJSONApi(request);
+  return callJSONApi(request)
+    .then(
+      response => (response.data),
+      error => (error),
+  );
 };
