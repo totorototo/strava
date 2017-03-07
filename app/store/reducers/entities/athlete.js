@@ -11,28 +11,28 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case RETRIEVE_ATHLETE_DETAILS:
-
-      return Object.assign({}, state,
-        action.details,
-      );
+      return {
+        ...state,
+        ...action.details,
+      };
 
     case RETRIEVE_ATHLETE_STATS:
-
-      return Object.assign({}, state, {
+      return {
+        ...state,
         stats: action.stats,
-      });
+      };
 
     case RETRIEVE_ATHLETE_CLUBS:
-
-      return Object.assign({}, state, {
+      return {
+        ...state,
         clubs: action.clubs,
-      });
+      };
 
     case RETRIEVE_ATHLETE_GEAR:
-
-      return Object.assign({}, state,
-        action.gear,
-      );
+      return {
+        ...state,
+        ...action.gear,
+      };
 
     // ...other actions
 
