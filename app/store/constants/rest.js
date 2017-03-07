@@ -4,12 +4,13 @@ export const API_ENDPOINT = 'https://www.strava.com';
 // resources
 export const RESOURCES = {
   OAUTH: '/oauth/token',
-  ATHLETE: '/v3/athlete',
+  ATHLETE: '/api/v3/athletes',
   ATHLETE_CLUB: '/api/v3/athlete/clubs',
   ACTIVITIES: '/api/v3/activities',
   CLUBS: '/api/v3/clubs',
   SEGMENTS: '/api/v3/segments',
   UPLOADS: '/api/v3/uploads',
+  STATS: 'stats',
 };
 
 // methods
