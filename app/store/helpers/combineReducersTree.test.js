@@ -57,22 +57,16 @@ describe('combineReducerTree', () => {
   it('It can init state with init action', () => {
     const a = combineReducersTree(data);
     expect(a({}, { type: '@@redux/INIT' })).toMatchSnapshot();
-    // todo shapeStore with redux init action
-    // expect(reducerManager.scopeReducerMap).toMatchSnapshot();
   });
 
   it('It can dispatch a scpecific action', () => {
     const a = combineReducersTree(data);
     expect(a({}, { type: 'ACTION1', data: 'some data after ACTION1' })).toMatchSnapshot();
-    // todo shapeStore with redux init action
-    // expect(reducerManager.scopeReducerMap).toMatchSnapshot();
   });
 
   it('It can dispatch a scpecific action with a previous state', () => {
     const a = combineReducersTree(data);
     expect(a(initialState, { type: 'ACTION1', data: 'some data after ACTION1' })).toMatchSnapshot();
-    // todo shapeStore with redux init action
-    // expect(reducerManager.scopeReducerMap).toMatchSnapshot();
   });
 
   it('Previous state is not alterated by action and immutability principle are respected', () => {

@@ -1,8 +1,8 @@
 // redux
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import ReducerManager from './helpers/ReducerManager';
 // import { composeWithDevTools } from 'remote-redux-devtools';
-// reducers
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 
@@ -13,7 +13,6 @@ export const defaultOptions = {
 
 export default class Store {
   constructor({
-    rootReducer = defaultOptions.rootReducer,
     startingSaga = defaultOptions.startingSaga,
     preloadedState = {},
     sagaMonitor,
@@ -21,6 +20,8 @@ export default class Store {
     const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
     const middleware = [sagaMiddleware];
 
+    const reducerManager = new ReducerManager();
+    this.sagaTotasksMap = new Map();
     // const composeEnhancers = composeWithDevTools(
     //   {
     //     name: 'configuration agent',
@@ -31,7 +32,7 @@ export default class Store {
     //   });
 
     let store = createStore(
-      rootReducer,
+      reducerManager.reducer,
       preloadedState,
       compose(
         applyMiddleware(...middleware),
@@ -47,10 +48,24 @@ export default class Store {
     store = Object.assign(
       this,
       store,
-      { run: sagaMiddleware.run },
+      {
+        run: sagaMiddleware.run,
+        addReducersTree: reducerManager.addReducersTree,
+        removeReducersTree: reducerManager.removeReducersTree,
+      },
     );
 
     // start all sagas
     startingSaga.forEach(saga => store.run(saga));
+  }
+
+  registerBusiness(business) {
+    this.addReducersTree(...business.reducersTrees);
+    business.sagas.forEach(saga => this.sagaTotasksMap.set(saga, this.run(saga)));
+  }
+
+  unregisterBusiness(business) {
+    this.removeReducersTree(...business.reducersTrees);
+    business.sagas.forEach(saga => this.sagaTotasksMap.delete(this.run(saga)));
   }
 }
