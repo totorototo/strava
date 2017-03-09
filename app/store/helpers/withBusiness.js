@@ -1,24 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default function withBusiness(WrappedComponent, business) {
-  // ...and returns another component...
-  return class extends Component {
-    constructor(props) {
-      super(props);
-      this.store = this.context.store;
-    }
+export default function withBusiness(business) {
+  return function (WrappedComponent) {
+    // ...and returns another component...
+    return class extends Component {
+      static contextTypes = {
+        store: React.PropTypes.object,
+      };
 
-    componentWillMount() {
-      this.store.registerBusiness(business);
-    }
+      constructor(props, context) {
+        super(props, context);
+        this.store = this.context.store;
+      }
 
-    componentWillUnmount() {
-      this.store.unregisterBusiness(business);
-    }
+      componentWillMount() {
+        this.store.registerBusiness(business);
+      }
 
-    render() {
-      return <WrappedComponent {...this.props} />;
-    }
+      componentWillUnmount() {
+        this.store.unregisterBusiness(business);
+      }
+
+      render() {
+        return <WrappedComponent {...this.props} />;
+      }
+    };
   };
 }
-

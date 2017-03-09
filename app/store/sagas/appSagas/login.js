@@ -52,6 +52,7 @@ function* authorize(temporaryAccessToken) {
 }
 
 export function* authenticationFlowSaga() {
+  console.log('yeah');
   try {
     // eslint-disable no-constant-condition
     while (true) {

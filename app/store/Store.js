@@ -13,7 +13,6 @@ export const defaultOptions = {
 
 export default class Store {
   constructor({
-    startingSaga = defaultOptions.startingSaga,
     preloadedState = {},
     sagaMonitor,
   } = defaultOptions) {
@@ -50,22 +49,18 @@ export default class Store {
       store,
       {
         run: sagaMiddleware.run,
-        addReducersTree: reducerManager.addReducersTree,
-        removeReducersTree: reducerManager.removeReducersTree,
+        reducerManager,
       },
     );
-
-    // start all sagas
-    startingSaga.forEach(saga => store.run(saga));
   }
 
   registerBusiness(business) {
-    this.addReducersTree(...business.reducersTrees);
+    this.reducerManager.addReducersTree(...business.reducersTrees);
     business.sagas.forEach(saga => this.sagaTotasksMap.set(saga, this.run(saga)));
   }
 
   unregisterBusiness(business) {
-    this.removeReducersTree(...business.reducersTrees);
+    this.reducerManager.removeReducersTree(...business.reducersTrees);
     business.sagas.forEach(saga => this.sagaTotasksMap.delete(this.run(saga)));
   }
 }
