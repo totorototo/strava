@@ -8,10 +8,10 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case RETRIEVE_ACCESS_TOKEN:
-
-      return Object.assign({}, state, {
+      return {
+        ...state,
         accessToken: action.accessToken,
-      });
+      };
 
         // ...other actions
 
