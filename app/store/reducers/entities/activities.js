@@ -7,8 +7,10 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
 
     case RETRIEVE_ATHLETE_ACTIVITIES:
-
-      return Object.assign({}, state, action.activities);
+      return {
+        ...state,
+        ...action.activities,
+      };
 
       // ...other actions
 
