@@ -14,7 +14,7 @@ export const getAthleteActivities = (token) => {
   };
   return callJSONApi(request)
         .then(
-            response => (response.data),
-            error => (error),
+            response => ({ response: response.data }),
+            error => ({ error }),
         );
 };
