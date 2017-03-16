@@ -1,6 +1,5 @@
 // redux-saga
-import { takeEvery } from 'redux-saga';
-import { put, call, select } from 'redux-saga/effects';
+import { put, call, select, takeEvery } from 'redux-saga/effects';
 
 // service
 import { getAthleteClubs, getAthleteStats } from '../services/athlete';
