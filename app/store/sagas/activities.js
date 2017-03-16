@@ -16,8 +16,10 @@ import { retrieveAthleteActivities } from '../actions/activities';
 function* getActivities() {
   try {
     const token = yield select(getToken);
-    const activities = yield call(getAthleteActivities, token);
-    yield put(retrieveAthleteActivities(activities));
+    const { response, error } = yield call(getAthleteActivities, token);
+    if (!error) {
+      yield put(retrieveAthleteActivities(response));
+    }
   } catch (error) {
     throw error;
   }
