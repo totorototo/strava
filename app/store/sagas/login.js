@@ -29,23 +29,24 @@ function* signout() {
 
 function* authorize(temporaryAccessToken) {
   try {
+    let token;
     // 1- convert access-token
-    const credentials = yield call(authenticate, temporaryAccessToken);
+    const { response, error } = yield call(authenticate, temporaryAccessToken);
+    if (!error) {
+      // 2- store token
+      token = response.access_token;
+      yield put(retrieveAccessToken(token));
 
-    // 2- store token
-    const token = credentials.access_token;
-    yield put(retrieveAccessToken(token));
+      // 3- get athlete details
+      const details = response.athlete;
+      yield put(retrieveAthleteDetails(details));
 
-    // 3- get athlete details
-    const details = credentials.athlete;
-    yield put(retrieveAthleteDetails(details));
+      yield put(getAthleteClubs());
 
-    yield put(getAthleteClubs());
+      yield put(getAthleteActivities());
 
-    yield put(getAthleteActivities());
-
-    yield put(getAthleteStats());
-
+      yield put(getAthleteStats());
+    }
     return token;
   } catch (error) {
     throw error;
@@ -59,7 +60,7 @@ export function* authenticationFlowSaga() {
       const navigation = yield take('Navigation/NAVIGATE');
       if (navigation.routeName === 'Home' && navigation.params.code !== undefined) {
         let token = yield call(authorize, navigation.params.code);
-        if (token) {
+        if (token !== undefined) {
           let userSignedOut;
           while (!userSignedOut) {
             yield take(LOGOUT);
