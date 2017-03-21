@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
     case RETRIEVE_ATHLETE_DETAILS:
       return {
         ...state,
-        ...action.details,
+        [action.details.id]: action.details,
       };
 
     case RETRIEVE_ATHLETE_STATS:
