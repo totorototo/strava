@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import athlete from './athlete';
+import athletes from './athletes';
 import activities from './activities';
 import entity from './entity';
 
 export default combineReducers({
-  athlete,
+  athletes,
   activities,
   entity,
 });
