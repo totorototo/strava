@@ -1,1 +1,2 @@
-export default state => state.entities.athlete.id;
+export default state => Object.keys(state.entities.athletes)[0];
+

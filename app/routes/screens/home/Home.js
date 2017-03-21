@@ -29,6 +29,10 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({ athlete: state.entities.athlete });
+const getCurrentAthlete = athletes => Object.values(athletes)[0];
+
+const mapStateToProps = state => ({
+  athlete: getCurrentAthlete(state.entities.athletes),
+});
 
 export default connect(mapStateToProps)(Home);
