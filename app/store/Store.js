@@ -22,7 +22,7 @@ export default class Store {
 
     const composeEnhancers = composeWithDevTools(
       {
-        name: 'configuration agent',
+        name: 'strava',
         hostname: 'localhost',
         maxAge: 20,
         realtime: true,
