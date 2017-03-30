@@ -573,7 +573,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = VFP8Z7Y3CG;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1003,9 +1003,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: el.totorototo@gmail.com (82KCWPEAHF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: el.totorototo@gmail.com (82KCWPEAHF)";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = VFP8Z7Y3CG;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**";
 				INFOPLIST_FILE = strava/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1016,6 +1017,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = strava;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1025,8 +1028,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: el.totorototo@gmail.com (82KCWPEAHF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: el.totorototo@gmail.com (82KCWPEAHF)";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VFP8Z7Y3CG;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**";
 				INFOPLIST_FILE = strava/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1037,6 +1041,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = strava;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
