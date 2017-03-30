@@ -1018,7 +1018,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = strava;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "313adc18-bb71-46cb-9cf4-ce98beeab67b";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1042,7 +1042,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = strava;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "313adc18-bb71-46cb-9cf4-ce98beeab67b";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1181,7 +1181,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "313adc18-bb71-46cb-9cf4-ce98beeab67b";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1218,7 +1218,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "313adc18-bb71-46cb-9cf4-ce98beeab67b";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
