@@ -11,7 +11,7 @@ import styles from './styles';
 
 // styles
 class Home extends Component {
-  // TODO: fix proptypes validation issue with selectors.
+
   static propTypes = {
     athlete: PropTypes.shape({
       firstname: PropTypes.string,
@@ -22,7 +22,6 @@ class Home extends Component {
   render() {
     const { athlete } = this.props;
 
-    // TODO: temporary - find  more elegant way to di this!
     if (athlete !== undefined && Object.keys(athlete).length > 0) {
       return (
         <View style={styles.home}>
@@ -35,7 +34,7 @@ class Home extends Component {
   }
 }
 
-// TODO: return array first item. Add parameter to return given athelte.
+// TODO: return array first item. Add parameter to return given athlete.
 const getCurrentAthlete = athletes => Object.values(athletes)[0];
 
 const mapStateToProps = state => ({
