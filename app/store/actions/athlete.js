@@ -8,9 +8,10 @@ import {
     RETRIEVE_ATHLETE_STATS,
 } from '../constants/actionTypes';
 
-export function retrieveAthleteDetails(details) {
+export function retrieveAthleteDetails(id, details) {
   return {
     type: RETRIEVE_ATHLETE_DETAILS,
+    id,
     details,
   };
 }
