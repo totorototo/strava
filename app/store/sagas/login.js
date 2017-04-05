@@ -28,16 +28,14 @@ function* signout() {
 
 function* authorize(temporaryAccessToken) {
   try {
-    let token;
     // 1- convert access-token
-    const { access_token, athlete, error } = yield call(authenticate, temporaryAccessToken);
+    const { token, athleteID, athleteDetails, error } = yield call(authenticate, temporaryAccessToken);
     if (!error) {
       // 2- store token
-      yield put(retrieveAccessToken(access_token));
+      yield put(retrieveAccessToken(token));
 
       // 3- get athlete details
-      const { id, ...remaining } = athlete;
-      yield put(retrieveAthleteDetails(id, remaining));
+      yield put(retrieveAthleteDetails(athleteID, athleteDetails));
     }
     return token;
   } catch (error) {
