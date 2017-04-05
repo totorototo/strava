@@ -9,7 +9,7 @@ export const authenticate = (temporaryAccessToken) => {
   // TODO: use config file to retrieve client id + client secret.
   const formData = new FormData();
   formData.append('client_id', '15688');
-  formData.append('client_secret', '14c1b90a867bcdd5451e11b3626daf82cc114371');
+  formData.append('client_secret', '');
   formData.append('code', temporaryAccessToken);
 
   const request = {
