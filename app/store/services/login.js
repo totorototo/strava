@@ -9,7 +9,7 @@ export const authenticate = (temporaryAccessToken) => {
   // TODO: use config file to retrieve client id + client secret.
   const formData = new FormData();
   formData.append('client_id', '15688');
-  formData.append('client_secret', '');
+  formData.append('client_secret', '14c1b90a867bcdd5451e11b3626daf82cc114371');
   formData.append('code', temporaryAccessToken);
 
   const request = {
@@ -21,7 +21,10 @@ export const authenticate = (temporaryAccessToken) => {
   };
   return callJSONApi(request)
       .then(
-          response => ({ response: response.data }),
+        (response) => {
+          const { access_token, athlete } = response.data;
+          return { access_token, athlete };
+        },
           error => ({ error }),
       );
 };
