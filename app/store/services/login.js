@@ -23,7 +23,8 @@ export const authenticate = (temporaryAccessToken) => {
       .then(
         (response) => {
           const { access_token, athlete } = response.data;
-          return { access_token, athlete };
+          const { id, firstname, lastname } = athlete;
+          return { token: access_token, athleteID: id, athleteDetails: { firstname, lastname } };
         },
           error => ({ error }),
       );
