@@ -30,15 +30,14 @@ function* authorize(temporaryAccessToken) {
   try {
     let token;
     // 1- convert access-token
-    const { response, error } = yield call(authenticate, temporaryAccessToken);
+    const { access_token, athlete, error } = yield call(authenticate, temporaryAccessToken);
     if (!error) {
       // 2- store token
-      token = response.access_token;
-      yield put(retrieveAccessToken(token));
+      yield put(retrieveAccessToken(access_token));
 
       // 3- get athlete details
-      const details = response.athlete;
-      yield put(retrieveAthleteDetails(details));
+      const { id, ...remaining } = athlete;
+      yield put(retrieveAthleteDetails(id, remaining));
     }
     return token;
   } catch (error) {
