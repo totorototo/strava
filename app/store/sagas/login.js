@@ -6,7 +6,7 @@ import { NavigationActions } from 'react-navigation';
 
 // actions
 import { retrieveAccessToken, logout } from '../actions/login';
-import { retrieveAthleteDetails } from '../actions/athlete';
+import { retrieveAthleteDetails, setCurrentAthlete, getAthleteClubs } from '../actions/athletes';
 
 // constants
 import { LOGOUT } from '../constants/actionTypes';
@@ -29,13 +29,19 @@ function* signout() {
 function* authorize(temporaryAccessToken) {
   try {
     // 1- convert access-token
-    const { token, athleteID, athleteDetails, error } = yield call(authenticate, temporaryAccessToken);
+    const { token, athleteID, athleteDetails, error } =
+      yield call(authenticate, temporaryAccessToken);
     if (!error) {
       // 2- store token
       yield put(retrieveAccessToken(token));
 
-      // 3- get athlete details
+      // 3- set current athlete
+      yield put(setCurrentAthlete(athleteID));
+
+      // 4- get athlete details
       yield put(retrieveAthleteDetails(athleteID, athleteDetails));
+
+      yield put(getAthleteClubs(athleteID));
     }
     return token;
   } catch (error) {

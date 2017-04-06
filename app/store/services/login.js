@@ -22,7 +22,8 @@ export const authenticate = (temporaryAccessToken) => {
 
   return callJSONApi(request)
     .then(
-      response => ({ token: response.data.access_token,
+      response => ({
+        token: response.data.access_token,
         athleteID: response.data.athlete.id,
         athleteDetails: {
           firstname: response.data.athlete.firstname,

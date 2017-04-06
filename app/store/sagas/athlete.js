@@ -6,33 +6,34 @@ import { getAthleteClubs, getAthleteStats } from '../services/athlete';
 
 // selector
 import getToken from '../selectors/token';
-import getAthleteID from '../selectors/athleteID';
+import getCurrentAthlete from '../selectors/currentAthlete';
 
 // actions
 import { GET_ATHLETE_CLUBS, GET_ATHLETE_STATS } from '../constants/actionTypes';
 
 // actions
-import { retrieveAthleteClubs, retrieveAthleteStats } from '../actions/athlete';
+import { retrieveAthleteClubs, retrieveAthleteStats } from '../actions/athletes';
 
-function* getClubs() {
+function* getCurrentAtheteClubs() {
   try {
     const token = yield select(getToken);
+    const id = yield select(getCurrentAthlete);
     const { response, error } = yield call(getAthleteClubs, token);
     if (!error) {
-      yield put(retrieveAthleteClubs(response));
+      yield put(retrieveAthleteClubs(id, response));
     }
   } catch (error) {
     throw error;
   }
 }
 
-function* getStats() {
+function* getCurrentAthleteStats() {
   try {
     const token = yield select(getToken);
-    const id = yield select(getAthleteID);
+    const id = yield select(getCurrentAthlete);
     const { response, error } = yield call(getAthleteStats, token, id);
     if (!error) {
-      yield put(retrieveAthleteStats(response));
+      yield put(retrieveAthleteStats(id, response));
     }
   } catch (error) {
     throw error;
@@ -42,7 +43,7 @@ function* getStats() {
 
 export function* athleteSaga() {
   yield [
-    takeEvery(GET_ATHLETE_CLUBS, getClubs),
-    takeEvery(GET_ATHLETE_STATS, getStats),
+    takeEvery(GET_ATHLETE_CLUBS, getCurrentAtheteClubs),
+    takeEvery(GET_ATHLETE_STATS, getCurrentAthleteStats),
   ];
 }
