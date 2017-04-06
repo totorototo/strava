@@ -6,51 +6,65 @@ import {
     RETRIEVE_ATHLETE_GEAR,
     GET_ATHLETE_STATS,
     RETRIEVE_ATHLETE_STATS,
+    SET_CURRENT_ATHLETE,
 } from '../constants/actionTypes';
 
-export function retrieveAthleteDetails(id, details) {
+export function setCurrentAthlete(athleteID) {
+  return {
+    type: SET_CURRENT_ATHLETE,
+    athleteID,
+  };
+}
+
+export function retrieveAthleteDetails(athleteID, details) {
   return {
     type: RETRIEVE_ATHLETE_DETAILS,
-    id,
+    athleteID,
     details,
   };
 }
 
-export function getAthleteClubs() {
+export function getAthleteClubs(athleteID) {
   return {
     type: GET_ATHLETE_CLUBS,
+    athleteID,
   };
 }
 
-export function retrieveAthleteClubs(clubs) {
+export function retrieveAthleteClubs(athleteID, clubs) {
   return {
     type: RETRIEVE_ATHLETE_CLUBS,
+    athleteID,
     clubs,
   };
 }
 
-export function getAthleteStats() {
+export function getAthleteStats(athleteID) {
   return {
     type: GET_ATHLETE_STATS,
+    athleteID,
   };
 }
 
-export function retrieveAthleteStats(stats) {
+export function retrieveAthleteStats(athleteID, stats) {
   return {
     type: RETRIEVE_ATHLETE_STATS,
+    athleteID,
     stats,
   };
 }
 
-export function getAthleteGear() {
+export function getAthleteGear(athleteID) {
   return {
     type: GET_ATHLETE_GEAR,
+    athleteID,
   };
 }
 
-export function retrieveAthleteGear(gear) {
+export function retrieveAthleteGear(athleteID, gear) {
   return {
     type: RETRIEVE_ATHLETE_GEAR,
+    athleteID,
     gear,
   };
 }
