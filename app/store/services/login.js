@@ -19,13 +19,14 @@ export const authenticate = (temporaryAccessToken) => {
     },
     parameters: formData,
   };
+
   return callJSONApi(request)
-      .then(
-        (response) => {
-          const { access_token, athlete } = response.data;
-          const { id, firstname, lastname } = athlete;
-          return { token: access_token, athleteID: id, athleteDetails: { firstname, lastname } };
-        },
-          error => ({ error }),
-      );
+    .then(
+      response => ({ token: response.data.access_token,
+        athleteID: response.data.athlete.id,
+        athleteDetails: {
+          firstname: response.data.athlete.firstname,
+          lastname: response.data.athlete.lastname } }),
+      error => ({ error }),
+    );
 };
