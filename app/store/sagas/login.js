@@ -5,8 +5,8 @@ import { put, call, take } from 'redux-saga/effects';
 import { NavigationActions } from 'react-navigation';
 
 // actions
-import { retrieveAccessToken, logout } from '../actions/login';
-import { retrieveAthleteDetails, setCurrentAthlete, getAthleteClubs } from '../actions/athletes';
+import { setAccessToken, logout } from '../actions/login';
+import { setEntities } from '../actions/entities';
 
 // constants
 import { LOGOUT } from '../constants/actionTypes';
@@ -29,19 +29,13 @@ function* signout() {
 function* authorize(temporaryAccessToken) {
   try {
     // 1- convert access-token
-    const { token, athleteID, athleteDetails, error } =
+    const { token, response, error } =
       yield call(authenticate, temporaryAccessToken);
     if (!error) {
       // 2- store token
-      yield put(retrieveAccessToken(token));
+      yield put(setAccessToken(token));
 
-      // 3- set current athlete
-      yield put(setCurrentAthlete(athleteID));
-
-      // 4- get athlete details
-      yield put(retrieveAthleteDetails(athleteID, athleteDetails));
-
-      yield put(getAthleteClubs(athleteID));
+      yield put(setEntities(response.entities));
     }
     return token;
   } catch (error) {
