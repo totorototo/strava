@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, RETRIEVE_TEMPORARY_ACCESS_TOKEN, RETRIEVE_ACCESS_TOKEN } from '../constants/actionTypes';
+import { LOGIN, LOGOUT, SET_ACCESS_TOKEN } from '../constants/actionTypes';
 
 export function login() {
   return {
@@ -6,16 +6,9 @@ export function login() {
   };
 }
 
-export function retrieveTemporaryAcessToken(temporaryAccessToken) {
+export function setAccessToken(accessToken) {
   return {
-    type: RETRIEVE_TEMPORARY_ACCESS_TOKEN,
-    temporaryAccessToken,
-  };
-}
-
-export function retrieveAccessToken(accessToken) {
-  return {
-    type: RETRIEVE_ACCESS_TOKEN,
+    type: SET_ACCESS_TOKEN,
     accessToken,
   };
 }
