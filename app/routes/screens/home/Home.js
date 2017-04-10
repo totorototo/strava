@@ -35,7 +35,12 @@ class Home extends Component {
 }
 
 // TODO: return array first item. Add parameter to return given athlete.
-const getCurrentAthlete = athletes => Object.values(athletes)[0];
+const getCurrentAthlete = (athletes) => {
+  if (athletes !== undefined) {
+    return Object.values(athletes)[0];
+  }
+  return undefined;
+};
 
 const mapStateToProps = state => ({
   athlete: getCurrentAthlete(state.entities.athletes),
