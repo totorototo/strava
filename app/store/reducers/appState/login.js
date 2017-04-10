@@ -1,5 +1,5 @@
 // constants
-import { RETRIEVE_ACCESS_TOKEN } from '../../constants/actionTypes';
+import { SET_ACCESS_TOKEN } from '../../constants/actionTypes';
 
 const initialState = {
   accessToken: '',
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case RETRIEVE_ACCESS_TOKEN:
+    case SET_ACCESS_TOKEN:
       return {
         ...state,
         accessToken: action.accessToken,
