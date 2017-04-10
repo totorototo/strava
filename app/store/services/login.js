@@ -1,3 +1,6 @@
+// normalizr
+import { schema, normalize } from 'normalizr';
+
 // constants
 import { API_ENDPOINT, RESOURCES, METHODS } from '../constants/rest';
 
@@ -20,14 +23,26 @@ export const authenticate = (temporaryAccessToken) => {
     parameters: formData,
   };
 
+
   return callJSONApi(request)
     .then(
-      response => ({
-        token: response.data.access_token,
-        athleteID: response.data.athlete.id,
-        athleteDetails: {
-          firstname: response.data.athlete.firstname,
-          lastname: response.data.athlete.lastname } }),
+      (response) => {
+        const athlete = response.data.athlete;
+        const shoes = new schema.Entity('shoes', {}, { idAttribute: 'id' });
+        const bikes = new schema.Entity('bikes', {}, { idAttribute: 'id' });
+        const clubs = new schema.Entity('clubs', {}, { idAttribute: 'id' });
+        const athleteSchema = new schema.Entity('athletes', {
+          shoes: [shoes],
+          bikes: [bikes],
+          clubs: [clubs],
+        }, { idAttribute: 'id' });
+
+        const normalizedData = normalize(athlete, athleteSchema);
+        return {
+          token: response.data.access_token,
+          response: normalizedData,
+        };
+      },
       error => ({ error }),
     );
 };
