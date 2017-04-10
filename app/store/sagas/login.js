@@ -27,20 +27,16 @@ function* signout() {
 }
 
 function* authorize(temporaryAccessToken) {
-  try {
     // 1- convert access-token
-    const { token, response, error } =
+  const { token, response, error } =
       yield call(authenticate, temporaryAccessToken);
-    if (!error) {
+  if (!error) {
       // 2- store token
-      yield put(setAccessToken(token));
+    yield put(setAccessToken(token));
 
-      yield put(setEntities(response.entities));
-    }
-    return token;
-  } catch (error) {
-    throw error;
+    yield put(setEntities(response.entities));
   }
+  return ({ token, error });
 }
 
 export function* authenticationFlowSaga() {
@@ -49,8 +45,9 @@ export function* authenticationFlowSaga() {
     while (true) {
       const navigation = yield take('Navigation/NAVIGATE');
       if (navigation.routeName === 'Home' && navigation.params.code !== undefined) {
-        let token = yield call(authorize, navigation.params.code);
-        if (token !== undefined) {
+        // eslint-disable-next-line no-unused-vars, prefer-const
+        let { token, error } = yield call(authorize, navigation.params.code);
+        if (!error) {
           let userSignedOut;
           while (!userSignedOut) {
             yield take(LOGOUT);
