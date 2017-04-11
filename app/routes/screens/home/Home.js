@@ -21,16 +21,12 @@ class Home extends Component {
 
   render() {
     const { athlete } = this.props;
-
-    if (athlete !== undefined && Object.keys(athlete).length > 0) {
-      return (
-        <View style={styles.home}>
-          <Text>{ athlete.firstname }</Text>
-          <Text>{ athlete.lastname }</Text>
-        </View>
-      );
-    }
-    return null;
+    return (
+      <View style={styles.home}>
+        <Text>{ athlete.firstname }</Text>
+        <Text>{ athlete.lastname }</Text>
+      </View>
+    );
   }
 }
 
@@ -39,7 +35,7 @@ const getCurrentAthlete = (athletes) => {
   if (athletes !== undefined) {
     return Object.values(athletes)[0];
   }
-  return undefined;
+  return { firstname: '', lastname: '' };
 };
 
 const mapStateToProps = state => ({
