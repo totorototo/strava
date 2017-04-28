@@ -1,25 +1,24 @@
 // react
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // react-native
-import { View, WebView } from 'react-native';
+import { View, WebView } from "react-native";
 
-import styles from './styles';
+import styles from "./styles";
 
-const INITIAL_URI = 'https://www.strava.com/oauth/authorize?client_id=15688&response_type=code&redirect_uri=strava://localhost&scope=public';
+const INITIAL_URI = "https://www.strava.com/oauth/authorize?client_id=15688&response_type=code&redirect_uri=strava://localhost&scope=public";
 
 export default class Login extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      visible: true,
+      visible: true
     };
   }
 
-  onShouldStartLoadWithRequest = (url) => {
+  onShouldStartLoadWithRequest = url => {
     if (this.webView != null) {
-      if (!url.startsWith('strava://localhost')) {
+      if (!url.startsWith("strava://localhost")) {
         this.setState(() => ({ visible: true }));
       } else {
         this.setState(() => ({ visible: false }));
@@ -37,12 +36,14 @@ export default class Login extends Component {
     return (
       <View style={currentStyles}>
         <WebView
-          ref={(ref) => {
+          ref={ref => {
             this.webView = ref;
           }}
           source={{ uri: INITIAL_URI }}
-          onNavigationStateChange={event => this.onShouldStartLoadWithRequest(event.url)}
-          onShouldStartLoadWithRequest={event => this.onShouldStartLoadWithRequest(event.url)}
+          onNavigationStateChange={event =>
+            this.onShouldStartLoadWithRequest(event.url)}
+          onShouldStartLoadWithRequest={event =>
+            this.onShouldStartLoadWithRequest(event.url)}
         />
       </View>
     );

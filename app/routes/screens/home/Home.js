@@ -1,45 +1,62 @@
 // react
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from "react";
 
 // react-native
-import { View, Text } from 'react-native';
+import { View, Text, Image } from "react-native";
 
 // redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import styles from './styles';
+import styles from "./styles";
 
 // styles
 class Home extends Component {
-
   static propTypes = {
     athlete: PropTypes.shape({
       firstname: PropTypes.string,
-      lastname: PropTypes.lastname,
-    }).isRequired,
+      lastname: PropTypes.lastname
+    }).isRequired
   };
 
   render() {
     const { athlete } = this.props;
+    // return (
+    //   <View style={styles.home}>
+    //     {
+    //       athlete !== undefined ?
+    //         <text>toto</text> :
+    //         null
+    //     }
+    //   </View>
+    // );
+
     return (
       <View style={styles.home}>
-        <Text>{ athlete.firstname }</Text>
-        <Text>{ athlete.lastname }</Text>
+        <Image
+          source={{ uri: athlete.profile }}
+          style={{ width: 50, height: 50 }}
+        />
+        {Object.keys(athlete).length > 0
+          ? Object.keys(athlete).map((item, key) => (
+              <Text key={key}>{athlete[item]}</Text>
+            ))
+          : null}
       </View>
     );
   }
 }
 
 // TODO: return array first item. Add parameter to return given athlete.
-const getCurrentAthlete = (athletes) => {
+const getCurrentAthlete = athletes => {
   if (athletes !== undefined) {
     return Object.values(athletes)[0];
   }
-  return { firstname: '', lastname: '' };
+  return { firstname: "", lastname: "", profile: "" };
+  // return undefined;
 };
 
 const mapStateToProps = state => ({
-  athlete: getCurrentAthlete(state.entities.athletes),
+  athlete: getCurrentAthlete(state.entities.athletes)
 });
 
 export default connect(mapStateToProps)(Home);

@@ -1,23 +1,23 @@
 // redux-saga
-import { put, call, take } from 'redux-saga/effects';
+import { put, call, take } from "redux-saga/effects";
 
 // navigation
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions } from "react-navigation";
 
 // actions
-import { setAccessToken, logout } from '../actions/login';
-import { setEntities } from '../actions/entities';
+import { setAccessToken, logout } from "../actions/login";
+import { setEntities } from "../actions/entities";
 
 // constants
-import { LOGOUT } from '../constants/actionTypes';
+import { LOGOUT } from "../constants/actionTypes";
 
 // service
-import { authenticate } from '../services/login';
+import { authenticate } from "../services/login";
 
 function* signout() {
   try {
     // 1- redirect to login component
-    yield put(NavigationActions.navigate({ routeName: 'Login' }));
+    yield put(NavigationActions.navigate({ routeName: "Login" }));
 
     // 2- update state
     yield put(logout());
@@ -27,24 +27,28 @@ function* signout() {
 }
 
 function* authorize(temporaryAccessToken) {
-    // 1- convert access-token
-  const { token, response, error } =
-      yield call(authenticate, temporaryAccessToken);
+  // 1- convert access-token
+  const { token, response, error } = yield call(
+    authenticate,
+    temporaryAccessToken
+  );
   if (!error) {
-      // 2- store token
+    // 2- store token
     yield put(setAccessToken(token));
 
     yield put(setEntities(response.entities));
   }
-  return ({ token, error });
+  return { token, error };
 }
 
 export function* authenticationFlowSaga() {
   try {
     // eslint-disable no-constant-condition
     while (true) {
-      const navigation = yield take('Navigation/NAVIGATE');
-      if (navigation.routeName === 'Home' && navigation.params.code !== undefined) {
+      const navigation = yield take("Navigation/NAVIGATE");
+      if (
+        navigation.routeName === "Home" && navigation.params.code !== undefined
+      ) {
         // eslint-disable-next-line no-unused-vars, prefer-const
         let { token, error } = yield call(authorize, navigation.params.code);
         if (!error) {

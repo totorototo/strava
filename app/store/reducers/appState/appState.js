@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import login from './login';
-import navigation from './navigation';
+import login from "./login";
+import navigation from "./navigation";
 
 export default combineReducers({
   navigation,
-  login,
+  login
 });
