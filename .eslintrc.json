@@ -1,6 +1,7 @@
 {
   "extends": [
-    "airbnb"
+    "airbnb",
+    "prettier"
   ],
   "plugins": [
     "react",
