@@ -20,25 +20,13 @@ class Home extends Component {
 
   render() {
     const { athlete } = this.props;
-    // return (
-    //   <View style={styles.home}>
-    //     {
-    //       athlete !== undefined ?
-    //         <text>toto</text> :
-    //         null
-    //     }
-    //   </View>
-    // );
 
     return (
       <View style={styles.home}>
-        <Image
-          source={{ uri: athlete.profile }}
-          style={{ width: 50, height: 50 }}
-        />
+        <Image source={{ uri: athlete.profile }} style={styles.image} />
         {Object.keys(athlete).length > 0
-          ? Object.keys(athlete).map((item, key) => (
-              <Text key={key}>{athlete[item]}</Text>
+          ? Object.keys(athlete).map(item => (
+              <Text key={item}>{athlete[item]}</Text>
             ))
           : null}
       </View>
