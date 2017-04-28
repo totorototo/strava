@@ -1,7 +1,4 @@
 // sagas
-import { authenticationFlowSaga } from './login';
+import { authenticationFlowSaga } from "./login";
 
-export default [
-  authenticationFlowSaga,
-];
-
+export default [authenticationFlowSaga];
