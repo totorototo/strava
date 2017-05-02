@@ -39,9 +39,11 @@ export const authenticate = temporaryAccessToken => {
       );
 
       const normalizedData = normalize(athlete, athleteSchema);
+
       return {
         token: response.data.access_token,
-        response: normalizedData
+        currentUserID: normalizedData.result,
+        entities: normalizedData.entities
       };
     },
     error => ({ error })
