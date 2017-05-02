@@ -12,10 +12,11 @@
     "lint": "eslint --quiet app",
     "devtools": "react-devtools",
     "precommit": "lint-staged",
+    "postcommit": "git reset",
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
     "major": "npm version major && npm publish",
-    "prepublish": "npm run lint && npm test && npm run build",
+    "prepublish": "npm run lint && npm test",
     "postpublish": "git push origin master --follow-tags"
   },
   "lint-staged": {
