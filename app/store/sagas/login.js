@@ -28,15 +28,16 @@ function* signout() {
 
 function* authorize(temporaryAccessToken) {
   // 1- convert access-token
-  const { token, response, error } = yield call(
+  const { token, currentUserID, entities, error } = yield call(
     authenticate,
     temporaryAccessToken
   );
   if (!error) {
+    console.log(currentUserID);
     // 2- store token
     yield put(setAccessToken(token));
 
-    yield put(setEntities(response.entities));
+    yield put(setEntities(entities));
   }
   return { token, error };
 }
