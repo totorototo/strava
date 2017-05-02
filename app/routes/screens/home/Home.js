@@ -34,17 +34,10 @@ class Home extends Component {
   }
 }
 
-// TODO: return array first item. Add parameter to return given athlete.
-const getCurrentAthlete = athletes => {
-  if (athletes !== undefined) {
-    return Object.values(athletes)[0];
-  }
-  return { firstname: "", lastname: "", profile: "" };
-  // return undefined;
-};
+const getAthlete = (state, id) => state.entities.athletes[id];
 
 const mapStateToProps = state => ({
-  athlete: getCurrentAthlete(state.entities.athletes)
+  athlete: getAthlete(state, state.appState.currentUserID)
 });
 
 export default connect(mapStateToProps)(Home);
