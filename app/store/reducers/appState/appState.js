@@ -7,3 +7,13 @@ export default combineReducers({
   navigation,
   login
 });
+//
+// const AppState = {
+//   "@@/data": {
+//     currentUserID: 123
+//   },
+//   login: {
+//     "@@/data": {},
+//     header: {}
+//   }
+// };
