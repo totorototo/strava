@@ -34,10 +34,15 @@ class Home extends Component {
   }
 }
 
-const getAthlete = (state, id) => state.entities.athletes[id];
+const getAthlete = (state, id) => {
+  if (id !== undefined && state.entities.athletes) {
+    return state.entities.athletes[id];
+  }
+  return { firstname: "", lastname: "" };
+};
 
 const mapStateToProps = state => ({
-  athlete: getAthlete(state, state.appState.currentUserID)
+  athlete: getAthlete(state, state.appState["@@/data"].currentUserID)
 });
 
 export default connect(mapStateToProps)(Home);
