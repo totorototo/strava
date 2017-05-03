@@ -35,9 +35,7 @@ function* authorize(temporaryAccessToken) {
   );
   if (!error) {
     yield put(setAccessToken(token));
-
     yield put(setCurrentUserID(currentUserID));
-
     yield put(setEntities(entities));
   }
   return { token, error };
