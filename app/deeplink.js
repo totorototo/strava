@@ -1,32 +1,34 @@
-import { Linking, Platform } from 'react-native';
+import { Linking, Platform } from "react-native";
 
 // navigation
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions } from "react-navigation";
 
-import parse from 'url-parse';
-
+import parse from "url-parse";
 
 export function subcribe(store) {
   function handleOpenURL(url) {
-    if (url != null && url.startsWith('strava://')) {
-      const relativeUrl = url.substring(Platform.OS === 'android' ? 'strava://strava/'.length : 'strava;//'.length);
+    if (url != null && url.startsWith("strava://")) {
+      const relativeUrl = url.substring(
+        Platform.OS === "android"
+          ? "strava://strava/".length
+          : "strava;//".length
+      );
       const parsedUrl = parse(relativeUrl, true);
       if (parsedUrl.query) {
-        store.dispatch(NavigationActions.navigate({
-          routeName: 'Home',
-          params: parsedUrl.query,
-        }));
+        store.dispatch(
+          NavigationActions.navigate({
+            routeName: "Home",
+            params: parsedUrl.query
+          })
+        );
       }
     }
   }
 
-  Linking.getInitialURL()
-    .then(handleOpenURL)
-    .catch((err) => {
-      // eslint no-console: "error"
-      console.error('An error occurred', err);
-    });
+  Linking.getInitialURL().then(handleOpenURL).catch(err => {
+    // eslint no-console: "error"
+    console.error("An error occurred", err);
+  });
 
-  Linking.addEventListener('url', event => handleOpenURL(event.url));
+  Linking.addEventListener("url", event => handleOpenURL(event.url));
 }
-

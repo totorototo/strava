@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import { View, Text } from 'react-native';
+import { View, Text } from "react-native";
 
 const Authenticate = () => (
   <View>
@@ -11,7 +11,7 @@ const Authenticate = () => (
 );
 
 Authenticate.navigationOptions = {
-  title: 'Authenticate',
+  title: "Authenticate"
 };
 
 export default Authenticate;

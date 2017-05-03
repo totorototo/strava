@@ -1,23 +1,24 @@
 // redux-saga
-import { put, call, take } from 'redux-saga/effects';
+import { put, call, take } from "redux-saga/effects";
 
 // navigation
-import { NavigationActions } from 'react-navigation';
+import { NavigationActions } from "react-navigation";
 
 // actions
-import { getAccessToken, logout } from '../actions/login';
-import { getAthleteDetails } from '../actions/athlete';
+import { setAccessToken, logout } from "../actions/login";
+import { setEntities } from "../actions/entities";
+import { setCurrentUserID } from "../actions/app";
 
 // constants
-import { LOGOUT } from '../constants/actionTypes';
+import { LOGOUT } from "../constants/actionTypes";
 
 // service
-import { fetchToken } from '../services/login';
+import { authenticate } from "../services/login";
 
 function* signout() {
   try {
     // 1- redirect to login component
-    yield put(NavigationActions.navigate({ routeName: 'Login' }));
+    yield put(NavigationActions.navigate({ routeName: "Login" }));
 
     // 2- update state
     yield put(logout());
@@ -27,38 +28,32 @@ function* signout() {
 }
 
 function* authorize(temporaryAccessToken) {
-  try {
-    // TODO: use config file to retrieve client id + client secret.
-    const formData = new FormData();
-    formData.append('client_id', '15688');
-    formData.append('client_secret', '');
-    formData.append('code', temporaryAccessToken);
+  // 1- convert access-token
+  const { token, currentUserID, entities, error } = yield call(
+    authenticate,
+    temporaryAccessToken
+  );
+  if (!error) {
+    yield put(setAccessToken(token));
 
-    // 1- convert access-token
-    const response = yield call(fetchToken, formData);
+    yield put(setCurrentUserID(currentUserID));
 
-    // 2- store token
-    const token = response.data.access_token;
-    yield put(getAccessToken(token));
-
-    // 3- get athlete details
-    const details = response.data.athlete;
-    yield put(getAthleteDetails(details));
-
-    return token;
-  } catch (error) {
-    throw error;
+    yield put(setEntities(entities));
   }
+  return { token, error };
 }
 
 export function* authenticationFlowSaga() {
   try {
     // eslint-disable no-constant-condition
     while (true) {
-      const navigation = yield take('Navigation/NAVIGATE');
-      if (navigation.routeName === 'Home' && navigation.params.code !== undefined) {
-        let token = yield call(authorize, navigation.params.code);
-        if (token) {
+      const navigation = yield take("Navigation/NAVIGATE");
+      if (
+        navigation.routeName === "Home" && navigation.params.code !== undefined
+      ) {
+        // eslint-disable-next-line no-unused-vars, prefer-const
+        let { token, error } = yield call(authorize, navigation.params.code);
+        if (!error) {
           let userSignedOut;
           while (!userSignedOut) {
             yield take(LOGOUT);

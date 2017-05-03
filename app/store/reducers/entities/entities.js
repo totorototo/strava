@@ -1,7 +1,19 @@
-import { combineReducers } from 'redux';
+// constants
+import { SET_ENTITIES } from "../../constants/actionTypes";
 
-import athlete from './athlete';
+const initialState = {};
 
-export default combineReducers({
-  athlete,
-});
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
+    case SET_ENTITIES:
+      return {
+        ...state,
+        ...action.entities
+      };
+
+    // ...other actions
+
+    default:
+      return state;
+  }
+}

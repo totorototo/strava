@@ -1,12 +1,12 @@
 // react-native
-import 'react-devtools'; // Put it first!
-import React, { Component } from 'react';
+import "react-devtools"; // Put it first!
+import React, { Component } from "react";
 // redux
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 // Container
-import AppWithNavigationState from './routes/AppWithNavigationState';
+import AppWithNavigationState from "./routes/AppWithNavigationState";
 // Store
-import store from './store';
+import store from "./store";
 
 export default class App extends Component {
   render() {

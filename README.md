@@ -1,12 +1,15 @@
-# strava
+# Strava
 
 Strava is a React Native application consuming Strava RESTFul web service.
 This application was designed for 'bitos' and 'bidochons' in order to complete successfully the 10th 'Grand Raid des Pyrénées'.
 
-# builds
+# Builds
 
 Android: [![Build Status](https://www.bitrise.io/app/a416933328198685.svg?token=0-NdeRg6y57BlLMUX0VIRg)](https://www.bitrise.io/app/a416933328198685)  iOS: [![Build Status](https://www.bitrise.io/app/17f5bc5ad4a502af.svg?token=08vLH5UDITLIxqCG-tumdw&branch=master)](https://www.bitrise.io/app/17f5bc5ad4a502af)
 
+# Style
+
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 # Requirements
 * node `^6.9.1`
