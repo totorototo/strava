@@ -7,6 +7,7 @@ import { NavigationActions } from "react-navigation";
 // actions
 import { setAccessToken, logout } from "../actions/login";
 import { setEntities } from "../actions/entities";
+import { setCurrentUserID } from "../actions/app";
 
 // constants
 import { LOGOUT } from "../constants/actionTypes";
@@ -33,9 +34,9 @@ function* authorize(temporaryAccessToken) {
     temporaryAccessToken
   );
   if (!error) {
-    console.log(currentUserID);
-    // 2- store token
     yield put(setAccessToken(token));
+
+    yield put(setCurrentUserID(currentUserID));
 
     yield put(setEntities(entities));
   }
