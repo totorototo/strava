@@ -14,7 +14,8 @@ class Home extends Component {
   static propTypes = {
     athlete: PropTypes.shape({
       firstname: PropTypes.string,
-      lastname: PropTypes.lastname
+      lastname: PropTypes.string,
+      profil: PropTypes.string
     }).isRequired
   };
 
@@ -38,7 +39,7 @@ const getAthlete = (state, id) => {
   if (id !== undefined && state.entities.athletes) {
     return state.entities.athletes[id];
   }
-  return { firstname: "", lastname: "" };
+  return { firstname: "", lastname: "", profil: "" };
 };
 
 const mapStateToProps = state => ({
