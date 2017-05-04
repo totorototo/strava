@@ -138,5 +138,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
