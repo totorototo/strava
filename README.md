@@ -7,6 +7,20 @@ This application was designed for 'bitos' and 'bidochons' in order to complete s
 
 Android: [![Build Status](https://www.bitrise.io/app/a416933328198685.svg?token=0-NdeRg6y57BlLMUX0VIRg)](https://www.bitrise.io/app/a416933328198685)  iOS: [![Build Status](https://www.bitrise.io/app/17f5bc5ad4a502af.svg?token=08vLH5UDITLIxqCG-tumdw&branch=master)](https://www.bitrise.io/app/17f5bc5ad4a502af)
 
+# Configuration
+
+In order to run this application, a configuration file has to be set. 
+
+Create a new .env file at the root of this project.
+Set CLIENT_ID and CLIENT_SECRET keys with values (granted by Strava).
+
+```bash
+CLIENT_ID=13456
+CLIENT_SECRET=12az12er2151g1tg5t1gt
+```
+
+Feel free to ask for those true key's values if you want to be part of this :)
+
 # Style
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
