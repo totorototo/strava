@@ -1,6 +1,7 @@
 // normalizr
 import { schema, normalize } from "normalizr";
 
+// config
 import Config from "react-native-config";
 
 // constants
