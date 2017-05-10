@@ -48,7 +48,7 @@ CLIENT_ID=13456
 CLIENT_SECRET=12az12er2151g1tg5t1gt
 ```
 
-# Launch
+# Ignition
 
 ```bash
 react-native start                     # Compile and launch packager
