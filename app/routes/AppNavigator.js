@@ -10,7 +10,10 @@ const AppNavigator = StackNavigator(
     Authenticate: { screen: Authenticate, path: "localhost" },
     Home: { screen: Home }
   },
-  { cardStyle: { flex: 1 } }
+  {
+    cardStyle: { flex: 1 },
+    headerMode: "none"
+  }
 );
 
 export default AppNavigator;

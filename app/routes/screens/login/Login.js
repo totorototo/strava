@@ -4,9 +4,12 @@ import React, { Component } from "react";
 // react-native
 import { View, WebView } from "react-native";
 
+// config
+import Config from "react-native-config";
+
 import styles from "./styles";
 
-const INITIAL_URI = "https://www.strava.com/oauth/authorize?client_id=15688&response_type=code&redirect_uri=strava://localhost&scope=public";
+const INITIAL_URI = `https://www.strava.com/oauth/authorize?client_id=${Config.CLIENT_ID}&response_type=code&redirect_uri=strava://localhost&scope=public`;
 
 export default class Login extends Component {
   constructor(props) {

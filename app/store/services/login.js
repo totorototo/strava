@@ -1,6 +1,9 @@
 // normalizr
 import { schema, normalize } from "normalizr";
 
+// config
+import Config from "react-native-config";
+
 // constants
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
@@ -8,10 +11,9 @@ import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 import { callJSONApi } from "./helpers/api";
 
 export const authenticate = temporaryAccessToken => {
-  // TODO: use config file to retrieve client id + client secret.
   const formData = new FormData();
-  formData.append("client_id", "15688");
-  formData.append("client_secret", "");
+  formData.append("client_id", Config.CLIENT_ID);
+  formData.append("client_secret", Config.CLIENT_SECRET);
   formData.append("code", temporaryAccessToken);
 
   const request = {
