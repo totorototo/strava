@@ -38,11 +38,11 @@ yarn install                           # Install project dependencies
 * go to https://www.strava.com/settings/api
 * retrieve application ID and secret
 * create a new .env file at the root of this project
-* edit .env file and add  CLIENT_ID and CLIENT_SECRET keys with your application ID and secret.
+* paste the following code inside your .env file and make sure to replace [XXX] and [YYY] with your info.
 
 ```bash
-CLIENT_ID=13456
-CLIENT_SECRET=12az12er2151g1tg5t1gt
+CLIENT_ID=[XXX]
+CLIENT_SECRET =[YYY]
 ```
 
 
