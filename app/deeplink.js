@@ -7,11 +7,10 @@ import parse from "url-parse";
 
 export function subcribe(store) {
   function handleOpenURL(url) {
-    if (url != null && url.startsWith("strava://")) {
+    console.log(`url${url}`);
+    if (url !== null && url.startsWith("strava://")) {
       const relativeUrl = url.substring(
-        Platform.OS === "android"
-          ? "strava://strava/".length
-          : "strava;//".length
+        Platform.OS === "android" ? "strava://".length : "strava;//".length
       );
       const parsedUrl = parse(relativeUrl, true);
       if (parsedUrl.query) {
@@ -25,7 +24,7 @@ export function subcribe(store) {
     }
   }
 
-  Linking.getInitialURL().then(handleOpenURL).catch(err => {
+  Linking.getInitialURL().then(url => handleOpenURL(url)).catch(err => {
     // eslint no-console: "error"
     console.error("An error occurred", err);
   });
