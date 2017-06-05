@@ -12,7 +12,7 @@ export const callJSONApi = (
   headers.append("Accept", "application/json");
   headers.append("Origin", "*");
   headers.append("Cache-Control", "no-cache");
-  headers.append("Content-Type", APPLICATION_TYPE.JSON);
+  headers.append("Content-Type", APPLICATION_TYPE.FORM_DATA);
   if (token.length) {
     headers.append("Authorization", `Bearer ${token}`);
   }
