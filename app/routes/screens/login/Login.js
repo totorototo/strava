@@ -20,7 +20,7 @@ export default class Login extends Component {
   }
 
   onShouldStartLoadWithRequest = url => {
-    if (this.webView != null) {
+    if (this.webView !== null) {
       if (!url.startsWith("strava://localhost")) {
         this.setState(() => ({ visible: true }));
       } else {
