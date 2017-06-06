@@ -7,7 +7,6 @@ import parse from "url-parse";
 
 export function subcribe(store) {
   function handleOpenURL(url) {
-    console.log(`url${url}`);
     if (url !== null && url.startsWith("strava://")) {
       const relativeUrl = url.substring(
         Platform.OS === "android" ? "strava://".length : "strava;//".length
