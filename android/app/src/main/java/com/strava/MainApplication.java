@@ -3,11 +3,8 @@ package com.strava;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-<<<<<<< ours
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.facebook.react.ReactInstanceManager;
-=======
->>>>>>> theirs
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
