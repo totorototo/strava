@@ -1,6 +1,6 @@
-# Strava
+# Strava React Native
 
-Strava is a React Native application consuming Strava RESTFul web service.
+this is a React Native application consuming Strava RESTFul web service.
 
 
 # continuous integration
