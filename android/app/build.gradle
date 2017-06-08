@@ -88,7 +88,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.strava"
+        applicationId "com.lybitos"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1

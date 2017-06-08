@@ -1,4 +1,4 @@
-package com.strava;
+package com.lybitos;
 
 import android.app.Application;
 
