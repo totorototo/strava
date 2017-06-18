@@ -39,7 +39,7 @@ const getAthlete = (state, id) => {
   if (id !== undefined && state.entities.athletes) {
     return state.entities.athletes[id];
   }
-  return { firstname: "", lastname: "", profil: "" };
+  return { firstname: "", lastname: "", profile: "" };
 };
 
 const mapStateToProps = state => ({
