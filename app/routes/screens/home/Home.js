@@ -1,49 +1,32 @@
-// react
-import React, { Component, PropTypes } from "react";
+import { TabNavigator } from "react-navigation";
 
-// react-native
-import { View, Text, Image } from "react-native";
+import Details from "../details/Details";
+import ClubFeed from "../clubFeed/ClubFeed";
+import PerformanceMeter from "../performanceMeter/PerformanceMeter";
+import RacePredictor from "../racePredictor/RacePredictor";
 
-// redux
-import { connect } from "react-redux";
-
-import styles from "./styles";
-
-// styles
-class Home extends Component {
-  static propTypes = {
-    athlete: PropTypes.shape({
-      firstname: PropTypes.string,
-      lastname: PropTypes.string,
-      profil: PropTypes.string
-    }).isRequired
-  };
-
-  render() {
-    const { athlete } = this.props;
-
-    return (
-      <View style={styles.home}>
-        <Image source={{ uri: athlete.profile }} style={styles.image} />
-        {Object.keys(athlete).length > 0
-          ? Object.keys(athlete).map(item => (
-              <Text key={item}>{athlete[item]}</Text>
-            ))
-          : null}
-      </View>
-    );
+const Home = TabNavigator(
+  {
+    PerformanceMeter: { screen: PerformanceMeter },
+    RacePredictor: { screen: RacePredictor },
+    Details: { screen: Details },
+    ClubFeed: { screen: ClubFeed }
+  },
+  {
+    tabBarPosition: "bottom",
+    tabBarOptions: {
+      labelStyle: {
+        fontSize: 12,
+        color: "grey"
+      },
+      style: {
+        backgroundColor: "white"
+      },
+      indicatorStyle: {
+        backgroundColor: "#FC4C02"
+      }
+    }
   }
-}
+);
 
-const getAthlete = (state, id) => {
-  if (id !== undefined && state.entities.athletes) {
-    return state.entities.athletes[id];
-  }
-  return { firstname: "", lastname: "", profile: "" };
-};
-
-const mapStateToProps = state => ({
-  athlete: getAthlete(state, state.appState["@@/data"].currentUserID)
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;
