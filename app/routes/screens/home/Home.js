@@ -7,10 +7,30 @@ import RacePredictor from "../racePredictor/RacePredictor";
 
 const Home = TabNavigator(
   {
-    PerformanceMeter: { screen: PerformanceMeter },
-    RacePredictor: { screen: RacePredictor },
-    Details: { screen: Details },
-    ClubFeed: { screen: ClubFeed }
+    PerformanceMeter: {
+      screen: PerformanceMeter,
+      navigationOptions: {
+        tabBarLabel: "Lybitometer"
+      }
+    },
+    RacePredictor: {
+      screen: RacePredictor,
+      navigationOptions: {
+        tabBarLabel: "predictor"
+      }
+    },
+    Details: {
+      screen: Details,
+      navigationOptions: {
+        tabBarLabel: "athlete"
+      }
+    },
+    ClubFeed: {
+      screen: ClubFeed,
+      navigationOptions: {
+        tabBarLabel: "leaks"
+      }
+    }
   },
   {
     tabBarPosition: "bottom",
