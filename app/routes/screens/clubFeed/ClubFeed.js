@@ -11,7 +11,7 @@ class ClubFeed extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Not implemented yet</Text>
+        <Text>Lybitos club gossips and more</Text>
       </View>
     );
   }

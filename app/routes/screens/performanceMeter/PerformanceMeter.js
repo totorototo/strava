@@ -11,7 +11,9 @@ class PerformanceMeter extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Not implemented yet</Text>
+        <Text>profit formula to be defined!</Text>
+        <Text>Will you be a Bitos ?</Text>
+        <Text>Or one of the few LYB on earth....</Text>
       </View>
     );
   }

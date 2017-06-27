@@ -14,14 +14,14 @@ const Home = TabNavigator(
     PerformanceMeter: {
       screen: PerformanceMeter,
       navigationOptions: {
-        tabBarLabel: "Lybito-mtr",
+        tabBarLabel: "lyb-mtr",
         tabBarIcon: () => <Icon name="whatshot" color="#FC4C02" />
       }
     },
     RacePredictor: {
       screen: RacePredictor,
       navigationOptions: {
-        tabBarLabel: "predictor",
+        tabBarLabel: "race",
         tabBarIcon: () => <Icon name="timer" color="#FC4C02" />
       }
     },
@@ -43,7 +43,7 @@ const Home = TabNavigator(
   {
     tabBarPosition: "bottom",
     tabBarOptions: {
-      showIcon: "true",
+      showIcon: true,
       labelStyle: {
         fontSize: 12,
         color: "#FC4C02"

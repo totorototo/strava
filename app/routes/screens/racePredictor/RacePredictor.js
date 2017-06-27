@@ -11,7 +11,8 @@ class RacePredictor extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Not implemented yet</Text>
+        <Text>Circus Tour time prediction</Text>
+        <Text>101% accurate</Text>
       </View>
     );
   }
