@@ -2,7 +2,6 @@
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "remote-redux-devtools";
-// reducers
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 
