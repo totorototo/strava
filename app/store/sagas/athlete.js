@@ -3,7 +3,7 @@ import { takeEvery } from "redux-saga";
 import { call, select } from "redux-saga/effects";
 
 // actions
-import { GET_ATHLETE_STATS } from "../constants/actionTypes";
+import { GET_CURRENT_ATHLETE_STATS } from "../constants/actionTypes";
 
 // selectors
 import { token, currentUserID } from "../selectors/app";
@@ -21,5 +21,5 @@ function* getStats() {
 }
 
 export function* athleteSaga() {
-  yield takeEvery(GET_ATHLETE_STATS, getStats);
+  yield takeEvery(GET_CURRENT_ATHLETE_STATS, getStats);
 }

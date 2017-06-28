@@ -1,7 +1,7 @@
 import { SET_CURRENT_USER_ID } from "../../constants/actionTypes";
 
 const initialState = {
-  currentUserID: ""
+  currentUserID: 0
 };
 
 export default function reducer(state = initialState, action) {

@@ -7,7 +7,7 @@ import { NavigationActions } from "react-navigation";
 // actions
 import { setAccessToken, logout } from "../actions/login";
 import { setEntities } from "../actions/entities";
-import { setCurrentUserID } from "../actions/app";
+import { setCurrentUserID } from "../actions/data";
 
 // constants
 import { LOGOUT } from "../constants/actionTypes";
