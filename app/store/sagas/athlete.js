@@ -1,9 +1,12 @@
 // redux saga
 import { takeEvery } from "redux-saga";
-import { call, select } from "redux-saga/effects";
+import { call, select, put } from "redux-saga/effects";
+
+// constants
+import { GET_CURRENT_ATHLETE_STATS } from "../constants/actionTypes";
 
 // actions
-import { GET_CURRENT_ATHLETE_STATS } from "../constants/actionTypes";
+import { updateEntities } from "../actions/entities";
 
 // selectors
 import { token, currentUserID } from "../selectors/app";
@@ -19,8 +22,8 @@ function* getStats() {
   const id = yield select(currentUserID);
   const { stats, error } = yield call(getAthleteStats, accessToken, id);
   if (!error && stats) {
-    const performanceIndicator = yield call(computeAthletePerformance, stats);
-    console.log(performanceIndicator);
+    const performance = yield call(computeAthletePerformance, stats);
+    yield put(updateEntities(id, "athletes", { performance }));
   }
 }
 
