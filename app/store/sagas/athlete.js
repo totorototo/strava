@@ -22,8 +22,10 @@ function* getStats() {
   const id = yield select(currentUserID);
   const { stats, error } = yield call(getAthleteStats, accessToken, id);
   if (!error && stats) {
-    const performance = yield call(computeAthletePerformance, stats);
-    yield put(updateEntity(id, "athletes", { performance }));
+    const { performance } = yield call(computeAthletePerformance, stats);
+    if (performance) {
+      yield put(updateEntity(id, "athletes", { performance }));
+    }
   }
 }
 
