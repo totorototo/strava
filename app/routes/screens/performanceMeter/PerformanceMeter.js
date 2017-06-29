@@ -16,7 +16,7 @@ class PerformanceMeter extends Component {
       <View style={styles.container}>
         {this.props.performance && this.props.performance !== 0
           ? <Text>
-              {this.props.performance}
+              {`${this.props.performance}% lyb`}
             </Text>
           : <Text>computing</Text>}
       </View>
