@@ -1,4 +1,4 @@
-import { SET_ENTITIES, UPDATE_ENTITIES } from "../constants/actionTypes";
+import { SET_ENTITIES, UPDATE_ENTITY } from "../constants/actionTypes";
 
 export function setEntities(entities) {
   return {
@@ -7,9 +7,9 @@ export function setEntities(entities) {
   };
 }
 
-export function updateEntities(id, entityType, payload) {
+export function updateEntity(id, entityType, payload) {
   return {
-    type: UPDATE_ENTITIES,
+    type: UPDATE_ENTITY,
     id,
     entityType,
     payload
