@@ -12,15 +12,17 @@ import styles from "./styles";
 
 class PerformanceMeter extends Component {
   static propTypes = {
-    currentAthleteID: PropTypes.number.isRequired
+    performance: PropTypes.number.isRequired
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>profit formula to be defined!</Text>
-        <Text>Will you be a Bitos ?</Text>
-        <Text>Or one of the few LYB on earth....</Text>
+        {this.props.performance
+          ? <Text>
+              {this.props.performance}
+            </Text>
+          : <Text>computing</Text>}
       </View>
     );
   }
@@ -34,7 +36,6 @@ const getPerformanceValue = (state, id) => {
 };
 
 const mapStateToProps = state => ({
-  currentAthleteID: state.appState["@@/data"].currentUserID,
   performance: getPerformanceValue(
     state,
     state.appState["@@/data"].currentUserID
