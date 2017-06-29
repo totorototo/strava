@@ -9,14 +9,18 @@ import { GET_CURRENT_ATHLETE_STATS } from "../constants/actionTypes";
 import { token, currentUserID } from "../selectors/app";
 
 // services
-import { getAthleteStats } from "../services/athlete";
+import {
+  getAthleteStats,
+  computeAthletePerformance
+} from "../services/athlete";
 
 function* getStats() {
   const accessToken = yield select(token);
   const id = yield select(currentUserID);
-  const { error } = yield call(getAthleteStats, accessToken, id);
-  if (error) {
-    console.log(error);
+  const { stats, error } = yield call(getAthleteStats, accessToken, id);
+  if (!error && stats) {
+    const performanceIndicator = yield call(computeAthletePerformance, stats);
+    console.log(performanceIndicator);
   }
 }
 
