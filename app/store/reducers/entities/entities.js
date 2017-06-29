@@ -11,20 +11,16 @@ export default function reducer(state = initialState, action) {
         ...action.entities
       };
     case UPDATE_ENTITIES:
-      return Object.keys(state[action.entityType]).map(item => {
-        if (parseInt(item, 10) === action.id) {
-          return {
-            ...state,
-            [action.entityType]: {
-              [action.id]: {
-                ...state[action.entityType][action.id],
-                ...action.payload
-              }
-            }
-          };
+      return {
+        ...state,
+        [action.entityType]: {
+          ...state[action.entityType],
+          [action.id]: {
+            ...state[action.entityType][action.id],
+            ...action.payload
+          }
         }
-        return state;
-      });
+      };
 
     // ...other actions
 
