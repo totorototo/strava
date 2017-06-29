@@ -18,7 +18,7 @@ class PerformanceMeter extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.performance
+        {this.props.performance && this.props.performance !== 0
           ? <Text>
               {this.props.performance}
             </Text>
@@ -30,7 +30,7 @@ class PerformanceMeter extends Component {
 
 const getPerformanceValue = (state, id) => {
   if (id !== undefined && id !== 0 && state.entities.athletes) {
-    return state.entities.athletes[id].performance;
+    return state.entities.athletes[id].performance || 0;
   }
   return 0;
 };
