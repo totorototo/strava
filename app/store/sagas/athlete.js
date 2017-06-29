@@ -3,10 +3,10 @@ import { takeEvery } from "redux-saga";
 import { call, select, put } from "redux-saga/effects";
 
 // constants
-import { GET_CURRENT_ATHLETE_STATS } from "../constants/actionTypes";
+import { SET_ENTITIES } from "../constants/actionTypes";
 
 // actions
-import { updateEntities } from "../actions/entities";
+import { updateEntity } from "../actions/entities";
 
 // selectors
 import { token, currentUserID } from "../selectors/app";
@@ -23,10 +23,10 @@ function* getStats() {
   const { stats, error } = yield call(getAthleteStats, accessToken, id);
   if (!error && stats) {
     const performance = yield call(computeAthletePerformance, stats);
-    yield put(updateEntities(id, "athletes", { performance }));
+    yield put(updateEntity(id, "athletes", { performance }));
   }
 }
 
 export function* athleteSaga() {
-  yield takeEvery(GET_CURRENT_ATHLETE_STATS, getStats);
+  yield takeEvery(SET_ENTITIES, getStats);
 }
