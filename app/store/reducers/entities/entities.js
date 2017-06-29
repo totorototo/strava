@@ -1,5 +1,5 @@
 // constants
-import { SET_ENTITIES, UPDATE_ENTITIES } from "../../constants/actionTypes";
+import { SET_ENTITIES, UPDATE_ENTITY } from "../../constants/actionTypes";
 
 const initialState = {};
 
@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         ...action.entities
       };
-    case UPDATE_ENTITIES:
+    case UPDATE_ENTITY:
       return {
         ...state,
         [action.entityType]: {
