@@ -56,7 +56,7 @@ export const getAthleteStats = (token, id) => {
 export const computeAthletePerformance = (
   { recent = {}, year = {}, total = {} } = {}
 ) => {
-  const v1 =
+  const heuristic1 =
     (recent.count /
       references.RECENT_RUN_COUNT *
       referencesWeightings.RECENT_RUN_COUNT +
@@ -68,7 +68,7 @@ export const computeAthletePerformance = (
         referencesWeightings.RECENT_RUN_ELEVATION_GAIN) *
     referencesWeightings.RECENT_EFFORTS;
 
-  const v2 =
+  const heuristic2 =
     (year.count /
       references.YEAR_RUN_COUNT *
       referencesWeightings.YEAR_RUN_COUNT +
@@ -80,7 +80,7 @@ export const computeAthletePerformance = (
         referencesWeightings.YEAR_RUN_ELEVATION_GAIN) *
     referencesWeightings.YEAR_EFFORTS;
 
-  const v3 =
+  const heuristic3 =
     (total.count /
       references.TOTAL_RUN_COUNT *
       referencesWeightings.TOTAL_RUN_COUNT +
@@ -92,5 +92,9 @@ export const computeAthletePerformance = (
         referencesWeightings.TOTAL_RUN_ELEVATION_GAIN) *
     referencesWeightings.TOTAL_EFFORTS;
 
-  return (v1 + v2 + v3) * 100;
+  const performance = (heuristic1 + heuristic2 + heuristic3) * 100;
+  if (performance !== undefined || !isNaN(performance)) {
+    return { performance };
+  }
+  return { error: "Oops" };
 };
