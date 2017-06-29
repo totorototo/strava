@@ -8,10 +8,14 @@ export const references = {
   YEAR_RUN_COUNT: 365,
   YEAR_RUN_DISTANCE: 1212000, // CCC race distance * 12
   YEAR_ACHIEVEMENT_COUNT: 49,
-  YEAR_RUN_ELEVATION_GAIN: 73200 // CCC race elevation gain * 12
+  YEAR_RUN_ELEVATION_GAIN: 73200, // CCC race elevation gain * 12
+  TOTAL_RUN_COUNT: 9999,
+  TOTAL_RUN_DISTANCE: 12120000, // CCC race distance * 120
+  TOTAL_ACHIEVEMENT_COUNT: 9999,
+  TOTAL_RUN_ELEVATION_GAIN: 884800 // Everest elevation gain * 100
 };
 
-export const referencesWeighting = {
+export const referencesWeightings = {
   BIGGEST_DISTANCE: 0.5,
   BIGGEST_ELEVATION_GAIN: 0.5,
   RECENT_RUN_COUNT: 0.2,
@@ -22,7 +26,10 @@ export const referencesWeighting = {
   YEAR_RUN_DISTANCE: 0.3,
   YEAR_ACHIEVEMENT_COUNT: 0.1,
   YEAR_RUN_ELEVATION_GAIN: 0.4,
-  BIGGEST_EFFORT: 0.2,
+  TOTAL_RUN_COUNT: 0.2,
+  TOTAL_RUN_DISTANCE: 0.4,
+  TOTAL_RUN_ELEVATION_GAIN: 0.4,
+  TOTAL_EFFORTS: 0.2,
   RECENT_EFFORTS: 0.3,
   YEAR_EFFORTS: 0.5
 };
