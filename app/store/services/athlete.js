@@ -1,13 +1,9 @@
-// lodash
 import { pick } from "lodash";
 
-// constants
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
-// helper
 import { callJSONApi } from "./helpers/api";
 
-// constants
 import { references, referencesWeightings } from "../constants/references";
 
 export const getAthleteStats = (token, id) => {

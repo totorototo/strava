@@ -1,13 +1,9 @@
-// react
 import React, { Component, PropTypes } from "react";
 
-// react-native
 import { View, Text } from "react-native";
 
-// redux
 import { connect } from "react-redux";
 
-// styles
 import styles from "./styles";
 
 class PerformanceMeter extends Component {

@@ -1,10 +1,7 @@
-// react
 import React, { Component } from "react";
 
-// react-native
 import { View, WebView } from "react-native";
 
-// config
 import Config from "react-native-config";
 
 import styles from "./styles";

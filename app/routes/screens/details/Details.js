@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 
 import styles from "./styles";
 
-// styles
 class Details extends Component {
   static propTypes = {
     athlete: PropTypes.shape({
@@ -25,8 +24,12 @@ class Details extends Component {
     return (
       <View style={styles.home}>
         <Image source={{ uri: athlete.profile }} style={styles.image} />
-        <Text>{athlete.firstname}</Text>
-        <Text>{athlete.lastname}</Text>
+        <Text>
+          {athlete.firstname}
+        </Text>
+        <Text>
+          {athlete.lastname}
+        </Text>
       </View>
     );
   }

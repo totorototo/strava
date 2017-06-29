@@ -1,4 +1,3 @@
-// store
 import Store from "./store/Store";
 import rootReducer from "./store/reducers/rootReducer";
 import sagaMonitor from "./devTools/sagaMonitor";

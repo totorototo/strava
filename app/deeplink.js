@@ -1,6 +1,5 @@
 import { Linking, Platform } from "react-native";
 
-// navigation
 import { NavigationActions } from "react-navigation";
 
 import parse from "url-parse";

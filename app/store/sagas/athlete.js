@@ -1,17 +1,12 @@
-// redux saga
 import { takeEvery } from "redux-saga";
 import { call, select, put } from "redux-saga/effects";
 
-// constants
 import { SET_ENTITIES } from "../constants/actionTypes";
 
-// actions
 import { updateEntity } from "../actions/entities";
 
-// selectors
 import { token, currentUserID } from "../selectors/app";
 
-// services
 import {
   getAthleteStats,
   computeAthletePerformance

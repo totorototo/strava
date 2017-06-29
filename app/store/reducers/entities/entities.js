@@ -1,4 +1,3 @@
-// constants
 import { SET_ENTITIES, UPDATE_ENTITY } from "../../constants/actionTypes";
 
 const initialState = {};

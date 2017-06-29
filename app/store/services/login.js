@@ -1,16 +1,11 @@
-// normalizr
 import { schema, normalize } from "normalizr";
 
-// config
 import Config from "react-native-config";
 
-// lodash
 import { pick } from "lodash";
 
-// constants
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
-// helper
 import { callJSONApi } from "./helpers/api";
 
 export const authenticate = temporaryAccessToken => {

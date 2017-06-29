@@ -1,4 +1,3 @@
-// sagas
 import { authenticationFlowSaga } from "./login";
 import { athleteSaga } from "./athlete";
 
