@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import { connect } from "react-redux";
+
+import { Circle } from "react-native-progress";
 
 import styles from "./styles";
 
@@ -12,14 +14,49 @@ class PerformanceMeter extends Component {
     performance: PropTypes.number.isRequired
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      progress: 0,
+      indeterminate: true
+    };
+  }
+
+  // TODO: componentWillReceiveProps
+  componentDidMount() {
+    this.animate();
+  }
+
+  // TODO: define animation (linear, interpolation and cie).
+  animate() {
+    let progress = 0;
+    this.setState({ progress });
+    setTimeout(() => {
+      this.setState({ indeterminate: false });
+      setInterval(() => {
+        progress += Math.random() / 5;
+        if (progress > 1) {
+          progress = 1;
+        }
+        this.setState({ progress });
+      }, 500);
+    }, 1500);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        {this.props.performance && this.props.performance !== 0
-          ? <Text>
-              {`${this.props.performance}% lyb`}
-            </Text>
-          : <Text>computing</Text>}
+        <Circle
+          progress={this.state.progress}
+          indeterminate={this.state.indeterminate}
+          showsText
+          size={200}
+          color="#FC4C02"
+          borderColor="#FC4C02"
+          unifiledColor="#559988"
+          textStyle={{ color: "#FC4C02", fontSize: 50 }}
+        />
       </View>
     );
   }
