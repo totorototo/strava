@@ -1,10 +1,10 @@
-// react
-import React, { Component, PropTypes } from "react";
-// redux
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
-// react navigation
+
 import { addNavigationHelpers } from "react-navigation";
-// routes
+
 import AppNavigator from "./AppNavigator";
 
 class AppWithNavigationState extends Component {
