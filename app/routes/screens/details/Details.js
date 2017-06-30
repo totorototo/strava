@@ -1,10 +1,7 @@
-// react
 import React, { Component, PropTypes } from "react";
 
-// react-native
 import { View, Text, Image } from "react-native";
 
-// redux
 import { connect } from "react-redux";
 
 import styles from "./styles";
@@ -36,7 +33,7 @@ class Details extends Component {
 }
 
 const getAthlete = (state, id) => {
-  if (id !== undefined && state.entities.athletes) {
+  if (id !== undefined && id !== 0 && state.entities.athletes) {
     return state.entities.athletes[id];
   }
   return { firstname: "", lastname: "", profile: "" };
