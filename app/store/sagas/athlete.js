@@ -1,5 +1,4 @@
-import { takeEvery } from "redux-saga";
-import { call, select, put } from "redux-saga/effects";
+import { call, select, put, takeEvery } from "redux-saga/effects";
 
 import { SET_ENTITIES } from "../constants/actionTypes";
 
