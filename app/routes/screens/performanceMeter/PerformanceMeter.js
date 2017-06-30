@@ -55,7 +55,6 @@ class PerformanceMeter extends Component {
           color="#FC4C02"
           borderColor="#FC4C02"
           unifiledColor="#559988"
-          textStyle={{ color: "#FC4C02", fontSize: 50 }}
         />
       </View>
     );
