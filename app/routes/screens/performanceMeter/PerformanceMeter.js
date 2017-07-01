@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { View, Text } from "react-native";
+import { Icon } from "react-native-elements";
 
 import { connect } from "react-redux";
 
@@ -63,9 +64,12 @@ class PerformanceMeter extends Component {
 
     if (isFaulty(athlete))
       return (
-        <Text>
-          Fuck it, there is an issue: {getDefect(athlete)}
-        </Text>
+        <View style={styles.container}>
+          <Icon name="watch" color="#FC4C02" size={100} />
+          <Text style={styles.text}>
+            Oops, I did it again: {getDefect(athlete)}
+          </Text>
+        </View>
       );
 
     return (
