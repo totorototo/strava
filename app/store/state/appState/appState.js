@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import login from "./login";
-import navigation from "./navigation";
+import login from "./login/login";
+import navigation from "./navigation/navigation";
 import data from "./data";
 
 export default combineReducers({
@@ -12,7 +12,7 @@ export default combineReducers({
 //
 // const AppState = {
 //   "@@/data": {
-//     currentUserID: 123
+//     getCurrentUserID: 123
 //   },
 //   login: {
 //     "@@/data": {},

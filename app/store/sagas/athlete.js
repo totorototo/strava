@@ -4,7 +4,7 @@ import { SET_ENTITIES } from "../constants/actionTypes";
 
 import { updateEntity } from "../actions/entities";
 
-import { token, currentUserID } from "../selectors/app";
+import { token, currentUserID } from "../state/appState/selectors";
 
 import {
   getAthleteStats,

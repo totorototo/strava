@@ -1,4 +1,4 @@
-import { SET_ACCESS_TOKEN } from "../../constants/actionTypes";
+import { SET_ACCESS_TOKEN } from "../../../constants/actionTypes";
 
 const initialState = {
   accessToken: ""
