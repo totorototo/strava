@@ -11,6 +11,7 @@
     "test": "jest",
     "lint": "eslint --quiet app",
     "devtools": "react-devtools",
+    "precommit": "lint-staged",
     "postcommit": "git reset",
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
