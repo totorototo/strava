@@ -4,7 +4,7 @@ import { NavigationActions } from "react-navigation";
 
 import parse from "url-parse";
 
-export function subcribe(store) {
+export default function deeplink(store) {
   function handleOpenURL(url) {
     if (url !== null && url.startsWith("strava://")) {
       const relativeUrl = url.substring(
@@ -24,7 +24,7 @@ export function subcribe(store) {
 
   Linking.getInitialURL().then(url => handleOpenURL(url)).catch(err => {
     // eslint no-console: "error"
-    console.error("An error occurred", err);
+    console.error("An error with deep linking occurred ", err);
   });
 
   Linking.addEventListener("url", event => handleOpenURL(event.url));

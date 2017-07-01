@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "remote-redux-devtools";
+import deeplink from "./deeplink";
 
 const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 
@@ -45,5 +46,7 @@ export default class Store {
 
     // start all sagas
     startingSaga.forEach(saga => store.run(saga));
+
+    deeplink(store);
   }
 }

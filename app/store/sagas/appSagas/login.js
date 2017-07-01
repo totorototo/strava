@@ -2,13 +2,13 @@ import { put, call, take } from "redux-saga/effects";
 
 import { NavigationActions } from "react-navigation";
 
-import { setAccessToken, logout } from "../actions/login";
-import { setEntities } from "../actions/entities";
-import { setCurrentUserID } from "../actions/data";
+import { setAccessToken, logout } from "../../actions/login";
+import { setEntities } from "../../actions/entities";
+import { setCurrentUserID } from "../../actions/data";
 
-import { LOGOUT } from "../constants/actionTypes";
+import { LOGOUT } from "../../constants/actionTypes";
 
-import { authenticate } from "../services/login";
+import { authenticate } from "../../services/login";
 
 function* signout() {
   try {

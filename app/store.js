@@ -1,10 +1,8 @@
 import Store from "./store/Store";
 import rootReducer from "./store/state/rootReducer";
 import sagaMonitor from "./devTools/sagaMonitor";
-import startingSaga from "./store/sagas/index";
-import { subcribe } from "./deeplink";
+import startingSaga from "./store/sagas/appSagas/index";
 
 const store = new Store({ rootReducer, sagaMonitor, startingSaga });
-subcribe(store);
 
 export default store;

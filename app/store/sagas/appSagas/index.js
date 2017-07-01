@@ -1,4 +1,4 @@
 import { authenticationFlowSaga } from "./login";
-import { athleteSaga } from "./athlete";
+import { athleteSaga } from "../athlete";
 
 export default [authenticationFlowSaga, athleteSaga];
