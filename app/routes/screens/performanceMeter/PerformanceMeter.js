@@ -23,9 +23,13 @@ class PerformanceMeter extends Component {
     };
   }
 
-  // TODO: componentWillReceiveProps
-  componentDidMount() {
-    this.animate();
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.performance &&
+      nextProps.performance !== this.props.performance
+    ) {
+      this.animate();
+    }
   }
 
   // TODO: define animation (linear, interpolation and cie).
@@ -36,8 +40,8 @@ class PerformanceMeter extends Component {
       this.setState({ indeterminate: false });
       setInterval(() => {
         progress += Math.random() / 5;
-        if (progress > 1) {
-          progress = 1;
+        if (progress > this.props.performance) {
+          progress = this.props.performance;
         }
         this.setState({ progress });
       }, 500);

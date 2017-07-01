@@ -88,7 +88,7 @@ export const computeAthletePerformance = (
         referencesWeightings.TOTAL_RUN_ELEVATION_GAIN) *
     referencesWeightings.TOTAL_EFFORTS;
 
-  const performance = (heuristic1 + heuristic2 + heuristic3) * 100;
+  const performance = heuristic1 + heuristic2 + heuristic3;
   if (performance !== undefined || !isNaN(performance)) {
     return { performance };
   }
