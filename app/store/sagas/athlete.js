@@ -4,7 +4,7 @@ import { SET_ENTITIES } from "../constants/actionTypes";
 
 import { updateEntity } from "../actions/entities";
 
-import { token, currentUserID } from "../state/appState/selectors";
+import { token, getCurrentUserID } from "../state/appState/selectors";
 
 import {
   getAthleteStats,
@@ -13,7 +13,7 @@ import {
 
 function* getStats() {
   const accessToken = yield select(token);
-  const id = yield select(currentUserID);
+  const id = yield select(getCurrentUserID);
   const { stats, error } = yield call(getAthleteStats, accessToken, id);
   if (!error && stats) {
     const { performance } = yield call(computeAthletePerformance, stats);

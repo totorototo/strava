@@ -1,17 +1,27 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import { connect } from "react-redux";
 
 import { Circle } from "react-native-progress";
 
+import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
+
+import { getCurrentUserID } from "../../../store/state/appState/selectors";
+import { getEntity } from "../../../store/state/entities/selectors";
+
 import styles from "./styles";
 
 class PerformanceMeter extends Component {
   static propTypes = {
-    performance: PropTypes.number.isRequired
+    athlete: PropTypes.shape({
+      firstname: PropTypes.string,
+      lastname: PropTypes.string,
+      profil: PropTypes.string,
+      performance: PropTypes.number
+    }).isRequired
   };
 
   constructor(props) {
@@ -25,8 +35,8 @@ class PerformanceMeter extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.performance &&
-      nextProps.performance !== this.props.performance
+      nextProps.athlete &&
+      nextProps.athlete.performance !== this.props.athlete.performance
     ) {
       this.animate();
     }
@@ -40,8 +50,8 @@ class PerformanceMeter extends Component {
       this.setState({ indeterminate: false });
       setInterval(() => {
         progress += Math.random() / 5;
-        if (progress > this.props.performance) {
-          progress = this.props.performance;
+        if (progress > this.props.athlete.performance) {
+          progress = this.props.athlete.performance;
         }
         this.setState({ progress });
       }, 500);
@@ -49,6 +59,15 @@ class PerformanceMeter extends Component {
   }
 
   render() {
+    const { athlete } = this.props;
+
+    if (isFaulty(athlete))
+      return (
+        <Text>
+          Fuck it, there is an issue: {getDefect(athlete)}
+        </Text>
+      );
+
     return (
       <View style={styles.container}>
         <Circle
@@ -65,18 +84,13 @@ class PerformanceMeter extends Component {
   }
 }
 
-const getPerformanceValue = (state, id) => {
-  if (id !== undefined && id !== 0 && state.entities.athletes) {
-    return state.entities.athletes[id].performance || 0;
-  }
-  return 0;
-};
+const getAthlete = (state, id) => getEntity(state, "athletes", id);
 
-const mapStateToProps = state => ({
-  performance: getPerformanceValue(
-    state,
-    state.appState["@@/data"].currentUserID
-  )
-});
+const mapStateToProps = state => {
+  const currentUserID = getCurrentUserID(state);
+  return {
+    athlete: getAthlete(state, currentUserID)
+  };
+};
 
 export default connect(mapStateToProps)(PerformanceMeter);
