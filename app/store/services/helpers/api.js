@@ -1,13 +1,10 @@
-// constants
 import { API_ENDPOINT, APPLICATION_TYPE, METHODS } from "../../constants/rest";
 
-export const callJSONApi = (
-  {
-    endpoint = { url: API_ENDPOINT, httpVerb: METHODS.GET },
-    token = "",
-    parameters = {}
-  }
-) => {
+export const callJSONApi = ({
+  endpoint = { url: API_ENDPOINT, httpVerb: METHODS.GET },
+  token = "",
+  parameters = {}
+}) => {
   const headers = new Headers();
   headers.append("Accept", "application/json");
   headers.append("Origin", "*");
@@ -21,11 +18,10 @@ export const callJSONApi = (
     method: endpoint.httpVerb,
     headers,
     mode: "cors",
-    body: (
+    body:
       Object.getOwnPropertyNames(parameters).length === 0
         ? undefined
-        : parameters
-    ),
+        : parameters,
     timeout: 100
   };
 
@@ -39,7 +35,10 @@ export const callJSONApi = (
       }
       return Promise.reject(json);
     })
-    .then(data => ({ data }), error => ({
-      error: error.message || "Something bad happened"
-    }));
+    .then(
+      data => ({ data }),
+      error => ({
+        error: error.message || "Something bad happened"
+      })
+    );
 };

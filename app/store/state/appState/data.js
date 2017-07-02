@@ -1,16 +1,15 @@
-// constants
-import { SET_ACCESS_TOKEN } from "../../constants/actionTypes";
+import { SET_CURRENT_USER_ID } from "../../constants/actionTypes";
 
 const initialState = {
-  accessToken: ""
+  currentUserID: 0
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_ACCESS_TOKEN:
+    case SET_CURRENT_USER_ID:
       return {
         ...state,
-        accessToken: action.accessToken
+        currentUserID: action.currentUserID
       };
 
     // ...other actions

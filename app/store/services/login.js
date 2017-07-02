@@ -1,13 +1,11 @@
-// normalizr
 import { schema, normalize } from "normalizr";
 
-// config
 import Config from "react-native-config";
 
-// constants
+import { pick } from "lodash";
+
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
-// helper
 import { callJSONApi } from "./helpers/api";
 
 export const authenticate = temporaryAccessToken => {
@@ -37,7 +35,18 @@ export const authenticate = temporaryAccessToken => {
           bikes: [bikes],
           clubs: [clubs]
         },
-        { idAttribute: "id" }
+        {
+          idAttribute: "id",
+          processStrategy: entity =>
+            pick(entity, [
+              "firstname",
+              "lastname",
+              "profile",
+              "bikes",
+              "shoes",
+              "clubs"
+            ])
+        }
       );
 
       const normalizedData = normalize(athlete, athleteSchema);

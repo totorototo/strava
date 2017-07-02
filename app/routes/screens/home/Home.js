@@ -1,49 +1,60 @@
-// react
-import React, { Component, PropTypes } from "react";
+import React from "react";
 
-// react-native
-import { View, Text, Image } from "react-native";
+import { TabNavigator } from "react-navigation";
+import { Icon } from "react-native-elements";
 
-// redux
-import { connect } from "react-redux";
+import Details from "../details/Details";
+import ClubFeed from "../clubFeed/ClubFeed";
+import PerformanceMeter from "../performanceMeter/PerformanceMeter";
+import RacePredictor from "../racePredictor/RacePredictor";
 
-import styles from "./styles";
-
-// styles
-class Home extends Component {
-  static propTypes = {
-    athlete: PropTypes.shape({
-      firstname: PropTypes.string,
-      lastname: PropTypes.string,
-      profil: PropTypes.string
-    }).isRequired
-  };
-
-  render() {
-    const { athlete } = this.props;
-
-    return (
-      <View style={styles.home}>
-        <Image source={{ uri: athlete.profile }} style={styles.image} />
-        {Object.keys(athlete).length > 0
-          ? Object.keys(athlete).map(item => (
-              <Text key={item}>{athlete[item]}</Text>
-            ))
-          : null}
-      </View>
-    );
+const Home = TabNavigator(
+  {
+    PerformanceMeter: {
+      screen: PerformanceMeter,
+      navigationOptions: {
+        tabBarLabel: "lyb-mtr",
+        tabBarIcon: () => <Icon name="whatshot" color="#FC4C02" />
+      }
+    },
+    RacePredictor: {
+      screen: RacePredictor,
+      navigationOptions: {
+        tabBarLabel: "race",
+        tabBarIcon: () => <Icon name="timer" color="#FC4C02" />
+      }
+    },
+    Details: {
+      screen: Details,
+      navigationOptions: {
+        tabBarLabel: "athlete",
+        tabBarIcon: () => <Icon name="face" color="#FC4C02" />
+      }
+    },
+    ClubFeed: {
+      screen: ClubFeed,
+      navigationOptions: {
+        tabBarLabel: "leaks",
+        tabBarIcon: () => <Icon name="comment" color="#FC4C02" />
+      }
+    }
+  },
+  {
+    tabBarPosition: "bottom",
+    tabBarOptions: {
+      showIcon: true,
+      labelStyle: {
+        fontSize: 12,
+        color: "#FC4C02"
+      },
+      style: {
+        backgroundColor: "white"
+      },
+      indicatorStyle: {
+        backgroundColor: "#FC4C02"
+      }
+    }
   }
-}
+);
 
-const getAthlete = (state, id) => {
-  if (id !== undefined && state.entities.athletes) {
-    return state.entities.athletes[id];
-  }
-  return { firstname: "", lastname: "", profil: "" };
-};
-
-const mapStateToProps = state => ({
-  athlete: getAthlete(state, state.appState["@@/data"].currentUserID)
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

@@ -1,19 +1,14 @@
-// redux-saga
 import { put, call, take } from "redux-saga/effects";
 
-// navigation
 import { NavigationActions } from "react-navigation";
 
-// actions
-import { setAccessToken, logout } from "../actions/login";
-import { setEntities } from "../actions/entities";
-import { setCurrentUserID } from "../actions/app";
+import { setAccessToken, logout } from "../../actions/login";
+import { setEntities } from "../../actions/entities";
+import { setCurrentUserID } from "../../actions/data";
 
-// constants
-import { LOGOUT } from "../constants/actionTypes";
+import { LOGOUT } from "../../constants/actionTypes";
 
-// service
-import { authenticate } from "../services/login";
+import { authenticate } from "../../services/login";
 
 function* signout() {
   try {
@@ -47,7 +42,8 @@ export function* authenticationFlowSaga() {
     while (true) {
       const navigation = yield take("Navigation/NAVIGATE");
       if (
-        navigation.routeName === "Home" && navigation.params.code !== undefined
+        navigation.routeName === "Home" &&
+        navigation.params.code !== undefined
       ) {
         // eslint-disable-next-line no-unused-vars, prefer-const
         let { token, error } = yield call(authorize, navigation.params.code);
