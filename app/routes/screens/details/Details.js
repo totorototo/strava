@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 import { View, Text, Image } from "react-native";
 
 import { connect } from "react-redux";
-import {
-  isFaulty,
-  getDefect
-} from "../../../dataDefinitions/defects";
+import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
 import { getCurrentUserID } from "../../../store/state/appState/selectors";
 import { getEntity } from "../../../store/state/entities/selectors";
 
@@ -25,15 +22,19 @@ class Details extends Component {
   render() {
     const { athlete } = this.props;
     if (isFaulty(athlete))
-      return <Text>Fuck it, there is an issue: {getDefect(athlete)}</Text>;
+      return (
+        <Text>
+          Fuck it, there is an issue: {getDefect(athlete)}
+        </Text>
+      );
 
     return (
       <View style={styles.home}>
         <Image source={{ uri: athlete.profile }} style={styles.image} />
-        <Text>
+        <Text style={styles.text}>
           {athlete.firstname}
         </Text>
-        <Text>
+        <Text style={styles.text}>
           {athlete.lastname}
         </Text>
       </View>

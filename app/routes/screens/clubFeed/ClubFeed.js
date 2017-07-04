@@ -9,7 +9,7 @@ class ClubFeed extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Lybitos club gossips and more</Text>
+        <Text style={styles.text}>Lybitos club gossips and more</Text>
       </View>
     );
   }
