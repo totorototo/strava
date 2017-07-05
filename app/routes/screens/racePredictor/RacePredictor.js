@@ -19,7 +19,7 @@ class RacePredictor extends Component {
       },
       hours: "Hours",
       mins: "Min",
-      segs: "Seg"
+      secs: "Sec"
     };
 
     return (
