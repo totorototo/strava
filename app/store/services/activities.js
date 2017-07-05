@@ -7,7 +7,7 @@ import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 import { callJSONApi } from "./helpers/api";
 
 export const getAthleteActivities = token => {
-  let d = new Date();
+  const d = new Date();
   d.setMonth(d.getMonth() - 1);
   const query = Math.round(d.getTime() / 1000);
 
