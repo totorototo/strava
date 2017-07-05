@@ -56,3 +56,37 @@ export const getAthleteActivities = token => {
     error => ({ error })
   );
 };
+
+export const computePerformance = (activities = {}) => {
+  let distance = 0;
+  let elevation = 0;
+  let time = 0;
+  let records = 0;
+  let achievements = 0;
+  let avgSpeed = 0;
+
+  Object.keys(activities).forEach(id => {
+    distance += activities[id].distance;
+    elevation += activities[id].total_elevation_gain;
+    time += activities[id].elapsed_time;
+    records += activities[id].pr_count;
+    achievements += activities[id].achievement_count;
+    avgSpeed += activities[id].average_speed;
+  });
+
+  avgSpeed /= Object.keys(activities).length;
+
+  const performance = {
+    avgSpeed,
+    distance,
+    elevation,
+    popularity: 0,
+    time,
+    achievements,
+    stakhanov: Object.keys(activities).length,
+    records
+  };
+  return {
+    performance
+  };
+};

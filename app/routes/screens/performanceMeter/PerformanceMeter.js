@@ -21,7 +21,16 @@ class PerformanceMeter extends Component {
       firstname: PropTypes.string,
       lastname: PropTypes.string,
       profil: PropTypes.string,
-      performance: PropTypes.number
+      performance: PropTypes.shape({
+        avgSpeed: PropTypes.number,
+        distance: PropTypes.number,
+        elevation: PropTypes.number,
+        popularity: PropTypes.number,
+        time: PropTypes.number,
+        achievements: PropTypes.number,
+        stakhanov: PropTypes.number,
+        records: PropTypes.number
+      })
     }).isRequired
   };
 
@@ -61,7 +70,6 @@ class PerformanceMeter extends Component {
 
   render() {
     const { athlete } = this.props;
-
     if (isFaulty(athlete))
       return (
         <View style={styles.container}>
