@@ -1,9 +1,12 @@
 import { API_ENDPOINT, APPLICATION_TYPE, METHODS } from "../../constants/rest";
 
+import updateQueryStringParameter from "./queryParameter";
+
 export const callJSONApi = ({
   endpoint = { url: API_ENDPOINT, httpVerb: METHODS.GET },
   token = "",
-  parameters = {}
+  parameters = {},
+  queryParameters = {}
 }) => {
   const headers = new Headers();
   headers.append("Accept", "application/json");
@@ -25,7 +28,9 @@ export const callJSONApi = ({
     timeout: 100
   };
 
-  return fetch(endpoint.url, params)
+  const url = updateQueryStringParameter(endpoint.url, queryParameters);
+
+  return fetch(url, params)
     .then(response => response.json().then(json => ({ json, response })))
     .then(({ json, response }) => {
       if (!response.ok) {
