@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { Icon } from "react-native-elements";
 
 import { connect } from "react-redux";
-
-import { Circle } from "react-native-progress";
 
 import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
 
 import { getCurrentUserID } from "../../../store/state/appState/selectors";
 import { getEntity } from "../../../store/state/entities/selectors";
+
+import AreaSpline from "./components/areaSpline/AreaSpline";
+import Pie from "./components/pie/Pie";
+import data from "./data";
+import Theme from "./colors";
 
 import styles from "./styles";
 
@@ -34,41 +37,38 @@ class PerformanceMeter extends Component {
     }).isRequired
   };
 
+  static shuffle(a) {
+    for (let i = a.length; i; i -= 1) {
+      const j = Math.floor(Math.random() * i);
+      // eslint-disable-next-line no-param-reassign
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+    return a;
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
-      progress: 0,
-      indeterminate: true
+      activeIndex: 0,
+      spendingsPerYear: data.spendingsPerYear
     };
+
+    this.onPieItemSelected = this.onPieItemSelected.bind(this);
+    this.shuffle = PerformanceMeter.shuffle.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.athlete &&
-      nextProps.athlete.performance !== this.props.athlete.performance
-    ) {
-      this.animate();
-    }
-  }
-
-  // TODO: define animation (linear, interpolation and cie).
-  animate() {
-    let progress = 0;
-    this.setState({ progress });
-    setTimeout(() => {
-      this.setState({ indeterminate: false });
-      setInterval(() => {
-        progress += Math.random() / 5;
-        if (progress > this.props.athlete.performance) {
-          progress = this.props.athlete.performance;
-        }
-        this.setState({ progress });
-      }, 500);
-    }, 1500);
+  onPieItemSelected(newIndex) {
+    this.setState({
+      ...this.state,
+      activeIndex: newIndex,
+      spendingsPerYear: this.shuffle(data.spendingsPerYear)
+    });
   }
 
   render() {
+    const height = 200;
+    const width = 500;
     const { athlete } = this.props;
     if (isFaulty(athlete))
       return (
@@ -81,17 +81,32 @@ class PerformanceMeter extends Component {
       );
 
     return (
-      <View style={styles.container}>
-        <Circle
-          progress={this.state.progress}
-          indeterminate={this.state.indeterminate}
-          showsText
-          size={200}
-          color="#FC4C02"
-          borderColor="#FC4C02"
-          unifiledColor="#559988"
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.chart_title}>
+            Distribution of spending this month
+          </Text>
+          <Pie
+            pieWidth={150}
+            pieHeight={150}
+            onItemSelected={this.onPieItemSelected}
+            colors={Theme.colors}
+            width={width}
+            height={height}
+            data={data.spendingsLastMonth}
+          />
+          <Text style={styles.chart_title}>
+            Spending per year in{" "}
+            {data.spendingsLastMonth[this.state.activeIndex].name}
+          </Text>
+          <AreaSpline
+            width={width}
+            height={height}
+            data={this.state.spendingsPerYear}
+            color={Theme.colors[this.state.activeIndex]}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
