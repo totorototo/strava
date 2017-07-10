@@ -7,6 +7,16 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    color: "#FC4C02"
+    color: "#FC4C02",
+    fontSize: 15
+  },
+  list: {
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20
+  },
+  details: {
+    marginTop: 30
   }
 });
