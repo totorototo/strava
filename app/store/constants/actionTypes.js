@@ -9,3 +9,4 @@ export const UPDATE_ENTITY = "UPDATE_ENTITY";
 
 // app
 export const SET_CURRENT_USER_ID = "SET_CURRENT_USER_ID";
+export const SET_CURRENT_CLUB_ID = "SET_CURRENT_CLUB_ID";
