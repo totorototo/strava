@@ -87,9 +87,9 @@ class PerformanceMeter extends Component {
         athlete.performance.details.length > 0
           ? <View style={styles.details}>
               {athlete.performance.details.map(detail =>
-                <Text
-                  style={styles.text}
-                >{`${detail.name}: ${detail.number}%`}</Text>
+                <Text style={styles.text}>
+                  {`${detail.name}: ${detail.number}%`}
+                </Text>
               )}
             </View>
           : null}
