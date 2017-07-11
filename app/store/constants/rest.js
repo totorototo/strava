@@ -11,7 +11,8 @@ export const RESOURCES = {
   SEGMENTS: "/api/v3/segments",
   UPLOADS: "/api/v3/uploads",
   STATS: "stats",
-  MEMBERS: "members"
+  MEMBERS: "members",
+  ANNOUNCEMENTS: "announcements"
 };
 
 // methods
