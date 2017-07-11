@@ -9,6 +9,8 @@ import { token } from "../state/appState/selectors";
 
 import { listClubMembers, listClubAnnoucements } from "../services/clubs";
 
+import { getStats } from "./athlete";
+
 function* listMembers() {
   const accessToken = yield select(token);
   const clubID = 288750;
@@ -16,6 +18,9 @@ function* listMembers() {
   if (!error) {
     yield put(setCurrentClubID(clubID));
     yield put(updateEntity(clubID, "clubs", { members }));
+    for (let index = 0; index < members.length; index += 1) {
+      yield getStats(members[index]);
+    }
   }
 }
 

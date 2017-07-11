@@ -6,43 +6,26 @@ import { callJSONApi } from "./helpers/api";
 
 import { references, referencesWeightings } from "../constants/references";
 
-export const getAthleteStats = (token, id) => {
+export const getAthleteDetails = (token, id) => {
   const request = {
     endpoint: {
-      url: `${API_ENDPOINT + RESOURCES.ATHLETE}/${id}/${RESOURCES.STATS}`,
+      url: `${API_ENDPOINT + RESOURCES.ATHLETE}/${id}`,
       httpVerb: METHODS.GET
     },
     token
   };
   return callJSONApi(request).then(
     response => {
-      const {
-        recent_run_totals,
-        ytd_run_totals,
-        all_run_totals
-      } = response.data;
-      const recent = pick(recent_run_totals, [
-        "count",
-        "distance",
-        "elevation_gain",
-        "achievement_count"
+      const details = pick(response.data, [
+        "firstname",
+        "lastname",
+        "profile",
+        "citye",
+        "country"
       ]);
-      const year = pick(ytd_run_totals, [
-        "distance",
-        "elevation_gain",
-        "count"
-      ]);
-      const total = pick(all_run_totals, [
-        "distance",
-        "elevation_gain",
-        "count"
-      ]);
+
       return {
-        stats: {
-          recent,
-          year,
-          total
-        }
+        details
       };
     },
     error => ({ error })
