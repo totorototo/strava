@@ -16,7 +16,7 @@ function* getCurrentAthleteActivities() {
   const id = yield select(getCurrentUserID);
   const { entities, error } = yield call(getAthleteActivities, accessToken, id);
   if (!error) {
-    const { performance } = yield call(computePerformance, entities.activities);
+    const { performance } = yield call(computePerformance, entities.Runs);
     yield put(updateEntity(id, "athletes", { performance }));
   }
 }

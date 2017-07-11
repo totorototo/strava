@@ -27,7 +27,7 @@ export const getAthleteActivities = token => {
   return callJSONApi(request).then(
     response => {
       const activitySchema = new schema.Entity(
-        "activities",
+        "Runs",
         {},
         {
           idAttribute: "id",
@@ -44,15 +44,21 @@ export const getAthleteActivities = token => {
               "average_cadence",
               "average_heartrate",
               "max_heartrate",
-              "start_date"
+              "start_date",
+              "type"
             ])
         }
       );
-      const activitiesSchema = [activitySchema];
+
+      const activitiesSchema = new schema.Array(
+        {
+          Runs: activitySchema
+        },
+        input => `${input.type}s`
+      );
       const normalizedData = normalize(response.data, activitiesSchema);
 
       return {
-        IDs: normalizedData.result,
         entities: normalizedData.entities
       };
     },
@@ -64,16 +70,17 @@ export const computePerformance = (activities = {}) => {
   let distance = 0;
   let elevation = 0;
   let duration = 0;
-  let avgSpeed = 0;
 
   Object.keys(activities).forEach(id => {
     distance += activities[id].distance;
     elevation += activities[id].total_elevation_gain;
     duration += activities[id].elapsed_time;
-    avgSpeed += activities[id].average_speed;
   });
 
-  avgSpeed /= Object.keys(activities).length;
+  const speedMeterPerSecond = distance / duration;
+  const speedMinutePerKilometer = (1000 / (distance / duration * 60)).toFixed(
+    2
+  );
 
   const distanceHeuristic =
     distance /
@@ -91,7 +98,7 @@ export const computePerformance = (activities = {}) => {
     referencesWeightings.RECENT_RUN_COUNT;
 
   const speedHeuristic =
-    avgSpeed /
+    speedMeterPerSecond /
     references.RECENT_RUN_SPEED *
     referencesWeightings.RECENT_RUN_SPEED;
 
@@ -129,11 +136,11 @@ export const computePerformance = (activities = {}) => {
   performanceDetails.push({
     name: "speed",
     percent: Math.trunc(speedHeuristic * 100 / performance),
-    absolute: (1000 / (avgSpeed * 60)).toFixed(2),
+    absolute: speedMinutePerKilometer,
     unit: "min/km"
   });
   performanceDetails.push({
-    name: "frequency",
+    name: "runs count",
     percent: Math.trunc(frequencyHeuristic * 100 / performance),
     absolute: Object.keys(activities).length,
     unit: ""
