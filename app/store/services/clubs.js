@@ -35,3 +35,32 @@ export const listClubMembers = (token, id) => {
     error => ({ error })
   );
 };
+
+export const listClubAnnoucements = (token, id) => {
+  const request = {
+    endpoint: {
+      url: `${API_ENDPOINT + RESOURCES.CLUBS}/${id}/${RESOURCES.ANNOUNCEMENTS}`,
+      httpVerb: METHODS.GET
+    },
+    token
+  };
+  return callJSONApi(request).then(
+    response => {
+      const announcementSchema = new schema.Entity(
+        "announcements",
+        {},
+        {
+          idAttribute: "id"
+        }
+      );
+      const announcementsSchema = [announcementSchema];
+      const normalizedData = normalize(response.data, announcementsSchema);
+
+      return {
+        IDs: normalizedData.result,
+        entities: normalizedData.entities
+      };
+    },
+    error => ({ error })
+  );
+};
