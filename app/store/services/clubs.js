@@ -36,7 +36,7 @@ export const listClubMembers = (token, id) => {
   );
 };
 
-export const listClubAnnoucements = (token, id) => {
+export const listClubAnnouncements = (token, id) => {
   const request = {
     endpoint: {
       url: `${API_ENDPOINT + RESOURCES.CLUBS}/${id}/${RESOURCES.ANNOUNCEMENTS}`,

@@ -7,7 +7,7 @@ import { setCurrentClubID } from "../actions/data";
 
 import { token } from "../state/appState/selectors";
 
-import { listClubMembers, listClubAnnoucements } from "../services/clubs";
+import { listClubMembers, listClubAnnouncements } from "../services/clubs";
 
 import { getStats } from "./athlete";
 
@@ -28,7 +28,7 @@ function* listAnnouncements() {
   const accessToken = yield select(token);
   const clubID = 288750;
   const { announcements, error } = yield call(
-    listClubAnnoucements,
+    listClubAnnouncements,
     accessToken,
     clubID
   );
