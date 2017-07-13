@@ -7,8 +7,13 @@ export const getEntity = (state, entityType, id) =>
     ? NotFoundEntity
     : state.entities[entityType][id];
 
+export const getEntityValue = (state, entityType, id, key) =>
+  get(state, `entities.${entityType}.${id}.${key}`) === undefined
+    ? NotFoundEntity
+    : state.entities[entityType][id][key];
+
 export const getEntities = (state, entityType, idList) =>
-  idList.map(id => getEntities(state, entityType, id));
+  idList.map(id => getEntity(state, entityType, id));
 
 export const getValidEntities = (state, entityType, idList) =>
   getEntities(state, entityType, idList).filter(isValid);
