@@ -2,19 +2,20 @@ import { getCurrentClubID } from "../../../store/state/appState/selectors";
 import {
   getEntity,
   getValueFrom,
-  getValidEntities,
-  bindState
+  getValidEntities
 } from "../../../store/state/entities/selectors";
 
-const clubFeedViewSelector = (/* ownProps */) => {
-  const currentClub = getEntity("clubs", getCurrentClubID());
-
+const clubFeedViewSelector = state => {
+  const currentClub = getEntity(state, "clubs", getCurrentClubID(state));
+  console.log(currentClub);
   return {
+    club: currentClub,
     clubMembers: getValidEntities(
+      state,
       "athletes",
       getValueFrom(currentClub, "members")
     )
   };
 };
 
-export default bindState(clubFeedViewSelector);
+export default clubFeedViewSelector;

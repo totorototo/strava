@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { View, Text, Image } from "react-native";
 
 import { connect } from "react-redux";
-import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
+import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 import { getCurrentUserID } from "../../../store/state/appState/selectors";
 import { getEntity } from "../../../store/state/entities/selectors";
 
@@ -21,6 +21,8 @@ class Details extends Component {
 
   render() {
     const { athlete } = this.props;
+    if (athlete === Loading) return <Text>We are loading</Text>;
+
     if (isFaulty(athlete))
       return (
         <Text>

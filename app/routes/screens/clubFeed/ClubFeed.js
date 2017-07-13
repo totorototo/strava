@@ -7,7 +7,7 @@ import { View, Text } from "react-native";
 import { Card, Button } from "react-native-elements";
 
 import selector from "./selector";
-import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
+import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
 import styles from "./styles";
 
@@ -26,6 +26,8 @@ class ClubFeed extends Component {
 
   render() {
     const { club } = this.props;
+    if (club === Loading) return <Text>We are loading</Text>;
+
     if (isFaulty(club))
       return (
         <Text>
