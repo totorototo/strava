@@ -6,12 +6,8 @@ import { connect } from "react-redux";
 import { View, Text } from "react-native";
 import { Card, Button } from "react-native-elements";
 
-import { getCurrentClubID } from "../../../store/state/appState/selectors";
-import {
-  getEntity,
-  getEntityValue
-} from "../../../store/state/entities/selectors";
-import { isFaulty, getDefect, isValid } from "../../../dataDefinitions/defects";
+import selector from "./selector";
+import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
 
 import styles from "./styles";
 
@@ -60,21 +56,4 @@ class ClubFeed extends Component {
   }
 }
 
-const getClub = (state, id) => getEntity(state, "clubs", id);
-const getMembersIDs = (state, type, id, key) =>
-  getEntityValue(state, type, id, key);
-
-const mapStateToProps = state => {
-  const currentClubID = getCurrentClubID(state);
-  const ids = getMembersIDs(state, "clubs", getCurrentClubID(state), "members");
-  if (isValid(ids)) {
-    const members = ids.map(id => getEntity(state, "athletes", id));
-    console.log(members);
-  }
-
-  return {
-    club: getClub(state, currentClubID)
-  };
-};
-
-export default connect(mapStateToProps)(ClubFeed);
+export default connect(selector)(ClubFeed);
