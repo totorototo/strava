@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { View, Text, Image } from "react-native";
+import { Icon } from "react-native-elements";
 
 import { connect } from "react-redux";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
-import { getCurrentUserID } from "../../../store/state/appState/selectors";
-import { getEntity } from "../../../store/state/entities/selectors";
 
+import selector from "./selector";
 import styles from "./styles";
 
 class Details extends Component {
@@ -21,7 +21,13 @@ class Details extends Component {
 
   render() {
     const { athlete } = this.props;
-    if (athlete === Loading) return <Text>We are loading</Text>;
+    if (athlete === Loading)
+      return (
+        <View style={styles.container}>
+          <Icon name="cached" color="#FC4C02" size={50} />
+          <Text style={styles.text}>fetching data</Text>
+        </View>
+      );
 
     if (isFaulty(athlete))
       return (
@@ -44,13 +50,4 @@ class Details extends Component {
   }
 }
 
-const getAthlete = (state, id) => getEntity(state, "athletes", id);
-
-const mapStateToProps = state => {
-  const currentUserID = getCurrentUserID(state);
-  return {
-    athlete: getAthlete(state, currentUserID)
-  };
-};
-
-export default connect(mapStateToProps)(Details);
+export default connect(selector)(Details);

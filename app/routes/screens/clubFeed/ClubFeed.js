@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { View, Text } from "react-native";
-import { Card, Button } from "react-native-elements";
+import { Card, Button, Icon } from "react-native-elements";
 
 import selector from "./selector";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
@@ -26,7 +26,13 @@ class ClubFeed extends Component {
 
   render() {
     const { club } = this.props;
-    if (club === Loading) return <Text>We are loading</Text>;
+    if (club === Loading)
+      return (
+        <View style={styles.container}>
+          <Icon name="cached" color="#FC4C02" size={50} />
+          <Text style={styles.text}>fetching data</Text>
+        </View>
+      );
 
     if (isFaulty(club))
       return (
