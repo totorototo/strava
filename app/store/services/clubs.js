@@ -64,3 +64,35 @@ export const listClubAnnouncements = (token, id) => {
     error => ({ error })
   );
 };
+
+export const listClubActivities = (token, id) => {
+  const request = {
+    endpoint: {
+      url: `${API_ENDPOINT +
+        RESOURCES.CLUBS}/${id}/${RESOURCES.CLUB_ACTIVITIES}`,
+      httpVerb: METHODS.GET
+    },
+    token
+  };
+  return callJSONApi(request).then(
+    response => {
+      const activitySchema = new schema.Entity(
+        "Runs",
+        {},
+        {
+          idAttribute: "id",
+          processStrategy: entity => pick(entity, ["type"])
+        }
+      );
+
+      const activitiesSchema = [activitySchema];
+      const normalizedData = normalize(response.data, activitiesSchema);
+
+      return {
+        activities: normalizedData.result,
+        entities: normalizedData.entities.Runs
+      };
+    },
+    error => ({ error })
+  );
+};

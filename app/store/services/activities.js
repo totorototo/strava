@@ -9,6 +9,35 @@ import { convert } from "./helpers/moment";
 
 import { references, referencesWeightings } from "../constants/references";
 
+export const getGivenActivity = (token, activityID) => {
+  const request = {
+    endpoint: {
+      url: `${API_ENDPOINT + RESOURCES.ACTIVITIES}/${activityID}`,
+      httpVerb: METHODS.GET
+    },
+    token
+  };
+  return callJSONApi(request).then(
+    response => {
+      const activitySchema = new schema.Entity(
+        "activity",
+        {},
+        {
+          idAttribute: "id",
+          processStrategy: entity => pick(entity, ["distance", "type"])
+        }
+      );
+      const normalizedData = normalize(response.data, activitySchema);
+
+      return {
+        ID: normalizedData.result,
+        entities: normalizedData.entities
+      };
+    },
+    error => ({ error })
+  );
+};
+
 export const getAthleteActivities = token => {
   const d = new Date();
   d.setMonth(d.getMonth() - 1);
