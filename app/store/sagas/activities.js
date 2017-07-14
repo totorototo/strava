@@ -1,11 +1,12 @@
 import { call, select, put, takeEvery } from "redux-saga/effects";
 
-import { SET_ENTITIES } from "../constants/actionTypes";
+import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
 
 import { token, getCurrentUserID } from "../state/appState/selectors";
 
 import {
   getAthleteActivities,
+  getGivenActivity,
   computePerformance
 } from "../services/activities";
 
@@ -21,6 +22,18 @@ function* getCurrentAthleteActivities() {
   }
 }
 
+export function* getActivity(activityID) {
+  const accessToken = yield select(token);
+  const { entities, error } = yield call(
+    getGivenActivity,
+    accessToken,
+    activityID
+  );
+  if (!error) {
+    yield put(updateEntity(activityID, "activities", entities.activity));
+  }
+}
+
 export function* activitiesSaga() {
-  yield takeEvery(SET_ENTITIES, getCurrentAthleteActivities);
+  yield takeEvery(SET_CURRENT_USER_ID, getCurrentAthleteActivities);
 }
