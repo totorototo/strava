@@ -29,11 +29,16 @@ class ClubFeed extends Component {
         profile: PropTypes.string,
         country: PropTypes.string
       })
+    ).isRequired,
+    activities: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string
+      })
     ).isRequired
   };
 
   render() {
-    const { club, clubMembers } = this.props;
+    const { club, clubMembers, activities } = this.props;
     if (club === Loading)
       return (
         <View style={styles.container}>
@@ -81,6 +86,15 @@ class ClubFeed extends Component {
                 />
                 <Text style={styles.text}>
                   {member.firstname}
+                </Text>
+              </View>
+            )}
+          </Card>
+          <Card titleStyle={styles.card} title="ACTIVITIES">
+            {activities.map(activity =>
+              <View style={styles.members}>
+                <Text style={styles.text}>
+                  {activity.type}
                 </Text>
               </View>
             )}

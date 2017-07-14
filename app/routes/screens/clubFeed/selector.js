@@ -13,6 +13,11 @@ const clubFeedViewSelector = state => {
       state,
       "athletes",
       getValueFrom(currentClub, "members")
+    ),
+    activities: getValidEntities(
+      state,
+      "activities",
+      getValueFrom(currentClub, "activities")
     )
   };
 };
