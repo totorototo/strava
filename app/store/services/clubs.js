@@ -81,7 +81,14 @@ export const listClubActivities = (token, id) => {
         {},
         {
           idAttribute: "id",
-          processStrategy: entity => pick(entity, ["type"])
+          processStrategy: entity =>
+            pick(entity, [
+              "type",
+              "name",
+              "athlete",
+              "distance",
+              "achievement_count"
+            ])
         }
       );
 

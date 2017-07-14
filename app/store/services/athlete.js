@@ -21,7 +21,8 @@ export const getAthleteDetails = (token, id) => {
         "lastname",
         "profile",
         "citye",
-        "country"
+        "country",
+        "id"
       ]);
 
       return {

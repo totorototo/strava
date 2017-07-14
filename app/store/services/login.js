@@ -44,7 +44,8 @@ export const authenticate = temporaryAccessToken => {
               "profile",
               "bikes",
               "shoes",
-              "clubs"
+              "clubs",
+              "id"
             ])
         }
       );
