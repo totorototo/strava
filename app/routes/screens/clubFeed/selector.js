@@ -7,7 +7,6 @@ import {
 
 const clubFeedViewSelector = state => {
   const currentClub = getEntity(state, "clubs", getCurrentClubID(state));
-  console.log(currentClub);
   return {
     club: currentClub,
     clubMembers: getValidEntities(
