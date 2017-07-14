@@ -26,14 +26,6 @@
     ]
   },
   "dependencies": {
-    "art": "^0.10.1",
-    "d3": "^4.2.7",
-    "d3-array": "^1.0.0",
-    "d3-axis": "^1.0.0",
-    "d3-format": "^1.0.0",
-    "d3-path": "^1.0.0",
-    "d3-scale": "^1.0.0",
-    "d3-shape": "^1.0.0",
     "es6-symbol": "^3.1.1",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.2",
@@ -50,7 +42,6 @@
     "redux": "^3.6.0",
     "redux-saga": "^0.14.3",
     "remote-redux-devtools": "0.5.0",
-    "reselect": "^3.0.1",
     "url-parse": "^1.1.8",
     "util": "^0.10.3"
   },
