@@ -93,8 +93,13 @@ class ClubFeed extends Component {
           <Card titleStyle={styles.card} title="ACTIVITIES">
             {activities.map(activity =>
               <View style={styles.members}>
+                <Image
+                  style={styles.image}
+                  resizeMode="cover"
+                  source={{ uri: activity.athlete.profile }}
+                />
                 <Text style={styles.text}>
-                  {activity.type}
+                  {`${activity.name} ${activity.distance}m`}
                 </Text>
               </View>
             )}
