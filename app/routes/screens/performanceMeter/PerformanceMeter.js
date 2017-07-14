@@ -4,11 +4,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { View, Text } from "react-native";
+
 import { Icon } from "react-native-elements";
 
 import { Circle } from "react-native-progress";
 
-import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
+import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
 import { getCurrentUserID } from "../../../store/state/appState/selectors";
 import { getEntity } from "../../../store/state/entities/selectors";
@@ -61,6 +62,8 @@ class PerformanceMeter extends Component {
 
   render() {
     const { athlete } = this.props;
+    if (athlete === Loading) return <Text>We are loading</Text>;
+
     if (isFaulty(athlete))
       return (
         <View style={styles.container}>
@@ -87,7 +90,7 @@ class PerformanceMeter extends Component {
         athlete.performance.details.length > 0
           ? <View style={styles.details}>
               {athlete.performance.details.map(detail =>
-                <Text style={styles.text}>
+                <Text style={styles.text} key={detail.name}>
                   {`${detail.name}: ${detail.absolute} ${detail.unit}`}
                 </Text>
               )}

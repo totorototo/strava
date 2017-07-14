@@ -4,7 +4,8 @@ import {
 } from "../../constants/actionTypes";
 
 const initialState = {
-  currentUserID: 0
+  currentUserID: "loading",
+  currentClubID: "loading"
 };
 
 export default function reducer(state = initialState, action) {

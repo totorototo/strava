@@ -14,6 +14,7 @@ import { getStats } from "./athlete";
 function* listMembers() {
   const accessToken = yield select(token);
   const clubID = 288750;
+  yield put(setCurrentClubID("loading"));
   const { members, error } = yield call(listClubMembers, accessToken, clubID);
   if (!error) {
     yield put(setCurrentClubID(clubID));
