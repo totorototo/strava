@@ -12,7 +12,8 @@ export const RESOURCES = {
   UPLOADS: "/api/v3/uploads",
   STATS: "stats",
   MEMBERS: "members",
-  ANNOUNCEMENTS: "announcements"
+  ANNOUNCEMENTS: "announcements",
+  CLUB_ACTIVITIES: "activities"
 };
 
 // methods
