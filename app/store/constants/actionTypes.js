@@ -5,6 +5,7 @@ export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 
 // entities
 export const SET_ENTITIES = "SET_ENTITIES";
+export const SET_SUB_ENTITY = "SET_SUB_ENTITY";
 export const UPDATE_ENTITY = "UPDATE_ENTITY";
 
 // app
