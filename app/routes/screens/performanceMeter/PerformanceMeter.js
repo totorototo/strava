@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { View, Text } from "react-native";
-k;
+
 import { Icon } from "react-native-elements";
 
 import { Circle } from "react-native-progress";
