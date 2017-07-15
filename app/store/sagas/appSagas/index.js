@@ -1,4 +1,5 @@
 import { authenticationFlowSaga } from "./login";
-import { athleteSaga } from "../athlete";
+import { activitiesSaga } from "../activities";
+import { clubsSaga } from "../clubs";
 
-export default [authenticationFlowSaga, athleteSaga];
+export default [authenticationFlowSaga, activitiesSaga, clubsSaga];

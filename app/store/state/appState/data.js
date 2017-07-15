@@ -1,7 +1,11 @@
-import { SET_CURRENT_USER_ID } from "../../constants/actionTypes";
+import {
+  SET_CURRENT_USER_ID,
+  SET_CURRENT_CLUB_ID
+} from "../../constants/actionTypes";
 
 const initialState = {
-  currentUserID: 0
+  currentUserID: "loading",
+  currentClubID: "loading"
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,6 +14,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         currentUserID: action.currentUserID
+      };
+
+    case SET_CURRENT_CLUB_ID:
+      return {
+        ...state,
+        currentClubID: action.currentClubID
       };
 
     // ...other actions

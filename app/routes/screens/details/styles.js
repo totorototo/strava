@@ -9,5 +9,8 @@ export default StyleSheet.create({
   image: {
     width: 50,
     height: 50
+  },
+  text: {
+    color: "#FC4C02"
   }
 });

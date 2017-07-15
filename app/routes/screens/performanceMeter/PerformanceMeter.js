@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Text } from "react-native";
-import { Icon } from "react-native-elements";
-
 import { connect } from "react-redux";
+
+import { View, Text } from "react-native";
+
+import { Icon } from "react-native-elements";
 
 import { Circle } from "react-native-progress";
 
-import { isFaulty, getDefect } from "../../../dataDefinitions/defects";
+import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
-import { getCurrentUserID } from "../../../store/state/appState/selectors";
-import { getEntity } from "../../../store/state/entities/selectors";
-
+import selector from "./selector";
 import styles from "./styles";
 
 class PerformanceMeter extends Component {
@@ -21,7 +20,7 @@ class PerformanceMeter extends Component {
       firstname: PropTypes.string,
       lastname: PropTypes.string,
       profil: PropTypes.string,
-      performance: PropTypes.number
+      performance: PropTypes.any
     }).isRequired
   };
 
@@ -51,8 +50,8 @@ class PerformanceMeter extends Component {
       this.setState({ indeterminate: false });
       setInterval(() => {
         progress += Math.random() / 5;
-        if (progress > this.props.athlete.performance) {
-          progress = this.props.athlete.performance;
+        if (progress > this.props.athlete.performance.value) {
+          progress = this.props.athlete.performance.value;
         }
         this.setState({ progress });
       }, 500);
@@ -61,11 +60,18 @@ class PerformanceMeter extends Component {
 
   render() {
     const { athlete } = this.props;
+    if (athlete === Loading)
+      return (
+        <View style={styles.container}>
+          <Icon name="cached" color="#FC4C02" size={50} />
+          <Text style={styles.text}>fetching data</Text>
+        </View>
+      );
 
     if (isFaulty(athlete))
       return (
         <View style={styles.container}>
-          <Icon name="watch" color="#FC4C02" size={100} />
+          <Icon name="error" color="#FC4C02" size={100} />
           <Text style={styles.text}>
             Oops, I did it again: {getDefect(athlete)}
           </Text>
@@ -83,18 +89,20 @@ class PerformanceMeter extends Component {
           borderColor="#FC4C02"
           unifiledColor="#559988"
         />
+        {athlete.performance &&
+        athlete.performance.details &&
+        athlete.performance.details.length > 0
+          ? <View style={styles.details}>
+              {athlete.performance.details.map(detail =>
+                <Text style={styles.text} key={detail.name}>
+                  {`${detail.name}: ${detail.absolute} ${detail.unit}`}
+                </Text>
+              )}
+            </View>
+          : null}
       </View>
     );
   }
 }
 
-const getAthlete = (state, id) => getEntity(state, "athletes", id);
-
-const mapStateToProps = state => {
-  const currentUserID = getCurrentUserID(state);
-  return {
-    athlete: getAthlete(state, currentUserID)
-  };
-};
-
-export default connect(mapStateToProps)(PerformanceMeter);
+export default connect(selector)(PerformanceMeter);

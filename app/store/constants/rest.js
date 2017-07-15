@@ -10,7 +10,10 @@ export const RESOURCES = {
   CLUBS: "/api/v3/clubs",
   SEGMENTS: "/api/v3/segments",
   UPLOADS: "/api/v3/uploads",
-  STATS: "stats"
+  STATS: "stats",
+  MEMBERS: "members",
+  ANNOUNCEMENTS: "announcements",
+  CLUB_ACTIVITIES: "activities"
 };
 
 // methods

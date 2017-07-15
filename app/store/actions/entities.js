@@ -1,9 +1,21 @@
-import { SET_ENTITIES, UPDATE_ENTITY } from "../constants/actionTypes";
+import {
+  SET_ENTITIES,
+  SET_ENTITY,
+  UPDATE_ENTITY
+} from "../constants/actionTypes";
 
 export function setEntities(entities) {
   return {
     type: SET_ENTITIES,
     entities
+  };
+}
+
+export function setEntity(entityType, payload) {
+  return {
+    type: SET_ENTITY,
+    entityType,
+    payload
   };
 }
 

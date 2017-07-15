@@ -1,28 +1,19 @@
-import { call, select, put, takeEvery } from "redux-saga/effects";
-
-import { SET_ENTITIES } from "../constants/actionTypes";
+import { call, select, put } from "redux-saga/effects";
 
 import { updateEntity } from "../actions/entities";
 
-import { token, getCurrentUserID } from "../state/appState/selectors";
+import { token } from "../state/appState/selectors";
 
-import {
-  getAthleteStats,
-  computeAthletePerformance
-} from "../services/athlete";
+import { getAthleteDetails } from "../services/athlete";
 
-function* getStats() {
+export function* getStats(athleteID) {
   const accessToken = yield select(token);
-  const id = yield select(getCurrentUserID);
-  const { stats, error } = yield call(getAthleteStats, accessToken, id);
-  if (!error && stats) {
-    const { performance } = yield call(computeAthletePerformance, stats);
-    if (performance) {
-      yield put(updateEntity(id, "athletes", { performance }));
-    }
+  const { details, error } = yield call(
+    getAthleteDetails,
+    accessToken,
+    athleteID
+  );
+  if (!error && details) {
+    yield put(updateEntity(athleteID, "athletes", details));
   }
-}
-
-export function* athleteSaga() {
-  yield takeEvery(SET_ENTITIES, getStats);
 }
