@@ -28,7 +28,7 @@ export const listClubMembers = (token, id) => {
       const normalizedData = normalize(response.data, membersSchema);
 
       return {
-        members: normalizedData.result,
+        ids: normalizedData.result,
         entities: normalizedData.entities
       };
     },
@@ -57,7 +57,7 @@ export const listClubAnnouncements = (token, id) => {
       const normalizedData = normalize(response.data, announcementsSchema);
 
       return {
-        IDs: normalizedData.result,
+        ids: normalizedData.result,
         entities: normalizedData.entities
       };
     },
@@ -96,7 +96,7 @@ export const listClubActivities = (token, id) => {
       const normalizedData = normalize(response.data, activitiesSchema);
 
       return {
-        activities: normalizedData.result,
+        ids: normalizedData.result,
         entities: normalizedData.entities.Runs
       };
     },

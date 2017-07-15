@@ -22,12 +22,12 @@ function* listMembers() {
   const accessToken = yield select(token);
   const clubID = 288750;
   yield put(setCurrentClubID("loading"));
-  const { members, error } = yield call(listClubMembers, accessToken, clubID);
+  const { ids, error } = yield call(listClubMembers, accessToken, clubID);
   if (!error) {
     yield put(setCurrentClubID(clubID));
-    yield put(updateEntity(clubID, "clubs", { members }));
-    for (let index = 0; index < members.length; index += 1) {
-      yield getStats(members[index]);
+    yield put(updateEntity(clubID, "clubs", { members: ids }));
+    for (let index = 0; index < ids.length; index += 1) {
+      yield getStats(ids[index]);
     }
   }
 }
@@ -35,26 +35,27 @@ function* listMembers() {
 function* listAnnouncements() {
   const accessToken = yield select(token);
   const clubID = 288750;
-  const { announcements, error } = yield call(
+  const { ids, entities, error } = yield call(
     listClubAnnouncements,
     accessToken,
     clubID
   );
-  if (!error && announcements) {
-    yield put(updateEntity(clubID, "clubs", { announcements }));
+  if (!error && ids && entities) {
+    yield put(updateEntity(clubID, "clubs", { ids }));
+    // yield put(setSubEntities(clubID, "clubs", entities));
   }
 }
 
 function* listActivities() {
   const accessToken = yield select(token);
   const clubID = 288750;
-  const { activities, entities, error } = yield call(
+  const { ids, entities, error } = yield call(
     listClubActivities,
     accessToken,
     clubID
   );
   if (!error) {
-    yield put(updateEntity(clubID, "clubs", { activities }));
+    yield put(updateEntity(clubID, "clubs", { activities: ids }));
     yield put(setSubEntities("activities", entities));
   }
 }

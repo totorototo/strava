@@ -30,7 +30,7 @@ export const getGivenActivity = (token, activityID) => {
       const normalizedData = normalize(response.data, activitySchema);
 
       return {
-        ID: normalizedData.result,
+        id: normalizedData.result,
         entities: normalizedData.entities
       };
     },
