@@ -1,6 +1,6 @@
 import {
   SET_ENTITIES,
-  SET_SUB_ENTITY,
+  SET_ENTITY,
   UPDATE_ENTITY
 } from "../constants/actionTypes";
 
@@ -11,9 +11,9 @@ export function setEntities(entities) {
   };
 }
 
-export function setSubEntities(entityType, payload) {
+export function setEntity(entityType, payload) {
   return {
-    type: SET_SUB_ENTITY,
+    type: SET_ENTITY,
     entityType,
     payload
   };

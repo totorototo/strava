@@ -1,6 +1,6 @@
 import {
   SET_ENTITIES,
-  SET_SUB_ENTITY,
+  SET_ENTITY,
   UPDATE_ENTITY
 } from "../../constants/actionTypes";
 
@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         ...action.entities
       };
-    case SET_SUB_ENTITY:
+    case SET_ENTITY:
       return {
         ...state,
         [action.entityType]: {

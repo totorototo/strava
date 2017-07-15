@@ -5,7 +5,7 @@ import {
   SET_CURRENT_CLUB_ID
 } from "../constants/actionTypes";
 
-import { updateEntity, setSubEntities } from "../actions/entities";
+import { updateEntity, setEntity } from "../actions/entities";
 import { setCurrentClubID } from "../actions/data";
 
 import { token } from "../state/appState/selectors";
@@ -56,7 +56,7 @@ function* listActivities() {
   );
   if (!error) {
     yield put(updateEntity(clubID, "clubs", { activities: ids }));
-    yield put(setSubEntities("activities", entities));
+    yield put(setEntity("activities", entities));
   }
 }
 
