@@ -17,6 +17,7 @@ import {
 } from "../services/clubs";
 
 import { getStats } from "./athlete";
+import { getRankings } from "../services/activities";
 
 function* listMembers() {
   const accessToken = yield select(token);
@@ -57,6 +58,8 @@ function* listActivities() {
   if (!error) {
     yield put(updateEntity(clubID, "clubs", { activities: ids }));
     yield put(setEntity("activities", entities));
+    const { ranking } = yield call(getRankings, entities);
+    yield put(updateEntity(clubID, "clubs", { ranking }));
   }
 }
 

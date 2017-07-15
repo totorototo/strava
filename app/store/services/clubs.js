@@ -87,7 +87,11 @@ export const listClubActivities = (token, id) => {
               "name",
               "athlete",
               "distance",
-              "achievement_count"
+              "achievement_count",
+              "elapsed_time",
+              "max_speed",
+              "calories",
+              "total_elevation_gain"
             ])
         }
       );

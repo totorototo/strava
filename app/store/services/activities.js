@@ -95,6 +95,39 @@ export const getAthleteActivities = token => {
   );
 };
 
+export const getRankings = (activities = {}) => {
+  const ranking = {
+    distance: {
+      value: 0,
+      athlete: 0
+    },
+    elevation: {
+      value: 0,
+      athlete: 0
+    },
+    elapsed_time: {
+      value: 0,
+      athlete: 0
+    }
+  };
+
+  Object.keys(activities).forEach(id => {
+    if (activities[id].distance > ranking.distance.value) {
+      ranking.distance.value = activities[id].distance;
+      ranking.distance.athlete = activities[id].athlete.id;
+    }
+    if (activities[id].elapsed_time > ranking.elapsed_time.value) {
+      ranking.elapsed_time.value = activities[id].elapsed_time;
+      ranking.elapsed_time.athlete = activities[id].athlete.id;
+    }
+    if (activities[id].total_elevation_gain > ranking.elevation.value) {
+      ranking.elevation.value = activities[id].total_elevation_gain;
+      ranking.elevation.athlete = activities[id].athlete.id;
+    }
+  });
+  return { ranking };
+};
+
 export const computePerformance = (activities = {}) => {
   let distance = 0;
   let elevation = 0;
