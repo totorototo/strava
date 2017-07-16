@@ -10,6 +10,7 @@ import selector from "./selector";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
 import styles from "./styles";
+import { getIconName } from "./helper";
 
 // styles
 class ClubFeed extends Component {
@@ -94,10 +95,9 @@ class ClubFeed extends Component {
             ? <Card titleStyle={styles.card} title="AWARDS">
                 {Object.keys(club.ranking).map(award =>
                   <View style={styles.members}>
-                    <Icon name="error" color="#FC4C02" />
+                    <Icon name={getIconName(award)} color="#FC4C02" />
                     <Text style={styles.text}>
-                      {`${club.ranking[award].athlete}:  ${club.ranking[award]
-                        .value}`}
+                      {`${club.ranking[award].athlete}`}
                     </Text>
                   </View>
                 )}
