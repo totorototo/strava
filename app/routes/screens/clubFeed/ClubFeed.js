@@ -59,7 +59,7 @@ class ClubFeed extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scroll}>
+        <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
           <Card
             titleStyle={styles.card}
             title="LYBITOS - GRP 2017"
