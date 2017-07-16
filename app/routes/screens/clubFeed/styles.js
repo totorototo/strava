@@ -5,7 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 3
+    marginTop: 2,
+    marginBottom: 2
   },
   scroll: {
     marginTop: 0,

@@ -41,7 +41,7 @@ const Home = TabNavigator(
   },
   {
     lazy: "true",
-    tabBarPosition: "top",
+    tabBarPosition: "bottom",
     tabBarOptions: {
       showIcon: true,
       labelStyle: {
@@ -52,7 +52,12 @@ const Home = TabNavigator(
         backgroundColor: "#FC4C02"
       },
       indicatorStyle: {
-        backgroundColor: "#FC4C02"
+        backgroundColor: "white"
+      },
+      tabStyle: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center"
       }
     }
   }
