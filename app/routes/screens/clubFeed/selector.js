@@ -7,6 +7,15 @@ import {
 
 const clubFeedViewSelector = state => {
   const currentClub = getEntity(state, "clubs", getCurrentClubID(state));
+  const activities = getValidEntities(
+    state,
+    "activities",
+    getValueFrom(currentClub, "activities")
+  );
+  const mapIDs = activities.map(activity => activity.map);
+
+  const maps = getValidEntities(state, "maps", mapIDs);
+
   return {
     club: currentClub,
     clubMembers: getValidEntities(
@@ -14,11 +23,8 @@ const clubFeedViewSelector = state => {
       "athletes",
       getValueFrom(currentClub, "members")
     ),
-    activities: getValidEntities(
-      state,
-      "activities",
-      getValueFrom(currentClub, "activities")
-    )
+    activities,
+    maps
   };
 };
 

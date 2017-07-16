@@ -7,10 +7,10 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   scroll: {
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 10,
-    marginRight: 10
+    marginTop: 10,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0
   },
   members: {
     flex: 1,
