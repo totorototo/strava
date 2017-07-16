@@ -7,7 +7,7 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   scroll: {
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 0,
     marginLeft: 0,
     marginRight: 0

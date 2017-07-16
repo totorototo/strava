@@ -90,6 +90,17 @@ class ClubFeed extends Component {
               </View>
             )}
           </Card>
+          {club.ranking
+            ? <Card titleStyle={styles.card} title="AWARDS">
+                {Object.keys(club.ranking).map(award =>
+                  <View style={styles.members}>
+                    <Text style={styles.text}>
+                      {`${award}: ${club.ranking[award].athlete}`}
+                    </Text>
+                  </View>
+                )}
+              </Card>
+            : null}
           <Card titleStyle={styles.card} title="ACTIVITIES">
             {activities.map(activity =>
               <View style={styles.members}>
