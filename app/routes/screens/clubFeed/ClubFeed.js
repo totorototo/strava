@@ -94,8 +94,10 @@ class ClubFeed extends Component {
             ? <Card titleStyle={styles.card} title="AWARDS">
                 {Object.keys(club.ranking).map(award =>
                   <View style={styles.members}>
+                    <Icon name="error" color="#FC4C02" />
                     <Text style={styles.text}>
-                      {`${award}: ${club.ranking[award].athlete}`}
+                      {`${club.ranking[award].athlete}:  ${club.ranking[award]
+                        .value}`}
                     </Text>
                   </View>
                 )}

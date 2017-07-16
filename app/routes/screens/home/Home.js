@@ -14,41 +14,42 @@ const Home = TabNavigator(
       screen: PerformanceMeter,
       navigationOptions: {
         tabBarLabel: "lyb-mtr",
-        tabBarIcon: () => <Icon name="whatshot" color="#FC4C02" />
+        tabBarIcon: () => <Icon reverse name="whatshot" color="#FC4C02" />
       }
     },
     RacePredictor: {
       screen: RacePredictor,
       navigationOptions: {
         tabBarLabel: "race",
-        tabBarIcon: () => <Icon name="timer" color="#FC4C02" />
+        tabBarIcon: () => <Icon reverse name="timer" color="#FC4C02" />
       }
     },
     Details: {
       screen: Details,
       navigationOptions: {
         tabBarLabel: "athlete",
-        tabBarIcon: () => <Icon name="face" color="#FC4C02" />
+        tabBarIcon: () => <Icon reverse name="face" color="#FC4C02" />
       }
     },
     ClubFeed: {
       screen: ClubFeed,
       navigationOptions: {
         tabBarLabel: "leaks",
-        tabBarIcon: () => <Icon name="comment" color="#FC4C02" />
+        tabBarIcon: () => <Icon reverse name="comment" color="#FC4C02" />
       }
     }
   },
   {
-    tabBarPosition: "bottom",
+    lazy: "true",
+    tabBarPosition: "top",
     tabBarOptions: {
       showIcon: true,
       labelStyle: {
         fontSize: 12,
-        color: "#FC4C02"
+        color: "white"
       },
       style: {
-        backgroundColor: "white"
+        backgroundColor: "#FC4C02"
       },
       indicatorStyle: {
         backgroundColor: "#FC4C02"
