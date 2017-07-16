@@ -89,17 +89,6 @@ class PerformanceMeter extends Component {
           borderColor="#FC4C02"
           unifiledColor="#559988"
         />
-        {athlete.performance &&
-        athlete.performance.details &&
-        athlete.performance.details.length > 0
-          ? <View style={styles.details}>
-              {athlete.performance.details.map(detail =>
-                <Text style={styles.text} key={detail.name}>
-                  {`${detail.name}: ${detail.absolute} ${detail.unit}`}
-                </Text>
-              )}
-            </View>
-          : null}
       </View>
     );
   }
