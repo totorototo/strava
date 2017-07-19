@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 
 import { View } from "react-native";
-
-import CountDown from "./components/CountDown";
+import MapView from "react-native-maps";
 
 import styles from "./styles";
 
@@ -12,22 +11,16 @@ class RacePredictor extends Component {
   }
 
   render() {
-    const messages = {
-      days: {
-        plural: "Days",
-        singular: "Day"
-      },
-      hours: "Hours",
-      mins: "Min",
-      secs: "Sec"
-    };
-
     return (
       <View style={styles.container}>
-        <CountDown
-          date="2017-08-25T08:00:00+00:00"
-          {...messages}
-          onEnd={this.finish}
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
         />
       </View>
     );
