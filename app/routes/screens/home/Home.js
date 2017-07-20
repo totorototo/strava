@@ -40,7 +40,7 @@ const Home = TabNavigator(
     }
   },
   {
-    lazy: "true",
+    lazy: true,
     tabBarPosition: "bottom",
     tabBarOptions: {
       showIcon: true,
