@@ -1,3 +1,94 @@
+export const markers = [
+  {
+    title: "Piau",
+    description: "12h15",
+    coordinates: {
+      latitude: 42.78473,
+      longitude: 0.15656
+    }
+  },
+  {
+    title: "Gèdre",
+    description: "17h00",
+    coordinates: {
+      latitude: 42.78744,
+      longitude: 0.044925
+    }
+  },
+  {
+    title: "Refuge d'Espuguettes",
+    description: "22h30",
+    coordinates: {
+      latitude: 42.72161,
+      longitude: 0.00607
+    }
+  },
+  {
+    title: "Gavarnie",
+    description: "0h30 -> 2h30",
+    coordinates: {
+      latitude: 42.7393,
+      longitude: -0.01283
+    }
+  },
+  {
+    title: "Gèdre",
+    description: "06h00",
+    coordinates: {
+      latitude: 42.79689,
+      longitude: 0.01307
+    }
+  },
+  {
+    title: "Luz Saint Sauveur",
+    description: "10h30",
+    coordinates: {
+      latitude: 42.87559,
+      longitude: 0.00744
+    }
+  },
+  {
+    title: "Barèges",
+    description: "14h30",
+    coordinates: {
+      latitude: 42.8953,
+      longitude: 0.07844
+    }
+  },
+  {
+    title: "Refuge de la Glère",
+    description: "18h00",
+    coordinates: {
+      latitude: 42.85282,
+      longitude: 0.1005
+    }
+  },
+  {
+    title: "Orédon",
+    description: "22h30",
+    coordinates: {
+      latitude: 42.82688,
+      longitude: 0.18334
+    }
+  },
+  {
+    title: "Merlans",
+    description: "02h30",
+    coordinates: {
+      latitude: 42.83548,
+      longitude: 0.2429
+    }
+  },
+  {
+    title: "Vielle Aure",
+    description: "06h00",
+    coordinates: {
+      latitude: 42.82985,
+      longitude: 0.32711
+    }
+  }
+];
+
 export const coordinates = [
   { latitude: 42.78386, longitude: 0.15844 },
   { latitude: 42.78323, longitude: 0.15838 },

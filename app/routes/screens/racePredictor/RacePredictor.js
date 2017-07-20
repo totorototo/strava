@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { View, Dimensions, Text } from "react-native";
 import MapView from "react-native-maps";
 
-import { coordinates } from "./data";
+import { coordinates, markers } from "./data";
 import styles from "./styles";
 
 const { width, height } = Dimensions.get("window");
@@ -32,6 +32,13 @@ class RacePredictor extends Component {
             fillColor="#FC4C02"
             strokeWidth={3}
           />
+          {markers.map(marker =>
+            <MapView.Marker
+              coordinate={marker.coordinates}
+              title={marker.title}
+              description={marker.description}
+            />
+          )}
         </MapView>
 
         <View style={styles.buttonContainer}>
