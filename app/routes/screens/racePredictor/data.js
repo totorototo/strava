@@ -1,5 +1,6 @@
 export const markers = [
   {
+    identifier: "1",
     title: "Piau",
     description: "12h15",
     coordinates: {
@@ -8,6 +9,7 @@ export const markers = [
     }
   },
   {
+    identifier: "2",
     title: "Gèdre",
     description: "17h00",
     coordinates: {
@@ -16,6 +18,7 @@ export const markers = [
     }
   },
   {
+    identifier: "3",
     title: "Refuge d'Espuguettes",
     description: "22h30",
     coordinates: {
@@ -24,6 +27,7 @@ export const markers = [
     }
   },
   {
+    identifier: "4",
     title: "Gavarnie",
     description: "0h30 -> 2h30",
     coordinates: {
@@ -32,6 +36,7 @@ export const markers = [
     }
   },
   {
+    identifier: "5",
     title: "Gèdre",
     description: "06h00",
     coordinates: {
@@ -40,6 +45,7 @@ export const markers = [
     }
   },
   {
+    identifier: "6",
     title: "Luz Saint Sauveur",
     description: "10h30",
     coordinates: {
@@ -48,6 +54,7 @@ export const markers = [
     }
   },
   {
+    identifier: "7",
     title: "Barèges",
     description: "14h30",
     coordinates: {
@@ -56,6 +63,7 @@ export const markers = [
     }
   },
   {
+    identifier: "8",
     title: "Refuge de la Glère",
     description: "18h00",
     coordinates: {
@@ -64,6 +72,7 @@ export const markers = [
     }
   },
   {
+    identifier: "9",
     title: "Orédon",
     description: "22h30",
     coordinates: {
@@ -72,6 +81,7 @@ export const markers = [
     }
   },
   {
+    identifier: "10",
     title: "Merlans",
     description: "02h30",
     coordinates: {
@@ -80,6 +90,7 @@ export const markers = [
     }
   },
   {
+    identifier: "11",
     title: "Vielle Aure",
     description: "06h00",
     coordinates: {
