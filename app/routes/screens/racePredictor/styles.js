@@ -2,23 +2,14 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    position: "absolute",
-    top: 20,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
     alignItems: "center"
   },
   map: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
+    ...StyleSheet.absoluteFillObject
   },
   bubble: {
-    flex: 1,
     backgroundColor: "rgba(255,255,255,0.7)",
     paddingHorizontal: 18,
     paddingVertical: 12,
@@ -29,14 +20,21 @@ export default StyleSheet.create({
     alignItems: "stretch"
   },
   button: {
-    width: 80,
-    paddingHorizontal: 12,
+    width: 100,
+    paddingHorizontal: 8,
     alignItems: "center",
-    marginHorizontal: 10
+    justifyContent: "center",
+    marginHorizontal: 5
   },
   buttonContainer: {
     flexDirection: "row",
     marginVertical: 20,
     backgroundColor: "transparent"
+  },
+  buttonText: {
+    textAlign: "center"
+  },
+  detail: {
+    textAlign: "center"
   }
 });
