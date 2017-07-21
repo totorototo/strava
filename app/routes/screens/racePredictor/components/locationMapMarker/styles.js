@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
-const SIZE = 35;
+const SIZE = 10;
 const HALO_RADIUS = 6;
 const ARROW_SIZE = 7;
 const ARROW_DISTANCE = 6;
 const HALO_SIZE = SIZE + HALO_RADIUS;
 const HEADING_BOX_SIZE = HALO_SIZE + ARROW_SIZE + ARROW_DISTANCE;
-const colorOfmyLocationMapMarker = "blue";
+const colorOfmyLocationMapMarker = "#00A0CC";
 
 export default StyleSheet.create({
   mapMarker: {

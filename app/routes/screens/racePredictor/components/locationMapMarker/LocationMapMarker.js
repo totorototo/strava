@@ -57,7 +57,6 @@ export default class MyLocationMapMarker extends React.PureComponent {
         if (granted && this.mounted) this.watchLocation();
       });
     } else {
-      console.log("watch");
       this.watchLocation();
     }
   }
@@ -74,7 +73,6 @@ export default class MyLocationMapMarker extends React.PureComponent {
       position => {
         const myLastPosition = this.state.myPosition;
         const myPosition = position.coords;
-        console.log(myLastPosition);
         if (!isEqual(myPosition, myLastPosition)) {
           this.setState({ myPosition });
         }
@@ -102,6 +100,9 @@ export default class MyLocationMapMarker extends React.PureComponent {
         style={styles.mapMarker}
         {...this.props}
         coordinate={coordinate}
+        pinColor="#00A0CC"
+        title="me"
+        description="xxx miles to go!"
       >
         <View style={styles.container}>
           <View style={styles.markerHalo} />

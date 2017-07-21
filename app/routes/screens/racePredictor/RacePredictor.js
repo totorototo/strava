@@ -16,13 +16,6 @@ const LONGITUDE = 0.15844;
 const LATITUDE_DELTA = 0.37;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-// const SAMPLE_REGION = {
-//   latitude: LATITUDE,
-//   longitude: LONGITUDE,
-//   latitudeDelta: LATITUDE_DELTA,
-//   longitudeDelta: LONGITUDE_DELTA
-// };
-
 class RacePredictor extends Component {
   constructor(props) {
     super(props);
@@ -34,33 +27,16 @@ class RacePredictor extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA
       },
-      myPosition: null,
-      lastPosition: "unknown",
-      watchID: 0
+      trackPosition: false
     };
-  }
-
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const initialPosition = JSON.stringify(position);
-        this.setState({ initialPosition });
-      },
-      error => alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-    this.watchID = navigator.geolocation.watchPosition(position => {
-      const lastPosition = JSON.stringify(position);
-      this.setState({ lastPosition });
-    });
-  }
-
-  componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchID);
   }
 
   onRegionChange(region) {
     this.setState({ region });
+  }
+
+  toggleTracking() {
+    this.setState({ trackPosition: !this.state.trackPosition });
   }
 
   jumpRandom() {
@@ -119,8 +95,7 @@ class RacePredictor extends Component {
               pinColor="#FC4C02"
             />
           )}
-
-          <MyLocationMapMarker />
+          {this.state.trackPosition ? <MyLocationMapMarker /> : null}
         </MapView>
 
         <View style={[styles.bubble, styles.latlng]}>
@@ -131,10 +106,12 @@ class RacePredictor extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => this.jumpRandom()}
+            onPress={() => this.toggleTracking()}
             style={[styles.bubble, styles.button]}
           >
-            <Text style={styles.buttonText}>Jump</Text>
+            <Text style={styles.buttonText}>
+              {this.state.trackPosition ? "UnTrack" : "Track"}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.animateRandom()}
