@@ -36,7 +36,7 @@
     "jsx-a11y/no-marquee": 0,
     "react/prefer-stateless-function": 0,
     "react-native/no-unused-styles": 2,
-    "react-native/split-platform-components": 2,
+    "react-native/split-platform-components": 1,
     "react-native/no-inline-styles": 2,
     "react-native/no-color-literals": 2,
     "react/jsx-indent": 0
