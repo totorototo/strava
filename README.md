@@ -72,7 +72,7 @@ yarn run devtools                     # launch react-devtools
 
 # Screenshots
 
-![Alt text](docs/images/race.png)
+![Alt text](docs/images/race.png | width=100)
 
 # References
 
