@@ -42,7 +42,8 @@ yarn install                           # Install project dependencies
 
 ```bash
 CLIENT_ID=[XXX]
-CLIENT_SECRET =[YYY]
+CLIENT_SECRET=[YYY]
+GOOGLE_MAPS_API_KEY=[ZZZ]
 ```
 
 
@@ -68,6 +69,10 @@ If you need to debug the React application, just fol:
 ```bash
 yarn run devtools                     # launch react-devtools
 ```
+
+# Screenshots
+
+![Alt text](docs/images/race.png)
 
 # References
 
