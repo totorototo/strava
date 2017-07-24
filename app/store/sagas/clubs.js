@@ -67,5 +67,4 @@ function* listAnnouncements() {
 export function* clubsSaga() {
   yield takeEvery(SET_CURRENT_USER_ID, listMembers);
   yield takeEvery(SET_CURRENT_CLUB_ID, listAnnouncements);
-  // yield takeEvery(SET_CURRENT_CLUB_ID, listActivities);
 }
