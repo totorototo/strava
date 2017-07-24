@@ -1,6 +1,6 @@
-# Strava
+# Lybitos - Strava
 
-Strava is a React Native application consuming Strava RESTFul web service.
+Lybitos is a React Native application consuming Strava RESTFul web service.
 
 
 # Continuous Integration
@@ -10,7 +10,7 @@ Android: [![Build Status](https://www.bitrise.io/app/a416933328198685.svg?token=
 
 # Style
 
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+ [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 
 # Requirements
@@ -38,7 +38,7 @@ yarn install                           # Install project dependencies
 * go to https://www.strava.com/settings/api
 * retrieve application ID and secret
 * create a new .env file at the root of this project
-* paste the following code inside your .env file and make sure to replace [XXX] and [YYY] with your info.
+* paste the following code inside your .env file and make sure to replace [XXX], [YYY] and [ZZZ] with your info.
 
 ```bash
 CLIENT_ID=[XXX]
@@ -80,6 +80,6 @@ Compute your performance: | Follow your progression during races: | Get your pro
 
 * Strava API: https://strava.github.io/api/
 * Strava Labs: http://labs.strava.com/
-
+* Strava API Google group: https://groups.google.com/forum/#!forum/strava-api
 
 
