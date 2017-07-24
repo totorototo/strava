@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import { View, Dimensions, Text, TouchableOpacity } from "react-native";
 import MapView from "react-native-maps";
 
-import MyLocationMapMarker from "./components/locationMapMarker/LocationMapMarker";
-
 import { coordinates, markers } from "./data";
 import styles from "./styles";
 
@@ -35,9 +33,10 @@ class RacePredictor extends Component {
     this.setState({ region });
   }
 
-  toggleTracking() {
-    this.setState({ trackPosition: !this.state.trackPosition });
-  }
+  // TODO: this needs to be modified. (toggle athlete tracking). Reloaddux has to be implemented first!
+  // toggleTracking() {
+  //   this.setState({ trackPosition: !this.state.trackPosition });
+  // }
 
   jumpRandom() {
     this.setState({ region: this.randomRegion() });
@@ -95,7 +94,6 @@ class RacePredictor extends Component {
               pinColor="#FC4C02"
             />
           )}
-          {this.state.trackPosition ? <MyLocationMapMarker /> : null}
         </MapView>
 
         <View style={[styles.bubble, styles.latlng]}>
@@ -106,12 +104,10 @@ class RacePredictor extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => this.toggleTracking()}
+            onPress={() => this.jumpRandom()}
             style={[styles.bubble, styles.button]}
           >
-            <Text style={styles.buttonText}>
-              {this.state.trackPosition ? "UnTrack" : "Track"}
-            </Text>
+            <Text style={styles.buttonText}>jump</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.animateRandom()}
