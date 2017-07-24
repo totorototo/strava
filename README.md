@@ -71,8 +71,7 @@ yarn run devtools                     # launch react-devtools
 ```
 
 # Screenshots
-
->Compute your performance: | >Follow your progression during races: | >Get your profile performances summary: | >Get the latest breaking news of your club: 
+Compute your performance: | Follow your progression during races: | Get your profile performances summary: | Get the latest breaking news of your club: 
 --- | --- | --- |---
 ![Alt text](docs/images/performance-meter.png) | ![Alt text](docs/images/race.png) | ![Alt text](docs/images/athlete-details.png) | ![Alt text](docs/images/club-details.png)
 
