@@ -21,7 +21,6 @@ import { getRankings } from "../services/activities";
 
 function* listActivities(clubID, membersIDs) {
   const accessToken = yield select(token);
-  // const clubID = 288750;
   const { ids, entities, error } = yield call(
     listClubActivities,
     accessToken,
