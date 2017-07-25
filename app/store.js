@@ -20,17 +20,10 @@ store.registerBusiness({
     default: rootReducer({}, { type: "@@redux/INIT" })
   },
   sagasMap: {
-    authenticationFlow: authenticationFlowSaga(),
-    athletactivitiesSagae: activitiesSaga(),
-    clubsSaga: clubsSaga()
+    authenticationFlowSaga,
+    activitiesSaga,
+    clubsSaga
   }
 });
-
-store.dispatch({
-  type: "SET_ACCESS_TOKEN",
-  accessToken: "898741e906a19063f8e002336dbe9f3c04eb546b"
-});
-
-console.log(store.getState());
 
 export default store;

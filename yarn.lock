@@ -5330,9 +5330,9 @@ regjsparser@^0.1.4:
   dependencies:
     jsesc "~0.5.0"
 
-reloaddux@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/reloaddux/-/reloaddux-0.0.6.tgz#ea4f34697ad57ff111d6797e064abfa84ca6d7a4"
+reloaddux@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/reloaddux/-/reloaddux-0.0.7.tgz#910f08b70b326ee7c9db3860cb7e09806c781299"
   dependencies:
     babel-preset-flow "^6.23.0"
     babel-preset-react-native "^1.9.1"
