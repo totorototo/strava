@@ -4,18 +4,20 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 2,
+    marginBottom: 2
   },
   scroll: {
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 10,
-    marginRight: 10
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0
   },
   members: {
     flex: 1,
     flexDirection: "row",
-    alignContent: "flex-start"
+    alignItems: "center"
   },
   image: {
     width: 20,

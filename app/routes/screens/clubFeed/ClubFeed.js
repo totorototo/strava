@@ -10,6 +10,7 @@ import selector from "./selector";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
 import styles from "./styles";
+import { getIconName } from "./helper";
 
 // styles
 class ClubFeed extends Component {
@@ -59,7 +60,7 @@ class ClubFeed extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scroll}>
+        <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
           <Card
             titleStyle={styles.card}
             title="LYBITOS - GRP 2017"
@@ -90,6 +91,18 @@ class ClubFeed extends Component {
               </View>
             )}
           </Card>
+          {club.ranking
+            ? <Card titleStyle={styles.card} title="AWARDS">
+                {Object.entries(club.ranking).map(([key, value]) =>
+                  <View style={styles.members}>
+                    <Icon name={getIconName(key)} color="#FC4C02" />
+                    <Text style={styles.text}>
+                      {`${value.athlete}`}
+                    </Text>
+                  </View>
+                )}
+              </Card>
+            : null}
           <Card titleStyle={styles.card} title="ACTIVITIES">
             {activities.map(activity =>
               <View style={styles.members}>

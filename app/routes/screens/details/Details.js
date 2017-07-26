@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { View, Text, Image } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, Card } from "react-native-elements";
 
 import { connect } from "react-redux";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
@@ -39,12 +39,16 @@ class Details extends Component {
     return (
       <View style={styles.home}>
         <Image source={{ uri: athlete.profile }} style={styles.image} />
-        <Text style={styles.text}>
-          {athlete.firstname}
-        </Text>
-        <Text style={styles.text}>
-          {athlete.lastname}
-        </Text>
+
+        {athlete.performance && athlete.performance.details
+          ? <Card titleStyle={styles.card} title="PERFORMANCES SUMMARY">
+              {athlete.performance.details.map(detail =>
+                <Text style={styles.text}>
+                  {`${detail.name}: ${detail.absolute} ${detail.unit}`}
+                </Text>
+              )}
+            </Card>
+          : null}
       </View>
     );
   }
