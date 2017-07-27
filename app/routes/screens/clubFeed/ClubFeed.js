@@ -61,6 +61,7 @@ class ClubFeed extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
           <Card
+            containerStyle={styles.clubImageStyle}
             titleStyle={styles.card}
             title="LYBITOS - GRP 2017"
             image={{ uri: club.cover_photo }}
@@ -70,7 +71,12 @@ class ClubFeed extends Component {
               and much more!
             </Text>
           </Card>
-          <Card titleStyle={styles.card} title="MEMBERS">
+          <Card
+            dividerStyle={styles.dividerStyle}
+            containerStyle={styles.containerCardStyle}
+            titleStyle={styles.card}
+            title="MEMBERS"
+          >
             {clubMembers.map(member =>
               <View key={member.name} style={styles.members}>
                 <Image
@@ -84,7 +90,11 @@ class ClubFeed extends Component {
               </View>
             )}
           </Card>
-          <Card titleStyle={styles.card} title="ACTIVITIES">
+          <Card
+            titleStyle={styles.card}
+            title="ACTIVITIES"
+            containerStyle={styles.containerCardStyle}
+          >
             {activities.map(activity =>
               <View style={styles.members}>
                 <Image

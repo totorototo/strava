@@ -12,7 +12,7 @@ const AppNavigator = StackNavigator(
     Home: { screen: Home }
   },
   {
-    cardStyle: { flex: 1, marginTop: 0, backgroundColor: "white" },
+    cardStyle: { flex: 1, marginTop: 0, backgroundColor: "#eff2f6" },
     headerMode: "none"
   }
 );

@@ -6,11 +6,27 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  clubImageStyle: {
+    padding: 0,
+    margin: 0,
+    borderWidth: 0
+  },
+  containerCardStyle: {
+    padding: 15,
+    marginTop: 15,
+    marginLeft: 0,
+    marginRight: 0,
+    borderWidth: 0
+  },
+  dividerStyle: {
+    marginLeft: 0,
+    marginRight: 0
+  },
   scroll: {
-    marginTop: 20,
-    marginBottom: 1,
-    marginLeft: 1,
-    marginRight: 1
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0
   },
   members: {
     flex: 1,
