@@ -8,9 +8,9 @@ export default StyleSheet.create({
   },
   scroll: {
     marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 10,
-    marginRight: 10
+    marginBottom: 1,
+    marginLeft: 1,
+    marginRight: 1
   },
   members: {
     flex: 1,

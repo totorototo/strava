@@ -1,3 +1,5 @@
+import { schema, normalize } from "normalizr";
+
 import { pick } from "lodash";
 
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
@@ -16,17 +18,37 @@ export const getAthleteDetails = (token, id) => {
   };
   return callJSONApi(request).then(
     response => {
-      const details = pick(response.data, [
-        "firstname",
-        "lastname",
-        "profile",
-        "citye",
-        "country",
-        "id"
-      ]);
+      const athlete = response.data;
+      const shoes = new schema.Entity("shoes", {}, { idAttribute: "id" });
+      const bikes = new schema.Entity("bikes", {}, { idAttribute: "id" });
+      const clubs = new schema.Entity("clubs", {}, { idAttribute: "id" });
+      const athleteSchema = new schema.Entity(
+        "athletes",
+        {
+          shoes: [shoes],
+          bikes: [bikes],
+          clubs: [clubs]
+        },
+        {
+          idAttribute: "id",
+          processStrategy: entity =>
+            pick(entity, [
+              "firstname",
+              "lastname",
+              "profile",
+              "bikes",
+              "shoes",
+              "clubs",
+              "id"
+            ])
+        }
+      );
+
+      const normalizedData = normalize(athlete, athleteSchema);
 
       return {
-        details
+        currentUserID: normalizedData.result,
+        entities: normalizedData.entities
       };
     },
     error => ({ error })

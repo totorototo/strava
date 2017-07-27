@@ -3,10 +3,11 @@ import { put, call, take } from "redux-saga/effects";
 import { NavigationActions } from "react-navigation";
 
 import { setAccessToken, logout } from "../../actions/login";
-import { setEntities } from "../../actions/entities";
 import { setCurrentUserID } from "../../actions/data";
 
 import { LOGOUT } from "../../constants/actionTypes";
+
+import { getDetails } from "../../sagas/athlete";
 
 import { authenticate } from "../../services/login";
 
@@ -24,14 +25,14 @@ function* signout() {
 
 function* authorize(temporaryAccessToken) {
   // 1- convert access-token
-  const { token, currentUserID, entities, error } = yield call(
+  const { token, currentUserID, error } = yield call(
     authenticate,
     temporaryAccessToken
   );
   if (!error) {
     yield put(setAccessToken(token));
+    yield getDetails(currentUserID);
     yield put(setCurrentUserID(currentUserID));
-    yield put(setEntities(entities));
   }
   return { token, error };
 }
