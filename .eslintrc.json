@@ -1,14 +1,6 @@
 {
-  "extends": [
-    "airbnb",
-    "prettier"
-  ],
-  "plugins": [
-    "react",
-    "react-native",
-    "jsx-a11y",
-    "import"
-  ],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "react-native", "jsx-a11y", "import"],
   "env": {
     "browser": true,
     "node": true
@@ -27,9 +19,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js"
-        ]
+        "extensions": [".js"]
       }
     ],
     "import/prefer-default-export": 0,

@@ -19,6 +19,21 @@ import {
 import { getStats } from "./athlete";
 import { getRankings } from "../services/activities";
 
+function* listActivities(clubID, membersIDs) {
+  const accessToken = yield select(token);
+  const { ids, entities, error } = yield call(
+    listClubActivities,
+    accessToken,
+    clubID
+  );
+  if (!error) {
+    yield put(updateEntity(clubID, "clubs", { activities: ids }));
+    yield put(setEntity("activities", entities));
+    const { ranking } = yield call(getRankings, membersIDs, entities);
+    yield put(updateEntity(clubID, "clubs", { ranking }));
+  }
+}
+
 function* listMembers() {
   const accessToken = yield select(token);
   const currentUserID = yield select(getCurrentUserID);
@@ -41,6 +56,7 @@ function* listMembers() {
       };
     }
     yield put(setEntity("athletes", mergedEntities.athletes));
+    yield listActivities(clubID, ids);
   }
 }
 
@@ -57,24 +73,7 @@ function* listAnnouncements() {
   }
 }
 
-function* listActivities() {
-  const accessToken = yield select(token);
-  const clubID = 288750;
-  const { ids, entities, error } = yield call(
-    listClubActivities,
-    accessToken,
-    clubID
-  );
-  if (!error) {
-    yield put(updateEntity(clubID, "clubs", { activities: ids }));
-    yield put(setEntity("activities", entities));
-    const { ranking } = yield call(getRankings, entities);
-    yield put(updateEntity(clubID, "clubs", { ranking }));
-  }
-}
-
 export function* clubsSaga() {
   yield takeEvery(SET_CURRENT_USER_ID, listMembers);
   yield takeEvery(SET_CURRENT_CLUB_ID, listAnnouncements);
-  yield takeEvery(SET_CURRENT_CLUB_ID, listActivities);
 }
