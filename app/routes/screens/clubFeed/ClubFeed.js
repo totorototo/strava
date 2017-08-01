@@ -95,7 +95,7 @@ class ClubFeed extends Component {
           {club.ranking &&
             <Card
               dividerStyle={styles.dividerStyle}
-              ontainerStyle={styles.containerCardStyle}
+              containerStyle={styles.containerCardStyle}
               titleStyle={styles.card}
               title="AWARDS"
             >
