@@ -95,36 +95,76 @@ export const getAthleteActivities = token => {
   );
 };
 
-export const getRankings = (activities = {}) => {
+export const getRankings = (members = [], activities = {}) => {
+  const sortedActivitiesByAthlete = members.map(member => {
+    const filteredIDs = Object.keys(activities).filter(
+      id => activities[id].athlete.id === member
+    );
+    return filteredIDs.map(id => activities[id]);
+  });
+
+  const computedDataByAthlete = sortedActivitiesByAthlete.map(
+    activitiesSortedByAthlete =>
+      activitiesSortedByAthlete.reduce(
+        (acc, currentValue) => ({
+          distance: acc.distance + currentValue.distance,
+          total_elevation_gain:
+            acc.total_elevation_gain + currentValue.total_elevation_gain,
+          elapsed_time: acc.elapsed_time + currentValue.elapsed_time,
+          max_speed:
+            currentValue.max_speed > acc.max_speed
+              ? currentValue.max_speed
+              : acc.max_speed,
+          achievement_count:
+            acc.achievement_count + currentValue.achievement_count,
+          name: currentValue.athlete.firstname
+        }),
+        {
+          distance: 0,
+          total_elevation_gain: 0,
+          elapsed_time: 0,
+          max_speed: 0,
+          achievement_count: 0,
+          name: ""
+        }
+      )
+  );
+
   const ranking = {
     distance: {
       value: 0,
-      athlete: 0
+      athlete: ""
     },
-    elevation: {
+    total_elevation_gain: {
       value: 0,
-      athlete: 0
+      athlete: ""
     },
     elapsed_time: {
       value: 0,
-      athlete: 0
+      athlete: ""
+    },
+    max_speed: {
+      value: 0,
+      athlete: ""
+    },
+    achievement_count: {
+      value: 0,
+      athlete: ""
     }
   };
 
-  Object.keys(activities).forEach(id => {
-    if (activities[id].distance > ranking.distance.value) {
-      ranking.distance.value = activities[id].distance;
-      ranking.distance.athlete = activities[id].athlete.id;
-    }
-    if (activities[id].elapsed_time > ranking.elapsed_time.value) {
-      ranking.elapsed_time.value = activities[id].elapsed_time;
-      ranking.elapsed_time.athlete = activities[id].athlete.id;
-    }
-    if (activities[id].total_elevation_gain > ranking.elevation.value) {
-      ranking.elevation.value = activities[id].total_elevation_gain;
-      ranking.elevation.athlete = activities[id].athlete.id;
-    }
+  computedDataByAthlete.forEach(statsByAthlete => {
+    Object.keys(statsByAthlete).forEach(stat => {
+      if (ranking[stat] === undefined) {
+        return;
+      }
+      if (statsByAthlete[stat] > ranking[stat].value) {
+        ranking[stat].value = statsByAthlete[stat];
+        ranking[stat].athlete = statsByAthlete.name;
+      }
+    });
   });
+
   return { ranking };
 };
 
