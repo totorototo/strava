@@ -91,23 +91,23 @@ class ClubFeed extends Component {
               </View>
             )}
           </Card>
-          {club.ranking
-            ? <Card
-                dividerStyle={styles.dividerStyle}
-                ontainerStyle={styles.containerCardStyle}
-                titleStyle={styles.card}
-                title="AWARDS"
-              >
-                {Object.entries(club.ranking).map(([key, value]) =>
-                  <View style={styles.members}>
-                    <Icon name={getIconName(key)} color="#FC4C02" />
-                    <Text style={styles.text}>
-                      {`${value.athlete}`}
-                    </Text>
-                  </View>
-                )}
-              </Card>
-            : null}
+
+          {club.ranking &&
+            <Card
+              dividerStyle={styles.dividerStyle}
+              ontainerStyle={styles.containerCardStyle}
+              titleStyle={styles.card}
+              title="AWARDS"
+            >
+              {Object.entries(club.ranking).map(([key, value]) =>
+                <View style={styles.members}>
+                  <Icon name={getIconName(key)} color="#FC4C02" />
+                  <Text style={styles.text}>
+                    {`${value.athlete}`}
+                  </Text>
+                </View>
+              )}
+            </Card>}
           <Card
             titleStyle={styles.card}
             title="ACTIVITIES"
