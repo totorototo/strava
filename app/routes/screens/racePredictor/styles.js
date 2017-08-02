@@ -6,6 +6,14 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  mapContainer: {
+    flex: 1,
+    justifyContent: "center",
+    flexDirection: "column",
+    backgroundColor: "white",
+    padding: 0,
+    marginTop: 15
+  },
   scroll: {
     marginTop: 0,
     marginBottom: 0,
@@ -13,7 +21,7 @@ export default StyleSheet.create({
     marginRight: 0
   },
   containerCardStyle: {
-    padding: 15,
+    padding: 0,
     marginTop: 15,
     marginLeft: 0,
     marginRight: 0,
@@ -23,6 +31,9 @@ export default StyleSheet.create({
     padding: 0,
     margin: 0,
     borderWidth: 0
+  },
+  image: {
+    height: 300
   },
   dividerStyle: {
     marginLeft: 0,
