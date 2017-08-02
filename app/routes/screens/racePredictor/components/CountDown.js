@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View, Text } from "react-native";
-import { Grid, Col, Row } from "react-native-elements";
 
 import styles from "./styles";
 
 class CountDown extends Component {
   static propTypes = {
     date: PropTypes.string,
-    days: PropTypes.objectOf(PropTypes.string),
-    hours: PropTypes.string,
-    minutes: PropTypes.string,
-    seconds: PropTypes.string,
     onEnd: PropTypes.func
   };
   static defaultProps = {
@@ -111,64 +106,16 @@ class CountDown extends Component {
 
   render() {
     const countDown = this.state;
-    let days;
-    if (countDown.days === 1) {
-      days = this.props.days.singular;
-    } else {
-      days = this.props.days.plural;
-    }
+
     return (
       <View style={styles.container}>
-        <Grid containerStyle={styles.grid}>
-          <Col size={25}>
-            <Row containerStyle={styles.rowTop}>
-              <Text style={styles.text}>
-                {CountDown.leadingZeros(countDown.days)}
-              </Text>
-            </Row>
-            <Row containerStyle={styles.rowLow}>
-              <Text style={styles.text}>
-                {days}
-              </Text>
-            </Row>
-          </Col>
-          <Col size={25}>
-            <Row containerStyle={styles.rowTop}>
-              <Text style={styles.text}>
-                {CountDown.leadingZeros(countDown.hours)}
-              </Text>
-            </Row>
-            <Row containerStyle={styles.rowLow}>
-              <Text style={styles.text}>
-                {this.props.hours}
-              </Text>
-            </Row>
-          </Col>
-          <Col size={25}>
-            <Row containerStyle={styles.rowTop}>
-              <Text style={styles.text}>
-                {CountDown.leadingZeros(countDown.min)}
-              </Text>
-            </Row>
-            <Row containerStyle={styles.rowLow}>
-              <Text style={styles.text}>
-                {this.props.minutes}
-              </Text>
-            </Row>
-          </Col>
-          <Col size={25}>
-            <Row containerStyle={styles.rowTop}>
-              <Text style={styles.text}>
-                {CountDown.leadingZeros(countDown.sec)}
-              </Text>
-            </Row>
-            <Row containerStyle={styles.rowLow}>
-              <Text style={styles.text}>
-                {this.props.seconds}
-              </Text>
-            </Row>
-          </Col>
-        </Grid>
+        <Text style={styles.text}>{`${CountDown.leadingZeros(
+          countDown.days
+        )} - ${CountDown.leadingZeros(
+          countDown.hours
+        )} - ${CountDown.leadingZeros(
+          countDown.min
+        )} - ${CountDown.leadingZeros(countDown.sec)}`}</Text>
       </View>
     );
   }
