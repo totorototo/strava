@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { View, ScrollView, Dimensions, Text, Image } from "react-native";
+import { View, ScrollView, Dimensions, Image } from "react-native";
 
 import MapView from "react-native-maps";
 import CountDown from "./components/CountDown";
@@ -43,23 +43,24 @@ class RacePredictor extends Component {
       <View style={styles.container}>
         <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
           <View style={styles.mapContainer}>
-            <Text>Tour des cirques</Text>
             <Image
               style={[styles.image, { width }]}
+              resizeMode="center"
               source={{
-                uri:
-                  "http://www.grandraidpyrenees.com/wp-content/uploads/sites/870/2016/10/grp2017_affichefinale_sebcazes.jpg"
+                uri: "https://i.ytimg.com/vi/rrwjYUkTziU/maxresdefault.jpg"
               }}
-            />
-            <CountDown
-              date="2017-08-25T08:00:00+00:00"
-              {...messages}
-              onEnd={this.finish}
-            />
+            >
+              <View style={styles.overlay}>
+                <CountDown
+                  date="2017-08-25T08:00:00+00:00"
+                  {...messages}
+                  onEnd={this.finish}
+                />
+              </View>
+            </Image>
           </View>
 
           <View style={styles.mapContainer}>
-            <Text>Map</Text>
             <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
               <MapView.Polyline
                 coordinates={coordinates}

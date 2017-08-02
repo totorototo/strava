@@ -7,7 +7,8 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    color: "#FC4C02",
-    fontSize: 15
+    color: "white",
+    fontSize: 45,
+    backgroundColor: "transparent"
   }
 });

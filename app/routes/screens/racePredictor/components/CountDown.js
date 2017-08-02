@@ -109,7 +109,7 @@ class CountDown extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{`${CountDown.leadingZeros(
+        <Text style={styles.text}>{`${CountDown.leadingZeros(
           countDown.days
         )}: ${CountDown.leadingZeros(
           countDown.hours

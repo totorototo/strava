@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   },
   mapContainer: {
     flex: 1,
@@ -20,31 +18,22 @@ export default StyleSheet.create({
     marginLeft: 0,
     marginRight: 0
   },
-  containerCardStyle: {
-    padding: 0,
-    marginTop: 15,
-    marginLeft: 0,
-    marginRight: 0,
-    borderWidth: 0
-  },
-  clubImageStyle: {
-    padding: 0,
-    margin: 0,
-    borderWidth: 0
-  },
   image: {
-    height: 300
+    flex: 1,
+    height: 150
   },
-  dividerStyle: {
-    marginLeft: 0,
-    marginRight: 0
-  },
-  card: {
-    color: "#FC4C02"
+  overlay: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "black",
+    opacity: 0.4
   },
   map: {
-    height: 200,
-    marginVertical: 10
+    height: 350,
+    margin: 10
   },
   text: {
     color: "#FC4C02",
