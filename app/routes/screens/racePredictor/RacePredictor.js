@@ -45,9 +45,10 @@ class RacePredictor extends Component {
           <View style={styles.mapContainer}>
             <Image
               style={[styles.image, { width }]}
-              resizeMode="center"
+              resizeMode="cover"
               source={{
-                uri: "https://i.ytimg.com/vi/rrwjYUkTziU/maxresdefault.jpg"
+                uri:
+                  "http://wallpaperrs.com/uploads/nature/thumbs/earth-mountain-elegant-wallpaper-89645-142977888722.jpg"
               }}
             >
               <View style={styles.overlay}>

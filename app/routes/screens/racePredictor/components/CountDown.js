@@ -111,11 +111,11 @@ class CountDown extends Component {
       <View style={styles.container}>
         <Text style={styles.text}>{`${CountDown.leadingZeros(
           countDown.days
-        )}: ${CountDown.leadingZeros(
+        )} - ${CountDown.leadingZeros(
           countDown.hours
-        )}: ${CountDown.leadingZeros(countDown.min)}: ${CountDown.leadingZeros(
-          countDown.sec
-        )}`}</Text>
+        )} - ${CountDown.leadingZeros(
+          countDown.min
+        )} - ${CountDown.leadingZeros(countDown.sec)}`}</Text>
       </View>
     );
   }
