@@ -80,11 +80,7 @@ class ClubFeed extends Component {
           >
             {clubMembers.map(member =>
               <View key={member.name} style={styles.members}>
-                <Image
-                  style={styles.image}
-                  resizeMode="cover"
-                  source={{ uri: member.profile }}
-                />
+                <Image style={styles.image} source={{ uri: member.profile }} />
                 <Text style={styles.text}>
                   {member.firstname}
                 </Text>
