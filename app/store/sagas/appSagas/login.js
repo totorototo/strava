@@ -1,9 +1,10 @@
-import { put, call, take } from "redux-saga/effects";
+import { put, call, take, spawn, cancel } from "redux-saga/effects";
 
 import { NavigationActions } from "react-navigation";
 
 import { setAccessToken, logout } from "../../actions/login";
 import { setCurrentUserID } from "../../actions/data";
+import { watchDatabase } from "../race";
 
 import { LOGOUT } from "../../constants/actionTypes";
 
@@ -49,12 +50,15 @@ export function* authenticationFlowSaga() {
         // eslint-disable-next-line no-unused-vars, prefer-const
         let { token, error } = yield call(authorize, navigation.params.code);
         if (!error) {
+          const task = yield spawn(watchDatabase);
+
           let userSignedOut;
           while (!userSignedOut) {
             yield take(LOGOUT);
             userSignedOut = true;
             token = null;
 
+            yield cancel(task);
             yield call(signout);
           }
         }
