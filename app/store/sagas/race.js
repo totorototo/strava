@@ -1,33 +1,23 @@
 import { call, cancelled, take } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 
-import firebase from "firebase";
-
-import Config from "react-native-config";
+import { database } from "../services/helpers/database";
 
 function subscribe() {
   return eventChannel(emit => {
-    const firebaseConfig = {
-      apiKey: Config.FIREBASE_APIKEY,
-      authDomain: Config.FIREBASE_AUTHDOMAIN,
-      databaseURL: Config.FIREBASE_DATABASEURL,
-      storageBucket: Config.FIREBASE_STORAGEBUCKET
-    };
-
-    const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-    const itemsRef = firebaseApp.database().ref();
-
     const messageHandler = snapshot => {
-      emit(snapshot);
+      emit(snapshot.val());
     };
 
-    itemsRef.on("value", messageHandler);
+    const db = database();
+
+    db.connect();
+    db.registerForEvent(messageHandler);
 
     // The subscriber must return an unsubscribe function
     return () => {
-      itemsRef.off("value", messageHandler);
-      firebaseApp.goOffline();
+      db.unregisterForEvent(messageHandler);
+      db.disconnect();
     };
   });
 }
