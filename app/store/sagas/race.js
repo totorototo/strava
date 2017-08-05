@@ -1,23 +1,27 @@
 import { call, cancelled, take } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 
-import { database } from "../services/helpers/database";
+import {
+  authenticate,
+  disconnect,
+  registerCallBackForEvent,
+  unregisterCallBackForEvent
+} from "../services/database";
 
 function subscribe() {
   return eventChannel(emit => {
-    const messageHandler = snapshot => {
+    const handler = snapshot => {
       emit(snapshot.val());
     };
 
-    const db = database();
-
-    db.connect();
-    db.registerForEvent(messageHandler);
+    // TODO: promise, call, generators?
+    authenticate();
+    registerCallBackForEvent(handler);
 
     // The subscriber must return an unsubscribe function
     return () => {
-      db.unregisterForEvent(messageHandler);
-      db.disconnect();
+      disconnect();
+      unregisterCallBackForEvent(handler);
     };
   });
 }
