@@ -1,15 +1,9 @@
 import firebase from "firebase";
 import Config from "react-native-config";
 
-export const database = () => {
+export const database = (() => {
   let firebaseApp;
   let itemsRef;
-  const firebaseConfig = {
-    apiKey: Config.FIREBASE_APIKEY,
-    authDomain: Config.FIREBASE_AUTHDOMAIN,
-    databaseURL: Config.FIREBASE_DATABASEURL,
-    storageBucket: Config.FIREBASE_STORAGEBUCKET
-  };
 
   function addListener(callBack) {
     itemsRef.on("value", callBack);
@@ -20,21 +14,21 @@ export const database = () => {
   }
 
   function writeData(value = {}) {
-    itemsRef.push({ value }.then(data => ({ data }), error => ({ error })));
+    itemsRef.update(value).then(() => ({ status: "done" })).catch(error => ({
+      error
+    }));
   }
 
-  function readData() {}
+  function readData() {
+    return itemsRef
+      .once("value")
+      .then(snapshot => ({ positions: snapshot.val() }));
+  }
 
-  function login() {
-    firebaseApp = firebase.initializeApp(firebaseConfig);
+  function login(configuration) {
+    firebaseApp = firebase.initializeApp(configuration);
     itemsRef = firebaseApp.database().ref();
-
-    firebaseApp.auth().signInAnonymously().catch(error => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    });
+    return firebaseApp.auth().signInAnonymously().catch(error => ({ error }));
   }
 
   function logout() {
@@ -43,14 +37,21 @@ export const database = () => {
   }
 
   return {
-    write() {
-      writeData();
+    write(data = {}) {
+      writeData(data);
     },
     read() {
       readData();
     },
-    connect() {
-      login();
+    connect(
+      config = {
+        apiKey: Config.FIREBASE_APIKEY,
+        authDomain: Config.FIREBASE_AUTHDOMAIN,
+        databaseURL: Config.FIREBASE_DATABASEURL,
+        storageBucket: Config.FIREBASE_STORAGEBUCKET
+      }
+    ) {
+      return login(config);
     },
     disconnect() {
       logout();
@@ -62,4 +63,4 @@ export const database = () => {
       removeListener(cb);
     }
   };
-};
+})();
