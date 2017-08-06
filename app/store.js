@@ -1,8 +1,22 @@
-import Store from "./store/Store";
-import rootReducer from "./store/state/rootReducer";
-import sagaMonitor from "./devTools/sagaMonitor";
-import startingSaga from "./store/sagas/appSagas/index";
+import { Store } from "reloaddux";
+import { composeWithDevTools } from "remote-redux-devtools";
 
-const store = new Store({ rootReducer, sagaMonitor, startingSaga });
+import sagaMonitor from "./devTools/sagaMonitor";
+import businessApp from "./store/businesses/index";
+
+import deeplink from "./store/deeplink";
+
+const composeEnhancers = composeWithDevTools({
+  name: "strava",
+  hostname: "localhost",
+  maxAge: 20,
+  realtime: true,
+  port: 8000
+});
+
+const store = new Store({ sagaMonitor, composeEnhancer });
+deeplink(store);
+
+store.registerBusiness(businessApp);
 
 export default store;

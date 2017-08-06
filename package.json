@@ -41,6 +41,7 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.3",
+    "reloaddux": "^0.0.8",
     "remote-redux-devtools": "0.5.0",
     "url-parse": "^1.1.8",
     "util": "^0.10.3"
