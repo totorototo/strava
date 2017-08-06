@@ -6,7 +6,7 @@ import businessApp from "./store/businesses/index";
 
 import deeplink from "./store/deeplink";
 
-const composeEnhancers = composeWithDevTools({
+const composeEnhancer = composeWithDevTools({
   name: "strava",
   hostname: "localhost",
   maxAge: 20,
