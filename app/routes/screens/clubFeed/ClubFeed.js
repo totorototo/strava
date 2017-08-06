@@ -4,11 +4,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { View, Text, ScrollView, Image } from "react-native";
-import { Card, Button, Icon } from "react-native-elements";
+import { Card, Icon } from "react-native-elements";
 
 import selector from "./selector";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
+import { getIconName } from "./helper";
 import styles from "./styles";
 
 // styles
@@ -59,8 +60,9 @@ class ClubFeed extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scroll}>
+        <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
           <Card
+            containerStyle={styles.clubImageStyle}
             titleStyle={styles.card}
             title="LYBITOS - GRP 2017"
             image={{ uri: club.cover_photo }}
@@ -69,28 +71,44 @@ class ClubFeed extends Component {
               Please find below anything related to Lybitos club: leaks, gossips
               and much more!
             </Text>
-            <Button
-              icon={{ name: "code" }}
-              backgroundColor="#FC4C02"
-              buttonStyle={styles.button}
-              title="VIEW NOW"
-            />
           </Card>
-          <Card titleStyle={styles.card} title="MEMBERS">
+          <Card
+            dividerStyle={styles.dividerStyle}
+            containerStyle={styles.containerCardStyle}
+            titleStyle={styles.card}
+            title="MEMBERS"
+          >
             {clubMembers.map(member =>
               <View key={member.name} style={styles.members}>
-                <Image
-                  style={styles.image}
-                  resizeMode="cover"
-                  source={{ uri: member.profile }}
-                />
+                <Image style={styles.image} source={{ uri: member.profile }} />
                 <Text style={styles.text}>
                   {member.firstname}
                 </Text>
               </View>
             )}
           </Card>
-          <Card titleStyle={styles.card} title="ACTIVITIES">
+
+          {club.ranking &&
+            <Card
+              dividerStyle={styles.dividerStyle}
+              containerStyle={styles.containerCardStyle}
+              titleStyle={styles.card}
+              title="AWARDS"
+            >
+              {Object.entries(club.ranking).map(([key, value]) =>
+                <View style={styles.members}>
+                  <Icon name={getIconName(key)} color="#FC4C02" />
+                  <Text style={styles.text}>
+                    {`${value.athlete}`}
+                  </Text>
+                </View>
+              )}
+            </Card>}
+          <Card
+            titleStyle={styles.card}
+            title="ACTIVITIES"
+            containerStyle={styles.containerCardStyle}
+          >
             {activities.map(activity =>
               <View style={styles.members}>
                 <Image
