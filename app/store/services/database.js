@@ -16,14 +16,14 @@ export const disconnect = () => {
   database.disconnect();
 };
 
-export const registerCallBackForEvent = cb => {
-  database.registerForEvent(cb);
+export const watchData = cb => {
+  database.registerWatcher(cb);
 };
 
-export const unregisterCallBackForEvent = cb => {
-  database.unregisterForEvent(cb);
+export const unwatchData = cb => {
+  database.unregisterWatcher(cb);
 };
 
-export const writeData = (data = {}) => database.write(data);
+export const writeData = (key = "", data = {}) => database.write(data);
 
 export const readData = (key = "") => database.read(key);

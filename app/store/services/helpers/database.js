@@ -56,10 +56,10 @@ export const database = (() => {
     disconnect() {
       logout();
     },
-    registerForEvent(cb) {
+    registerWatcher(cb) {
       addListener(cb);
     },
-    unregisterForEvent(cb) {
+    unregisterWatcher(cb) {
       removeListener(cb);
     }
   };
