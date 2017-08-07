@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import CountDown from "./components/CountDown";
 
 import styles from "./styles";
-import { coordinates, markers } from "./data";
 
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
@@ -44,6 +43,7 @@ const messages = {
 class RacePredictor extends Component {
   static propTypes = {
     race: PropTypes.shape({
+      startingTime: PropTypes.string,
       path: PropTypes.string,
       runners: PropTypes.string,
       checkPoints: PropTypes.string
@@ -89,7 +89,7 @@ class RacePredictor extends Component {
             >
               <View style={styles.overlay}>
                 <CountDown
-                  date="2017-08-25T08:00:00+00:00"
+                  date={race.startingTime}
                   {...messages}
                   onEnd={this.finish}
                 />
@@ -100,12 +100,12 @@ class RacePredictor extends Component {
           <View style={styles.mapContainer}>
             <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
               <MapView.Polyline
-                coordinates={coordinates}
+                coordinates={race.path.coordinates}
                 strokeColor="#FC4C02"
                 fillColor="#FC4C02"
                 strokeWidth={3}
               />
-              {markers.map(marker =>
+              {race.checkPoints.map(marker =>
                 <MapView.Marker
                   key={marker.title + marker.description}
                   coordinate={marker.coordinates}
