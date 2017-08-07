@@ -4,7 +4,6 @@ import { NavigationActions } from "react-navigation";
 
 import { setAccessToken, logout } from "../../actions/login";
 import { setCurrentUserID } from "../../actions/data";
-import { watchDatabase } from "../race";
 
 import { LOGOUT } from "../../constants/actionTypes";
 
