@@ -1,11 +1,13 @@
-import { call, cancelled, take } from "redux-saga/effects";
+import { call, cancelled, take, takeEvery, race } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
+
+import { SET_CURRENT_USER_ID, LOGOUT } from "../constants/actionTypes";
 
 import {
   authenticate,
   disconnect,
-  registerCallBackForEvent,
-  unregisterCallBackForEvent
+  watchData,
+  unwatchData
 } from "../services/database";
 
 function subscribe() {
@@ -16,27 +18,40 @@ function subscribe() {
 
     // TODO: promise, call, generators?
     authenticate();
-    registerCallBackForEvent(handler);
+    watchData(handler);
 
     // The subscriber must return an unsubscribe function
     return () => {
+      unwatchData(handler);
       disconnect();
-      unregisterCallBackForEvent(handler);
     };
   });
 }
 
-export function* watchDatabase() {
+function* watchDatabase() {
   const channel = yield call(subscribe);
 
   try {
     // eslint-disable no-constant-condition
     while (true) {
       // take(END) will cause the saga to terminate by jumping to the finally block
-      const event = yield take(channel);
-      console.log(event);
+
+      const { event, signout } = yield race({
+        event: take(channel),
+        signout: take(LOGOUT)
+      });
+
+      if (event) {
+        console.log(event);
+      } else {
+      }
+      console.log(signout);
     }
   } finally {
     if (yield cancelled()) channel.close();
   }
+}
+
+export function* dataBaseSaga() {
+  yield takeEvery(SET_CURRENT_USER_ID, watchDatabase);
 }
