@@ -79,7 +79,7 @@ class ClubFeed extends Component {
             title="MEMBERS"
           >
             {clubMembers.map(member =>
-              <View key={member.name} style={styles.members}>
+              <View key={member.id} style={styles.members}>
                 <Image style={styles.image} source={{ uri: member.profile }} />
                 <Text style={styles.text}>
                   {member.firstname}
@@ -96,7 +96,7 @@ class ClubFeed extends Component {
               title="AWARDS"
             >
               {Object.entries(club.ranking).map(([key, value]) =>
-                <View style={styles.members}>
+                <View style={styles.members} key={key}>
                   <Icon name={getIconName(key)} color="#FC4C02" />
                   <Text style={styles.text}>
                     {`${value.athlete}`}
@@ -109,8 +109,8 @@ class ClubFeed extends Component {
             title="ACTIVITIES"
             containerStyle={styles.containerCardStyle}
           >
-            {activities.map(activity =>
-              <View style={styles.members}>
+            {activities.map((activity, index) =>
+              <View style={styles.members} key={index}>
                 <Image
                   style={styles.image}
                   resizeMode="cover"
