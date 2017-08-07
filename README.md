@@ -30,7 +30,7 @@ yarn install                           # Install project dependencies
 ```
 
 
-# Configuration
+# Strave Application Configuration
 
 * go to http://labs.strava.com/developers/ 
 * create an application
@@ -38,12 +38,38 @@ yarn install                           # Install project dependencies
 * go to https://www.strava.com/settings/api
 * retrieve application ID and secret
 * create a new .env file at the root of this project
-* paste the following code inside your .env file and make sure to replace [XXX], [YYY] and [ZZZ] with your info.
+* paste the following code inside your .env file and make sure to replace [XXX] and [YYY] with your info.
+
+
+
+# Google MAP API Configuration
+
+* go to https://developers.google.com/maps/documentation/javascript/get-api-key?hl=Fr
+* to get a key, follow the instruction
+* edit .env file
+* paste the following code inside your .env file and make sure to replace [ZZZ] with your info.
 
 ```bash
-CLIENT_ID=[XXX]
-CLIENT_SECRET =[YYY]
 GOOGLE_MAPS_API_KEY=[ZZZ]
+```
+
+
+# Google Firebase Configuration
+
+* go to https://firebase.google.com 
+* click “Go to Console” in the top right
+* create a new project
+* Click the “Add firebase to your web app” link on the home screen and note the config object, we will need this later for the front end setup
+* edit .env file
+* paste the following code inside your .env file and make sure to replace [AAA], [BBB], [CCC], [DDD], [EEE], [FFF] with your info.
+
+```bash
+FIREBASE_APIKEY=[AAA]
+FIREBASE_AUTHDOMAIN=[BBB]
+FIREBASE_DATABASEURL=https=[CCC]
+FIREBASE_PROJECTID=[DDD]
+FIREBASE_STORAGEBUCKET=[EEE]
+FIREBASE_MESSAGINGSENDERID=[FFF]
 ```
 
 
