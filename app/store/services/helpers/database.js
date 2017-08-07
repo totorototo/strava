@@ -3,31 +3,29 @@ import Config from "react-native-config";
 
 export const database = (() => {
   let firebaseApp;
-  let itemsRef;
 
-  function addListener(callBack) {
-    itemsRef.on("value", callBack);
+  function addListener(itemKey, callBack) {
+    firebaseApp.database().ref(itemKey).on("value", callBack);
   }
 
-  function removeListener(callBack) {
-    itemsRef.on("value", callBack);
+  function removeListener(itemKey, callBack) {
+    firebaseApp.database().ref(itemKey).on("value", callBack);
   }
 
-  function writeData(value = {}) {
-    itemsRef.update(value).then(() => ({ status: "done" })).catch(error => ({
-      error
-    }));
+  function writeData(itemKey = "", value = {}) {
+    return firebaseApp.database().ref(itemKey).set(value);
   }
 
-  function readData() {
-    return itemsRef
+  function readData(itemKey = "") {
+    return firebaseApp
+      .database()
+      .ref(itemKey)
       .once("value")
-      .then(snapshot => ({ positions: snapshot.val() }));
+      .then(snapshot => ({ snapshot }));
   }
 
   function login(configuration) {
     firebaseApp = firebase.initializeApp(configuration);
-    itemsRef = firebaseApp.database().ref();
     return firebaseApp.auth().signInAnonymously().catch(error => ({ error }));
   }
 
@@ -37,11 +35,11 @@ export const database = (() => {
   }
 
   return {
-    write(data = {}) {
-      writeData(data);
+    write(key = "", data = {}) {
+      writeData(key, data);
     },
-    read() {
-      readData();
+    read(key = "") {
+      readData(key);
     },
     connect(
       config = {
@@ -56,11 +54,11 @@ export const database = (() => {
     disconnect() {
       logout();
     },
-    registerWatcher(cb) {
-      addListener(cb);
+    registerWatcher(path, cb) {
+      addListener(path, cb);
     },
-    unregisterWatcher(cb) {
-      removeListener(cb);
+    unregisterWatcher(path, cb) {
+      removeListener(path, cb);
     }
   };
 })();

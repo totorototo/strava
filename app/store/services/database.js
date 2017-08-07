@@ -16,12 +16,12 @@ export const disconnect = () => {
   database.disconnect();
 };
 
-export const watchData = cb => {
-  database.registerWatcher(cb);
+export const watchData = (path, cb) => {
+  database.registerWatcher(path, cb);
 };
 
-export const unwatchData = cb => {
-  database.unregisterWatcher(cb);
+export const unwatchData = (path, cb) => {
+  database.unregisterWatcher(path, cb);
 };
 
 export const writeData = (key = "", data = {}) => database.write(data);

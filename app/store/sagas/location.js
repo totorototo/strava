@@ -18,17 +18,17 @@ function subscribe() {
 
     // TODO: promise, call, generators?
     authenticate();
-    watchData(handler);
+    watchData("locations", handler);
 
     // The subscriber must return an unsubscribe function
     return () => {
-      unwatchData(handler);
+      unwatchData("locations", handler);
       disconnect();
     };
   });
 }
 
-function* watchDatabase() {
+function* watchLocations() {
   const channel = yield call(subscribe);
 
   try {
@@ -56,5 +56,5 @@ function* watchDatabase() {
 }
 
 export function* locationSaga() {
-  yield takeEvery(SET_CURRENT_USER_ID, watchDatabase);
+  yield takeEvery(SET_CURRENT_USER_ID, watchLocations);
 }
