@@ -33,7 +33,8 @@ function* watchDatabase() {
 
   try {
     // eslint-disable no-constant-condition
-    while (true) {
+    let userSignedOut;
+    while (!userSignedOut) {
       // take(END) will cause the saga to terminate by jumping to the finally block
 
       const { event, signout } = yield race({
@@ -44,14 +45,16 @@ function* watchDatabase() {
       if (event) {
         console.log(event);
       } else {
+        console.log(signout);
+        userSignedOut = true;
       }
-      console.log(signout);
     }
+    channel.close();
   } finally {
     if (yield cancelled()) channel.close();
   }
 }
 
-export function* dataBaseSaga() {
+export function* locationSaga() {
   yield takeEvery(SET_CURRENT_USER_ID, watchDatabase);
 }

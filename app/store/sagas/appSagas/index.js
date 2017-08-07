@@ -1,11 +1,11 @@
 import { authenticationFlowSaga } from "./login";
 import { activitiesSaga } from "../activities";
 import { clubsSaga } from "../clubs";
-import { dataBaseSaga } from "../race";
+import { locationSaga } from "../location";
 
-export default [
+export default {
   authenticationFlowSaga,
   activitiesSaga,
   clubsSaga,
-  dataBaseSaga
-];
+  locationSaga
+};
