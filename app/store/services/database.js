@@ -16,14 +16,14 @@ export const disconnect = () => {
   database.disconnect();
 };
 
-export const watchData = (path, cb) => {
+export const onDataChange = (path, cb) => {
   database.registerWatcher(path, cb);
+
+  return () => {
+    database.unregisterWatcher(path, cb);
+  };
 };
 
-export const unwatchData = (path, cb) => {
-  database.unregisterWatcher(path, cb);
-};
-
-export const writeData = (key = "", data = {}) => database.write(data);
+export const writeData = (key = "", data = {}) => database.write(key, data);
 
 export const readData = (key = "") => database.read(key);

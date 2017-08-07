@@ -3,12 +3,7 @@ import { eventChannel } from "redux-saga";
 
 import { SET_CURRENT_USER_ID, LOGOUT } from "../constants/actionTypes";
 
-import {
-  authenticate,
-  disconnect,
-  watchData,
-  unwatchData
-} from "../services/database";
+import { authenticate, disconnect, onDataChange } from "../services/database";
 
 function subscribe() {
   return eventChannel(emit => {
@@ -18,11 +13,11 @@ function subscribe() {
 
     // TODO: promise, call, generators?
     authenticate();
-    watchData("locations", handler);
+    const subscriber = onDataChange("locations", handler);
 
     // The subscriber must return an unsubscribe function
     return () => {
-      unwatchData("locations", handler);
+      subscriber.close();
       disconnect();
     };
   });

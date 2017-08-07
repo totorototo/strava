@@ -13,7 +13,11 @@ export const database = (() => {
   }
 
   function writeData(itemKey = "", value = {}) {
-    return firebaseApp.database().ref(itemKey).set(value);
+    return firebaseApp
+      .database()
+      .ref(itemKey)
+      .set(value)
+      .catch(error => ({ error }));
   }
 
   function readData(itemKey = "") {
