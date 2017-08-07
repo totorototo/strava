@@ -30,7 +30,7 @@ yarn install                           # Install project dependencies
 ```
 
 
-# Strave Application Configuration
+# Strava Application Configuration
 
 * go to http://labs.strava.com/developers/ 
 * create an application
@@ -39,6 +39,11 @@ yarn install                           # Install project dependencies
 * retrieve application ID and secret
 * create a new .env file at the root of this project
 * paste the following code inside your .env file and make sure to replace [XXX] and [YYY] with your info.
+
+```bash
+CLIENT_ID=[XXX]
+CLIENT_SECRET =[YYY]
+```
 
 
 
