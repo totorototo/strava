@@ -1,13 +1,15 @@
 import { authenticationFlowSaga } from "./login";
 import { activitiesSaga } from "../activities";
 import { clubsSaga } from "../clubs";
-import { locationSaga } from "../location";
+import { remoteDataSaga } from "../remoteData/data";
 import { raceSaga } from "../race";
+import { locationSaga } from "../location";
 
 export default {
   authenticationFlowSaga,
   activitiesSaga,
   clubsSaga,
-  locationSaga,
-  raceSaga
+  remoteDataSaga,
+  raceSaga,
+  locationSaga
 };

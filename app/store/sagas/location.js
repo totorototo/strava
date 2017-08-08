@@ -1,55 +1,30 @@
-import { call, cancelled, take, takeEvery, race } from "redux-saga/effects";
-import { eventChannel } from "redux-saga";
+import { call, takeEvery, select } from "redux-saga/effects";
 
-import { SET_CURRENT_USER_ID, LOGOUT } from "../constants/actionTypes";
+import {
+  getCurrentRaceID,
+  getCurrentUserID
+} from "../state/appState/selectors";
 
-import { authenticate, disconnect, onDataChange } from "../services/database";
+import { writeData } from "../services/database";
+import { SHARE_LOCATION } from "../constants/actionTypes";
 
-function subscribe() {
-  return eventChannel(emit => {
-    const handler = snapshot => {
-      emit(snapshot.val());
-    };
-
-    // TODO: promise, call, generators?
-    authenticate();
-    const subscriber = onDataChange("locations", handler);
-
-    // The subscriber must return an unsubscribe function
-    return () => {
-      subscriber.close();
-      disconnect();
-    };
-  });
-}
-
-function* watchLocations() {
-  const channel = yield call(subscribe);
-
-  try {
-    // eslint-disable no-constant-condition
-    let userSignedOut;
-    while (!userSignedOut) {
-      // take(END) will cause the saga to terminate by jumping to the finally block
-
-      const { event, signout } = yield race({
-        event: take(channel),
-        signout: take(LOGOUT)
-      });
-
-      if (event) {
-        console.log(event);
-      } else {
-        console.log(signout);
-        userSignedOut = true;
-      }
+function* shareLocation() {
+  // 1- get location
+  // 2- share it
+  const raceID = yield select(getCurrentRaceID);
+  const userID = yield select(getCurrentUserID);
+  const key = `${raceID}/locations/${userID}`;
+  const data = {
+    time: new Date().toISOString(),
+    coordinates: {
+      latitude: 42.79689,
+      longitude: 0.01307
     }
-    channel.close();
-  } finally {
-    if (yield cancelled()) channel.close();
-  }
+  };
+
+  yield call(writeData, key, data);
 }
 
 export function* locationSaga() {
-  yield takeEvery(SET_CURRENT_USER_ID, watchLocations);
+  yield takeEvery(SHARE_LOCATION, shareLocation);
 }
