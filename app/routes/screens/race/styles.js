@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "flex-end",
     alignItems: "center"
   },
   mapContainer: {
@@ -34,8 +34,7 @@ export default StyleSheet.create({
     opacity: 0.4
   },
   map: {
-    height: 350,
-    margin: 10
+    ...StyleSheet.absoluteFillObject
   },
   text: {
     color: "#FC4C02",

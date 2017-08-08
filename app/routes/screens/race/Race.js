@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, ScrollView, Dimensions, Image, Text } from "react-native";
+import { View, Dimensions, Text } from "react-native";
 import { Icon } from "react-native-elements";
 
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
-
-import CountDown from "./components/CountDown";
 
 import styles from "./styles";
 
@@ -30,23 +28,30 @@ const SAMPLE_REGION = {
   longitudeDelta: LONGITUDE_DELTA
 };
 
-const messages = {
-  days: {
-    plural: "Days",
-    singular: "Day"
-  },
-  hours: "Hours",
-  mins: "Min",
-  secs: "Sec"
-};
-
 class RacePredictor extends Component {
   static propTypes = {
     race: PropTypes.shape({
       startingTime: PropTypes.string,
-      path: PropTypes.string,
+      path: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(
+          PropTypes.shape({
+            latitude: PropTypes.number,
+            longitude: PropTypes.number
+          })
+        )
+      }),
       runners: PropTypes.string,
-      checkPoints: PropTypes.string
+      checkPoints: PropTypes.arrayOf(
+        PropTypes.shape({
+          identifier: PropTypes.string,
+          title: PropTypes.string,
+          description: PropTypes.string,
+          coordinates: PropTypes.shape({
+            latitude: PropTypes.number,
+            longitude: PropTypes.number
+          })
+        })
+      )
     }).isRequired
   };
 
@@ -77,46 +82,23 @@ class RacePredictor extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
-          <View style={styles.mapContainer}>
-            <Image
-              style={[styles.image, { width }]}
-              resizeMode="cover"
-              source={{
-                uri:
-                  "http://wallpaperrs.com/uploads/nature/thumbs/earth-mountain-elegant-wallpaper-89645-142977888722.jpg"
-              }}
-            >
-              <View style={styles.overlay}>
-                <CountDown
-                  date={race.startingTime}
-                  {...messages}
-                  onEnd={this.finish}
-                />
-              </View>
-            </Image>
-          </View>
-
-          <View style={styles.mapContainer}>
-            <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
-              <MapView.Polyline
-                coordinates={race.path.coordinates}
-                strokeColor="#FC4C02"
-                fillColor="#FC4C02"
-                strokeWidth={3}
-              />
-              {race.checkPoints.map(marker =>
-                <MapView.Marker
-                  key={marker.title + marker.description}
-                  coordinate={marker.coordinates}
-                  title={marker.title}
-                  description={marker.description}
-                  pinColor="#FC4C02"
-                />
-              )}
-            </MapView>
-          </View>
-        </ScrollView>
+        <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
+          <MapView.Polyline
+            coordinates={race.path.coordinates}
+            strokeColor="#FC4C02"
+            fillColor="#FC4C02"
+            strokeWidth={3}
+          />
+          {race.checkPoints.map(marker =>
+            <MapView.Marker
+              key={marker.title + marker.description}
+              coordinate={marker.coordinates}
+              title={marker.title}
+              description={marker.description}
+              pinColor="#FC4C02"
+            />
+          )}
+        </MapView>
       </View>
     );
   }
