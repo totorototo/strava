@@ -110,7 +110,7 @@ class ClubFeed extends Component {
             containerStyle={styles.containerCardStyle}
           >
             {activities.map((activity, index) =>
-              <View style={styles.members} key={index}>
+              <View style={styles.members} key={index.toString()}>
                 <Image
                   style={styles.image}
                   resizeMode="cover"
