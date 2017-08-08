@@ -4,13 +4,15 @@ import {
   take,
   takeEvery,
   race,
-  select
+  select,
+  put
 } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 
 import { SET_CURRENT_RACE_ID, LOGOUT } from "../../constants/actionTypes";
 
 import { getCurrentRaceID } from "../../state/appState/selectors";
+import { updateEntity } from "../../actions/entities";
 
 import {
   authenticate,
@@ -46,15 +48,16 @@ function* watchData() {
     while (!userSignedOut) {
       // take(END) will cause the saga to terminate by jumping to the finally block
 
-      const { event, signout } = yield race({
+      const { event } = yield race({
         event: take(channel),
         signout: take(LOGOUT)
       });
 
       if (event) {
-        console.log(event);
+        yield put(
+          updateEntity(raceID, "races", { locations: event.locations })
+        );
       } else {
-        console.log(signout);
         userSignedOut = true;
       }
     }

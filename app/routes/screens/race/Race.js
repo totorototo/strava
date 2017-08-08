@@ -98,6 +98,16 @@ class RacePredictor extends Component {
               pinColor="#FC4C02"
             />
           )}
+          {race.locations &&
+            Object.entries(race.locations).map(([id, location]) =>
+              <MapView.Marker
+                coordinate={location.coordinates}
+                title={id}
+                description={location.time}
+                pinColor="#004C02"
+                key={id}
+              />
+            )}
         </MapView>
       </View>
     );
