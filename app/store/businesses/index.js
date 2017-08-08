@@ -3,8 +3,7 @@ import appSagas from "../sagas/appSagas/index";
 
 export default {
   reducersTree: {
-    reducer: rootReducer,
-    default: rootReducer({}, { type: "@@redux/INIT" })
+    reducer: rootReducer
   },
   sagasMap: appSagas
 };
