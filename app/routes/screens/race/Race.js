@@ -1,12 +1,19 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { View, ScrollView, Dimensions, Image } from "react-native";
+import { View, ScrollView, Dimensions, Image, Text } from "react-native";
+import { Icon } from "react-native-elements";
 
 import MapView from "react-native-maps";
+import { connect } from "react-redux";
+
 import CountDown from "./components/CountDown";
 
 import styles from "./styles";
-import { coordinates, markers } from "./data";
+
+import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+
+import selector from "./selector";
 
 const { width, height } = Dimensions.get("window");
 
@@ -34,11 +41,40 @@ const messages = {
 };
 
 class RacePredictor extends Component {
+  static propTypes = {
+    race: PropTypes.shape({
+      startingTime: PropTypes.string,
+      path: PropTypes.string,
+      runners: PropTypes.string,
+      checkPoints: PropTypes.string
+    }).isRequired
+  };
+
   static finish() {
     console.log("Countdown finished");
   }
 
   render() {
+    const { race } = this.props;
+
+    if (race === Loading)
+      return (
+        <View style={styles.container}>
+          <Icon name="cached" color="#FC4C02" size={50} />
+          <Text style={styles.text}>fetching data</Text>
+        </View>
+      );
+
+    if (isFaulty(race))
+      return (
+        <View style={styles.container}>
+          <Icon name="error" color="#FC4C02" size={100} />
+          <Text style={styles.text}>
+            Oops, I did it again: {getDefect(race)}
+          </Text>
+        </View>
+      );
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -53,7 +89,7 @@ class RacePredictor extends Component {
             >
               <View style={styles.overlay}>
                 <CountDown
-                  date="2017-08-25T08:00:00+00:00"
+                  date={race.startingTime}
                   {...messages}
                   onEnd={this.finish}
                 />
@@ -64,12 +100,12 @@ class RacePredictor extends Component {
           <View style={styles.mapContainer}>
             <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
               <MapView.Polyline
-                coordinates={coordinates}
+                coordinates={race.path.coordinates}
                 strokeColor="#FC4C02"
                 fillColor="#FC4C02"
                 strokeWidth={3}
               />
-              {markers.map(marker =>
+              {race.checkPoints.map(marker =>
                 <MapView.Marker
                   key={marker.title + marker.description}
                   coordinate={marker.coordinates}
@@ -86,4 +122,4 @@ class RacePredictor extends Component {
   }
 }
 
-export default RacePredictor;
+export default connect(selector)(RacePredictor);
