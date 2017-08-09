@@ -19,9 +19,11 @@ export const disconnect = () => {
 export const onDataChange = (path, cb) => {
   database.registerWatcher(path, cb);
 
-  return () => {
+  const unsubscribe = () => {
     database.unregisterWatcher(path, cb);
   };
+
+  return unsubscribe;
 };
 
 export const writeData = (key = "", data = {}) => database.write(key, data);

@@ -27,12 +27,11 @@ function subscribe(id) {
     };
 
     authenticate();
-    const subscriber = onDataChange(id, handler);
+    const unsubscribe = onDataChange(id, handler);
 
     // The subscriber must return an unsubscribe function
     return () => {
-      // TODO: fix it!
-      subscriber();
+      unsubscribe();
       disconnect();
     };
   });
