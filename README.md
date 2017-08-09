@@ -2,6 +2,13 @@
 
 Lybitos is a React Native application consuming Strava RESTFul web service.
 
+Application features: 
+
+* Compute athlete performance level
+* Select athlete races (get details, path, checkpoints, live track, ...)
+* Get athlete details
+* Select athlete clubs (get details, parse club activities, get rankings, ...)
+
 
 # Continuous Integration
 
