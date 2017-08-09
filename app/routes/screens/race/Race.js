@@ -12,6 +12,7 @@ import styles from "./styles";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
 import selector from "./selector";
+import actionsCreator from "./actionsCreator";
 
 const { width, height } = Dimensions.get("window");
 
@@ -52,7 +53,8 @@ class RacePredictor extends Component {
           })
         })
       )
-    }).isRequired
+    }).isRequired,
+    geoloactionActionsCreators: PropTypes.objectOf(PropTypes.func).isRequired
   };
 
   static intToColor(id = 0) {
@@ -62,7 +64,7 @@ class RacePredictor extends Component {
   }
 
   render() {
-    const { race } = this.props;
+    const { race, geoloactionActionsCreators } = this.props;
 
     if (race === Loading)
       return (
@@ -101,21 +103,31 @@ class RacePredictor extends Component {
             />
           )}
           {race.locations &&
-            Object.entries(race.locations).map(([id, location]) =>
-              <MapView.Marker
-                coordinate={location.coordinates}
-                title={id}
-                description={new Date(location.time).toLocaleString()}
-                pinColor={`#${RacePredictor.intToColor(id)}`}
-                key={id}
-              />
-            )}
+            Object.entries(race.locations).map(([id, location]) => {
+              const coordinate = {
+                longitude: location.coords.longitude,
+                latitude: location.coords.latitude
+              };
+
+              return (
+                <MapView.Marker
+                  coordinate={coordinate}
+                  title={id}
+                  description={new Date(location.timestamp).toLocaleString()}
+                  pinColor={`#${RacePredictor.intToColor(id)}`}
+                  key={id}
+                />
+              );
+            })}
         </MapView>
         <View style={[styles.bubble, styles.latlng]}>
           <Text style={styles.text}>42.8953, 0.00744</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
+          <TouchableOpacity
+            style={[styles.bubble, styles.button]}
+            onPress={() => geoloactionActionsCreators.shareLocation()}
+          >
             <Text style={styles.buttonText}>Spot me!</Text>
           </TouchableOpacity>
         </View>
@@ -124,4 +136,4 @@ class RacePredictor extends Component {
   }
 }
 
-export default connect(selector)(RacePredictor);
+export default connect(selector, actionsCreator)(RacePredictor);
