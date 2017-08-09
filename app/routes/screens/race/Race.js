@@ -55,8 +55,10 @@ class RacePredictor extends Component {
     }).isRequired
   };
 
-  static finish() {
-    console.log("Countdown finished");
+  static intToColor(id = 0) {
+    // eslint-disable-next-line
+    const c = (id & 0x00ffffff).toString(16).toUpperCase();
+    return "00000".substring(0, 6 - c.length) + c;
   }
 
   render() {
@@ -104,7 +106,7 @@ class RacePredictor extends Component {
                 coordinate={location.coordinates}
                 title={id}
                 description={location.time}
-                pinColor="#004C02"
+                pinColor={`#${RacePredictor.intToColor(id)}`}
                 key={id}
               />
             )}

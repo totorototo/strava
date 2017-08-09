@@ -6,7 +6,7 @@ import { setCurrentRaceID } from "../actions/data";
 import { setEntity } from "../actions/entities";
 import { shareLocation } from "../actions/location";
 
-import { markers, coordinates } from "../../routes/screens/race/data";
+import { markers, coordinates } from "./data/data";
 
 function* listRaces() {
   // 1- mock strava api call
