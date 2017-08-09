@@ -6,39 +6,46 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center"
   },
-  mapContainer: {
-    flex: 1,
-    justifyContent: "center",
-    flexDirection: "column",
-    backgroundColor: "white",
-    padding: 0,
-    marginTop: 15
-  },
-  scroll: {
-    marginTop: 0,
-    marginBottom: 0,
-    marginLeft: 0,
-    marginRight: 0
-  },
-  image: {
-    flex: 1,
-    height: 150
-  },
   overlay: {
     position: "absolute",
     top: 0,
     right: 0,
-    bottom: 0,
+    height: 250,
     left: 0,
     backgroundColor: "black",
-    opacity: 0.4
+    opacity: 0.6
   },
   map: {
     ...StyleSheet.absoluteFillObject
   },
   text: {
     color: "#FC4C02",
-    marginBottom: 10,
-    marginLeft: 10
+    textAlign: "center"
+  },
+  bubble: {
+    backgroundColor: "rgba(255,255,255,0.7)",
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20
+  },
+  latlng: {
+    width: 200,
+    alignItems: "stretch"
+  },
+  button: {
+    width: 100,
+    paddingHorizontal: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 5
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    marginVertical: 20,
+    backgroundColor: "transparent"
+  },
+  buttonText: {
+    textAlign: "center",
+    color: "#FC4C02"
   }
 });

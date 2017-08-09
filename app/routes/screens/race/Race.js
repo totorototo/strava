@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Dimensions, Text } from "react-native";
+import { View, Dimensions, Text, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 
 import MapView from "react-native-maps";
@@ -105,12 +105,20 @@ class RacePredictor extends Component {
               <MapView.Marker
                 coordinate={location.coordinates}
                 title={id}
-                description={location.time}
+                description={new Date(location.time).toLocaleString()}
                 pinColor={`#${RacePredictor.intToColor(id)}`}
                 key={id}
               />
             )}
         </MapView>
+        <View style={[styles.bubble, styles.latlng]}>
+          <Text style={styles.text}>42.8953, 0.00744</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.bubble, styles.button]}>
+            <Text style={styles.buttonText}>Spot me!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
