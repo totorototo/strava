@@ -37,11 +37,11 @@ function* listActivities(clubID, membersIDs) {
 function* listMembers() {
   const accessToken = yield select(token);
   const currentUserID = yield select(getCurrentUserID);
+  // TODO: this should not be done this way! (current club ID)
   const clubID = 288750;
   yield put(setCurrentClubID("loading"));
   const { ids, error } = yield call(listClubMembers, accessToken, clubID);
   if (!error) {
-    yield put(setCurrentClubID(clubID));
     yield put(updateEntity(clubID, "clubs", { members: ids }));
     const filteredIds = ids.filter(id => id !== currentUserID);
     let mergedEntities = {};
@@ -56,6 +56,7 @@ function* listMembers() {
       };
     }
     yield put(setEntity("athletes", mergedEntities.athletes));
+    yield put(setCurrentClubID(clubID));
     yield listActivities(clubID, ids);
   }
 }

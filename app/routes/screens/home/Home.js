@@ -6,7 +6,7 @@ import { Icon } from "react-native-elements";
 import Details from "../details/Details";
 import ClubFeed from "../clubFeed/ClubFeed";
 import PerformanceMeter from "../performanceMeter/PerformanceMeter";
-import RacePredictor from "../racePredictor/RacePredictor";
+import RacePredictor from "../race/Race";
 
 const Home = TabNavigator(
   {

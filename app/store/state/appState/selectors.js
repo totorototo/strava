@@ -5,3 +5,6 @@ export const getCurrentUserID = state =>
 
 export const getCurrentClubID = state =>
   state.appState["@@/data"].currentClubID;
+
+export const getCurrentRaceID = state =>
+  state.appState["@@/data"].currentRaceID;
