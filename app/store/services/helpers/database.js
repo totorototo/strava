@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import Config from "react-native-config";
 
 export const database = (() => {
   let firebaseApp;
@@ -47,10 +46,10 @@ export const database = (() => {
     },
     connect(
       config = {
-        apiKey: Config.FIREBASE_APIKEY,
-        authDomain: Config.FIREBASE_AUTHDOMAIN,
-        databaseURL: Config.FIREBASE_DATABASEURL,
-        storageBucket: Config.FIREBASE_STORAGEBUCKET
+        apiKey: "",
+        authDomain: "",
+        databaseURL: "",
+        storageBucket: ""
       }
     ) {
       return login(config);

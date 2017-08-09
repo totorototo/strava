@@ -9,6 +9,8 @@ import {
 } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
 
+import Config from "react-native-config";
+
 import { SET_CURRENT_RACE_ID, LOGOUT } from "../../constants/actionTypes";
 
 import { getCurrentRaceID } from "../../state/appState/selectors";
@@ -26,7 +28,14 @@ function subscribe(id) {
       emit(snapshot.val());
     };
 
-    authenticate();
+    const configuration = {
+      apiKey: Config.FIREBASE_APIKEY,
+      authDomain: Config.FIREBASE_AUTHDOMAIN,
+      databaseURL: Config.FIREBASE_DATABASEURL,
+      storageBucket: Config.FIREBASE_STORAGEBUCKET
+    };
+
+    authenticate(configuration);
     const unsubscribe = onDataChange(id, handler);
 
     // The subscriber must return an unsubscribe function
