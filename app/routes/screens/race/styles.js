@@ -10,10 +10,17 @@ export default StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
-    height: 250,
     left: 0,
-    backgroundColor: "black",
-    opacity: 0.6
+    backgroundColor: "white",
+    opacity: 0.6,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingVertical: 5
   },
   map: {
     ...StyleSheet.absoluteFillObject
@@ -26,7 +33,7 @@ export default StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.7)",
     paddingHorizontal: 18,
     paddingVertical: 12,
-    borderRadius: 20
+    borderRadius: 10
   },
   latlng: {
     width: 200,

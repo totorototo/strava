@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Dimensions, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+  NativeModules,
+  LayoutAnimation
+} from "react-native";
 import { Icon } from "react-native-elements";
 
 import MapView from "react-native-maps";
@@ -28,6 +35,11 @@ const SAMPLE_REGION = {
   latitudeDelta: LATITUDE_DELTA,
   longitudeDelta: LONGITUDE_DELTA
 };
+
+const { UIManager } = NativeModules;
+
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 
 class RacePredictor extends Component {
   static propTypes = {
@@ -62,6 +74,21 @@ class RacePredictor extends Component {
     const c = (id & 0x00ffffff).toString(16).toUpperCase();
     return "00000".substring(0, 6 - c.length) + c;
   }
+
+  state = {
+    h: 25,
+    expand: false
+  };
+
+  onPress = () => {
+    // Animate the update
+    LayoutAnimation.spring();
+    if (this.state.expand) {
+      this.setState({ h: (this.state.h = 45), expand: !this.state.expand });
+    } else {
+      this.setState({ h: (this.state.h = 250), expand: !this.state.expand });
+    }
+  };
 
   render() {
     const { race, geoloactionActionsCreators } = this.props;
@@ -120,8 +147,13 @@ class RacePredictor extends Component {
               );
             })}
         </MapView>
-        <View style={[styles.bubble, styles.latlng]}>
-          <Text style={styles.text}>42.8953, 0.00744</Text>
+        <View style={[styles.overlay, { height: this.state.h }]}>
+          <Icon
+            name={this.state.expand ? "expand-less" : "expand-more"}
+            color="#FC4C02"
+            size={15}
+            onPress={this.onPress}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
