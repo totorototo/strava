@@ -61,20 +61,6 @@ function* listMembers() {
   }
 }
 
-function* listAnnouncements() {
-  const accessToken = yield select(token);
-  const clubID = 288750;
-  const { ids, entities, error } = yield call(
-    listClubAnnouncements,
-    accessToken,
-    clubID
-  );
-  if (!error && ids && entities) {
-    yield put(updateEntity(clubID, "clubs", { ids }));
-  }
-}
-
 export function* clubsSaga() {
   yield takeEvery(SET_CURRENT_USER_ID, listMembers);
-  yield takeEvery(SET_CURRENT_CLUB_ID, listAnnouncements);
 }
