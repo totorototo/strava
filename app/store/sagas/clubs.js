@@ -1,20 +1,13 @@
 import { call, select, put, takeEvery } from "redux-saga/effects";
 
-import {
-  SET_CURRENT_USER_ID,
-  SET_CURRENT_CLUB_ID
-} from "../constants/actionTypes";
+import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
 
 import { updateEntity, setEntity } from "../actions/entities";
 import { setCurrentClubID } from "../actions/data";
 
 import { token, getCurrentUserID } from "../state/appState/selectors";
 
-import {
-  listClubMembers,
-  listClubActivities,
-  listClubAnnouncements
-} from "../services/clubs";
+import { listClubMembers, listClubActivities } from "../services/clubs";
 
 import { getStats } from "./athlete";
 import { getRankings } from "../services/activities";
