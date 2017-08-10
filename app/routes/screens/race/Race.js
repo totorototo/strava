@@ -38,6 +38,7 @@ const SAMPLE_REGION = {
 
 const { UIManager } = NativeModules;
 
+// eslint-disable-next-line
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
