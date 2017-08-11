@@ -38,7 +38,7 @@ const SAMPLE_REGION = {
 };
 
 const EXPANDED_MENU_HEIGHT = 250;
-const COLLAPSED_MENU_HEIGHT = 25;
+const COLLAPSED_MENU_HEIGHT = 35;
 
 const { UIManager } = NativeModules;
 
@@ -50,7 +50,7 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 class RacePredictor extends Component {
   static propTypes = {
     race: PropTypes.shape({
-      startingTime: PropTypes.string,
+      date: PropTypes.string,
       path: PropTypes.shape({
         coordinates: PropTypes.arrayOf(
           PropTypes.shape({
@@ -159,7 +159,7 @@ class RacePredictor extends Component {
             }
           ]}
         >
-          <Timer raceDate={race.startingTime} timerStyle={animatedStyle} />
+          <Timer date={race.date} timerStyle={animatedStyle} />
           <TouchableOpacity>
             <Icon
               name={this.state.expand ? "expand-less" : "expand-more"}

@@ -7,7 +7,7 @@ import styles from "./styles";
 
 class Timer extends Component {
   static propTypes = {
-    raceDate: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
     timerStyle: View.propTypes.style.isRequired
   };
 
@@ -28,7 +28,7 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      raceDate: new Date(this.props.raceDate),
+      date: new Date(this.props.date),
       elapsedTime: 0
     };
   }
@@ -43,7 +43,7 @@ class Timer extends Component {
 
   tick() {
     this.setState({
-      elapsedTime: new Date() - this.state.raceDate
+      elapsedTime: new Date() - this.state.date
     });
   }
 
