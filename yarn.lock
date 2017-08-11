@@ -5115,9 +5115,9 @@ react-dom@^15.4.2:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-native-config@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.4.2.tgz#42ee30835c6aa293a91f4487c85a3e9f15204f56"
+react-native-config@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.6.0.tgz#0f71631ab5ac4b568637dcb8e9f6ab85ffb380ed"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
