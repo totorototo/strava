@@ -78,7 +78,7 @@ class RacePredictor extends Component {
   static intToColor(id = 0) {
     // eslint-disable-next-line
     const c = (id & 0x00ffffff).toString(16).toUpperCase();
-    return "00000".substring(0, 6 - c.length) + c;
+    return `#${"00000".substring(0, 6 - c.length)}${c}`;
   }
 
   state = {
@@ -143,7 +143,7 @@ class RacePredictor extends Component {
                   coordinate={coordinate}
                   title={id}
                   description={new Date(location.timestamp).toLocaleString()}
-                  pinColor={`#${RacePredictor.intToColor(id)}`}
+                  pinColor={RacePredictor.intToColor(id)}
                   key={id}
                 />
               );
