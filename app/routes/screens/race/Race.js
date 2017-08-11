@@ -37,8 +37,12 @@ const SAMPLE_REGION = {
   longitudeDelta: LONGITUDE_DELTA
 };
 
+const EXPANDED_MENU_HEIGHT = 250;
+const COLLAPSED_MENU_HEIGHT = 25;
+
 const { UIManager } = NativeModules;
 
+// Enable LayoutAnimation under Android
 // eslint-disable-next-line
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -78,22 +82,18 @@ class RacePredictor extends Component {
   }
 
   state = {
-    h: 25,
     expand: false
   };
 
-  onPress = () => {
+  toggleMenu = () => {
     // Animate the update
     LayoutAnimation.spring();
-    if (this.state.expand) {
-      this.setState({ h: (this.state.h = 25), expand: !this.state.expand });
-    } else {
-      this.setState({ h: (this.state.h = 250), expand: !this.state.expand });
-    }
+    this.setState({ expand: !this.state.expand });
   };
 
   render() {
     const { race, geoloactionActionsCreators } = this.props;
+    const animatedStyle = { opacity: this.state.expand ? 1 : 0 };
 
     if (race === Loading)
       return (
@@ -149,14 +149,25 @@ class RacePredictor extends Component {
               );
             })}
         </MapView>
-        <View style={[styles.overlay, { height: this.state.h }]}>
-          <Timer startingDate="2017-07-25T08:00:00+00:00" />
-          <Icon
-            name={this.state.expand ? "expand-less" : "expand-more"}
-            color="#FC4C02"
-            size={30}
-            onPress={this.onPress}
-          />
+        <View
+          style={[
+            styles.overlay,
+            {
+              height: this.state.expand
+                ? EXPANDED_MENU_HEIGHT
+                : COLLAPSED_MENU_HEIGHT
+            }
+          ]}
+        >
+          <Timer raceDate={race.startingTime} timerStyle={animatedStyle} />
+          <TouchableOpacity>
+            <Icon
+              name={this.state.expand ? "expand-less" : "expand-more"}
+              color="#FC4C02"
+              size={30}
+              onPress={this.toggleMenu}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity

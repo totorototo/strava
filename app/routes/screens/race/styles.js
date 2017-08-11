@@ -13,13 +13,9 @@ export default StyleSheet.create({
     left: 0,
     backgroundColor: "white",
     opacity: 0.6,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
     flexDirection: "column",
     justifyContent: "flex-end",
-    alignItems: "center",
+    alignItems: "stretch",
     paddingVertical: 5
   },
   map: {
@@ -32,8 +28,7 @@ export default StyleSheet.create({
   bubble: {
     backgroundColor: "rgba(255,255,255,0.7)",
     paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 10
+    paddingVertical: 12
   },
   latlng: {
     width: 200,
