@@ -72,6 +72,14 @@ class RacePredictor extends Component {
         })
       )
     }).isRequired,
+    clubMembers: PropTypes.arrayOf(
+      PropTypes.shape({
+        firstname: PropTypes.string,
+        lastname: PropTypes.string,
+        profile: PropTypes.string,
+        country: PropTypes.string
+      })
+    ).isRequired,
     geoloactionActionsCreators: PropTypes.objectOf(PropTypes.func).isRequired
   };
 
@@ -85,6 +93,10 @@ class RacePredictor extends Component {
     expand: false
   };
 
+  getAthlete = (athletes = [], id) => {
+    athletes.find(athlete => athlete.id === id);
+  };
+
   toggleMenu = () => {
     // Animate the update
     LayoutAnimation.spring();
@@ -92,7 +104,7 @@ class RacePredictor extends Component {
   };
 
   render() {
-    const { race, geoloactionActionsCreators } = this.props;
+    const { race, clubMembers, geoloactionActionsCreators } = this.props;
     const animatedStyle = { opacity: this.state.expand ? 1 : 0 };
 
     if (race === Loading)
@@ -138,10 +150,14 @@ class RacePredictor extends Component {
                 latitude: location.coords.latitude
               };
 
+              const trailRunner = clubMembers.find(
+                athlete => athlete.id === parseInt(id, 10)
+              );
+
               return (
                 <MapView.Marker
                   coordinate={coordinate}
-                  title={id}
+                  title={trailRunner ? trailRunner.firstname : id}
                   description={new Date(location.timestamp).toLocaleString()}
                   pinColor={RacePredictor.intToColor(id)}
                   key={id}
