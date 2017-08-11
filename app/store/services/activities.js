@@ -180,9 +180,8 @@ export const computePerformance = (activities = {}) => {
   });
 
   const speedMeterPerSecond = distance / duration;
-  const speedMinutePerKilometer = (1000 / (distance / duration * 60)).toFixed(
-    2
-  );
+  const speedMinutePerKilometer =
+    distance > 0 ? (1000 / (distance / duration * 60)).toFixed(2) : 0;
 
   const distanceHeuristic =
     distance /
@@ -195,9 +194,11 @@ export const computePerformance = (activities = {}) => {
     referencesWeightings.RECENT_RUN_ELEVATION_GAIN;
 
   const frequencyHeuristic =
-    Object.keys(activities).length /
-    references.RECENT_RUN_COUNT *
-    referencesWeightings.RECENT_RUN_COUNT;
+    Object.keys(activities).length > 0
+      ? Object.keys(activities).length /
+        references.RECENT_RUN_COUNT *
+        referencesWeightings.RECENT_RUN_COUNT
+      : 0;
 
   const speedHeuristic =
     speedMeterPerSecond /
