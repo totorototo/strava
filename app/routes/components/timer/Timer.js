@@ -50,17 +50,12 @@ class Timer extends Component {
   render() {
     const { timerStyle } = this.props;
 
-    let text;
-    if (this.state.elapsedTime < 0) {
-      text = "Not started yet";
-    } else {
-      text = Timer.msToTime(this.state.elapsedTime);
-    }
+    const time = Timer.msToTime(Math.abs(this.state.elapsedTime));
 
     return (
       <View style={[styles.container, timerStyle && timerStyle]}>
         <Text style={styles.text}>
-          {text}
+          {time}
         </Text>
       </View>
     );
