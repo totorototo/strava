@@ -37,7 +37,7 @@ const SAMPLE_REGION = {
   longitudeDelta: LONGITUDE_DELTA
 };
 
-const EXPANDED_MENU_HEIGHT = 250;
+const EXPANDED_MENU_HEIGHT = 150;
 const COLLAPSED_MENU_HEIGHT = 35;
 
 const { UIManager } = NativeModules;
