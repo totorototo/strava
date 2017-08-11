@@ -14,6 +14,7 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
+import Timer from "../../components/timer/Timer";
 import styles from "./styles";
 
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
@@ -85,7 +86,7 @@ class RacePredictor extends Component {
     // Animate the update
     LayoutAnimation.spring();
     if (this.state.expand) {
-      this.setState({ h: (this.state.h = 45), expand: !this.state.expand });
+      this.setState({ h: (this.state.h = 25), expand: !this.state.expand });
     } else {
       this.setState({ h: (this.state.h = 250), expand: !this.state.expand });
     }
@@ -149,10 +150,11 @@ class RacePredictor extends Component {
             })}
         </MapView>
         <View style={[styles.overlay, { height: this.state.h }]}>
+          <Timer startingDate="2017-07-25T08:00:00+00:00" />
           <Icon
             name={this.state.expand ? "expand-less" : "expand-more"}
             color="#FC4C02"
-            size={15}
+            size={30}
             onPress={this.onPress}
           />
         </View>
