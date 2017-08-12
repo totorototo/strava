@@ -1,4 +1,5 @@
-import { StackNavigator } from "react-navigation";
+import { connect } from "react-redux";
+import { addNavigationHelpers, StackNavigator } from "react-navigation";
 
 import Login from "./screens/login/Login";
 import Home from "./screens/home/Home";
@@ -17,4 +18,15 @@ const AppNavigator = StackNavigator(
   }
 );
 
-export default AppNavigator;
+const mapStateToProps = state => ({ state: state.appState.navigation });
+const mapDispatchToProps = dispatch => ({ dispatch });
+const mergeProps = (stateProps, dispatchProps) => ({
+  navigation: addNavigationHelpers({
+    state: stateProps.state,
+    dispatch: dispatchProps.dispatch
+  })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+  AppNavigator
+);
