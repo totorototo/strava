@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import { Provider } from "react-redux";
 
-import AppWithNavigationState from "./routes/AppWithNavigationState";
+import AppNavigator from "./routes/AppNavigator";
 
 import store from "./store";
 
@@ -11,7 +11,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <AppWithNavigationState />
+        <AppNavigator />
       </Provider>
     );
   }
