@@ -13,6 +13,7 @@
     "devtools": "react-devtools",
     "precommit": "lint-staged",
     "postcommit": "git reset",
+    "prepush": "yarn lint",
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
     "major": "npm version major && npm publish",
