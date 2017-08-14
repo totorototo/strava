@@ -10,7 +10,7 @@ const composeEnhancer = composeWithDevTools({
   name: "strava",
   hostname: "localhost",
   maxAge: 20,
-  realtime: true,
+  realtime: false,
   port: 8000
 });
 
