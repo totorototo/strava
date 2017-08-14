@@ -146,8 +146,10 @@ class RacePredictor extends Component {
           {race.locations &&
             Object.entries(race.locations).map(([id, location]) => {
               const coordinate = {
-                longitude: location.coords.longitude,
-                latitude: location.coords.latitude
+                longitude:
+                  (location.coords && location.coords.longitude) || 0.15844,
+                latitude:
+                  (location.coords && location.coords.latitude) || 42.78386
               };
 
               const trailRunner = clubMembers.find(
