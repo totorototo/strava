@@ -117,7 +117,7 @@ class RacePredictor extends Component {
 
     if (isFaulty(race))
       return (
-        <View style={styles.container}>
+        <View style={styles.defectContainer}>
           <Icon name="error" color="#FC4C02" size={100} />
           <Text style={styles.text}>
             Oops, I did it again: {getDefect(race)}
