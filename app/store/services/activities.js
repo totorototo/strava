@@ -232,8 +232,7 @@ export const computePerformance = (activities = {}) => {
   performanceDetails.push({
     name: "duration",
     percent: Math.trunc(timeHeuristic * 100 / performance),
-    absolute: msToTime(duration * 1000),
-    unit: ""
+    absolute: msToTime(duration * 1000)
   });
   performanceDetails.push({
     name: "pace",
@@ -244,8 +243,7 @@ export const computePerformance = (activities = {}) => {
   performanceDetails.push({
     name: "runs count",
     percent: Math.trunc(frequencyHeuristic * 100 / performance),
-    absolute: Object.keys(activities).length,
-    unit: ""
+    absolute: Object.keys(activities).length
   });
 
   return {
