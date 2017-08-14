@@ -5,7 +5,7 @@ import { pick } from "lodash";
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
 import { callJSONApi } from "./helpers/api";
-import { convert } from "./helpers/moment";
+import { msToTime } from "./helpers/moment";
 
 import { references, referencesWeightings } from "../constants/references";
 
@@ -233,7 +233,7 @@ export const computePerformance = (activities = {}) => {
   performanceDetails.push({
     name: "duration",
     percent: Math.trunc(timeHeuristic * 100 / performance),
-    absolute: convert(duration),
+    absolute: msToTime(duration * 1000),
     unit: ""
   });
   performanceDetails.push({
