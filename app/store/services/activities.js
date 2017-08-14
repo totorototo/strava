@@ -179,9 +179,8 @@ export const computePerformance = (activities = {}) => {
     duration += activities[id].elapsed_time;
   });
 
-  const speedMeterPerSecond = distance / duration;
-  const speedMinutePerKilometer =
-    distance > 0 ? (1000 / (distance / duration * 60)).toFixed(2) : 0;
+  const paceMeterPerSecond = duration > 0 ? distance / duration : 0;
+  const paceKilometerPerHour = (paceMeterPerSecond * 3.6).toFixed(2);
 
   const distanceHeuristic =
     distance /
@@ -201,7 +200,7 @@ export const computePerformance = (activities = {}) => {
       : 0;
 
   const speedHeuristic =
-    speedMeterPerSecond /
+    paceMeterPerSecond /
     references.RECENT_RUN_SPEED *
     referencesWeightings.RECENT_RUN_SPEED;
 
@@ -237,10 +236,10 @@ export const computePerformance = (activities = {}) => {
     unit: ""
   });
   performanceDetails.push({
-    name: "speed",
+    name: "pace",
     percent: Math.trunc(speedHeuristic * 100 / performance),
-    absolute: speedMinutePerKilometer,
-    unit: "min/km"
+    absolute: paceKilometerPerHour,
+    unit: "km/h"
   });
   performanceDetails.push({
     name: "runs count",
