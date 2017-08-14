@@ -43,7 +43,7 @@ export function* authenticationFlowSaga() {
     while (true) {
       const navigation = yield take("Navigation/NAVIGATE");
       if (
-        navigation.routeName === "Home" &&
+        navigation.routeName === "Main" &&
         navigation.params.code !== undefined
       ) {
         // eslint-disable-next-line no-unused-vars, prefer-const

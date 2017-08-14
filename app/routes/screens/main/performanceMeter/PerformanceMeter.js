@@ -9,7 +9,11 @@ import { Icon } from "react-native-elements";
 
 import { Circle } from "react-native-progress";
 
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 import styles from "./styles";

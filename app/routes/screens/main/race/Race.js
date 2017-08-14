@@ -9,7 +9,11 @@ import { connect } from "react-redux";
 
 import styles from "./styles";
 
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 

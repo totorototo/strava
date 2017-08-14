@@ -1,5 +1,5 @@
-import { getCurrentRaceID } from "../../../store/state/appState/selectors";
-import { getEntity } from "../../../store/state/entities/selectors";
+import { getCurrentRaceID } from "../../../../store/state/appState/selectors";
+import { getEntity } from "../../../../store/state/entities/selectors";
 
 const raceViewSelector = state => {
   const currentRaceID = getCurrentRaceID(state);
