@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Linking /* Platform*/ } from "react-native";
+import { Linking } from "react-native";
 import hoistStatics from "hoist-non-react-statics";
 import Config from "react-native-config";
 
