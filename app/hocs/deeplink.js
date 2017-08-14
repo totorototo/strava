@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import { Linking } from "react-native";
 import hoistStatics from "hoist-non-react-statics";
-import Config from "react-native-config";
 
-const { URL_SHEME_PREFIX, URL_SHEME_HOST } = Config;
-
-function getPathAndQuery(url) {
-  const baseUrlSheme = `${URL_SHEME_PREFIX}://${URL_SHEME_HOST}/`;
-  return url.indexOf(baseUrlSheme) === -1 ? url : url.replace(baseUrlSheme, "");
+function getPathAndQuery(prefix, url) {
+  return url.indexOf(prefix) === -1 ? url : url.replace(prefix, "");
 }
 
-export default function deeplink(WrappedComponent) {
+export default prefix => WrappedComponent => {
   class DeeplinkingContainer extends Component {
     static contextTypes = {
       store: React.PropTypes.object
@@ -31,7 +27,7 @@ export default function deeplink(WrappedComponent) {
     handleOpenURL = event => {
       if (event && event.url) {
         const navigationAction = WrappedComponent.router.getActionForPathAndParams(
-          getPathAndQuery(event.url)
+          getPathAndQuery(prefix, event.url)
         );
         if (navigationAction) {
           this.context.store.dispatch(navigationAction);
@@ -49,4 +45,4 @@ export default function deeplink(WrappedComponent) {
   }
 
   return hoistStatics(DeeplinkingContainer, WrappedComponent);
-}
+};
