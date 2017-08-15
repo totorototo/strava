@@ -14,10 +14,14 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
-import Timer from "../../components/timer/Timer";
+import Timer from "../../../components/timer/Timer";
 import styles from "./styles";
 
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 import actionsCreator from "./actionsCreator";
@@ -146,8 +150,10 @@ class RacePredictor extends Component {
           {race.locations &&
             Object.entries(race.locations).map(([id, location]) => {
               const coordinate = {
-                longitude: location.coords.longitude,
-                latitude: location.coords.latitude
+                longitude:
+                  (location.coords && location.coords.longitude) || 0.15844,
+                latitude:
+                  (location.coords && location.coords.latitude) || 42.78386
               };
 
               const trailRunner = clubMembers.find(

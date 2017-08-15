@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+// todo unused
 export default StyleSheet.create({
   home: {
     flex: 1,

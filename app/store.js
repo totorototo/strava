@@ -4,8 +4,6 @@ import { composeWithDevTools } from "remote-redux-devtools";
 import sagaMonitor from "./devTools/sagaMonitor";
 import businessApp from "./store/businesses/index";
 
-import deeplink from "./store/deeplink";
-
 const composeEnhancer = composeWithDevTools({
   name: "strava",
   hostname: "localhost",
@@ -15,8 +13,6 @@ const composeEnhancer = composeWithDevTools({
 });
 
 const store = new Store({ sagaMonitor, composeEnhancer });
-deeplink(store);
-
 store.registerBusiness(businessApp);
 
 export default store;

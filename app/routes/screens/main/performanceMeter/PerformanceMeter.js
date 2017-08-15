@@ -9,7 +9,11 @@ import { Icon } from "react-native-elements";
 
 import { Circle } from "react-native-progress";
 
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 import styles from "./styles";
@@ -95,7 +99,7 @@ class PerformanceMeter extends Component {
           ? <View style={styles.details}>
               {athlete.performance.details.map(detail =>
                 <Text style={styles.text} key={detail.name}>
-                  {`${detail.name}: ${detail.absolute} ${detail.unit}`}
+                  {detail.name} {detail.value} {detail.unit && detail.unit}
                 </Text>
               )}
             </View>

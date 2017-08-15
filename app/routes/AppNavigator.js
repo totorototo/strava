@@ -1,20 +1,46 @@
-import { StackNavigator } from "react-navigation";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { addNavigationHelpers, StackNavigator } from "react-navigation";
+import Config from "react-native-config";
 
+import deeplink from "../hocs/deeplink";
 import Login from "./screens/login/Login";
-import Home from "./screens/home/Home";
+import Main from "./screens/main/Main";
 
-import Authenticate from "./screens/authenticate/authenticate";
+const { URL_SHEME_PREFIX, URL_SHEME_HOST } = Config;
+
+const navigatorOptions = {
+  cardStyle: { flex: 1, marginTop: 0, backgroundColor: "#eff2f6" },
+  headerMode: "none"
+};
 
 const AppNavigator = StackNavigator(
   {
-    Login: { screen: Login },
-    Authenticate: { screen: Authenticate, path: "localhost" },
-    Home: { screen: Home }
+    Login: {
+      screen: Login,
+      path: "login"
+    },
+    Main: {
+      screen: Main,
+      path: "main"
+    }
   },
-  {
-    cardStyle: { flex: 1, marginTop: 0, backgroundColor: "#eff2f6" },
-    headerMode: "none"
-  }
+  navigatorOptions
 );
 
-export default AppNavigator;
+const mapStateToProps = state => ({ state: state.appState.navigation });
+const mapDispatchToProps = dispatch => ({ dispatch });
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
+  navigation: addNavigationHelpers({
+    state: stateProps.state,
+    dispatch: dispatchProps.dispatch
+  })
+});
+
+const connectWithDeepLink = compose(
+  deeplink(`${URL_SHEME_PREFIX}://${URL_SHEME_HOST}/`),
+  connect(mapStateToProps, mapDispatchToProps, mergeProps)
+);
+
+export default connectWithDeepLink(AppNavigator);
