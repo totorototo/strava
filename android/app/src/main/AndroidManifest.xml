@@ -31,7 +31,7 @@
           <action android:name="android.intent.action.VIEW"/>
           <category android:name="android.intent.category.DEFAULT"/>
           <category android:name="android.intent.category.BROWSABLE"/>
-          <data android:scheme="strava" android:host="localhost" />
+          <data android:scheme="@string/URL_SHEME_PREFIX" android:host="@string/URL_SHEME_HOST" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

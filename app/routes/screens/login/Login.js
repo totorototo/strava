@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-
 import { View, WebView } from "react-native";
-
 import Config from "react-native-config";
 
 import styles from "./styles";
 
-const INITIAL_URI = `https://www.strava.com/oauth/authorize?client_id=${Config.CLIENT_ID}&response_type=code&redirect_uri=strava://localhost&scope=public`;
+const { CLIENT_ID, URL_SHEME_PREFIX, URL_SHEME_HOST } = Config;
+const CALL_BACK_URL_SHEME = `${URL_SHEME_PREFIX}://${URL_SHEME_HOST}/main`;
+const INITIAL_URI = `https://www.strava.com/oauth/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${CALL_BACK_URL_SHEME}&scope=public`;
 
 export default class Login extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class Login extends Component {
 
   onShouldStartLoadWithRequest = url => {
     if (this.webView !== null) {
-      if (!url.startsWith("strava://localhost")) {
+      if (!url.startsWith(CALL_BACK_URL_SHEME)) {
         this.setState(() => ({ visible: true }));
       } else {
         this.setState(() => ({ visible: false }));

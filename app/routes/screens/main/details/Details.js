@@ -5,7 +5,11 @@ import { View, Text, Image } from "react-native";
 import { Icon } from "react-native-elements";
 
 import { connect } from "react-redux";
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 import styles from "./styles";
