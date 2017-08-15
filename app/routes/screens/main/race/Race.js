@@ -94,7 +94,7 @@ class RacePredictor extends Component {
   }
 
   state = {
-    expand: false
+    expanded: false
   };
 
   getAthlete = (athletes = [], id) => {
@@ -104,12 +104,12 @@ class RacePredictor extends Component {
   toggleMenu = () => {
     // Animate the update
     LayoutAnimation.spring();
-    this.setState({ expand: !this.state.expand });
+    this.setState({ expanded: !this.state.expanded });
   };
 
   render() {
     const { race, clubMembers, geoloactionActionsCreators } = this.props;
-    const animatedStyle = { opacity: this.state.expand ? 1 : 0 };
+    const animatedStyle = { opacity: this.state.expanded ? 1 : 0 };
 
     if (race === Loading)
       return (
@@ -121,7 +121,7 @@ class RacePredictor extends Component {
 
     if (isFaulty(race))
       return (
-        <View style={styles.container}>
+        <View style={styles.defectContainer}>
           <Icon name="error" color="#FC4C02" size={100} />
           <Text style={styles.text}>
             Oops, I did it again: {getDefect(race)}
@@ -175,7 +175,7 @@ class RacePredictor extends Component {
           style={[
             styles.overlay,
             {
-              height: this.state.expand
+              height: this.state.expanded
                 ? EXPANDED_MENU_HEIGHT
                 : COLLAPSED_MENU_HEIGHT
             }
@@ -184,7 +184,7 @@ class RacePredictor extends Component {
           <Timer date={race.date} timerStyle={animatedStyle} />
           <TouchableOpacity>
             <Icon
-              name={this.state.expand ? "expand-less" : "expand-more"}
+              name={this.state.expanded ? "expand-less" : "expand-more"}
               color="#FC4C02"
               size={30}
               onPress={this.toggleMenu}

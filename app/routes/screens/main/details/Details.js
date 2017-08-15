@@ -35,13 +35,16 @@ class Details extends Component {
 
     if (isFaulty(athlete))
       return (
-        <Text>
-          Fuck it, there is an issue: {getDefect(athlete)}
-        </Text>
+        <View style={styles.container}>
+          <Icon name="error" color="#FC4C02" size={100} />
+          <Text style={styles.text}>
+            Oops, I did it again: {getDefect(athlete)}
+          </Text>
+        </View>
       );
 
     return (
-      <View style={styles.home}>
+      <View style={styles.container}>
         <Image source={{ uri: athlete.profile }} style={styles.image} />
         <Text style={styles.text}>
           {athlete.firstname}

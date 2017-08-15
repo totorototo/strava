@@ -6,6 +6,11 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center"
   },
+  defectContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   overlay: {
     position: "absolute",
     top: 0,
