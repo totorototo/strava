@@ -5,7 +5,7 @@ import { pick } from "lodash";
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
 import { callJSONApi } from "./helpers/api";
-import { convert } from "./helpers/moment";
+import { msToTime } from "./helpers/moment";
 
 import { references, referencesWeightings } from "../constants/references";
 
@@ -179,9 +179,8 @@ export const computePerformance = (activities = {}) => {
     duration += activities[id].elapsed_time;
   });
 
-  const speedMeterPerSecond = distance / duration;
-  const speedMinutePerKilometer =
-    distance > 0 ? (1000 / (distance / duration * 60)).toFixed(2) : 0;
+  const paceMeterPerSecond = duration > 0 ? distance / duration : 0;
+  const paceKilometerPerHour = (paceMeterPerSecond * 3.6).toFixed(2);
 
   const distanceHeuristic =
     distance /
@@ -201,7 +200,7 @@ export const computePerformance = (activities = {}) => {
       : 0;
 
   const speedHeuristic =
-    speedMeterPerSecond /
+    paceMeterPerSecond /
     references.RECENT_RUN_SPEED *
     referencesWeightings.RECENT_RUN_SPEED;
 
@@ -221,32 +220,30 @@ export const computePerformance = (activities = {}) => {
   performanceDetails.push({
     name: "distance",
     percent: Math.trunc(distanceHeuristic * 100 / performance),
-    absolute: Math.trunc(distance / 1000),
+    value: Math.trunc(distance / 1000),
     unit: "km"
   });
   performanceDetails.push({
     name: "elevation",
     percent: Math.trunc(elevationHeuristic * 100 / performance),
-    absolute: elevation,
+    value: elevation,
     unit: "m"
   });
   performanceDetails.push({
     name: "duration",
     percent: Math.trunc(timeHeuristic * 100 / performance),
-    absolute: convert(duration),
-    unit: ""
+    value: msToTime(duration * 1000)
   });
   performanceDetails.push({
-    name: "speed",
+    name: "pace",
     percent: Math.trunc(speedHeuristic * 100 / performance),
-    absolute: speedMinutePerKilometer,
-    unit: "min/km"
+    value: paceKilometerPerHour,
+    unit: "km/h"
   });
   performanceDetails.push({
     name: "runs count",
     percent: Math.trunc(frequencyHeuristic * 100 / performance),
-    absolute: Object.keys(activities).length,
-    unit: ""
+    value: Object.keys(activities).length
   });
 
   return {
