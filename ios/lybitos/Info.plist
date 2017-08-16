@@ -33,7 +33,7 @@
 			<string>org.reactjs.native.example.lybitos</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>strava</string>
+				<string>__RN_CONFIG_URL_SHEME_PREFIX</string>
 			</array>
 		</dict>
 	</array>

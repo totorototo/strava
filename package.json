@@ -29,6 +29,7 @@
   "dependencies": {
     "es6-symbol": "^3.1.1",
     "firebase": "^4.2.0",
+    "hoist-non-react-statics": "^2.2.2",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.3",
     "prop-types": "^15.5.10",
@@ -46,7 +47,6 @@
     "redux-saga": "^0.15.5",
     "reloaddux": "^0.0.9",
     "remote-redux-devtools": "^0.5.12",
-    "url-parse": "^1.1.9",
     "util": "^0.10.3"
   },
   "devDependencies": {

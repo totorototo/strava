@@ -14,10 +14,14 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
-import Timer from "../../components/timer/Timer";
+import Timer from "../../../components/timer/Timer";
 import styles from "./styles";
 
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";

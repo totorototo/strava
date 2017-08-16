@@ -1,12 +1,12 @@
 import {
   getCurrentRaceID,
   getCurrentClubID
-} from "../../../store/state/appState/selectors";
+} from "../../../../store/state/appState/selectors";
 import {
   getEntity,
   getValueFrom,
   getValidEntities
-} from "../../../store/state/entities/selectors";
+} from "../../../../store/state/entities/selectors";
 
 const raceViewSelector = state => {
   const currentRaceID = getCurrentRaceID(state);

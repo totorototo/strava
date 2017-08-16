@@ -7,7 +7,11 @@ import { View, Text, ScrollView, Image } from "react-native";
 import { Card, Icon } from "react-native-elements";
 
 import selector from "./selector";
-import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
+import {
+  isFaulty,
+  getDefect,
+  Loading
+} from "../../../../dataDefinitions/defects";
 
 import { getIconName } from "./helper";
 import styles from "./styles";
