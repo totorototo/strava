@@ -20,7 +20,7 @@ import styles from "./styles";
 import { isFaulty, getDefect, Loading } from "../../../dataDefinitions/defects";
 
 import selector from "./selector";
-import actionsCreator from "./actionsCreator";
+import mapDispatchToProps from "./mapDispatchToProps";
 
 const { width, height } = Dimensions.get("window");
 
@@ -80,7 +80,7 @@ class RacePredictor extends Component {
         country: PropTypes.string
       })
     ).isRequired,
-    geoloactionActionsCreators: PropTypes.objectOf(PropTypes.func).isRequired
+    boundActionCreators: PropTypes.objectOf(PropTypes.func).isRequired
   };
 
   static intToColor(id = 0) {
@@ -104,7 +104,7 @@ class RacePredictor extends Component {
   };
 
   render() {
-    const { race, clubMembers, geoloactionActionsCreators } = this.props;
+    const { race, clubMembers, boundActionCreators } = this.props;
     const animatedStyle = { opacity: this.state.expanded ? 1 : 0 };
 
     if (race === Loading)
@@ -190,7 +190,7 @@ class RacePredictor extends Component {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={[styles.bubble, styles.button]}
-            onPress={() => geoloactionActionsCreators.shareLocation()}
+            onPress={() => boundActionCreators.shareLocation()}
           >
             <Text style={styles.buttonText}>Spot me!</Text>
           </TouchableOpacity>
@@ -200,4 +200,4 @@ class RacePredictor extends Component {
   }
 }
 
-export default connect(selector, actionsCreator)(RacePredictor);
+export default connect(selector, mapDispatchToProps)(RacePredictor);
