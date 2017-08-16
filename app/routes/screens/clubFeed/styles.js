@@ -31,7 +31,7 @@ export default StyleSheet.create({
   members: {
     flex: 1,
     flexDirection: "row",
-    alignContent: "flex-start"
+    alignItems: "flex-start"
   },
   image: {
     width: 20,
