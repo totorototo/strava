@@ -199,7 +199,7 @@ export const computePerformance = (activities = {}) => {
         referencesWeightings.RECENT_RUN_COUNT
       : 0;
 
-  const speedHeuristic =
+  const paceHeuristic =
     paceMeterPerSecond /
     references.RECENT_RUN_SPEED *
     referencesWeightings.RECENT_RUN_SPEED;
@@ -213,7 +213,7 @@ export const computePerformance = (activities = {}) => {
     distanceHeuristic +
     elevationHeuristic +
     frequencyHeuristic +
-    speedHeuristic +
+    paceHeuristic +
     timeHeuristic;
 
   const performanceDetails = [];
@@ -236,7 +236,7 @@ export const computePerformance = (activities = {}) => {
   });
   performanceDetails.push({
     name: "pace",
-    percent: Math.trunc(speedHeuristic * 100 / performance),
+    percent: Math.trunc(paceHeuristic * 100 / performance),
     value: paceKilometerPerHour,
     unit: "km/h"
   });
