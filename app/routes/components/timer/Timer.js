@@ -9,7 +9,11 @@ import styles from "./styles";
 class Timer extends Component {
   static propTypes = {
     date: PropTypes.string.isRequired,
-    timerStyle: View.propTypes.style.isRequired
+    timerStyle: View.propTypes.style
+  };
+
+  static defaultProps = {
+    timerStyle: null
   };
 
   constructor(props) {
@@ -40,7 +44,7 @@ class Timer extends Component {
     const time = msToTime(Math.abs(this.state.elapsedTime));
 
     return (
-      <View style={[styles.container, timerStyle && timerStyle]}>
+      <View style={[styles.container, timerStyle]}>
         <Text style={styles.text}>
           {time}
         </Text>
