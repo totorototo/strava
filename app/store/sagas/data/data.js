@@ -13,8 +13,8 @@ export const markers = [
     title: "Gèdre",
     description: "17h00",
     coordinates: {
-      latitude: 42.78744,
-      longitude: 0.044925
+      latitude: 42.78528,
+      longitude: 0.02181
     }
   },
   {
@@ -37,11 +37,11 @@ export const markers = [
   },
   {
     identifier: "5",
-    title: "Gèdre",
+    title: "Gèdre Da Return",
     description: "06h00",
     coordinates: {
-      latitude: 42.79689,
-      longitude: 0.01307
+      latitude: 42.78528,
+      longitude: 0.02191
     }
   },
   {

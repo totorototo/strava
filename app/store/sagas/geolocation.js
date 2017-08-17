@@ -5,24 +5,20 @@ import {
   getCurrentUserID
 } from "../state/appState/selectors";
 
+import { getCurrentAthleteLocation } from "../services/geolocation";
+
 import { writeData } from "../services/database";
 import { SHARE_LOCATION } from "../constants/actionTypes";
 
 function* shareLocation() {
-  // 1- get location
-  // 2- share it
-  const raceID = yield select(getCurrentRaceID);
-  const userID = yield select(getCurrentUserID);
-  const key = `${raceID}/locations/${userID}`;
-  const data = {
-    time: new Date().toISOString(),
-    coordinates: {
-      latitude: 42.79689,
-      longitude: 0.01307
-    }
-  };
+  const { position, error } = yield call(getCurrentAthleteLocation);
+  if (!error && position) {
+    const raceID = yield select(getCurrentRaceID);
+    const userID = yield select(getCurrentUserID);
+    const key = `${raceID}/locations/${userID}`;
 
-  yield call(writeData, key, data);
+    yield call(writeData, key, position);
+  }
 }
 
 export function* locationSaga() {

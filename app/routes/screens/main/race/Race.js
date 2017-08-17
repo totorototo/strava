@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { View, Dimensions, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+  NativeModules,
+  LayoutAnimation
+} from "react-native";
 import { Icon } from "react-native-elements";
 
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
+import Timer from "../../../components/timer/Timer";
 import styles from "./styles";
 
 import {
@@ -16,6 +24,7 @@ import {
 } from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
+import mapDispatchToProps from "./mapDispatchToProps";
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,10 +41,20 @@ const SAMPLE_REGION = {
   longitudeDelta: LONGITUDE_DELTA
 };
 
+const EXPANDED_MENU_HEIGHT = 150;
+const COLLAPSED_MENU_HEIGHT = 35;
+
+const { UIManager } = NativeModules;
+
+// Enable LayoutAnimation under Android
+// eslint-disable-next-line
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+
 class RacePredictor extends Component {
   static propTypes = {
     race: PropTypes.shape({
-      startingTime: PropTypes.string,
+      date: PropTypes.string,
       path: PropTypes.shape({
         coordinates: PropTypes.arrayOf(
           PropTypes.shape({
@@ -56,17 +75,41 @@ class RacePredictor extends Component {
           })
         })
       )
-    }).isRequired
+    }).isRequired,
+    clubMembers: PropTypes.arrayOf(
+      PropTypes.shape({
+        firstname: PropTypes.string,
+        lastname: PropTypes.string,
+        profile: PropTypes.string,
+        country: PropTypes.string
+      })
+    ).isRequired,
+    shareLocation: PropTypes.func.isRequired
   };
 
   static intToColor(id = 0) {
     // eslint-disable-next-line
     const c = (id & 0x00ffffff).toString(16).toUpperCase();
-    return "00000".substring(0, 6 - c.length) + c;
+    return `#${"00000".substring(0, 6 - c.length)}${c}`;
   }
 
+  state = {
+    expanded: false
+  };
+
+  getAthlete = (athletes = [], id) => {
+    athletes.find(athlete => athlete.id === id);
+  };
+
+  toggleMenu = () => {
+    // Animate the update
+    LayoutAnimation.spring();
+    this.setState({ expanded: !this.state.expanded });
+  };
+
   render() {
-    const { race } = this.props;
+    const { race, clubMembers, shareLocation } = this.props;
+    const animatedStyle = { opacity: this.state.expanded ? 1 : 0 };
 
     if (race === Loading)
       return (
@@ -78,7 +121,7 @@ class RacePredictor extends Component {
 
     if (isFaulty(race))
       return (
-        <View style={styles.container}>
+        <View style={styles.defectContainer}>
           <Icon name="error" color="#FC4C02" size={100} />
           <Text style={styles.text}>
             Oops, I did it again: {getDefect(race)}
@@ -105,21 +148,54 @@ class RacePredictor extends Component {
             />
           )}
           {race.locations &&
-            Object.entries(race.locations).map(([id, location]) =>
-              <MapView.Marker
-                coordinate={location.coordinates}
-                title={id}
-                description={new Date(location.time).toLocaleString()}
-                pinColor={`#${RacePredictor.intToColor(id)}`}
-                key={id}
-              />
-            )}
+            Object.entries(race.locations).map(([id, location]) => {
+              const coordinate = {
+                longitude:
+                  (location.coords && location.coords.longitude) || 0.15844,
+                latitude:
+                  (location.coords && location.coords.latitude) || 42.78386
+              };
+
+              const trailRunner = clubMembers.find(
+                athlete => athlete.id === parseInt(id, 10)
+              );
+
+              return (
+                <MapView.Marker
+                  coordinate={coordinate}
+                  title={trailRunner ? trailRunner.firstname : id}
+                  description={new Date(location.timestamp).toLocaleString()}
+                  pinColor={RacePredictor.intToColor(id)}
+                  key={id}
+                />
+              );
+            })}
         </MapView>
-        <View style={[styles.bubble, styles.latlng]}>
-          <Text style={styles.text}>42.8953, 0.00744</Text>
+        <View
+          style={[
+            styles.overlay,
+            {
+              height: this.state.expanded
+                ? EXPANDED_MENU_HEIGHT
+                : COLLAPSED_MENU_HEIGHT
+            }
+          ]}
+        >
+          <Timer date={race.date} timerStyle={animatedStyle} />
+          <TouchableOpacity>
+            <Icon
+              name={this.state.expanded ? "expand-less" : "expand-more"}
+              color="#FC4C02"
+              size={30}
+              onPress={this.toggleMenu}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
+          <TouchableOpacity
+            style={[styles.bubble, styles.button]}
+            onPress={shareLocation}
+          >
             <Text style={styles.buttonText}>Spot me!</Text>
           </TouchableOpacity>
         </View>
@@ -128,4 +204,4 @@ class RacePredictor extends Component {
   }
 }
 
-export default connect(selector)(RacePredictor);
+export default connect(selector, mapDispatchToProps)(RacePredictor);

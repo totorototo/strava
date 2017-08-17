@@ -1,20 +1,13 @@
 import { call, select, put, takeEvery } from "redux-saga/effects";
 
-import {
-  SET_CURRENT_USER_ID,
-  SET_CURRENT_CLUB_ID
-} from "../constants/actionTypes";
+import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
 
 import { updateEntity, setEntity } from "../actions/entities";
 import { setCurrentClubID } from "../actions/data";
 
 import { token, getCurrentUserID } from "../state/appState/selectors";
 
-import {
-  listClubMembers,
-  listClubActivities,
-  listClubAnnouncements
-} from "../services/clubs";
+import { listClubMembers, listClubActivities } from "../services/clubs";
 
 import { getStats } from "./athlete";
 import { getRankings } from "../services/activities";
@@ -61,20 +54,6 @@ function* listMembers() {
   }
 }
 
-function* listAnnouncements() {
-  const accessToken = yield select(token);
-  const clubID = 288750;
-  const { ids, entities, error } = yield call(
-    listClubAnnouncements,
-    accessToken,
-    clubID
-  );
-  if (!error && ids && entities) {
-    yield put(updateEntity(clubID, "clubs", { ids }));
-  }
-}
-
 export function* clubsSaga() {
   yield takeEvery(SET_CURRENT_USER_ID, listMembers);
-  yield takeEvery(SET_CURRENT_CLUB_ID, listAnnouncements);
 }

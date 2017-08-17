@@ -6,14 +6,22 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center"
   },
+  defectContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   overlay: {
     position: "absolute",
     top: 0,
     right: 0,
-    height: 250,
     left: 0,
-    backgroundColor: "black",
-    opacity: 0.6
+    backgroundColor: "white",
+    opacity: 0.6,
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "stretch",
+    paddingVertical: 5
   },
   map: {
     ...StyleSheet.absoluteFillObject
@@ -25,8 +33,7 @@ export default StyleSheet.create({
   bubble: {
     backgroundColor: "rgba(255,255,255,0.7)",
     paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20
+    paddingVertical: 12
   },
   latlng: {
     width: 200,

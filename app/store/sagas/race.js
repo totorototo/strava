@@ -4,7 +4,6 @@ import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
 
 import { setCurrentRaceID } from "../actions/data";
 import { setEntity } from "../actions/entities";
-import { shareLocation } from "../actions/location";
 
 import { markers, coordinates } from "./data/data";
 
@@ -13,7 +12,7 @@ function* listRaces() {
   const entities = {};
   const raceID = 123456;
   entities[raceID] = {
-    startingTime: "2017-08-25T08:00:00+00:00",
+    date: "2017-08-25T08:00:00+00:00",
     checkPoints: markers,
     path: {
       coordinates
@@ -21,7 +20,6 @@ function* listRaces() {
   };
   yield put(setCurrentRaceID(raceID));
   yield put(setEntity("races", entities));
-  yield put(shareLocation());
 }
 
 export function* raceSaga() {

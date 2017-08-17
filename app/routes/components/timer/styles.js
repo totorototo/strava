@@ -6,11 +6,9 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  image: {
-    width: 50,
-    height: 50
-  },
   text: {
-    color: "#FC4C02"
+    color: "#FC4C02",
+    textAlign: "center",
+    fontSize: 40
   }
 });
