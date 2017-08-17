@@ -1,5 +1,8 @@
 import firebase from "firebase";
 
+// hide warning box caused by react native https://github.com/facebook/react-native/issues/12981#issuecomment-309595327
+console.ignoredYellowBox = ["Setting a timer"];
+
 export const database = (() => {
   let firebaseApp;
 
