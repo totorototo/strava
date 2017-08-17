@@ -1,8 +1,7 @@
-import { bindActionCreators } from "redux";
-import * as geoloactionActions from "../../../../store/actions/geolocation";
+import { shareLocation } from "../../../../store/actions/geolocation";
 
-const mapDispatchToProps = dispatch => ({
-  boundActionCreators: bindActionCreators(geoloactionActions, dispatch)
-});
+const mapDispatchToProps = {
+  shareLocation
+};
 
 export default mapDispatchToProps;

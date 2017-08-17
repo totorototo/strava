@@ -84,7 +84,7 @@ class RacePredictor extends Component {
         country: PropTypes.string
       })
     ).isRequired,
-    boundActionCreators: PropTypes.objectOf(PropTypes.func).isRequired
+    shareLocation: PropTypes.func.isRequired
   };
 
   static intToColor(id = 0) {
@@ -108,7 +108,7 @@ class RacePredictor extends Component {
   };
 
   render() {
-    const { race, clubMembers, boundActionCreators } = this.props;
+    const { race, clubMembers, shareLocation } = this.props;
     const animatedStyle = { opacity: this.state.expanded ? 1 : 0 };
 
     if (race === Loading)
@@ -194,7 +194,7 @@ class RacePredictor extends Component {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={[styles.bubble, styles.button]}
-            onPress={() => boundActionCreators.shareLocation()}
+            onPress={shareLocation}
           >
             <Text style={styles.buttonText}>Spot me!</Text>
           </TouchableOpacity>
