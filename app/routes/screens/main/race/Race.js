@@ -14,7 +14,8 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
-import Timer from "../../../components/timer/Timer";
+import Countdown from "../../../components/countdown/Countdown";
+
 import styles from "./styles";
 
 import {
@@ -181,7 +182,7 @@ class RacePredictor extends Component {
             }
           ]}
         >
-          <Timer date={race.date} timerStyle={animatedStyle} />
+          <Countdown date={race.date} timerStyle={animatedStyle} />
           <TouchableOpacity>
             <Icon
               name={this.state.expanded ? "expand-less" : "expand-more"}
