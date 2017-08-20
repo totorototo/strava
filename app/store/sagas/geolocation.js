@@ -4,9 +4,7 @@ import {
   getCurrentRaceID,
   getCurrentUserID
 } from "../state/appState/selectors";
-
 import { getCurrentAthleteLocation } from "../services/geolocation";
-
 import { writeData } from "../services/database";
 import { SHARE_LOCATION } from "../constants/actionTypes";
 

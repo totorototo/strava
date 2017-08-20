@@ -1,14 +1,10 @@
 import { put, call, take } from "redux-saga/effects";
-
 import { NavigationActions } from "react-navigation";
 
 import { setAccessToken, logout } from "../../actions/login";
 import { setCurrentUserID } from "../../actions/data";
-
 import { LOGOUT } from "../../constants/actionTypes";
-
 import { getDetails } from "../../sagas/athlete";
-
 import { authenticate } from "../../services/login";
 
 function* signout() {

@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import { connect } from "react-redux";
-
 import { View, Text } from "react-native";
-
 import { Icon } from "react-native-elements";
-
 import { Circle } from "react-native-progress";
 
 import {
@@ -14,7 +10,6 @@ import {
   getDefect,
   Loading
 } from "../../../../dataDefinitions/defects";
-
 import selector from "./selector";
 import styles from "./styles";
 

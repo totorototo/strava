@@ -1,6 +1,14 @@
 {
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["react", "react-native", "jsx-a11y", "import"],
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "plugins": [
+    "react",
+    "react-native",
+    "jsx-a11y",
+    "import"
+  ],
   "env": {
     "browser": true,
     "node": true
@@ -19,10 +27,30 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js"]
+        "extensions": [
+          ".js"
+        ]
       }
     ],
     "import/prefer-default-export": 0,
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": [
+          [
+            "builtin",
+            "external",
+            "internal"
+          ],
+          [
+            "parent",
+            "index",
+            "sibling"
+          ]
+        ]
+      }
+    ],
     "jsx-a11y/no-marquee": 0,
     "react/prefer-stateless-function": 0,
     "react-native/no-unused-styles": 2,

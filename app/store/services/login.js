@@ -1,12 +1,9 @@
 import { schema, normalize } from "normalizr";
-
 import Config from "react-native-config";
-
 import { pick } from "lodash";
 
-import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
-
 import { callJSONApi } from "./helpers/api";
+import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 
 export const authenticate = temporaryAccessToken => {
   const formData = new FormData();

@@ -1,5 +1,4 @@
 import { API_ENDPOINT, APPLICATION_TYPE, METHODS } from "../../constants/rest";
-
 import updateQueryStringParameter from "./queryParameter";
 
 export const callJSONApi = ({

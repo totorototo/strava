@@ -8,14 +8,11 @@ import {
   put
 } from "redux-saga/effects";
 import { eventChannel } from "redux-saga";
-
 import Config from "react-native-config";
 
 import { SET_CURRENT_RACE_ID, LOGOUT } from "../../constants/actionTypes";
-
 import { getCurrentRaceID } from "../../state/appState/selectors";
 import { updateEntity } from "../../actions/entities";
-
 import {
   authenticate,
   disconnect,
