@@ -7,7 +7,7 @@ import {
 const initialState = {
   currentUserID: "loading",
   currentClubID: "loading",
-  currentRaceID: "Loading"
+  currentRaceID: "IsLoading"
 };
 
 export default function reducer(state = initialState, action) {

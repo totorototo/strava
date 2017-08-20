@@ -10,4 +10,4 @@ export const getDefect = object => (isValid(object) ? "" : object[Defect]);
 export const NotFoundEntity = { [Defect]: "Not Found" };
 export const InvalidEntity = { [Defect]: "Invalid" };
 
-export const Loading = { [Defect]: "Loading" };
+export const IsLoading = { [Defect]: "Loading" };

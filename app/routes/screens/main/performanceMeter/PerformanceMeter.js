@@ -1,22 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import { connect } from "react-redux";
-
 import { View, Text } from "react-native";
-
-import { Icon } from "react-native-elements";
-
 import { Circle } from "react-native-progress";
 
+import Faulty from "../../../components/faulty/Faulty";
 import {
   isFaulty,
   getDefect,
-  Loading
+  IsLoading
 } from "../../../../dataDefinitions/defects";
-
 import selector from "./selector";
 import styles from "./styles";
+import Loading from "../../../components/loading/Loading";
 
 class PerformanceMeter extends Component {
   static propTypes = {
@@ -64,23 +60,9 @@ class PerformanceMeter extends Component {
 
   render() {
     const { athlete } = this.props;
-    if (athlete === Loading)
-      return (
-        <View style={styles.container}>
-          <Icon name="cached" color="#FC4C02" size={50} />
-          <Text style={styles.text}>fetching data</Text>
-        </View>
-      );
+    if (athlete === IsLoading) return <Loading />;
 
-    if (isFaulty(athlete))
-      return (
-        <View style={styles.container}>
-          <Icon name="error" color="#FC4C02" size={100} />
-          <Text style={styles.text}>
-            Oops, I did it again: {getDefect(athlete)}
-          </Text>
-        </View>
-      );
+    if (isFaulty(athlete)) return <Faulty message={getDefect(athlete)} />;
 
     return (
       <View style={styles.container}>

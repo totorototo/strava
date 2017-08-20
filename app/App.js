@@ -1,4 +1,4 @@
-// todo check if is here in prod
+// todo check if it is here in prod
 import "react-devtools"; // Put it before react!
 import React, { Component } from "react";
 import { Provider } from "react-redux";
