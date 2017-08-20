@@ -15,9 +15,9 @@ import {
 
 import { getIconName } from "./helper";
 import styles from "./styles";
-import Faulty from "../../../components/faulty/Faulty";
-import Loading from "../../../components/loading/Loading";
-import CardList from "../../../components/cardList/CardList";
+import Faulty from "../../../../components/faulty/Faulty";
+import Loading from "../../../../components/loading/Loading";
+import CardList from "../../../../components/cardList/CardList";
 
 // styles
 class ClubFeed extends Component {

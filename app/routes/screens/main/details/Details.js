@@ -10,8 +10,8 @@ import {
 } from "../../../../dataDefinitions/defects";
 import selector from "./selector";
 import styles from "./styles";
-import Loading from "../../../components/loading/Loading";
-import Faulty from "../../../components/faulty/Faulty";
+import Loading from "../../../../components/loading/Loading";
+import Faulty from "../../../../components/faulty/Faulty";
 
 class Details extends Component {
   static propTypes = {

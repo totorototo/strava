@@ -14,7 +14,7 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
-import Timer from "../../../components/timer/Timer";
+import Timer from "../../../../components/timer/Timer";
 import styles from "./styles";
 
 import {
@@ -25,8 +25,8 @@ import {
 
 import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
-import Loading from "../../../components/loading/Loading";
-import Faulty from "../../../components/faulty/Faulty";
+import Loading from "../../../../components/loading/Loading";
+import Faulty from "../../../../components/faulty/Faulty";
 
 const { width, height } = Dimensions.get("window");
 

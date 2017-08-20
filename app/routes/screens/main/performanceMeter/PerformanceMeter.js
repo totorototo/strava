@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { View, Text } from "react-native";
 import { Circle } from "react-native-progress";
 
-import Faulty from "../../../components/faulty/Faulty";
+import Faulty from "../../../../components/faulty/Faulty";
 import {
   isFaulty,
   getDefect,
@@ -12,7 +12,7 @@ import {
 } from "../../../../dataDefinitions/defects";
 import selector from "./selector";
 import styles from "./styles";
-import Loading from "../../../components/loading/Loading";
+import Loading from "../../../../components/loading/Loading";
 
 class PerformanceMeter extends Component {
   static propTypes = {
