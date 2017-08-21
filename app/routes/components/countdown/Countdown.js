@@ -5,10 +5,14 @@ import { View, Text } from "react-native";
 
 import { msToTime } from "../../../store/services/helpers/moment";
 import styles from "./styles";
+import clock from "../../../hocs/clock";
 
-class Timer extends Component {
+class Countdown extends Component {
   static propTypes = {
-    date: PropTypes.string.isRequired,
+    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+      .isRequired,
+    now: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+      .isRequired,
     timerStyle: View.propTypes.style
   };
 
@@ -16,32 +20,11 @@ class Timer extends Component {
     timerStyle: null
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: new Date(this.props.date),
-      elapsedTime: 0
-    };
-  }
-
-  componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({
-      elapsedTime: new Date() - this.state.date
-    });
-  }
-
   render() {
     const { timerStyle } = this.props;
-
-    const time = msToTime(Math.abs(this.state.elapsedTime));
+    const time = msToTime(
+      Math.abs(new Date(this.props.date) - new Date(this.props.now))
+    );
 
     return (
       <View style={[styles.container, timerStyle]}>
@@ -53,4 +36,4 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+export default clock(Countdown);
