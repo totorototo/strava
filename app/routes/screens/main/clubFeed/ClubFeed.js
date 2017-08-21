@@ -3,18 +3,21 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 
-import { View, Text, ScrollView, Image } from "react-native";
-import { Card, Icon } from "react-native-elements";
+import { View, Text, ScrollView } from "react-native";
+import { Card } from "react-native-elements";
 
 import selector from "./selector";
 import {
   isFaulty,
   getDefect,
-  Loading
+  IsLoading
 } from "../../../../dataDefinitions/defects";
 
 import { getIconName } from "./helper";
 import styles from "./styles";
+import Faulty from "../../../../components/faulty/Faulty";
+import Loading from "../../../../components/loading/Loading";
+import CardList from "../../../../components/cardList/CardList";
 
 // styles
 class ClubFeed extends Component {
@@ -44,23 +47,9 @@ class ClubFeed extends Component {
 
   render() {
     const { club, clubMembers, activities } = this.props;
-    if (club === Loading)
-      return (
-        <View style={styles.container}>
-          <Icon name="cached" color="#FC4C02" size={50} />
-          <Text style={styles.text}>fetching data</Text>
-        </View>
-      );
+    if (club === IsLoading) return <Loading />;
 
-    if (isFaulty(club))
-      return (
-        <View style={styles.container}>
-          <Icon name="error" color="#FC4C02" size={100} />
-          <Text style={styles.text}>
-            Oops, I did it again: {getDefect(club)}
-          </Text>
-        </View>
-      );
+    if (isFaulty(club)) return <Faulty message={getDefect(club)} />;
 
     return (
       <View style={styles.container}>
@@ -76,56 +65,33 @@ class ClubFeed extends Component {
               and much more!
             </Text>
           </Card>
-          <Card
-            dividerStyle={styles.dividerStyle}
-            containerStyle={styles.containerCardStyle}
-            titleStyle={styles.card}
-            title="MEMBERS"
-          >
-            {clubMembers.map(member =>
-              <View key={member.id} style={styles.members}>
-                <Image style={styles.image} source={{ uri: member.profile }} />
-                <Text style={styles.text}>
-                  {member.firstname}
-                </Text>
-              </View>
-            )}
-          </Card>
 
-          {club.ranking &&
-            <Card
-              dividerStyle={styles.dividerStyle}
-              containerStyle={styles.containerCardStyle}
-              titleStyle={styles.card}
-              title="AWARDS"
-            >
-              {Object.entries(club.ranking).map(([key, value]) =>
-                <View style={styles.members} key={key}>
-                  <Icon name={getIconName(key)} color="#FC4C02" />
-                  <Text style={styles.text}>
-                    {`${value.athlete}`}
-                  </Text>
-                </View>
-              )}
-            </Card>}
-          <Card
-            titleStyle={styles.card}
-            title="ACTIVITIES"
-            containerStyle={styles.containerCardStyle}
-          >
-            {activities.map((activity, index) =>
-              <View style={styles.members} key={index.toString()}>
-                <Image
-                  style={styles.image}
-                  resizeMode="cover"
-                  source={{ uri: activity.athlete.profile }}
-                />
-                <Text style={styles.text}>
-                  {`${activity.name} ${activity.distance}m`}
-                </Text>
-              </View>
-            )}
-          </Card>
+          <CardList
+            title={"Member"}
+            list={clubMembers.map(member => ({
+              key: member.id,
+              image: member.profile,
+              text: member.firstname
+            }))}
+          />
+
+          <CardList
+            title={"AWARDS"}
+            list={Object.entries(club.ranking).map(([key, value]) => ({
+              key,
+              image: { name: getIconName(key), color: "#FC4C02" },
+              text: value.athlete
+            }))}
+          />
+
+          <CardList
+            title={"ACTIVITIES"}
+            list={activities.map((activity, index) => ({
+              key: index,
+              image: activity.athlete.profile,
+              text: `${activity.name} ${activity.distance}m`
+            }))}
+          />
         </ScrollView>
       </View>
     );

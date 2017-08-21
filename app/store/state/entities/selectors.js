@@ -1,13 +1,13 @@
 import { get } from "lodash";
 
 import {
-  Loading,
+  IsLoading,
   NotFoundEntity,
   isValid
 } from "../../../dataDefinitions/defects";
 
 export const getEntity = (state, entityType, id) => {
-  if (id === "loading") return Loading;
+  if (id === "loading") return IsLoading;
   return get(state, `entities.${entityType}.${id}`) === undefined
     ? NotFoundEntity
     : state.entities[entityType][id];

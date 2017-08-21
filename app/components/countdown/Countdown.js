@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import { View, Text } from "react-native";
 
-import { msToTime } from "../../../store/services/helpers/moment";
+import { msToTime } from "../../store/services/helpers/moment";
 import styles from "./styles";
-import clock from "../../../hocs/clock";
+import clock from "../../hocs/clock";
 
 class Countdown extends Component {
   static propTypes = {

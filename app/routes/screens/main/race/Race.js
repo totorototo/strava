@@ -14,18 +14,19 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
-import Countdown from "../../../components/countdown/Countdown";
-
+import CountDown from "../../../../components/countdown/Countdown";
 import styles from "./styles";
 
 import {
   isFaulty,
   getDefect,
-  Loading
+  IsLoading
 } from "../../../../dataDefinitions/defects";
 
 import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
+import Loading from "../../../../components/loading/Loading";
+import Faulty from "../../../../components/faulty/Faulty";
 
 const { width, height } = Dimensions.get("window");
 
@@ -112,23 +113,9 @@ class RacePredictor extends Component {
     const { race, clubMembers, shareLocation } = this.props;
     const animatedStyle = { opacity: this.state.expanded ? 1 : 0 };
 
-    if (race === Loading)
-      return (
-        <View style={styles.container}>
-          <Icon name="cached" color="#FC4C02" size={50} />
-          <Text style={styles.text}>fetching data</Text>
-        </View>
-      );
+    if (race === IsLoading) return <Loading />;
 
-    if (isFaulty(race))
-      return (
-        <View style={styles.defectContainer}>
-          <Icon name="error" color="#FC4C02" size={100} />
-          <Text style={styles.text}>
-            Oops, I did it again: {getDefect(race)}
-          </Text>
-        </View>
-      );
+    if (isFaulty(race)) return <Faulty message={getDefect(race)} />;
 
     return (
       <View style={styles.container}>
@@ -182,7 +169,7 @@ class RacePredictor extends Component {
             }
           ]}
         >
-          <Countdown date={race.date} timerStyle={animatedStyle} />
+          <CountDown date={race.date} timerStyle={animatedStyle} />
           <TouchableOpacity>
             <Icon
               name={this.state.expanded ? "expand-less" : "expand-more"}
