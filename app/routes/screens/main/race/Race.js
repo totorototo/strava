@@ -169,7 +169,7 @@ class RacePredictor extends Component {
             }
           ]}
         >
-          <Timer date={race.date} timerStyle={animatedStyle} />
+          <Countdown date={race.date} timerStyle={animatedStyle} />
           <TouchableOpacity>
             <Icon
               name={this.state.expanded ? "expand-less" : "expand-more"}
