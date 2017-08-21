@@ -6,9 +6,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  details: {
-    marginTop: 30
-  },
   text: {
     color: "#FC4C02",
     fontSize: 15
