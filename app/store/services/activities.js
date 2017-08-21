@@ -1,12 +1,9 @@
 import { schema, normalize } from "normalizr";
-
 import { pick } from "lodash";
 
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
-
 import { callJSONApi } from "./helpers/api";
 import { msToTime } from "./helpers/moment";
-
 import { references, referencesWeightings } from "../constants/references";
 
 export const getGivenActivity = (token, activityID) => {

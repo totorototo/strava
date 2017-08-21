@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import { connect } from "react-redux";
-
 import { View, Text, ScrollView } from "react-native";
 import { Card } from "react-native-elements";
 
@@ -12,7 +10,6 @@ import {
   getDefect,
   IsLoading
 } from "../../../../dataDefinitions/defects";
-
 import { getIconName } from "./helper";
 import styles from "./styles";
 import Faulty from "../../../../components/faulty/Faulty";

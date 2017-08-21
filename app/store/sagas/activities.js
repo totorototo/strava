@@ -1,15 +1,12 @@
 import { call, select, put, takeEvery } from "redux-saga/effects";
 
 import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
-
 import { token, getCurrentUserID } from "../state/appState/selectors";
-
 import {
   getAthleteActivities,
   getGivenActivity,
   computePerformance
 } from "../services/activities";
-
 import { updateEntity } from "../actions/entities";
 
 function* getCurrentAthleteActivities() {

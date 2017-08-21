@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
 import {
   View,
   Dimensions,
@@ -10,19 +9,16 @@ import {
   LayoutAnimation
 } from "react-native";
 import { Icon } from "react-native-elements";
-
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
 import CountDown from "../../../../components/countdown/Countdown";
 import styles from "./styles";
-
 import {
   isFaulty,
   getDefect,
   IsLoading
 } from "../../../../dataDefinitions/defects";
-
 import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
 import Loading from "../../../../components/loading/Loading";

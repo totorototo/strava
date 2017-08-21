@@ -1,9 +1,7 @@
 import { call, select, put } from "redux-saga/effects";
 
 import { setEntities } from "../actions/entities";
-
 import { token } from "../state/appState/selectors";
-
 import { getAthleteDetails } from "../services/athlete";
 
 export function* getStats(athleteID) {
