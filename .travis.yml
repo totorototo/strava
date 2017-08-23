@@ -21,4 +21,4 @@ android:
   - android-sdk-license-.+
   - intel-android-extra-license.+
 script:
-- cd android && ./gradlew assembleRelease
+- cd android && ./gradlew assembleRelease --stacktrace --debug
