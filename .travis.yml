@@ -2,6 +2,7 @@ language: android
 before_install:
 - openssl aes-256-cbc -K $encrypted_0b5eff37ea82_key -iv $encrypted_0b5eff37ea82_iv
   -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
 - nvm install 6
 - node --version
 install:
