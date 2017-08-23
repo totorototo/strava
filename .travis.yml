@@ -24,3 +24,15 @@ android:
   - intel-android-extra-license.+
 script:
 - cd android && ./gradlew assembleRelease
+deploy:
+  provider: releases
+  api_key:
+    secure: okpBUibQ+A+4CDvgUlMIq8kw1w9MfmjKLe2RHCAFfwVFHlCKgdDaw2rCXgkP4wcpBkcQqH0WiP0/PqeF/o+Y8K5Co6GRbaPBnCkIFQXWM8fqrICFK0fPY3K2dXUTgYXbsM5bp8P2IC38trhuWNKiOlXCsQL7Q/DVqUdpvc3pmqYAliavOWQHj8xzhnq8otzIjknWiqt7f1f7p68kAD33j8ZoCpdwz/mIAhIYcKT3VibNscJYBFxvdbCIKyH392ai5bXk3ThQVeKAEQtnqW93tM7fXfYOHLQdrKpsGz02mgw0E64i/ulN4wSmNEpWnPqED+WaxoBfYc3cAylvLh0Eom32BZmnSvJTTKSHJYNtxAXbSxvgAAZz4qAcjHccDfu2wQuJ3j1rfaGjtG4kro62tG8jpIHgc6VAPlBXNF9rsfMn5XHaBvTe/mChOD+EY6bvBix+24V5i09CbXCZwxf+cpWqdse5nkaL8GmFqmWX0bLAQHj6DGy1Z1MCTIeZTbpVu5ocbFeOXHwPEHbm2Fb55qyx8YmvPvCOtqRE7nqe5JYPWpPraMJUfg0s32Vo8/kBzU6Hkm5hPmOMSPQDrNdMzin+4Zej1/nkWNdAdFgkXua8sG4C3e4ltx2YxWFNAfrhxlc+9R04Ja8RUns8m/0zbQXThEmZhVkxYufb0xq/tq8=
+  file: strava/build/outputs/apk/*.apk
+  file_glob: "true"
+  skip_cleanup: true
+  on:
+    repo: totorototo/strava
+    branch: ci/travis
+after_success:
+- sh set_tags.sh
