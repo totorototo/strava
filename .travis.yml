@@ -3,7 +3,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_0b5eff37ea82_key -iv $encrypted_0b5eff37ea82_iv
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
-- cp $TRAVIS_BUILD_DIR/my-release-key.keystore $TRAVIS_BUILD_DIR/android/my-release-key.keystore
+- cp $TRAVIS_BUILD_DIR/my-release-key.keystore $TRAVIS_BUILD_DIR/android/app/my-release-key.keystore
 - cp $TRAVIS_BUILD_DIR/keystore.properties $TRAVIS_BUILD_DIR/android/keystore.properties
 - nvm install 6
 - node --version
