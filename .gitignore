@@ -54,3 +54,4 @@ fastlane/screenshots
 /.env
 *.keystore
 *.tar
+keystore.properties
