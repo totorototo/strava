@@ -1,6 +1,8 @@
 language: android
 before_install:
 - openssl aes-256-cbc -K $encrypted_0b5eff37ea82_key -iv $encrypted_0b5eff37ea82_iv
+  -in my-release-key.keystore.enc -out my-release-key.keystore -d
+- openssl aes-256-cbc -K $encrypted_0b5eff37ea82_key -iv $encrypted_0b5eff37ea82_iv
   -in .env.enc -out .env -d
 - nvm install 6
 - node --version
@@ -22,4 +24,4 @@ android:
   - android-sdk-license-.+
   - intel-android-extra-license.+
 script:
-- cd android && ./gradlew assembleRelease --stacktrace --debug
+- cd android && ./gradlew assembleRelease
