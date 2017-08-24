@@ -23,6 +23,7 @@ import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
 import Loading from "../../../../components/loading/Loading";
 import Faulty from "../../../../components/faulty/Faulty";
+import theme from "../../../../theme/theme";
 
 const { width, height } = Dimensions.get("window");
 
@@ -118,8 +119,8 @@ class RacePredictor extends Component {
         <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
           <MapView.Polyline
             coordinates={race.path.coordinates}
-            strokeColor="#FC4C02"
-            fillColor="#FC4C02"
+            strokeColor={theme.PrimaryColor}
+            fillColor={theme.PrimaryColor}
             strokeWidth={3}
           />
           {race.checkPoints.map(marker =>
@@ -128,7 +129,7 @@ class RacePredictor extends Component {
               coordinate={marker.coordinates}
               title={marker.title}
               description={marker.description}
-              pinColor="#FC4C02"
+              pinColor={theme.PrimaryColor}
             />
           )}
           {race.locations &&
@@ -169,7 +170,7 @@ class RacePredictor extends Component {
           <TouchableOpacity>
             <Icon
               name={this.state.expanded ? "expand-less" : "expand-more"}
-              color="#FC4C02"
+              color={theme.paperColorText}
               size={30}
               onPress={this.toggleMenu}
             />

@@ -15,6 +15,7 @@ import styles from "./styles";
 import Faulty from "../../../../components/faulty/Faulty";
 import Loading from "../../../../components/loading/Loading";
 import CardList from "../../../../components/cardList/CardList";
+import theme from "../../../../theme/theme";
 
 // styles
 class ClubFeed extends Component {
@@ -76,7 +77,7 @@ class ClubFeed extends Component {
             title={"AWARDS"}
             list={Object.entries(club.ranking).map(([key, value]) => ({
               key,
-              image: { name: getIconName(key), color: "#FC4C02" },
+              image: { name: getIconName(key), color: theme.PrimaryColor },
               text: value.athlete
             }))}
           />

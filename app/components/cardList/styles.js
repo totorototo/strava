@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import theme from "../../theme/theme";
+
 export default StyleSheet.create({
   containerCardStyle: {
     padding: 15,
@@ -13,7 +15,7 @@ export default StyleSheet.create({
     marginRight: 0
   },
   card: {
-    color: "#FC4C02"
+    color: theme.paperColorText
   },
   item: {
     flex: 1,
@@ -25,7 +27,7 @@ export default StyleSheet.create({
     height: 20
   },
   text: {
-    color: "#FC4C02",
+    color: theme.paperColorText,
     marginBottom: 10,
     marginLeft: 10
   }

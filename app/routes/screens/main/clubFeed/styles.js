@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import theme from "../../../../theme/theme";
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -38,7 +40,7 @@ export default StyleSheet.create({
     height: 20
   },
   text: {
-    color: "#FC4C02",
+    color: theme.paperColorText,
     marginBottom: 10,
     marginLeft: 10
   },
@@ -49,6 +51,6 @@ export default StyleSheet.create({
     marginBottom: 0
   },
   card: {
-    color: "#FC4C02"
+    color: theme.paperColorText
   }
 });

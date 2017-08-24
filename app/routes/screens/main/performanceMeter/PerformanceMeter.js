@@ -13,6 +13,7 @@ import {
 import selector from "./selector";
 import styles from "./styles";
 import Loading from "../../../../components/loading/Loading";
+import theme from "../../../../theme/theme";
 
 class PerformanceMeter extends Component {
   static propTypes = {
@@ -71,8 +72,9 @@ class PerformanceMeter extends Component {
           indeterminate={this.state.indeterminate}
           showsText
           size={200}
-          color="#FC4C02"
-          borderColor="#FC4C02"
+          color={theme.backgroundColorText}
+          borderColor={theme.backgroundColorText}
+          // wtf is this color
           unifiledColor="#559988"
         />
         {athlete.performance &&
