@@ -35,6 +35,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: totorototo/strava
-    branch: ci/travis
-after_success:
-- sh set_tags.sh
+    tags: true
