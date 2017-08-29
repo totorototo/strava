@@ -37,4 +37,4 @@ deploy:
     repo: totorototo/strava 
     branch: ci/travis
   after_success:
-    -sh set_tags.sh
+    - ./set_tags.sh
