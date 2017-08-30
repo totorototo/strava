@@ -34,7 +34,6 @@ deploy:
   file_glob: 'true'
   skip_cleanup: true
   on:
-    repo: totorototo/strava 
-    branch: ci/travis
+    repo: totorototo/strava     
   after_success:
     - ./set_tags.sh
