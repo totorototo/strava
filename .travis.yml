@@ -34,4 +34,6 @@ deploy:
   skip_cleanup: true
   on:
     repo: totorototo/strava
+    tags: false
+    all_branches: true
 
