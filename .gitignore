@@ -52,3 +52,6 @@ fastlane/Preview.html
 fastlane/screenshots
 /.tmp/
 /.env
+*.keystore
+*.tar
+keystore.properties
