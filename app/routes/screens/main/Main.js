@@ -6,6 +6,7 @@ import Details from "./details/Details";
 import ClubFeed from "./clubFeed/ClubFeed";
 import PerformanceMeter from "./performanceMeter/PerformanceMeter";
 import RacePredictor from "./race/Race";
+import theme from "../../../theme/theme";
 
 const Main = TabNavigator(
   {
@@ -13,28 +14,32 @@ const Main = TabNavigator(
       screen: PerformanceMeter,
       navigationOptions: {
         tabBarLabel: "lyb-mtr",
-        tabBarIcon: () => <Icon reverse name="whatshot" color="#FC4C02" />
+        tabBarIcon: () =>
+          <Icon reverse name="whatshot" color={theme.PrimaryColor} />
       }
     },
     RacePredictor: {
       screen: RacePredictor,
       navigationOptions: {
         tabBarLabel: "race",
-        tabBarIcon: () => <Icon reverse name="timer" color="#FC4C02" />
+        tabBarIcon: () =>
+          <Icon reverse name="timer" color={theme.PrimaryColor} />
       }
     },
     Details: {
       screen: Details,
       navigationOptions: {
         tabBarLabel: "athlete",
-        tabBarIcon: () => <Icon reverse name="face" color="#FC4C02" />
+        tabBarIcon: () =>
+          <Icon reverse name="face" color={theme.PrimaryColor} />
       }
     },
     ClubFeed: {
       screen: ClubFeed,
       navigationOptions: {
         tabBarLabel: "leaks",
-        tabBarIcon: () => <Icon reverse name="comment" color="#FC4C02" />
+        tabBarIcon: () =>
+          <Icon reverse name="comment" color={theme.PrimaryColor} />
       }
     }
   },
@@ -45,12 +50,13 @@ const Main = TabNavigator(
       showIcon: true,
       labelStyle: {
         fontSize: 12,
-        color: "white"
+        color: theme.PrimaryColorText
       },
       style: {
-        backgroundColor: "#FC4C02"
+        backgroundColor: theme.PrimaryColor
       },
       indicatorStyle: {
+        // TODO replace color
         backgroundColor: "white"
       },
       tabStyle: {

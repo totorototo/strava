@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import theme from "../../../../theme/theme";
+
 export default StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
@@ -16,7 +18,7 @@ export default StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    backgroundColor: "white",
+    backgroundColor: theme.paperColor,
     opacity: 0.6,
     flexDirection: "column",
     justifyContent: "flex-end",
@@ -27,10 +29,11 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject
   },
   text: {
-    color: "#FC4C02",
+    color: theme.backgroundColorText,
     textAlign: "center"
   },
   bubble: {
+    // todo handle transparency theme
     backgroundColor: "rgba(255,255,255,0.7)",
     paddingHorizontal: 18,
     paddingVertical: 12
@@ -53,6 +56,6 @@ export default StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
-    color: "#FC4C02"
+    color: theme.paperColorText
   }
 });

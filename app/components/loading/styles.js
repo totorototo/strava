@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import theme from "../../theme/theme";
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -7,7 +9,8 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    color: "#FC4C02",
+    // todo check if it always valid color
+    color: theme.paperColorText,
     fontSize: 15
   }
 });

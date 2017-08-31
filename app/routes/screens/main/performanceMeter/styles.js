@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 
+import theme from "../../../../theme/theme";
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -10,7 +12,7 @@ export default StyleSheet.create({
     marginTop: 30
   },
   text: {
-    color: "#FC4C02",
+    color: theme.backgroundColorText,
     fontSize: 15
   }
 });
