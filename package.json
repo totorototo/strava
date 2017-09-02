@@ -35,7 +35,7 @@
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.12",
     "react-devtools": "^2.5.0",
-    "react-native": "0.47.1",
+    "react-native": "0.48.0",
     "react-native-config": "^0.6.0",
     "react-native-elements": "^0.15.0",
     "react-native-maps": "^0.16.0",
