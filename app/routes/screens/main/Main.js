@@ -18,20 +18,20 @@ const Main = TabNavigator(
           <Icon reverse name="whatshot" color={theme.PrimaryColor} />
       }
     },
-    RacePredictor: {
-      screen: RacePredictor,
-      navigationOptions: {
-        tabBarLabel: "race",
-        tabBarIcon: () =>
-          <Icon reverse name="timer" color={theme.PrimaryColor} />
-      }
-    },
     Details: {
       screen: Details,
       navigationOptions: {
         tabBarLabel: "athlete",
         tabBarIcon: () =>
           <Icon reverse name="face" color={theme.PrimaryColor} />
+      }
+    },
+    RacePredictor: {
+      screen: RacePredictor,
+      navigationOptions: {
+        tabBarLabel: "race",
+        tabBarIcon: () =>
+          <Icon reverse name="timer" color={theme.PrimaryColor} />
       }
     },
     ClubFeed: {

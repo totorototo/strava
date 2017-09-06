@@ -12,7 +12,23 @@ export default StyleSheet.create({
     width: 50,
     height: 50
   },
+  athleteImageStyle: {
+    padding: 0,
+    margin: 0,
+    borderWidth: 0
+  },
   text: {
-    color: theme.backgroundColorText
+    color: theme.paperColorText,
+    marginBottom: 10,
+    marginLeft: 10
+  },
+  card: {
+    color: theme.paperColorText
+  },
+  scroll: {
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0
   }
 });

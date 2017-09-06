@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { Circle } from "react-native-progress";
 
 import Faulty from "../../../../components/faulty/Faulty";
@@ -77,17 +77,6 @@ class PerformanceMeter extends Component {
           // wtf is this color
           unifiledColor="#559988"
         />
-        {athlete.performance &&
-        athlete.performance.details &&
-        athlete.performance.details.length > 0
-          ? <View style={styles.details}>
-              {athlete.performance.details.map(detail =>
-                <Text style={styles.text} key={detail.name}>
-                  {detail.name} {detail.value} {detail.unit && detail.unit}
-                </Text>
-              )}
-            </View>
-          : null}
       </View>
     );
   }
