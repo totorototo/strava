@@ -55,7 +55,7 @@ class ClubFeed extends Component {
           <Card
             containerStyle={styles.clubImageStyle}
             titleStyle={styles.card}
-            title="LYBITOS - GRP 2017"
+            title="LYBITOS"
             image={{ uri: club.cover_photo }}
           >
             <Text style={styles.text}>
@@ -65,7 +65,7 @@ class ClubFeed extends Component {
           </Card>
 
           <CardList
-            title={"Member"}
+            title={"MEMBERS"}
             list={clubMembers.map(member => ({
               key: member.id,
               image: member.profile,
@@ -87,7 +87,7 @@ class ClubFeed extends Component {
             list={activities.map((activity, index) => ({
               key: index,
               image: activity.athlete.profile,
-              text: `${activity.name} ${activity.distance}m`
+              text: activity.name
             }))}
           />
         </ScrollView>
