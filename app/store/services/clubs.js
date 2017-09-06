@@ -70,7 +70,10 @@ export const listClubActivities = (token, id) => {
         RESOURCES.CLUBS}/${id}/${RESOURCES.CLUB_ACTIVITIES}`,
       httpVerb: METHODS.GET
     },
-    token
+    token,
+    queryParameters: {
+      per_page: 200
+    }
   };
   return callJSONApi(request).then(
     response => {
