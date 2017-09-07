@@ -18,7 +18,7 @@ export default StyleSheet.create({
     top: 0,
     right: 0,
     left: 0,
-    backgroundColor: theme.paperColor,
+    backgroundColor: theme.PaperColor,
     opacity: 0.6,
     flexDirection: "column",
     justifyContent: "flex-end",
@@ -29,7 +29,7 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject
   },
   text: {
-    color: theme.backgroundColorText,
+    color: theme.BackgroundColorText,
     textAlign: "center"
   },
   bubble: {
@@ -56,6 +56,6 @@ export default StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
-    color: theme.paperColorText
+    color: theme.PaperColorText
   }
 });

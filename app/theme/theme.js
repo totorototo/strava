@@ -1,13 +1,13 @@
 export default {
-  PrimaryColor: "black", // "#FC4C02",
-  PrimaryColorText: "#ffffff",
+  PrimaryColor: "#FC4C02", // "#FC4C02",
+  PrimaryColorText: "white",
 
-  SecondaryColor: "",
-  SecondaryColorText: "",
+  SecondaryColor: "black",
+  SecondaryColorText: "white",
 
-  paperColor: "#ffffff",
-  paperColorText: "black", // "#FC4C02",
+  PaperColor: "#ffffff",
+  PaperColorText: "black", // "#FC4C02",
 
-  backgroundColor: "#eff2f6",
-  backgroundColorText: "#333"
+  BackgroundColor: "#eff2f6",
+  BackgroundColorText: "#333"
 };

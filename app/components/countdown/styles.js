@@ -9,7 +9,7 @@ export default StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    color: theme.paperColorText,
+    color: theme.PaperColorText,
     textAlign: "center",
     fontSize: 40
   }

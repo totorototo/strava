@@ -40,7 +40,7 @@ export default StyleSheet.create({
     height: 20
   },
   text: {
-    color: theme.paperColorText,
+    color: theme.PaperColorText,
     marginBottom: 10,
     marginLeft: 10
   },
@@ -51,6 +51,6 @@ export default StyleSheet.create({
     marginBottom: 0
   },
   card: {
-    color: theme.paperColorText
+    color: theme.PaperColorText
   }
 });

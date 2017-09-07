@@ -14,12 +14,12 @@ export default StyleSheet.create({
     borderWidth: 0
   },
   text: {
-    color: theme.paperColorText,
+    color: theme.PaperColorText,
     marginBottom: 10,
     marginLeft: 10
   },
   card: {
-    color: theme.paperColorText
+    color: theme.PaperColorText
   },
   scroll: {
     marginTop: 0,

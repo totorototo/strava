@@ -15,20 +15,15 @@ export default StyleSheet.create({
     marginRight: 0
   },
   card: {
-    color: theme.paperColorText
+    color: theme.PaperColorText
   },
   item: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-start"
+    paddingVertical: 10
   },
   image: {
     width: 20,
     height: 20
-  },
-  text: {
-    color: theme.paperColorText,
-    marginBottom: 10,
-    marginLeft: 10
   }
 });

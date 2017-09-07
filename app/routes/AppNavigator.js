@@ -11,7 +11,7 @@ import theme from "../theme/theme";
 const { URL_SHEME_PREFIX, URL_SHEME_HOST } = Config;
 
 const navigatorOptions = {
-  cardStyle: { flex: 1, marginTop: 0, backgroundColor: theme.backgroundColor },
+  cardStyle: { flex: 1, marginTop: 0, backgroundColor: theme.BackgroundColor },
   headerMode: "none"
 };
 

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Card, Icon } from "react-native-elements";
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 
 import styles from "./styles";
+import Paragraph from "../typography/paragraph/Paragraph";
 
 export default class CardList extends Component {
   static propTypes = {
@@ -47,9 +48,9 @@ export default class CardList extends Component {
                   source={{ uri: item.image.toString() }}
                 />
               : <Icon color={item.image.color} name={item.image.name} />}
-            <Text style={styles.text}>
+            <Paragraph>
               {item.text}
-            </Text>
+            </Paragraph>
           </View>
         )}
       </Card>

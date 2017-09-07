@@ -10,7 +10,7 @@ export default StyleSheet.create({
   },
   text: {
     // todo check if it always valid color
-    color: theme.paperColorText,
+    color: theme.PaperColorText,
     textAlign: "center",
     fontSize: 40
   }
