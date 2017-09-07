@@ -15,15 +15,7 @@ const Main = TabNavigator(
       navigationOptions: {
         tabBarLabel: "lyb-mtr",
         tabBarIcon: () =>
-          <Icon reverse name="whatshot" color={theme.PrimaryColor} />
-      }
-    },
-    RacePredictor: {
-      screen: RacePredictor,
-      navigationOptions: {
-        tabBarLabel: "race",
-        tabBarIcon: () =>
-          <Icon reverse name="timer" color={theme.PrimaryColor} />
+          <Icon reverse name="network-check" color={theme.PrimaryColor} />
       }
     },
     Details: {
@@ -32,6 +24,14 @@ const Main = TabNavigator(
         tabBarLabel: "athlete",
         tabBarIcon: () =>
           <Icon reverse name="face" color={theme.PrimaryColor} />
+      }
+    },
+    RacePredictor: {
+      screen: RacePredictor,
+      navigationOptions: {
+        tabBarLabel: "events",
+        tabBarIcon: () =>
+          <Icon reverse name="event" color={theme.PrimaryColor} />
       }
     },
     ClubFeed: {
