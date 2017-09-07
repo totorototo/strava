@@ -8,10 +8,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  image: {
-    width: 50,
-    height: 50
-  },
   athleteImageStyle: {
     padding: 0,
     margin: 0,

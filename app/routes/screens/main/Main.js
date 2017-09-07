@@ -15,7 +15,7 @@ const Main = TabNavigator(
       navigationOptions: {
         tabBarLabel: "lyb-mtr",
         tabBarIcon: () =>
-          <Icon reverse name="whatshot" color={theme.PrimaryColor} />
+          <Icon reverse name="network-check" color={theme.PrimaryColor} />
       }
     },
     Details: {
@@ -29,9 +29,9 @@ const Main = TabNavigator(
     RacePredictor: {
       screen: RacePredictor,
       navigationOptions: {
-        tabBarLabel: "race",
+        tabBarLabel: "events",
         tabBarIcon: () =>
-          <Icon reverse name="timer" color={theme.PrimaryColor} />
+          <Icon reverse name="event" color={theme.PrimaryColor} />
       }
     },
     ClubFeed: {

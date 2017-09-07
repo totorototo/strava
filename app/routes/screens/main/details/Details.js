@@ -57,7 +57,9 @@ class Details extends Component {
                     name: getIconName(detail.name),
                     color: theme.PrimaryColor
                   },
-                  text: `${detail.value}  ${detail.unit}`
+                  text: `${detail.value}  ${detail.unit !== undefined
+                    ? detail.unit
+                    : ""}`
                 }))}
               />
             : null}
