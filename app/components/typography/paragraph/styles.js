@@ -3,22 +3,13 @@ import { StyleSheet } from "react-native";
 import theme from "../../../theme/theme";
 
 export default StyleSheet.create({
-  level1: {
-    fontSize: 18
-  },
-  level2: {
-    fontSize: 24
-  },
-  level3: {
-    fontSize: 30
-  },
-  modeprimary: {
+  mode_primary: {
     color: theme.PrimaryColorText
   },
-  modesecondary: {
+  mode_secondary: {
     color: theme.SecondaryColorText
   },
-  modepaper: {
+  mode_paper: {
     color: theme.Paper
   }
 });

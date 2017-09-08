@@ -6,14 +6,14 @@ import styles from "./styles";
 
 class Title extends Component {
   static propTypes = {
-    level: PropTypes.oneOf([1, 2, 3]),
-    mode: PropTypes.oneOf(["primary", "secondary"]),
+    level: PropTypes.oneOf(["huge", 1, 2, 3]),
+    mode: PropTypes.oneOf(["primary", "secondary", "paper"]),
     style: PropTypes.shape({})
   };
 
   static defaultProps = {
     level: 1,
-    mode: "primary",
+    mode: "paper",
     style: null
   };
 
@@ -23,8 +23,8 @@ class Title extends Component {
         {...this.props}
         style={[
           this.props.style,
-          styles[`level${this.props.level}`],
-          styles[`mode${this.props.mode}`]
+          styles[`level_${this.props.level}`],
+          styles[`mode_${this.props.mode}`]
         ]}
       />
     );
