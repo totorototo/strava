@@ -12,7 +12,7 @@ import { Icon } from "react-native-elements";
 import MapView from "react-native-maps";
 import { connect } from "react-redux";
 
-import CountDown from "../../../components/uncommon/countdown/Countdown";
+import CountDown from "../../../components/specific/countdown/Countdown";
 import styles from "./styles";
 import {
   isFaulty,
@@ -177,9 +177,6 @@ class RacePredictor extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
-          {
-            // todo replace by button
-          }
           <TouchableOpacity
             style={[styles.bubble, styles.button]}
             onPress={shareLocation}
