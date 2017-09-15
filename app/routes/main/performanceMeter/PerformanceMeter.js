@@ -72,8 +72,8 @@ class PerformanceMeter extends Component {
           indeterminate={this.state.indeterminate}
           showsText
           size={200}
-          color={theme.BackgroundColorText}
-          borderColor={theme.BackgroundColorText}
+          color={theme.BackgroundTextColor}
+          borderColor={theme.BackgroundTextColor}
           // wtf is this color
           unifiledColor="#559988"
         />

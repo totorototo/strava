@@ -46,6 +46,6 @@ export default StyleSheet.create({
     marginBottom: 0
   },
   card: {
-    color: theme.PaperColorText
+    color: theme.PrimaryTextColor
   }
 });

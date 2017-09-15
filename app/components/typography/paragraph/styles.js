@@ -4,12 +4,12 @@ import theme from "../../../theme/theme";
 
 export default StyleSheet.create({
   mode_primary: {
-    color: theme.PrimaryColorText
+    color: theme.PrimaryTextColor
   },
   mode_secondary: {
-    color: theme.SecondaryColorText
+    color: theme.SecondaryTextColor
   },
   mode_paper: {
-    color: theme.Paper
+    color: theme.PaperTextColor
   }
 });

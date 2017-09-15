@@ -16,10 +16,10 @@ export default StyleSheet.create({
     fontSize: 30
   },
   mode_primary: {
-    color: theme.PrimaryColorText
+    color: theme.PrimaryTextColor
   },
   mode_secondary: {
-    color: theme.SecondaryColorText
+    color: theme.SecondaryTextColor
   },
   mode_paper: {
     color: theme.Paper

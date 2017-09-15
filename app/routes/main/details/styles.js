@@ -14,7 +14,7 @@ export default StyleSheet.create({
     borderWidth: 0
   },
   card: {
-    color: theme.PaperColorText
+    color: theme.PrimaryTextColor
   },
   scroll: {
     marginTop: 0,

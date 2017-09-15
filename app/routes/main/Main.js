@@ -50,7 +50,7 @@ const Main = TabNavigator(
       showIcon: true,
       labelStyle: {
         fontSize: 12,
-        color: theme.PrimaryColorText
+        color: theme.SecondaryTextColor
       },
       style: {
         backgroundColor: theme.PrimaryColor

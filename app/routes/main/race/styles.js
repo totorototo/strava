@@ -29,7 +29,7 @@ export default StyleSheet.create({
     ...StyleSheet.absoluteFillObject
   },
   text: {
-    color: theme.BackgroundColorText,
+    color: theme.BackgroundTextColor,
     textAlign: "center"
   },
   bubble: {
@@ -56,6 +56,6 @@ export default StyleSheet.create({
   },
   buttonText: {
     textAlign: "center",
-    color: theme.PaperColorText
+    color: theme.PaperTextColor
   }
 });

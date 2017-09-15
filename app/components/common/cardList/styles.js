@@ -15,7 +15,7 @@ export default StyleSheet.create({
     marginRight: 0
   },
   card: {
-    color: theme.PaperColorText
+    color: theme.PrimaryTextColor
   },
   item: {
     flex: 1,

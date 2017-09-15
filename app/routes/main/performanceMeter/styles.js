@@ -12,7 +12,7 @@ export default StyleSheet.create({
     marginTop: 30
   },
   text: {
-    color: theme.BackgroundColorText,
+    color: theme.BackgroundTextColor,
     fontSize: 15
   }
 });

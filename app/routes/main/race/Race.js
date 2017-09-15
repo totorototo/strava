@@ -170,7 +170,7 @@ class RacePredictor extends Component {
           <TouchableOpacity>
             <Icon
               name={this.state.expanded ? "expand-less" : "expand-more"}
-              color={theme.PaperColorText}
+              color={theme.PaperTextColor}
               size={30}
               onPress={this.toggleMenu}
             />

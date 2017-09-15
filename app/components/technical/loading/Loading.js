@@ -11,7 +11,7 @@ export default class Loading extends Component {
     return (
       <View style={styles.container}>
         <Icon name="cached" color={theme.PrimaryColor} size={50} />
-        <Title>fetching data</Title>
+        <Title mode={"primary"}>fetching data</Title>
       </View>
     );
   }

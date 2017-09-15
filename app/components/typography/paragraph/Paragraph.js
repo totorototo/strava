@@ -11,7 +11,7 @@ class Paragraph extends Component {
   };
 
   static defaultProps = {
-    mode: "paper",
+    mode: "primary",
     style: null
   };
 
@@ -19,7 +19,7 @@ class Paragraph extends Component {
     return (
       <Text
         {...this.props}
-        style={[this.props.style, styles[`mode${this.props.mode}`]]}
+        style={[this.props.style, styles[`mode_${this.props.mode}`]]}
       />
     );
   }
