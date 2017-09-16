@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   View,
   Dimensions,
-  Text,
   TouchableOpacity,
   NativeModules,
   LayoutAnimation
@@ -24,6 +23,7 @@ import mapDispatchToProps from "./mapDispatchToProps";
 import Loading from "../../../components/technical/loading/Loading";
 import Faulty from "../../../components/technical/faulty/Faulty";
 import theme from "../../../theme/theme";
+import Link from "../../../components/typography/link/Link";
 
 const { width, height } = Dimensions.get("window");
 
@@ -176,13 +176,8 @@ class RacePredictor extends Component {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.bubble, styles.button]}
-            onPress={shareLocation}
-          >
-            <Text style={styles.buttonText}>Spot me!</Text>
-          </TouchableOpacity>
+        <View style={[styles.buttonContainer, styles.bubble]}>
+          <Link onPress={shareLocation}>Spot me!</Link>
         </View>
       </View>
     );

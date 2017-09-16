@@ -42,20 +42,9 @@ export default StyleSheet.create({
     width: 200,
     alignItems: "stretch"
   },
-  button: {
-    width: 100,
-    paddingHorizontal: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: 5
-  },
   buttonContainer: {
     flexDirection: "row",
     marginVertical: 20,
     backgroundColor: "transparent"
-  },
-  buttonText: {
-    textAlign: "center",
-    color: theme.PaperTextColor
   }
 });
