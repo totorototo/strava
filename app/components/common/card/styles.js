@@ -16,15 +16,5 @@ export default StyleSheet.create({
   },
   card: {
     color: theme.PrimaryTextColor
-  },
-  item: {
-    flex: 1,
-    flexDirection: "row",
-    paddingVertical: 10
-  },
-  image: {
-    width: 20,
-    height: 20,
-    marginRight: 20
   }
 });

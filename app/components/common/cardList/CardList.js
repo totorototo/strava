@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, Icon } from "react-native-elements";
+import { Icon } from "react-native-elements";
 import { View, Image } from "react-native";
 
 import styles from "./styles";
 import Paragraph from "../../typography/paragraph/Paragraph";
+import Card from "../card/Card";
 
 export default class CardList extends Component {
   static propTypes = {
@@ -26,20 +27,12 @@ export default class CardList extends Component {
   };
 
   static defaultProps = {
-    list: null
+    list: []
   };
 
   render() {
-    // FIXME may be we should display something anyway
-    if (!this.props.list) return null;
-
     return (
-      <Card
-        dividerStyle={styles.dividerStyle}
-        containerStyle={styles.containerCardStyle}
-        titleStyle={styles.card}
-        title={this.props.title}
-      >
+      <Card title={this.props.title}>
         {this.props.list.map(item =>
           <View key={item.key} style={styles.item}>
             {typeof item.image === "string"
@@ -47,7 +40,11 @@ export default class CardList extends Component {
                   style={styles.image}
                   source={{ uri: item.image.toString() }}
                 />
-              : <Icon color={item.image.color} name={item.image.name} />}
+              : <Icon
+                  style={styles.image}
+                  color={item.image.color}
+                  name={item.image.name}
+                />}
             <Paragraph>
               {item.text}
             </Paragraph>
