@@ -9,7 +9,7 @@ import Card from "../card/Card";
 
 export default class CardList extends Component {
   static propTypes = {
-    title: Card.propTypes.title.isRequired,
+    title: Card.propTypes.title,
     list: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
@@ -27,6 +27,7 @@ export default class CardList extends Component {
   };
 
   static defaultProps = {
+    title: null,
     list: []
   };
 

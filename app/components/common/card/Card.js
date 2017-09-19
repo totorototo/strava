@@ -6,14 +6,16 @@ import styles from "./styles";
 
 export default class Card extends Component {
   static propTypes = {
-    title: NativeCard.propTypes.title.isRequired,
+    title: NativeCard.propTypes.title,
     children: PropTypes.node,
-    image: NativeCard.propTypes.image.isRequired
+    image: NativeCard.propTypes.image
   };
 
   static defaultProps = {
+    title: null,
     list: [],
-    children: null
+    children: null,
+    image: null
   };
 
   render() {

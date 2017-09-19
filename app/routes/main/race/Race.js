@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  View,
-  Dimensions,
-  TouchableOpacity,
-  NativeModules,
-  LayoutAnimation
-} from "react-native";
-import { Icon } from "react-native-elements";
-import MapView from "react-native-maps";
+import { View } from "react-native";
 import { connect } from "react-redux";
 
 import CountDown from "../../../components/specific/countdown/Countdown";
@@ -22,33 +14,9 @@ import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
 import Loading from "../../../components/technical/loading/Loading";
 import Faulty from "../../../components/technical/faulty/Faulty";
-import theme from "../../../theme/theme";
 import Link from "../../../components/typography/link/Link";
-
-const { width, height } = Dimensions.get("window");
-
-const ASPECT_RATIO = width / height;
-const LATITUDE = 42.78386;
-const LONGITUDE = 0.15844;
-const LATITUDE_DELTA = 0.37;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-const SAMPLE_REGION = {
-  latitude: LATITUDE,
-  longitude: LONGITUDE,
-  latitudeDelta: LATITUDE_DELTA,
-  longitudeDelta: LONGITUDE_DELTA
-};
-
-const EXPANDED_MENU_HEIGHT = 150;
-const COLLAPSED_MENU_HEIGHT = 35;
-
-const { UIManager } = NativeModules;
-
-// Enable LayoutAnimation under Android
-// eslint-disable-next-line
-UIManager.setLayoutAnimationEnabledExperimental &&
-  UIManager.setLayoutAnimationEnabledExperimental(true);
+import RaceMap from "../../../components/specific/map/RaceMap";
+import CollapsableDrawer from "../../../components/specific/collapsableDrawer/CollapsableDrawer";
 
 class RacePredictor extends Component {
   static propTypes = {
@@ -86,29 +54,8 @@ class RacePredictor extends Component {
     shareLocation: PropTypes.func.isRequired
   };
 
-  static intToColor(id = 0) {
-    // eslint-disable-next-line
-    const c = (id & 0x00ffffff).toString(16).toUpperCase();
-    return `#${"00000".substring(0, 6 - c.length)}${c}`;
-  }
-
-  state = {
-    expanded: false
-  };
-
-  getAthlete = (athletes = [], id) => {
-    athletes.find(athlete => athlete.id === id);
-  };
-
-  toggleMenu = () => {
-    // Animate the update
-    LayoutAnimation.spring();
-    this.setState({ expanded: !this.state.expanded });
-  };
-
   render() {
     const { race, clubMembers, shareLocation } = this.props;
-    const animatedStyle = { opacity: this.state.expanded ? 1 : 0 };
 
     if (race === IsLoading) return <Loading />;
 
@@ -116,66 +63,10 @@ class RacePredictor extends Component {
 
     return (
       <View style={styles.container}>
-        <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
-          <MapView.Polyline
-            coordinates={race.path.coordinates}
-            strokeColor={theme.PrimaryColor}
-            fillColor={theme.PrimaryColor}
-            strokeWidth={3}
-          />
-          {race.checkPoints.map(marker =>
-            <MapView.Marker
-              key={marker.title + marker.description}
-              coordinate={marker.coordinates}
-              title={marker.title}
-              description={marker.description}
-              pinColor={theme.PrimaryColor}
-            />
-          )}
-          {race.locations &&
-            Object.entries(race.locations).map(([id, location]) => {
-              const coordinate = {
-                longitude:
-                  (location.coords && location.coords.longitude) || 0.15844,
-                latitude:
-                  (location.coords && location.coords.latitude) || 42.78386
-              };
-
-              const trailRunner = clubMembers.find(
-                athlete => athlete.id === parseInt(id, 10)
-              );
-
-              return (
-                <MapView.Marker
-                  coordinate={coordinate}
-                  title={trailRunner ? trailRunner.firstname : id}
-                  description={new Date(location.timestamp).toLocaleString()}
-                  pinColor={RacePredictor.intToColor(id)}
-                  key={id}
-                />
-              );
-            })}
-        </MapView>
-        <View
-          style={[
-            styles.overlay,
-            {
-              height: this.state.expanded
-                ? EXPANDED_MENU_HEIGHT
-                : COLLAPSED_MENU_HEIGHT
-            }
-          ]}
-        >
-          <CountDown date={race.date} timerStyle={animatedStyle} />
-          <TouchableOpacity>
-            <Icon
-              name={this.state.expanded ? "expand-less" : "expand-more"}
-              color={theme.PaperTextColor}
-              size={30}
-              onPress={this.toggleMenu}
-            />
-          </TouchableOpacity>
-        </View>
+        <RaceMap race={race} clubMembers={clubMembers} />
+        <CollapsableDrawer>
+          <CountDown date={race.date} />
+        </CollapsableDrawer>
         <View style={[styles.buttonContainer, styles.bubble]}>
           <Link onPress={shareLocation}>Spot me!</Link>
         </View>
