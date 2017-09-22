@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
+import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import CountDown from "../../../components/specific/countdown/Countdown";
 import styles from "./styles";
 import {
@@ -75,4 +77,7 @@ class RacePredictor extends Component {
   }
 }
 
-export default connect(selector, mapDispatchToProps)(RacePredictor);
+export default compose(
+  enhanceWithValidEntities(({ race }) => [race]),
+  connect(selector, mapDispatchToProps)
+)(RacePredictor);

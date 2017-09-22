@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native";
+import { compose } from "redux";
 
+import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
-import {
-  isFaulty,
-  getDefect,
-  IsLoading
-} from "../../../dataDefinitions/defects";
 import styles from "./styles";
-import Faulty from "../../../components/technical/faulty/Faulty";
-import Loading from "../../../components/technical/loading/Loading";
 import ClubCard from "../../../components/specific/cards/ClubCard";
 import ClubAwardsCard from "../../../components/specific/cards/ClubAwardsCard";
 import ClubMembersCard from "../../../components/specific/cards/ClubMembersCard";
@@ -45,9 +40,6 @@ class ClubFeed extends Component {
 
   render() {
     const { club, clubMembers, activities } = this.props;
-    if (club === IsLoading) return <Loading />;
-
-    if (isFaulty(club)) return <Faulty message={getDefect(club)} />;
 
     return (
       <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -60,4 +52,7 @@ class ClubFeed extends Component {
   }
 }
 
-export default connect(selector)(ClubFeed);
+export default compose(
+  enhanceWithValidEntities(({ club }) => [club]),
+  connect(selector)
+)(ClubFeed);
