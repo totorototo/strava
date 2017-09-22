@@ -2,16 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ScrollView } from "react-native";
 import { connect } from "react-redux";
+import { compose } from "redux";
 
-import {
-  isFaulty,
-  getDefect,
-  IsLoading
-} from "../../../dataDefinitions/defects";
+import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
 import styles from "./styles";
-import Loading from "../../../components/technical/loading/Loading";
-import Faulty from "../../../components/technical/faulty/Faulty";
 import AthleteCard from "../../../components/specific/cards/AthleteCard";
 import AthleteDetailsCard from "../../../components/specific/cards/AthleteDetailsCard";
 
@@ -26,10 +21,6 @@ class Details extends Component {
 
   render() {
     const { athlete } = this.props;
-    if (athlete === IsLoading) return <Loading />;
-
-    if (isFaulty(athlete)) return <Faulty message={getDefect(athlete)} />;
-
     // TODO add idx https://github.com/facebookincubator/idx
     return (
       <ScrollView style={[styles.scroll]} showsVerticalScrollIndicator={false}>
@@ -47,4 +38,7 @@ class Details extends Component {
   }
 }
 
-export default connect(selector)(Details);
+export default compose(
+  enhanceWithValidEntities(({ athlete }) => [athlete]),
+  connect(selector)
+)(Details);
