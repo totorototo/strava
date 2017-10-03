@@ -5,10 +5,10 @@ import Loading from "../components/technical/loading/Loading";
 import Faulty from "../components/technical/faulty/Faulty";
 import { isFaulty, isLoading, getDefect } from "../dataDefinitions/defects";
 
-export default test => WrappedComponent => {
+export default entities => WrappedComponent => {
   class EnhancedComponent extends Component {
     render() {
-      const data = test(this.props);
+      const data = entities(this.props);
       const faultyEntity = data.find(isFaulty);
       if (faultyEntity) return <Faulty message={getDefect(faultyEntity)} />;
 
