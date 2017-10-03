@@ -9,7 +9,7 @@ import selector from "./selector";
 import styles from "./styles";
 import Progress from "../../../components/common/progress/Progress";
 
-class PerformanceMeter extends Component {
+class AthletePerformanceLevel extends Component {
   static propTypes = {
     athlete: PropTypes.shape({
       firstname: PropTypes.string,
@@ -37,4 +37,4 @@ class PerformanceMeter extends Component {
 export default compose(
   enhanceWithValidEntities(({ athlete }) => [athlete]),
   connect(selector)
-)(PerformanceMeter);
+)(AthletePerformanceLevel);

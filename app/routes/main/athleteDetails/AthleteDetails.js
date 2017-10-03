@@ -10,7 +10,7 @@ import styles from "./styles";
 import AthleteCard from "../../../components/specific/cards/AthleteCard";
 import AthleteDetailsCard from "../../../components/specific/cards/AthleteDetailsCard";
 
-class Details extends Component {
+class AthleteDetails extends Component {
   static propTypes = {
     athlete: PropTypes.shape({
       firstname: PropTypes.string,
@@ -41,4 +41,4 @@ class Details extends Component {
 export default compose(
   enhanceWithValidEntities(({ athlete }) => [athlete]),
   connect(selector)
-)(Details);
+)(AthleteDetails);

@@ -2,10 +2,10 @@ import React from "react";
 import { TabNavigator } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import Details from "./details/Details";
+import Details from "./athleteDetails/AthleteDetails";
 import ClubFeed from "./clubFeed/ClubFeed";
-import PerformanceMeter from "./performanceMeter/PerformanceMeter";
-import RacePredictor from "./race/Race";
+import PerformanceMeter from "./athletePerformanceLevel/AthletePerformanceLevel";
+import RacePredictor from "./clubEvents/ClubEvents";
 import theme from "../../theme/theme";
 
 const Main = TabNavigator(

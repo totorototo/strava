@@ -13,7 +13,7 @@ import Link from "../../../components/typography/link/Link";
 import RaceMap from "../../../components/specific/map/RaceMap";
 import CollapsableDrawer from "../../../components/specific/collapsableDrawer/CollapsableDrawer";
 
-class RacePredictor extends Component {
+class ClubEvents extends Component {
   static propTypes = {
     race: PropTypes.shape({
       date: PropTypes.string,
@@ -69,4 +69,4 @@ class RacePredictor extends Component {
 export default compose(
   enhanceWithValidEntities(({ race }) => [race]),
   connect(selector, mapDispatchToProps)
-)(RacePredictor);
+)(ClubEvents);
