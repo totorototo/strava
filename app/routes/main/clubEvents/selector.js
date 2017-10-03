@@ -8,7 +8,7 @@ import {
   getValidEntities
 } from "../../../store/state/entities/selectors";
 
-const raceViewSelector = state => {
+const clubEventsViewSelector = state => {
   const currentRaceID = getCurrentRaceID(state);
   const currentClub = getEntity(state, "clubs", getCurrentClubID(state));
   return {
@@ -21,4 +21,4 @@ const raceViewSelector = state => {
   };
 };
 
-export default raceViewSelector;
+export default clubEventsViewSelector;
