@@ -2,32 +2,32 @@ import React from "react";
 import { TabNavigator } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import Details from "./athleteDetails/AthleteDetails";
+import AthleteDetails from "./athleteDetails/AthleteDetails";
 import ClubFeed from "./clubFeed/ClubFeed";
-import PerformanceMeter from "./athletePerformanceLevel/AthletePerformanceLevel";
-import RacePredictor from "./clubEvents/ClubEvents";
+import AthletePerformanceLevel from "./athletePerformanceLevel/AthletePerformanceLevel";
+import ClubEvents from "./clubEvents/ClubEvents";
 import theme from "../../theme/theme";
 
 const Main = TabNavigator(
   {
-    PerformanceMeter: {
-      screen: PerformanceMeter,
+    AthletePerformanceLevel: {
+      screen: AthletePerformanceLevel,
       navigationOptions: {
         tabBarLabel: "lyb-mtr",
         tabBarIcon: () =>
           <Icon reverse name="network-check" color={theme.PrimaryColor} />
       }
     },
-    Details: {
-      screen: Details,
+    AthleteDetails: {
+      screen: AthleteDetails,
       navigationOptions: {
         tabBarLabel: "athlete",
         tabBarIcon: () =>
           <Icon reverse name="face" color={theme.PrimaryColor} />
       }
     },
-    RacePredictor: {
-      screen: RacePredictor,
+    ClubEvents: {
+      screen: ClubEvents,
       navigationOptions: {
         tabBarLabel: "events",
         tabBarIcon: () =>
