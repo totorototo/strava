@@ -51,7 +51,7 @@ export default class CollapsableDrawer extends Component {
         <TouchableOpacity>
           <Icon
             name={this.state.expanded ? "expand-less" : "expand-more"}
-            color={theme.PaperTextColor}
+            color={theme.PrimaryTextColor}
             size={30}
             onPress={this.toggleMenu}
           />

@@ -10,7 +10,7 @@ class Link extends Component {
   };
 
   static defaultProps = {
-    mode: "paper"
+    mode: "primary"
   };
 
   render() {

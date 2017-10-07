@@ -13,7 +13,7 @@ class Title extends Component {
 
   static defaultProps = {
     level: 1,
-    mode: "paper",
+    mode: "primary",
     style: null
   };
 
