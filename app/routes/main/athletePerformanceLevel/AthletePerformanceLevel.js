@@ -17,10 +17,10 @@ class AthletePerformanceLevel extends Component {
           name: PropTypes.string,
           percent: PropTypes.number,
           values: PropTypes.number,
-          unit: PropTypes.number
+          unit: PropTypes.string
         }).isRequired
       ),
-      value: PropTypes.number.isRequired
+      value: PropTypes.number
     }).isRequired
   };
 
