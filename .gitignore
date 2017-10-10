@@ -53,5 +53,5 @@ fastlane/screenshots
 /.env
 *.keystore
 *.tar
-keystore.properties
+android/keystore.properties
 
