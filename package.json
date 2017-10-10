@@ -27,7 +27,6 @@
     ]
   },
   "dependencies": {
-    "es6-symbol": "^3.1.1",
     "firebase": "^4.2.0",
     "hoist-non-react-statics": "^2.2.2",
     "lodash": "^4.17.4",
