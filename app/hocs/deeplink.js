@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Linking } from "react-native";
 import hoistStatics from "hoist-non-react-statics";
+import PropTypes from "prop-types";
 
 function getPathAndQuery(prefix, url) {
   return url.indexOf(prefix) === -1 ? url : url.replace(prefix, "");
@@ -9,14 +10,16 @@ function getPathAndQuery(prefix, url) {
 export default prefix => WrappedComponent => {
   class DeeplinkingContainer extends Component {
     static contextTypes = {
-      store: React.PropTypes.object
+      store: PropTypes.object
     };
 
     componentDidMount() {
-      Linking.getInitialURL().then(this.handleOpenURL).catch(err => {
-        // eslint no-console: "error"
-        console.error("[Deep linking] An error occurred ", err);
-      });
+      Linking.getInitialURL()
+        .then(this.handleOpenURL)
+        .catch(err => {
+          // eslint no-console: "error"
+          console.error("[Deep linking] An error occurred ", err);
+        });
       Linking.addEventListener("url", this.handleOpenURL);
     }
 
