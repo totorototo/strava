@@ -19,7 +19,7 @@ export default class ClubMembersCard extends Component {
     const { clubMembers } = this.props;
     return (
       <CardList
-        title={"MEMBERS"}
+        title="MEMBERS"
         list={clubMembers.map(member => ({
           key: member.id,
           image: member.profile,

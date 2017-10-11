@@ -21,7 +21,7 @@ export const authenticate = temporaryAccessToken => {
 
   return callJSONApi(request).then(
     response => {
-      const athlete = response.data.athlete;
+      const { athlete } = response.data;
       const shoes = new schema.Entity("shoes", {}, { idAttribute: "id" });
       const bikes = new schema.Entity("bikes", {}, { idAttribute: "id" });
       const clubs = new schema.Entity("clubs", {}, { idAttribute: "id" });

@@ -51,6 +51,8 @@
         ]
       }
     ],
+    "react/jsx-wrap-multilines": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "jsx-a11y/no-marquee": 0,
     "react/prefer-stateless-function": 0,
     "react-native/no-unused-styles": 2,

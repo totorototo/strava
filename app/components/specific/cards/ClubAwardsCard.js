@@ -21,7 +21,7 @@ export default class ClubAwardsCard extends Component {
     const { club } = this.props;
     return (
       <CardList
-        title={"AWARDS"}
+        title="AWARDS"
         list={Object.entries(club.ranking).map(([key, value]) => ({
           key,
           image: { name: getIconName(key), color: theme.PrimaryColor },

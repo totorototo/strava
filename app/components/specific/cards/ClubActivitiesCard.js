@@ -16,7 +16,7 @@ export default class ClubActivitiesCard extends Component {
     const { activities } = this.props;
     return (
       <CardList
-        title={"ACTIVITIES"}
+        title="ACTIVITIES"
         list={activities.map((activity, index) => ({
           key: index,
           image: activity.athlete.profile,
