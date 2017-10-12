@@ -18,7 +18,7 @@ export default class Progress extends Component {
       <Circle
         animated
         progress={this.props.progress || 0}
-        indeterminate={isNaN(this.props.progress)}
+        indeterminate={Number.isNaN(this.props.progress)}
         showsText
         size={200}
         color={theme.BackgroundTextColor}
