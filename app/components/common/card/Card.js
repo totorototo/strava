@@ -13,7 +13,6 @@ export default class Card extends Component {
 
   static defaultProps = {
     title: null,
-    list: [],
     children: null,
     image: null
   };

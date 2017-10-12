@@ -92,7 +92,7 @@ export const computeAthletePerformance = (
     referencesWeightings.TOTAL_EFFORTS;
 
   const performance = heuristic1 + heuristic2 + heuristic3;
-  if (performance !== undefined || !isNaN(performance)) {
+  if (performance !== undefined || !Number.isNaN(performance)) {
     return { performance };
   }
   return { error: "Oops" };

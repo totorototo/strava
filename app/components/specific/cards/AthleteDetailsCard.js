@@ -26,7 +26,7 @@ export default class AthleteDetailsCard extends Component {
 
     return (
       <CardList
-        title={"DETAILS"}
+        title="DETAILS"
         list={athlete.performance.details.map((detail, index) => ({
           key: index,
           image: {
