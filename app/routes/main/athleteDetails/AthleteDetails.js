@@ -20,18 +20,17 @@ class AthleteDetails extends Component {
     }).isRequired
   };
 
-  static getPerformanceDetails(props) {
-    return idx(props, _ => _.performance.details);
+  static getPerformanceDetailsLength(props) {
+    return idx(props, _ => _.performance.details.length);
   }
 
   render() {
     const { athlete } = this.props;
-    const details = AthleteDetails.getPerformanceDetails(athlete);
     return (
       <ScrollView style={[styles.scroll]} showsVerticalScrollIndicator={false}>
         <AthleteCard athlete={athlete} />
         <AthleteDetailsCard
-          rendered={details && details.length > 0}
+          rendered={AthleteDetails.getPerformanceDetailsLength(athlete) > 0}
           athlete={athlete}
         />
       </ScrollView>
