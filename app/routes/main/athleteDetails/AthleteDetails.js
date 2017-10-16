@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import idx from "idx";
 
 import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
@@ -19,18 +20,18 @@ class AthleteDetails extends Component {
     }).isRequired
   };
 
+  static getPerformanceDetails(props) {
+    return idx(props, _ => _.performance.details);
+  }
+
   render() {
     const { athlete } = this.props;
-    // TODO add idx https://github.com/facebookincubator/idx
+    const details = AthleteDetails.getPerformanceDetails(athlete);
     return (
       <ScrollView style={[styles.scroll]} showsVerticalScrollIndicator={false}>
         <AthleteCard athlete={athlete} />
         <AthleteDetailsCard
-          rendered={
-            athlete.performance &&
-            athlete.performance.details &&
-            athlete.performance.details.length > 0
-          }
+          rendered={details && details.length > 0}
           athlete={athlete}
         />
       </ScrollView>
