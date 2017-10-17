@@ -5,15 +5,17 @@ import CardList from "../../common/cardList/CardList";
 import { getIconName } from "../../../routes/main/clubFeed/helper";
 import theme from "../../../theme/theme";
 
-export default class AthleteDetailsCard extends Component {
-  // ToDO fix shape
+export default class AthletePerformancesCard extends Component {
   static propTypes = {
     rendered: PropTypes.bool,
-    athlete: PropTypes.shape({
-      firstname: PropTypes.string,
-      lastname: PropTypes.string,
-      profil: PropTypes.string
-    }).isRequired
+    performances: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        percent: PropTypes.number,
+        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        unit: PropTypes.string
+      })
+    ).isRequired
   };
 
   static defaultProps = {
@@ -21,13 +23,13 @@ export default class AthleteDetailsCard extends Component {
   };
 
   render() {
-    const { athlete } = this.props;
+    const { performances } = this.props;
     if (!this.props.rendered) return false;
 
     return (
       <CardList
         title="DETAILS"
-        list={athlete.performance.details.map((detail, index) => ({
+        list={performances.map((detail, index) => ({
           key: index,
           image: {
             name: getIconName(detail.name),
