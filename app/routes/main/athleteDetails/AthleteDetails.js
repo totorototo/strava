@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
 import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
-import styles from "./styles";
 import AthleteCard from "../../../components/specific/cards/AthleteCard";
 import AthleteDetailsCard from "../../../components/specific/cards/AthleteDetailsCard";
+import ScrollableList from "../../../components/layout/scrollableList/ScrollableList";
 
 class AthleteDetails extends Component {
   static propTypes = {
@@ -23,7 +22,7 @@ class AthleteDetails extends Component {
     const { athlete } = this.props;
     // TODO add idx https://github.com/facebookincubator/idx
     return (
-      <ScrollView style={[styles.scroll]} showsVerticalScrollIndicator={false}>
+      <ScrollableList>
         <AthleteCard athlete={athlete} />
         <AthleteDetailsCard
           rendered={
@@ -33,7 +32,7 @@ class AthleteDetails extends Component {
           }
           athlete={athlete}
         />
-      </ScrollView>
+      </ScrollableList>
     );
   }
 }
