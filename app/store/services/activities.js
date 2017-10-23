@@ -3,7 +3,6 @@ import { pick } from "lodash";
 
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 import { callJSONApi } from "./helpers/api";
-import { msToTime } from "./helpers/moment";
 import { references, referencesWeightings } from "../constants/references";
 
 export const getGivenActivity = (token, activityID) => {
@@ -177,7 +176,9 @@ export const computePerformance = (activities = {}) => {
   });
 
   const paceMeterPerSecond = duration > 0 ? distance / duration : 0;
-  const paceKilometerPerHour = (paceMeterPerSecond * 3.6).toFixed(2);
+  const paceKilometerPerHour = parseFloat(
+    (paceMeterPerSecond * 3.6).toFixed(2)
+  );
 
   const distanceHeuristic =
     distance /
@@ -229,7 +230,7 @@ export const computePerformance = (activities = {}) => {
   performanceDetails.push({
     name: "duration",
     percent: Math.trunc(timeHeuristic * 100 / performance),
-    value: msToTime(duration * 1000)
+    value: duration
   });
   performanceDetails.push({
     name: "pace",
