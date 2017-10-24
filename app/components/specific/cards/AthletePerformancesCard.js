@@ -26,20 +26,17 @@ export default class AthletePerformancesCard extends Component {
     const { performances } = this.props;
     if (!this.props.rendered) return false;
 
-    return (
-      <CardList
-        title="DETAILS"
-        list={performances.map((detail, index) => ({
-          key: index,
-          image: {
-            name: getIconName(detail.name),
-            color: theme.PrimaryColor
-          },
-          text: `${detail.value}  ${detail.unit !== undefined
-            ? detail.unit
-            : ""}`
-        }))}
-      />
-    );
+    const performancesList = performances.map((performance, index) => ({
+      key: index,
+      image: {
+        name: getIconName(performance.name),
+        color: theme.PrimaryColor
+      },
+      text: `${performance.value}  ${performance.unit !== undefined
+        ? performance.unit
+        : ""}`
+    }));
+
+    return <CardList title="DETAILS" list={performancesList} />;
   }
 }
