@@ -21,7 +21,7 @@ class AthleteDetails extends Component {
       PropTypes.shape({
         name: PropTypes.string,
         percent: PropTypes.number,
-        value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        value: PropTypes.number,
         unit: PropTypes.string
       })
     ).isRequired
