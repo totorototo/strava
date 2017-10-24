@@ -8,7 +8,7 @@ import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
 import styles from "./styles";
 import AthleteCard from "../../../components/specific/cards/AthleteCard";
-import AthleteDetailsCard from "../../../components/specific/cards/AthleteDetailsCard";
+import AthletePerformancesCard from "../../../components/specific/cards/AthletePerformancesCard";
 
 class AthleteDetails extends Component {
   static propTypes = {
@@ -16,22 +16,25 @@ class AthleteDetails extends Component {
       firstname: PropTypes.string,
       lastname: PropTypes.string,
       profil: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    performances: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        percent: PropTypes.number,
+        value: PropTypes.number,
+        unit: PropTypes.string
+      })
+    ).isRequired
   };
 
   render() {
-    const { athlete } = this.props;
-    // TODO add idx https://github.com/facebookincubator/idx
+    const { athlete, performances } = this.props;
     return (
       <ScrollView style={[styles.scroll]} showsVerticalScrollIndicator={false}>
         <AthleteCard athlete={athlete} />
-        <AthleteDetailsCard
-          rendered={
-            athlete.performance &&
-            athlete.performance.details &&
-            athlete.performance.details.length > 0
-          }
-          athlete={athlete}
+        <AthletePerformancesCard
+          rendered={performances.length > 0}
+          performances={performances}
         />
       </ScrollView>
     );
