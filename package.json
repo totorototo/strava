@@ -29,6 +29,7 @@
   "dependencies": {
     "firebase": "^4.2.0",
     "hoist-non-react-statics": "^2.2.2",
+    "idx": "^2.1.0",
     "lodash": "^4.17.4",
     "normalizr": "^3.2.3",
     "prop-types": "^15.5.10",
