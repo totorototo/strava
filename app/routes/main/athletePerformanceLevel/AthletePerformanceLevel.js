@@ -6,6 +6,7 @@ import { compose } from "redux";
 import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
 import Progress from "../../../components/common/progress/Progress";
+import ScrollableList from "../../../components/layout/scrollableList/ScrollableList";
 
 class AthletePerformanceLevel extends Component {
   static propTypes = {
@@ -23,7 +24,11 @@ class AthletePerformanceLevel extends Component {
   };
 
   render() {
-    return <Progress progress={this.props.performance.value} />;
+    return (
+      <ScrollableList alignItems="center">
+        <Progress progress={this.props.performance.value} />
+      </ScrollableList>
+    );
   }
 }
 
