@@ -93,10 +93,10 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+ def enableProguardInReleaseBuilds = false
+ def keystorePropertiesFile = rootProject.file("keystore.properties")
+ def keystoreProperties = new Properties()
+ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion 23
@@ -113,12 +113,12 @@ android {
         }
     }
     signingConfigs {
-         release {
-             keyAlias keystoreProperties['keyAlias']
-             keyPassword keystoreProperties['keyPassword']
-             storeFile file(keystoreProperties['storeFile'])
-             storePassword keystoreProperties['storePassword']
-         }
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
     }
     splits {
         abi {
@@ -129,11 +129,11 @@ android {
         }
     }
     buildTypes {
-        release {
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
-        }
+         release {
+             minifyEnabled enableProguardInReleaseBuilds
+             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+             signingConfig signingConfigs.release
+          }
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->

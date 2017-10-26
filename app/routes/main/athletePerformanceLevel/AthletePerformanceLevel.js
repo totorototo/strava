@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { View } from "react-native";
 import { compose } from "redux";
 
 import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
-import styles from "./styles";
 import Progress from "../../../components/common/progress/Progress";
+import ScrollableList from "../../../components/layout/scrollableList/ScrollableList";
 
 class AthletePerformanceLevel extends Component {
   static propTypes = {
@@ -26,9 +25,9 @@ class AthletePerformanceLevel extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollableList alignItems="center">
         <Progress progress={this.props.performance.value} />
-      </View>
+      </ScrollableList>
     );
   }
 }

@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
 import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
 import selector from "./selector";
-import styles from "./styles";
 import AthleteCard from "../../../components/specific/cards/AthleteCard";
 import AthletePerformancesCard from "../../../components/specific/cards/AthletePerformancesCard";
+import ScrollableList from "../../../components/layout/scrollableList/ScrollableList";
 
 class AthleteDetails extends Component {
   static propTypes = {
@@ -30,13 +29,13 @@ class AthleteDetails extends Component {
   render() {
     const { athlete, performances } = this.props;
     return (
-      <ScrollView style={[styles.scroll]} showsVerticalScrollIndicator={false}>
+      <ScrollableList>
         <AthleteCard athlete={athlete} />
         <AthletePerformancesCard
           rendered={performances.length > 0}
           performances={performances}
         />
-      </ScrollView>
+      </ScrollableList>
     );
   }
 }
