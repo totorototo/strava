@@ -166,10 +166,10 @@ export const getRankings = (members = [], activities = {}) => {
 
 export const computePerformance = (activities = {}) => {
   const sum = Object.keys(activities).reduce(
-    (accumulator, activity) => ({
-      distance: accumulator + activity.distance,
-      elevation: accumulator + activity.total_elevation_gain,
-      duration: accumulator + activity.elapsed_time
+    (accumulator, id) => ({
+      distance: accumulator.distance + activities[id].distance,
+      elevation: accumulator.elevation + activities[id].total_elevation_gain,
+      duration: accumulator.duration + activities[id].elapsed_time
     }),
     { distance: 0, elevation: 0, duration: 0 }
   );
