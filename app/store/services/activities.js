@@ -165,28 +165,27 @@ export const getRankings = (members = [], activities = {}) => {
 };
 
 export const computePerformance = (activities = {}) => {
-  let distance = 0;
-  let elevation = 0;
-  let duration = 0;
+  const sum = Object.keys(activities).reduce(
+    (accumulator, activity) => ({
+      distance: accumulator + activity.distance,
+      elevation: accumulator + activity.total_elevation_gain,
+      duration: accumulator + activity.elapsed_time
+    }),
+    { distance: 0, elevation: 0, duration: 0 }
+  );
 
-  Object.keys(activities).forEach(id => {
-    distance += activities[id].distance;
-    elevation += activities[id].total_elevation_gain;
-    duration += activities[id].elapsed_time;
-  });
-
-  const paceMeterPerSecond = duration > 0 ? distance / duration : 0;
+  const paceMeterPerSecond = sum.duration > 0 ? sum.distance / sum.duration : 0;
   const paceKilometerPerHour = parseFloat(
     (paceMeterPerSecond * 3.6).toFixed(2)
   );
 
   const distanceHeuristic =
-    distance /
+    sum.distance /
     references.RECENT_RUN_DISTANCE *
     referencesWeightings.RECENT_RUN_DISTANCE;
 
   const elevationHeuristic =
-    elevation /
+    sum.elevation /
     references.RECENT_RUN_ELEVATION_GAIN *
     referencesWeightings.RECENT_RUN_ELEVATION_GAIN;
 
@@ -203,7 +202,7 @@ export const computePerformance = (activities = {}) => {
     referencesWeightings.RECENT_RUN_SPEED;
 
   const timeHeuristic =
-    duration /
+    sum.duration /
     references.RECENT_RUN_TIME *
     referencesWeightings.RECENT_RUN_TIME;
 
@@ -214,39 +213,38 @@ export const computePerformance = (activities = {}) => {
     paceHeuristic +
     timeHeuristic;
 
-  const performanceDetails = [];
-  performanceDetails.push({
-    name: "distance",
-    percent: Math.trunc(distanceHeuristic * 100 / performance),
-    value: Math.trunc(distance / 1000),
-    unit: "km"
-  });
-  performanceDetails.push({
-    name: "elevation",
-    percent: Math.trunc(elevationHeuristic * 100 / performance),
-    value: elevation,
-    unit: "m"
-  });
-  performanceDetails.push({
-    name: "duration",
-    percent: Math.trunc(timeHeuristic * 100 / performance),
-    value: duration
-  });
-  performanceDetails.push({
-    name: "pace",
-    percent: Math.trunc(paceHeuristic * 100 / performance),
-    value: paceKilometerPerHour,
-    unit: "km/h"
-  });
-  performanceDetails.push({
-    name: "runs count",
-    percent: Math.trunc(frequencyHeuristic * 100 / performance),
-    value: Object.keys(activities).length
-  });
-
   return {
     performance: {
-      details: performanceDetails,
+      details: [
+        {
+          name: "distance",
+          percent: Math.trunc(distanceHeuristic * 100 / performance),
+          value: Math.trunc(sum.distance / 1000),
+          unit: "km"
+        },
+        {
+          name: "elevation",
+          percent: Math.trunc(elevationHeuristic * 100 / performance),
+          value: sum.elevation,
+          unit: "m"
+        },
+        {
+          name: "duration",
+          percent: Math.trunc(timeHeuristic * 100 / performance),
+          value: sum.duration
+        },
+        {
+          name: "pace",
+          percent: Math.trunc(paceHeuristic * 100 / performance),
+          value: paceKilometerPerHour,
+          unit: "km/h"
+        },
+        {
+          name: "runs count",
+          percent: Math.trunc(frequencyHeuristic * 100 / performance),
+          value: Object.keys(activities).length
+        }
+      ],
       value: performance
     }
   };
