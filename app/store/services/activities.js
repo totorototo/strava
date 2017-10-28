@@ -165,7 +165,7 @@ export const getRankings = (members = [], activities = {}) => {
 };
 
 export const computePerformance = (activities = {}) => {
-  const sum = Object.keys(activities).reduce(
+  const overallPerformance = Object.keys(activities).reduce(
     (accumulator, id) => ({
       distance: accumulator.distance + activities[id].distance,
       elevation: accumulator.elevation + activities[id].total_elevation_gain,
@@ -174,18 +174,21 @@ export const computePerformance = (activities = {}) => {
     { distance: 0, elevation: 0, duration: 0 }
   );
 
-  const paceMeterPerSecond = sum.duration > 0 ? sum.distance / sum.duration : 0;
+  const paceMeterPerSecond =
+    overallPerformance.duration > 0
+      ? overallPerformance.distance / overallPerformance.duration
+      : 0;
   const paceKilometerPerHour = parseFloat(
     (paceMeterPerSecond * 3.6).toFixed(2)
   );
 
   const distanceHeuristic =
-    sum.distance /
+    overallPerformance.distance /
     references.RECENT_RUN_DISTANCE *
     referencesWeightings.RECENT_RUN_DISTANCE;
 
   const elevationHeuristic =
-    sum.elevation /
+    overallPerformance.elevation /
     references.RECENT_RUN_ELEVATION_GAIN *
     referencesWeightings.RECENT_RUN_ELEVATION_GAIN;
 
@@ -202,7 +205,7 @@ export const computePerformance = (activities = {}) => {
     referencesWeightings.RECENT_RUN_SPEED;
 
   const timeHeuristic =
-    sum.duration /
+    overallPerformance.duration /
     references.RECENT_RUN_TIME *
     referencesWeightings.RECENT_RUN_TIME;
 
@@ -219,19 +222,19 @@ export const computePerformance = (activities = {}) => {
         {
           name: "distance",
           percent: Math.trunc(distanceHeuristic * 100 / performance),
-          value: Math.trunc(sum.distance / 1000),
+          value: Math.trunc(overallPerformance.distance / 1000),
           unit: "km"
         },
         {
           name: "elevation",
           percent: Math.trunc(elevationHeuristic * 100 / performance),
-          value: sum.elevation,
+          value: overallPerformance.elevation,
           unit: "m"
         },
         {
           name: "duration",
           percent: Math.trunc(timeHeuristic * 100 / performance),
-          value: sum.duration
+          value: overallPerformance.duration
         },
         {
           name: "pace",
