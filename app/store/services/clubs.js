@@ -77,9 +77,10 @@ export const listClubActivities = (token, id) => {
   };
   return callJSONApi(request).then(
     response => {
+      const map = new schema.Entity("maps", {}, { idAttribute: "id" });
       const activitySchema = new schema.Entity(
         "Runs",
-        {},
+        { map },
         {
           idAttribute: "id",
           processStrategy: entity =>
@@ -92,7 +93,8 @@ export const listClubActivities = (token, id) => {
               "elapsed_time",
               "max_speed",
               "calories",
-              "total_elevation_gain"
+              "total_elevation_gain",
+              "map"
             ])
         }
       );
@@ -102,7 +104,8 @@ export const listClubActivities = (token, id) => {
 
       return {
         ids: normalizedData.result,
-        entities: normalizedData.entities.Runs
+        activities: normalizedData.entities.Runs,
+        maps: normalizedData.entities.maps
       };
     },
     error => ({ error })

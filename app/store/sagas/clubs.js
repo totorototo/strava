@@ -10,15 +10,16 @@ import { getRankings } from "../services/activities";
 
 function* listActivities(clubID, membersIDs) {
   const accessToken = yield select(token);
-  const { ids, entities, error } = yield call(
+  const { ids, activities, maps, error } = yield call(
     listClubActivities,
     accessToken,
     clubID
   );
   if (!error) {
     yield put(updateEntity(clubID, "clubs", { activities: ids }));
-    yield put(setEntity("activities", entities));
-    const { ranking } = yield call(getRankings, membersIDs, entities);
+    yield put(setEntity("activities", activities));
+    yield put(setEntity("maps", maps));
+    const { ranking } = yield call(getRankings, membersIDs, activities);
     yield put(updateEntity(clubID, "clubs", { ranking }));
   }
 }
