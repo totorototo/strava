@@ -60,12 +60,11 @@ const clubFeedViewSelector = state => {
     getValueFrom(currentClub, "activities")
   );
 
-  const mapsIDs = activities.map(activity => activity.map);
-  const maps = getValidEntities(state, "maps", mapsIDs);
-  const modifiedMaps = maps.map(map => ({
-    id: map.id,
-    coordinates: decodePolyline(map.summary_polyline)
-  }));
+  const updatedActivities = activities.map(activity => {
+    const activityMap = getEntity(state, "maps", activity.map);
+    const map = decodePolyline(activityMap.summary_polyline);
+    return { ...activity, map };
+  });
 
   return {
     club: currentClub,
@@ -74,8 +73,7 @@ const clubFeedViewSelector = state => {
       "athletes",
       getValueFrom(currentClub, "members")
     ),
-    activities,
-    maps: modifiedMaps
+    activities: updatedActivities
   };
 };
 
