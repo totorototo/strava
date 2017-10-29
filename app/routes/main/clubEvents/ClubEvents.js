@@ -10,7 +10,7 @@ import CountDown from "../../../components/specific/countdown/Countdown";
 import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
 import Link from "../../../components/typography/link/Link";
-import RaceMap from "../../../components/specific/map/RaceMap";
+import ActivityMap from "../../../components/specific/map/ActivityMap";
 import CollapsableDrawer from "../../../components/specific/collapsableDrawer/CollapsableDrawer";
 
 // fix me -> remove
@@ -66,7 +66,7 @@ class ClubEvents extends Component {
     const { race, clubMembers, shareLocation } = this.props;
 
     return [
-      <RaceMap key="1" race={race} clubMembers={clubMembers} />,
+      <ActivityMap key="1" race={race} clubMembers={clubMembers} />,
       <CollapsableDrawer key="2">
         <CountDown date={race.date} />
       </CollapsableDrawer>,

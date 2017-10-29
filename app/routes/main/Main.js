@@ -5,7 +5,6 @@ import { Icon } from "react-native-elements";
 import AthleteDetails from "./athleteDetails/AthleteDetails";
 import ClubFeed from "./clubFeed/ClubFeed";
 import AthletePerformanceLevel from "./athletePerformanceLevel/AthletePerformanceLevel";
-import ClubEvents from "./clubEvents/ClubEvents";
 import theme from "../../theme/theme";
 
 const Main = TabNavigator(
@@ -14,32 +13,27 @@ const Main = TabNavigator(
       screen: AthletePerformanceLevel,
       navigationOptions: {
         tabBarLabel: "lyb-mtr",
-        tabBarIcon: () =>
+        tabBarIcon: () => (
           <Icon reverse name="network-check" color={theme.PrimaryColor} />
+        )
       }
     },
     AthleteDetails: {
       screen: AthleteDetails,
       navigationOptions: {
         tabBarLabel: "athlete",
-        tabBarIcon: () =>
+        tabBarIcon: () => (
           <Icon reverse name="face" color={theme.PrimaryColor} />
-      }
-    },
-    ClubEvents: {
-      screen: ClubEvents,
-      navigationOptions: {
-        tabBarLabel: "events",
-        tabBarIcon: () =>
-          <Icon reverse name="event" color={theme.PrimaryColor} />
+        )
       }
     },
     ClubFeed: {
       screen: ClubFeed,
       navigationOptions: {
         tabBarLabel: "leaks",
-        tabBarIcon: () =>
+        tabBarIcon: () => (
           <Icon reverse name="comment" color={theme.PrimaryColor} />
+        )
       }
     }
   },
