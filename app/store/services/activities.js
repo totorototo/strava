@@ -221,30 +221,30 @@ export const computePerformance = (activities = {}) => {
       details: [
         {
           name: "distance",
-          percent: Math.trunc(distanceHeuristic * 100 / performance),
-          value: Math.trunc(overallPerformance.distance / 1000),
+          percent: distanceHeuristic,
+          value: overallPerformance.distance,
           unit: "km"
         },
         {
           name: "elevation",
-          percent: Math.trunc(elevationHeuristic * 100 / performance),
+          percent: elevationHeuristic,
           value: overallPerformance.elevation,
           unit: "m"
         },
         {
           name: "duration",
-          percent: Math.trunc(timeHeuristic * 100 / performance),
+          percent: timeHeuristic,
           value: overallPerformance.duration
         },
         {
           name: "pace",
-          percent: Math.trunc(paceHeuristic * 100 / performance),
+          percent: paceHeuristic,
           value: paceKilometerPerHour,
           unit: "km/h"
         },
         {
           name: "runs count",
-          percent: Math.trunc(frequencyHeuristic * 100 / performance),
+          percent: frequencyHeuristic,
           value: Object.keys(activities).length
         }
       ],
