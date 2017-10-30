@@ -178,9 +178,6 @@ export const computePerformance = (activities = {}) => {
     overallPerformance.duration > 0
       ? overallPerformance.distance / overallPerformance.duration
       : 0;
-  const paceKilometerPerHour = parseFloat(
-    (paceMeterPerSecond * 3.6).toFixed(2)
-  );
 
   const distanceHeuristic =
     overallPerformance.distance /
@@ -223,7 +220,7 @@ export const computePerformance = (activities = {}) => {
           name: "distance",
           percent: distanceHeuristic,
           value: overallPerformance.distance,
-          unit: "km"
+          unit: "m"
         },
         {
           name: "elevation",
@@ -234,18 +231,20 @@ export const computePerformance = (activities = {}) => {
         {
           name: "duration",
           percent: timeHeuristic,
-          value: overallPerformance.duration
+          value: overallPerformance.duration,
+          unit: "s"
         },
         {
           name: "pace",
           percent: paceHeuristic,
-          value: paceKilometerPerHour,
-          unit: "km/h"
+          value: paceMeterPerSecond,
+          unit: "m.s-1"
         },
         {
           name: "runs count",
           percent: frequencyHeuristic,
-          value: Object.keys(activities).length
+          value: Object.keys(activities).length,
+          unit: ""
         }
       ],
       value: performance
