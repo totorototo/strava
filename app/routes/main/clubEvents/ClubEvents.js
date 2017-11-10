@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 import enhanceWithValidEntities from "../../../hocs/enhanceWithValidEntities";
-import CountDown from "../../../components/specific/countdown/Countdown";
+// import CountDown from "../../../components/specific/countdown/Countdown";
 import selector from "./selector";
 import mapDispatchToProps from "./mapDispatchToProps";
 import Link from "../../../components/typography/link/Link";
@@ -67,9 +67,7 @@ class ClubEvents extends Component {
 
     return [
       <RaceMap key="1" race={race} clubMembers={clubMembers} />,
-      <CollapsableDrawer key="2">
-        <CountDown date={race.date} />
-      </CollapsableDrawer>,
+      <CollapsableDrawer key="2" />,
       <View style={styles.bubble} key="3">
         <Link onPress={shareLocation}>Spot me!</Link>
       </View>
