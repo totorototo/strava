@@ -13,7 +13,7 @@ class Countdown extends Component {
       .isRequired,
     now: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
       .isRequired,
-    timerStyle: View.propTypes.style
+    timerStyle: PropTypes.style
   };
 
   static defaultProps = {
@@ -28,9 +28,7 @@ class Countdown extends Component {
 
     return (
       <View style={[styles.container, timerStyle]}>
-        <Title level="huge">
-          {time}
-        </Title>
+        <Title level="huge">{time}</Title>
       </View>
     );
   }
