@@ -1,8 +1,8 @@
 export const markers = [
   {
     identifier: "1",
-    title: "",
-    description: "",
+    title: "Restaurant Merlan",
+    description: "8h30",
     coordinates: {
       latitude: 42.82919,
       longitude: 0.21603
@@ -10,8 +10,8 @@ export const markers = [
   },
   {
     identifier: "2",
-    title: "",
-    description: "",
+    title: "La Mongie",
+    description: "13h00",
     coordinates: {
       latitude: 42.91469,
       longitude: 0.1814
@@ -19,8 +19,8 @@ export const markers = [
   },
   {
     identifier: "3",
-    title: "",
-    description: "",
+    title: "Col de Sencours",
+    description: "15h15",
     coordinates: {
       latitude: 42.93268,
       longitude: 0.1385
@@ -28,8 +28,8 @@ export const markers = [
   },
   {
     identifier: "4",
-    title: "",
-    description: "",
+    title: "Col de Sencours",
+    description: "17h00",
     coordinates: {
       latitude: 42.92552,
       longitude: 0.13465
@@ -37,8 +37,8 @@ export const markers = [
   },
   {
     identifier: "5",
-    title: "",
-    description: "",
+    title: "Col d'Aoube",
+    description: "18h15",
     coordinates: {
       latitude: 42.93147,
       longitude: 0.10053
@@ -46,8 +46,8 @@ export const markers = [
   },
   {
     identifier: "6",
-    title: "",
-    description: "",
+    title: "Hautacam",
+    description: "22h00",
     coordinates: {
       latitude: 42.97193,
       longitude: -0.02066
@@ -56,8 +56,8 @@ export const markers = [
 
   {
     identifier: "7",
-    title: "",
-    description: "",
+    title: "Pierrefitte",
+    description: "0h15 - 0h45",
     coordinates: {
       latitude: 42.94993,
       longitude: -0.07824
@@ -65,8 +65,8 @@ export const markers = [
   },
   {
     identifier: "8",
-    title: "",
-    description: "",
+    title: "Bederet",
+    description: "5h30",
     coordinates: {
       latitude: 42.89638,
       longitude: -0.07268
@@ -74,8 +74,8 @@ export const markers = [
   },
   {
     identifier: "9",
-    title: "",
-    description: "",
+    title: "Cauterets",
+    description: "8h00",
     coordinates: {
       latitude: 42.89283,
       longitude: -0.10251
@@ -83,8 +83,8 @@ export const markers = [
   },
   {
     identifier: "10",
-    title: "",
-    description: "",
+    title: "Luz Saint Sauveur",
+    description: "13h30 - 14h00",
     coordinates: {
       latitude: 42.87284,
       longitude: 0.01212
@@ -92,8 +92,8 @@ export const markers = [
   },
   {
     identifier: "11",
-    title: "",
-    description: "",
+    title: "Soubralets",
+    description: "16h00",
     coordinates: {
       latitude: 42.86638,
       longitude: 0.05306
@@ -101,8 +101,8 @@ export const markers = [
   },
   {
     identifier: "12",
-    title: "",
-    description: "",
+    title: "Refuge de la Glère",
+    description: "20h00",
     coordinates: {
       latitude: 42.89473,
       longitude: 0.08338
@@ -110,8 +110,8 @@ export const markers = [
   },
   {
     identifier: "13",
-    title: "",
-    description: "",
+    title: "Tournaboup",
+    description: "21h45",
     coordinates: {
       latitude: 42.88269,
       longitude: 0.11468
@@ -119,8 +119,8 @@ export const markers = [
   },
   {
     identifier: "14",
-    title: "",
-    description: "",
+    title: "Cabane d'Aygues cluses",
+    description: "01h00",
     coordinates: {
       latitude: 42.86241,
       longitude: 0.17824
@@ -128,8 +128,8 @@ export const markers = [
   },
   {
     identifier: "15",
-    title: "",
-    description: "",
+    title: "Restaurant Merlans",
+    description: "05h00",
     coordinates: {
       latitude: 42.83355,
       longitude: 0.25248
@@ -137,8 +137,8 @@ export const markers = [
   },
   {
     identifier: "16",
-    title: "",
-    description: "",
+    title: "Vielle Aure",
+    description: "09h00",
     coordinates: {
       latitude: 42.82974,
       longitude: 0.32791
