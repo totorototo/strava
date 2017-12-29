@@ -1,101 +1,147 @@
 export const markers = [
   {
     identifier: "1",
-    title: "Piau",
-    description: "12h15",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.78473,
-      longitude: 0.15656
+      latitude: 42.82919,
+      longitude: 0.21603
     }
   },
   {
     identifier: "2",
-    title: "Gèdre",
-    description: "17h00",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.78528,
-      longitude: 0.02181
+      latitude: 42.91469,
+      longitude: 0.1814
     }
   },
   {
     identifier: "3",
-    title: "Refuge d'Espuguettes",
-    description: "22h30",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.72161,
-      longitude: 0.00607
+      latitude: 42.93268,
+      longitude: 0.1385
     }
   },
   {
     identifier: "4",
-    title: "Gavarnie",
-    description: "0h30 -> 2h30",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.7393,
-      longitude: -0.01283
+      latitude: 42.92552,
+      longitude: 0.13465
     }
   },
   {
     identifier: "5",
-    title: "Gèdre Da Return",
-    description: "06h00",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.78528,
-      longitude: 0.02191
+      latitude: 42.93147,
+      longitude: 0.10053
     }
   },
   {
     identifier: "6",
-    title: "Luz Saint Sauveur",
-    description: "10h30",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.87559,
-      longitude: 0.00744
+      latitude: 42.97193,
+      longitude: -0.02066
     }
   },
+
   {
     identifier: "7",
-    title: "Barèges",
-    description: "14h30",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.8953,
-      longitude: 0.07844
+      latitude: 42.94993,
+      longitude: -0.07824
     }
   },
   {
     identifier: "8",
-    title: "Refuge de la Glère",
-    description: "18h00",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.85282,
-      longitude: 0.1005
+      latitude: 42.89638,
+      longitude: -0.07268
     }
   },
   {
     identifier: "9",
-    title: "Orédon",
-    description: "22h30",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.82688,
-      longitude: 0.18334
+      latitude: 42.89283,
+      longitude: -0.10251
     }
   },
   {
     identifier: "10",
-    title: "Merlans",
-    description: "02h30",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.83548,
-      longitude: 0.2429
+      latitude: 42.87284,
+      longitude: 0.01212
     }
   },
   {
     identifier: "11",
-    title: "Vielle Aure",
-    description: "06h00",
+    title: "",
+    description: "",
     coordinates: {
-      latitude: 42.82985,
-      longitude: 0.32711
+      latitude: 42.86638,
+      longitude: 0.05306
+    }
+  },
+  {
+    identifier: "12",
+    title: "",
+    description: "",
+    coordinates: {
+      latitude: 42.89473,
+      longitude: 0.08338
+    }
+  },
+  {
+    identifier: "13",
+    title: "",
+    description: "",
+    coordinates: {
+      latitude: 42.88269,
+      longitude: 0.11468
+    }
+  },
+  {
+    identifier: "14",
+    title: "",
+    description: "",
+    coordinates: {
+      latitude: 42.86241,
+      longitude: 0.17824
+    }
+  },
+  {
+    identifier: "15",
+    title: "",
+    description: "",
+    coordinates: {
+      latitude: 42.83355,
+      longitude: 0.25248
+    }
+  },
+  {
+    identifier: "16",
+    title: "",
+    description: "",
+    coordinates: {
+      latitude: 42.82974,
+      longitude: 0.32791
     }
   }
 ];

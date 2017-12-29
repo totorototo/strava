@@ -10,7 +10,7 @@ function* listRaces() {
   const entities = {};
   const raceID = 123456;
   entities[raceID] = {
-    date: "2017-08-25T08:00:00+00:00",
+    date: "2018-08-24T03:00:00+00:00",
     checkPoints: markers,
     path: {
       coordinates
