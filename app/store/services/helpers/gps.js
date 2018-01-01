@@ -25,7 +25,7 @@ const isInArea = (
   Math.abs(position.longitude - point.longitude) < Δλ &&
   Math.abs(position.latitude - point.latitude) < Δφ;
 
-const getEventDistance = (points = []) => {
+const computePathDistance = (points = []) => {
   points.reduce((distance, currentPoint, index) => {
     const nextPoint = points[index + 1];
     if (nextPoint) {
@@ -35,7 +35,7 @@ const getEventDistance = (points = []) => {
   }, 0);
 };
 
-const getNearestPoint = (points = [], currentPosition = {}) => {
+const findClosestPoint = (points = [], currentPosition = {}) => {
   const distances = points.map((currentPoint, index) => ({
     index,
     distance: getDistance(currentPosition, currentPoint)
@@ -48,4 +48,4 @@ const getNearestPoint = (points = [], currentPosition = {}) => {
   return currentPosition;
 };
 
-export default { getDistance, isInArea, getEventDistance, getNearestPoint };
+export default { getDistance, isInArea, computePathDistance, findClosestPoint };

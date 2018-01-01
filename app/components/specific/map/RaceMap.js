@@ -94,7 +94,7 @@ export default class RaceMap extends Component {
                 race.path.coordinates[0].latitude
             };
 
-            const nearestPoint = positionHelper.getNearestPoint(
+            const nearestPoint = positionHelper.findClosestPoint(
               race.path.coordinates,
               coordinate
             );
