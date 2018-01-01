@@ -1,4 +1,4 @@
-const getDistance = (
+const computeDistance = (
   pointA = { longitude: 0, latitude: 0 },
   pointB = { longitude: 0, latitude: 0 }
 ) => {
@@ -29,7 +29,7 @@ const computePathDistance = (points = []) => {
   points.reduce((distance, currentPoint, index) => {
     const nextPoint = points[index + 1];
     if (nextPoint) {
-      return distance + getDistance(currentPoint, nextPoint);
+      return distance + computeDistance(currentPoint, nextPoint);
     }
     return distance;
   }, 0);
@@ -38,7 +38,7 @@ const computePathDistance = (points = []) => {
 const findClosestPoint = (points = [], currentPosition = {}) => {
   const distances = points.map((currentPoint, index) => ({
     index,
-    distance: getDistance(currentPosition, currentPoint)
+    distance: computeDistance(currentPosition, currentPoint)
   }));
 
   const sortedDistances = distances.sort((a, b) => a.distance - b.distance);
@@ -48,4 +48,9 @@ const findClosestPoint = (points = [], currentPosition = {}) => {
   return currentPosition;
 };
 
-export default { getDistance, isInArea, computePathDistance, findClosestPoint };
+export default {
+  computeDistance,
+  isInArea,
+  computePathDistance,
+  findClosestPoint
+};
