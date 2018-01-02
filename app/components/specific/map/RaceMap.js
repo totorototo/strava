@@ -13,6 +13,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.57;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+// TODO: helper function to be moved asap!
 const getColor = (id = 0) => {
   // eslint-disable-next-line
   const c = (id & 0x00ffffff).toString(16).toUpperCase();
@@ -56,18 +57,38 @@ export default class RaceMap extends Component {
 
   static defaultProps = {};
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      SAMPLE_REGION: {
+        latitude: this.props.race.path.coordinates[0].latitude || 47.478419,
+        longitude:
+          this.props.race.path.coordinates[0].longitude || -0.5631660000000238,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      }
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { race } = this.props;
+    if (nextProps.race && nextProps.race.path !== race.path) {
+      this.setState({
+        SAMPLE_REGION: {
+          latitude: race.path.coordinates[0].latitude,
+          longitude: race.path.coordinates[0].longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA
+        }
+      });
+    }
+  }
+
   render() {
     const { race, clubMembers } = this.props;
 
-    const SAMPLE_REGION = {
-      latitude: race.path.coordinates[0].latitude,
-      longitude: race.path.coordinates[0].longitude,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA
-    };
-
     return (
-      <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
+      <MapView style={styles.map} initialRegion={this.state.SAMPLE_REGION}>
         <MapView.Polyline
           coordinates={race.path.coordinates}
           strokeColor={theme.PrimaryColor}
