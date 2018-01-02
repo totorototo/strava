@@ -124,11 +124,24 @@ export default class RaceMap extends Component {
               athlete => athlete.id === parseInt(id, 10)
             );
 
+            let description = "";
+            const index = race.path.coordinates.findIndex(
+              point =>
+                point.longitude === nearestPoint.longitude &&
+                point.latitude === nearestPoint.latitude
+            );
+            if (index) {
+              const pathDone = race.path.coordinates.slice(0, index);
+              description = `distance done: ${positionHelper.computePathDistance(
+                pathDone
+              )}`;
+            }
+
             return (
               <MapView.Marker
                 coordinate={nearestPoint}
                 title={trailRunner ? trailRunner.firstname : id}
-                description={new Date(location.timestamp).toLocaleString()}
+                description={description}
                 pinColor={getColor(id)}
                 key={id}
               />
