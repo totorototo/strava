@@ -25,15 +25,14 @@ const isInArea = (
   Math.abs(position.longitude - point.longitude) < Δλ &&
   Math.abs(position.latitude - point.latitude) < Δφ;
 
-const computePathDistance = (points = []) => {
-  return points.reduce((distance, currentPoint, index) => {
+const computePathDistance = (points = []) =>
+  points.reduce((distance, currentPoint, index) => {
     const nextPoint = points[index + 1];
     if (nextPoint) {
       return distance + computeDistance(currentPoint, nextPoint);
     }
     return distance;
   }, 0);
-};
 
 const findClosestPoint = (points = [], currentPosition = {}) => {
   const distances = points.map((currentPoint, index) => ({
