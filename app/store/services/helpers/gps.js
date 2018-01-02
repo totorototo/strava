@@ -26,7 +26,7 @@ const isInArea = (
   Math.abs(position.latitude - point.latitude) < Δφ;
 
 const computePathDistance = (points = []) => {
-  points.reduce((distance, currentPoint, index) => {
+  return points.reduce((distance, currentPoint, index) => {
     const nextPoint = points[index + 1];
     if (nextPoint) {
       return distance + computeDistance(currentPoint, nextPoint);
@@ -48,9 +48,23 @@ const findClosestPoint = (points = [], currentPosition = {}) => {
   return currentPosition;
 };
 
+const computeElevationGain = (points = []) =>
+  points.reduce((elevationGain, currentPoint, index) => {
+    const previousPoint = points[index - 1];
+    if (previousPoint) {
+      const Δφ = currentPoint.altitude - previousPoint.altitude;
+      if (Δφ > 0) {
+        return elevationGain + Δφ;
+      }
+      return elevationGain;
+    }
+    return elevationGain;
+  }, 0);
+
 export default {
   computeDistance,
   isInArea,
   computePathDistance,
+  computeElevationGain,
   findClosestPoint
 };
