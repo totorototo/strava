@@ -1,12 +1,12 @@
 const computeDistance = (
-  fromLocation = { longitude: 0, latitude: 0 },
-  toLocation = { longitude: 0, latitude: 0 }
+  origin = { longitude: 0, latitude: 0 },
+  destination = { longitude: 0, latitude: 0 }
 ) => {
   const R = 6371e3; // metres
-  const φ1 = fromLocation.latitude * Math.PI / 180;
-  const φ2 = toLocation.latitude * Math.PI / 180;
-  const Δφ = (toLocation.latitude - fromLocation.latitude) * Math.PI / 180;
-  const Δλ = (toLocation.longitude - fromLocation.longitude) * Math.PI / 180;
+  const φ1 = origin.latitude * Math.PI / 180;
+  const φ2 = destination.latitude * Math.PI / 180;
+  const Δφ = (destination.latitude - origin.latitude) * Math.PI / 180;
+  const Δλ = (destination.longitude - origin.longitude) * Math.PI / 180;
 
   const a =
     Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
@@ -25,7 +25,7 @@ const isInRegion = (
   Math.abs(currentLocation.longitude - reference.longitude) < Δλ &&
   Math.abs(currentLocation.latitude - reference.latitude) < Δφ;
 
-const computePathDistance = (locations = []) =>
+const computePathDistance = (...locations) =>
   locations.reduce((distance, currentPoint, index) => {
     const nextPoint = locations[index + 1];
     if (nextPoint) {
@@ -34,7 +34,7 @@ const computePathDistance = (locations = []) =>
     return distance;
   }, 0);
 
-const findClosestPoint = (locations = [], currentLocation = {}) => {
+const findClosestLocation = (locations = [], currentLocation = {}) => {
   const distances = locations.map((currentPoint, index) => ({
     index,
     distance: computeDistance(currentLocation, currentPoint)
@@ -44,10 +44,10 @@ const findClosestPoint = (locations = [], currentLocation = {}) => {
   if (sortedDistances.length > 0) {
     return locations[sortedDistances[0].index];
   }
-  return currentLocation;
+  return null;
 };
 
-const computeElevationGain = (locations = []) =>
+const computeElevationGain = (...locations) =>
   locations.reduce((elevationGain, currentLocation, index) => {
     const previousPoint = locations[index - 1];
     if (previousPoint) {
@@ -94,5 +94,5 @@ export default {
   isInRegion,
   computePathDistance,
   computeElevationGain,
-  findClosestPoint
+  findClosestLocation
 };

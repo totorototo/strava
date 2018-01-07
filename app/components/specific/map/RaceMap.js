@@ -115,7 +115,7 @@ export default class RaceMap extends Component {
                 race.path.coordinates[0].latitude
             };
 
-            const nearestPoint = positionHelper.findClosestPoint(
+            const nearestPoint = positionHelper.findClosestLocation(
               race.path.coordinates,
               coordinate
             );
@@ -133,7 +133,7 @@ export default class RaceMap extends Component {
             if (index) {
               const pathDone = race.path.coordinates.slice(0, index);
               description = `distance done: ${positionHelper.computePathDistance(
-                pathDone
+                ...pathDone
               )}`;
             }
 
