@@ -56,7 +56,7 @@ CLIENT_SECRET =[YYY]
 Those will be used in Login component to set callback url used during authentication. 
 
 ```bash
-URL_SHEME_PREFIX=[appName]
+URL_SHEME_PREFIX=[yourApplicationName]
 URL_SHEME_HOST=localhost
 ```
 
