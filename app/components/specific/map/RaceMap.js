@@ -3,24 +3,17 @@ import PropTypes from "prop-types";
 import { Dimensions } from "react-native";
 import MapView from "react-native-maps";
 
+import positionHelper from "../../../store/services/helpers/gps";
 import styles from "./styles";
 import theme from "../../../theme/theme";
 
 const { width, height } = Dimensions.get("window");
 
 const ASPECT_RATIO = width / height;
-const LATITUDE = 42.78386;
-const LONGITUDE = 0.15844;
-const LATITUDE_DELTA = 0.37;
+const LATITUDE_DELTA = 0.57;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-const SAMPLE_REGION = {
-  latitude: LATITUDE,
-  longitude: LONGITUDE,
-  latitudeDelta: LATITUDE_DELTA,
-  longitudeDelta: LONGITUDE_DELTA
-};
-
+// TODO: helper function to be moved asap!
 const getColor = (id = 0) => {
   // eslint-disable-next-line
   const c = (id & 0x00ffffff).toString(16).toUpperCase();
@@ -67,8 +60,15 @@ export default class RaceMap extends Component {
   render() {
     const { race, clubMembers } = this.props;
 
+    const sampleRegion = {
+      latitude: race.path.coordinates[0].latitude,
+      longitude: race.path.coordinates[0].longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA
+    };
+
     return (
-      <MapView style={styles.map} initialRegion={SAMPLE_REGION}>
+      <MapView style={styles.map} initialRegion={sampleRegion}>
         <MapView.Polyline
           coordinates={race.path.coordinates}
           strokeColor={theme.PrimaryColor}
@@ -88,20 +88,40 @@ export default class RaceMap extends Component {
           Object.entries(race.locations).map(([id, location]) => {
             const coordinate = {
               longitude:
-                (location.coords && location.coords.longitude) || 0.15844,
+                (location.coords && location.coords.longitude) ||
+                race.path.coordinates[0].longitude,
               latitude:
-                (location.coords && location.coords.latitude) || 42.78386
+                (location.coords && location.coords.latitude) ||
+                race.path.coordinates[0].latitude
             };
+
+            const nearestPoint = positionHelper.findClosestLocation(
+              race.path.coordinates,
+              coordinate
+            );
 
             const trailRunner = clubMembers.find(
               athlete => athlete.id === parseInt(id, 10)
             );
 
+            let description = "";
+            const index = race.path.coordinates.findIndex(
+              point =>
+                point.longitude === nearestPoint.longitude &&
+                point.latitude === nearestPoint.latitude
+            );
+            if (index) {
+              const pathDone = race.path.coordinates.slice(0, index);
+              description = `distance done: ${positionHelper.computePathDistance(
+                ...pathDone
+              )}`;
+            }
+
             return (
               <MapView.Marker
-                coordinate={coordinate}
+                coordinate={nearestPoint}
                 title={trailRunner ? trailRunner.firstname : id}
-                description={new Date(location.timestamp).toLocaleString()}
+                description={description}
                 pinColor={getColor(id)}
                 key={id}
               />
