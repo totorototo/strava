@@ -57,38 +57,18 @@ export default class RaceMap extends Component {
 
   static defaultProps = {};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      SAMPLE_REGION: {
-        latitude: this.props.race.path.coordinates[0].latitude || 47.478419,
-        longitude:
-          this.props.race.path.coordinates[0].longitude || -0.5631660000000238,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA
-      }
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { race } = this.props;
-    if (nextProps.race && nextProps.race.path !== race.path) {
-      this.setState({
-        SAMPLE_REGION: {
-          latitude: race.path.coordinates[0].latitude,
-          longitude: race.path.coordinates[0].longitude,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA
-        }
-      });
-    }
-  }
-
   render() {
     const { race, clubMembers } = this.props;
 
+    const sampleRegion = {
+      latitude: race.path.coordinates[0].latitude,
+      longitude: race.path.coordinates[0].longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA
+    };
+
     return (
-      <MapView style={styles.map} initialRegion={this.state.SAMPLE_REGION}>
+      <MapView style={styles.map} initialRegion={sampleRegion}>
         <MapView.Polyline
           coordinates={race.path.coordinates}
           strokeColor={theme.PrimaryColor}
