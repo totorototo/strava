@@ -52,6 +52,13 @@ CLIENT_ID=[XXX]
 CLIENT_SECRET =[YYY]
 ```
 
+* in order to make authentication flow to work, you will have to add the follwoing properties to .env file.
+Those will be used in Login component to set callback url used during authentication. 
+
+```bash
+URL_SHEME_PREFIX=[yourApplicationName]
+URL_SHEME_HOST=localhost
+```
 
 
 # Google MAP API Configuration
