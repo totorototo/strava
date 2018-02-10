@@ -19,7 +19,8 @@ export const listClubMembers = (token, id) => {
         {},
         {
           idAttribute: "id",
-          processStrategy: entity => pick(entity, ["username"])
+          processStrategy: entity =>
+            pick(entity, ["firstname", "lastname", "profile", "id", "country"])
         }
       );
       const membersSchema = [memberSchema];

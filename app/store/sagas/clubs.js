@@ -28,26 +28,19 @@ function* listMembers() {
   // TODO: this should not be done this way! (current club ID)
   const clubID = 288750;
   yield put(setCurrentClubID("loading"));
-  const { ids, error } = yield call(listClubMembers, accessToken, clubID);
+  const { ids, error, entities } = yield call(
+    listClubMembers,
+    accessToken,
+    clubID
+  );
   if (!error) {
     yield put(updateEntity(clubID, "clubs", { members: ids }));
-    const filteredIds = ids.filter(id => id !== currentUserID);
-    const athletes = filteredIds.reduce(
-      (acc, currentValue) => ({
-        ...acc,
-        [currentValue]: {
-          ...acc[currentValue],
-          ...{
-            id: currentValue,
-            image: "",
-            text: "",
-            profile: "",
-            country: "fr"
-          }
-        }
-      }),
-      {}
-    );
+
+    const athletes = Object.keys(entities.members)
+      .filter(member => parseInt(member, 0) !== currentUserID)
+      .map(key => ({ [key]: entities.members[key] }))
+      .reduce((accumulator, current) => ({ ...accumulator, ...current }), {});
+
     yield put(setEntity("athletes", athletes));
     yield put(setCurrentClubID(clubID));
     yield listActivities(clubID, ids);
