@@ -109,3 +109,9 @@ export const listClubActivities = (token, id) => {
     error => ({ error })
   );
 };
+
+export const filterClubAthletes = (athletes = {}, filteredAthleteID = 0) =>
+  Object.keys(athletes)
+    .filter(member => parseInt(member, 0) !== filteredAthleteID)
+    .map(key => ({ [key]: athletes[key] }))
+    .reduce((accumulator, current) => ({ ...accumulator, ...current }), {});

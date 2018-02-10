@@ -4,7 +4,11 @@ import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
 import { updateEntity, setEntity } from "../actions/entities";
 import { setCurrentClubID } from "../actions/data";
 import { token, getCurrentUserID } from "../state/appState/selectors";
-import { listClubMembers, listClubActivities } from "../services/clubs";
+import {
+  listClubMembers,
+  listClubActivities,
+  filterClubAthletes
+} from "../services/clubs";
 import { getRankings } from "../services/activities";
 
 function* listActivities(clubID, membersIDs) {
@@ -36,10 +40,11 @@ function* listMembers() {
   if (!error) {
     yield put(updateEntity(clubID, "clubs", { members: ids }));
 
-    const athletes = Object.keys(entities.members)
-      .filter(member => parseInt(member, 0) !== currentUserID)
-      .map(key => ({ [key]: entities.members[key] }))
-      .reduce((accumulator, current) => ({ ...accumulator, ...current }), {});
+    const athletes = yield call(
+      filterClubAthletes,
+      entities.members,
+      currentUserID
+    );
 
     yield put(setEntity("athletes", athletes));
     yield put(setCurrentClubID(clubID));
