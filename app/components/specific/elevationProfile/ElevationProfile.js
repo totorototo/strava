@@ -19,6 +19,7 @@ export default class ElevationProfile extends Component {
 
   render() {
     const { coordinates } = this.props;
+    console.log(coordinates);
 
     return (
       <View style={styles.container}>
