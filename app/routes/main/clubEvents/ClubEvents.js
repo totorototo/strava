@@ -12,6 +12,7 @@ import mapDispatchToProps from "./mapDispatchToProps";
 import Link from "../../../components/typography/link/Link";
 import RaceMap from "../../../components/specific/map/RaceMap";
 import CollapsableDrawer from "../../../components/specific/collapsableDrawer/CollapsableDrawer";
+import ElevationProfile from "../../../components/specific/elevationProfile/ElevationProfile";
 
 // fix me -> remove
 const styles = StyleSheet.create({
@@ -66,6 +67,7 @@ class ClubEvents extends Component {
     const { race, clubMembers, shareLocation } = this.props;
 
     return [
+      <ElevationProfile coordinates={race.path.coordinates} />,
       <RaceMap key="1" race={race} clubMembers={clubMembers} />,
       <CollapsableDrawer key="2">
         <CountDown date={race.date} />
