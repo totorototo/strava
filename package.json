@@ -27,6 +27,9 @@
     ]
   },
   "dependencies": {
+    "d3-array": "^1.2.1",
+    "d3-scale": "^2.0.0",
+    "d3-shape": "^1.2.0",
     "firebase": "^4.6.2",
     "hoist-non-react-statics": "^2.2.2",
     "idx": "^2.2.0",
