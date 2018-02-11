@@ -9,14 +9,20 @@ export default class AthleteCard extends Component {
     athlete: PropTypes.shape({
       firstname: PropTypes.string,
       lastname: PropTypes.string,
-      profil: PropTypes.string
+      profile: PropTypes.string
     }).isRequired
   };
 
   render() {
     const { athlete } = this.props;
     return (
-      <Card title="ATHLETE" image={{ uri: athlete.profile }}>
+      <Card
+        title="ATHLETE"
+        image={{
+          uri:
+            "https://blog.strava.com/wp-content/uploads/2017/12/Strava_YearInStats_Header_0_1x-1.jpg"
+        }}
+      >
         <Paragraph>
           Anything you need to know about {athlete.firstname} {athlete.lastname}.
           performance, data, predictions and much more!
