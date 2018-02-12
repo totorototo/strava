@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     position: "absolute",
     bottom: 20,
-    alignSelf: "center"
+    alignSelf: "center",
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center"
   }
 });
 
@@ -67,13 +70,13 @@ class ClubEvents extends Component {
     const { race, clubMembers, shareLocation } = this.props;
 
     return [
-      <ElevationProfile coordinates={race.path.coordinates} />,
       <RaceMap key="1" race={race} clubMembers={clubMembers} />,
       <CollapsableDrawer key="2">
         <CountDown date={race.date} />
       </CollapsableDrawer>,
       <View style={styles.bubble} key="3">
         <Link onPress={shareLocation}>Spot me!</Link>
+        <ElevationProfile coordinates={race.path.coordinates} />
       </View>
     ];
   }
