@@ -5,6 +5,7 @@ import * as scale from "d3-scale";
 import * as shape from "d3-shape";
 import * as d3Array from "d3-array";
 
+import positionHelper from "../../../store/services/helpers/gps";
 import styles from "./styles";
 
 const { Surface, Shape } = ART;
@@ -16,13 +17,23 @@ const d3 = {
 
 export default class ElevationProfile extends Component {
   static propTypes = {
-    coordinates: PropTypes.arrayOf(
-      PropTypes.shape({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        altitude: PropTypes.number
-      })
-    ).isRequired
+    path: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          src: PropTypes.shape({
+            longitude: PropTypes.number,
+            latitude: PropTypes.number,
+            altitude: PropTypes.number
+          }),
+          dest: PropTypes.shape({
+            longitude: PropTypes.number,
+            latitude: PropTypes.number,
+            altitude: PropTypes.number
+          }),
+          length: PropTypes.number
+        })
+      )
+    }).isRequired
   };
 
   static createXScale(start, end, rangeWidth) {
@@ -44,17 +55,17 @@ export default class ElevationProfile extends Component {
     );
   }
 
-  static createAreaGraph(data, graphWidth, graphHeight) {
+  static createAreaGraph(edges, graphWidth, graphHeight) {
     // Create our x-scale.
     const scaleX = ElevationProfile.createXScale(
       0,
-      data.length - 1,
+      positionHelper.computeDistance(...edges),
       graphWidth
     );
 
     // Collect all y values.
-    const altitudes = data.reduce(
-      (accu, location) => [...accu, location.altitude],
+    const altitudes = edges.reduce(
+      (accu, location) => [...accu, location.src.altitude],
       []
     );
 
@@ -70,22 +81,22 @@ export default class ElevationProfile extends Component {
       // For every x and y-point in our line shape we are given an item from our
       // array which we pass through our scale function so we map the domain value
       // to the range value.
-      .x(d => scaleX(data.indexOf(d)))
-      .y1(d => scaleY(d.altitude))
+      .x(d => scaleX(d.length))
+      .y1(d => scaleY(d.src.altitude))
       .y0(extentY[1])
       .curve(d3.shape.curveNatural);
 
     return {
       // Pass in our array of data to our line generator to produce the `d={}`
       // attribute value that will go into our `<Shape />` component.
-      path: areaShape(data)
+      path: areaShape(edges)
     };
   }
 
   render() {
-    const { coordinates } = this.props;
+    const { path } = this.props;
 
-    const lineGraph = ElevationProfile.createAreaGraph(coordinates, 300, 100);
+    const lineGraph = ElevationProfile.createAreaGraph(path.edges, 300, 100);
 
     return (
       <View style={styles.container}>

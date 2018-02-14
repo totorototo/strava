@@ -35,10 +35,19 @@ class ClubEvents extends Component {
     race: PropTypes.shape({
       date: PropTypes.string,
       path: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(
+        edges: PropTypes.arrayOf(
           PropTypes.shape({
-            latitude: PropTypes.number,
-            longitude: PropTypes.number
+            src: PropTypes.shape({
+              longitude: PropTypes.number,
+              latitude: PropTypes.number,
+              altitude: PropTypes.number
+            }),
+            dest: PropTypes.shape({
+              longitude: PropTypes.number,
+              latitude: PropTypes.number,
+              altitude: PropTypes.number
+            }),
+            length: PropTypes.number
           })
         )
       }),
@@ -76,7 +85,7 @@ class ClubEvents extends Component {
       </CollapsableDrawer>,
       <View style={styles.bubble} key="3">
         <Link onPress={shareLocation}>Spot me!</Link>
-        <ElevationProfile coordinates={race.path.coordinates} />
+        <ElevationProfile path={race.path} />
       </View>
     ];
   }

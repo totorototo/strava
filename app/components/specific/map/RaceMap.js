@@ -25,10 +25,19 @@ export default class RaceMap extends Component {
     race: PropTypes.shape({
       date: PropTypes.string,
       path: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(
+        edges: PropTypes.arrayOf(
           PropTypes.shape({
-            latitude: PropTypes.number,
-            longitude: PropTypes.number
+            src: PropTypes.shape({
+              longitude: PropTypes.number,
+              latitude: PropTypes.number,
+              altitude: PropTypes.number
+            }),
+            dest: PropTypes.shape({
+              longitude: PropTypes.number,
+              latitude: PropTypes.number,
+              altitude: PropTypes.number
+            }),
+            length: PropTypes.number
           })
         )
       }),
@@ -61,16 +70,24 @@ export default class RaceMap extends Component {
     const { race, clubMembers } = this.props;
 
     const sampleRegion = {
-      latitude: race.path.coordinates[0].latitude,
-      longitude: race.path.coordinates[0].longitude,
+      latitude: race.path.edges[0].src.latitude,
+      longitude: race.path.edges[0].src.longitude,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA
     };
 
+    const raceData = race.path.edges.reduce(
+      (locations, edge) => [
+        ...locations,
+        { longitude: edge.src.longitude, latitude: edge.src.latitude }
+      ],
+      []
+    );
+
     return (
       <MapView style={styles.map} initialRegion={sampleRegion}>
         <MapView.Polyline
-          coordinates={race.path.coordinates}
+          coordinates={raceData}
           strokeColor={theme.PrimaryColor}
           fillColor={theme.PrimaryColor}
           strokeWidth={3}
