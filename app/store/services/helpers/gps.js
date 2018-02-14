@@ -1,4 +1,4 @@
-const computeDistance = (
+const computeDistanceBetweenLocations = (
   origin = { longitude: 0, latitude: 0 },
   destination = { longitude: 0, latitude: 0 }
 ) => {
@@ -16,83 +16,41 @@ const computeDistance = (
   return R * c / 1000;
 };
 
-const isInRegion = (
-  currentLocation = { longitude: 0, latitude: 0 },
-  reference = { longitude: 0, latitude: 0 },
-  Δλ = 0,
-  Δφ = 0
-) =>
-  Math.abs(currentLocation.longitude - reference.longitude) < Δλ &&
-  Math.abs(currentLocation.latitude - reference.latitude) < Δφ;
+const computeDistance = (...edges) =>
+  edges.reduce(
+    (distance, edge) =>
+      distance + computeDistanceBetweenLocations(edge.src, edge.dest),
+    0
+  );
 
-const computePathDistance = (...locations) =>
-  locations.reduce((distance, currentPoint, index) => {
-    const nextPoint = locations[index + 1];
-    if (nextPoint) {
-      return distance + computeDistance(currentPoint, nextPoint);
-    }
-    return distance;
-  }, 0);
-
-const findClosestLocation = (locations = [], currentLocation = {}) => {
-  const distances = locations.map((currentPoint, index) => ({
-    index,
-    distance: computeDistance(currentLocation, currentPoint)
-  }));
-
-  const sortedDistances = distances.sort((a, b) => a.distance - b.distance);
-  if (sortedDistances.length > 0) {
-    return locations[sortedDistances[0].index];
-  }
-  return null;
-};
-
-const computeElevationGain = (...locations) =>
-  locations.reduce((elevationGain, currentLocation, index) => {
-    const previousPoint = locations[index - 1];
-    if (previousPoint) {
-      const Δφ = currentLocation.altitude - previousPoint.altitude;
-      if (Δφ > 0) {
-        return elevationGain + Δφ;
-      }
-      return elevationGain;
+const computeElevationGain = (...edges) =>
+  edges.reduce((elevationGain, edge) => {
+    const Δφ = edge.dest.altitude - edge.src.altitude;
+    if (Δφ > 0) {
+      return elevationGain + Δφ;
     }
     return elevationGain;
   }, 0);
 
-const computeRegion = (locations = []) =>
-  locations.reduce(
-    (region, currentLocation) => ({
-      minLongitude:
-        currentLocation.longitude < region.minLongitude
-          ? currentLocation.longitude
-          : region.minLongitude,
-      maxLongitude:
-        currentLocation.longitude > region.maxLongitude
-          ? currentLocation.longitude
-          : region.maxLongitude,
-      minLatitude:
-        currentLocation.latitude < region.minLatitude
-          ? currentLocation.latitude
-          : region.minLatitude,
-      maxLatitude:
-        currentLocation.latitude > region.maxLongitude
-          ? currentLocation.latitude
-          : region.maxLongitude
-    }),
-    {
-      minLongitude: locations[0].longitude,
-      maxLongitude: locations[0].longitude,
-      minLatitude: locations[0].latitude,
-      maxLatitude: locations[0].latitude
-    }
+const findClosestEdge = (location, ...edges) => {
+  const gaps = edges.reduce(
+    (acc, edge) => [
+      ...acc,
+      {
+        edge,
+        distance:
+          computeDistanceBetweenLocations(edge.src, location) +
+          computeDistanceBetweenLocations(edge.dest, location)
+      }
+    ],
+    []
   );
+  return gaps.sort((a, b) => a.distance - b.distance);
+};
 
 export default {
-  computeRegion,
   computeDistance,
-  isInRegion,
-  computePathDistance,
+  findClosestEdge,
   computeElevationGain,
-  findClosestLocation
+  computeDistanceBetweenLocations
 };
