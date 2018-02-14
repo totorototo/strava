@@ -45,7 +45,12 @@ const findClosestEdge = (location, ...edges) => {
     ],
     []
   );
-  return gaps.sort((a, b) => a.distance - b.distance);
+  const sortedEdges = gaps.sort((a, b) => a.distance - b.distance);
+  if (sortedEdges.length > 0) {
+    return sortedEdges[0].edge;
+  }
+
+  return null;
 };
 
 export default {

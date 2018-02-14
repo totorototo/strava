@@ -101,8 +101,8 @@ export default class RaceMap extends Component {
             pinColor={theme.PrimaryColor}
           />
         ))}
-        {race.locations &&
-          Object.entries(race.locations).map(([id, location]) => {
+        {race.positions &&
+          Object.entries(race.positions).map(([id, location]) => {
             const coordinate = {
               longitude:
                 (location.coords && location.coords.longitude) ||
@@ -112,33 +112,20 @@ export default class RaceMap extends Component {
                 race.path.coordinates[0].latitude
             };
 
-            const nearestPoint = positionHelper.findClosestLocation(
-              race.path.coordinates,
-              coordinate
+            const nearestEdge = positionHelper.findClosestEdge(
+              coordinate,
+              ...race.path.edges
             );
 
             const trailRunner = clubMembers.find(
               athlete => athlete.id === parseInt(id, 10)
             );
 
-            let description = "";
-            const index = race.path.coordinates.findIndex(
-              point =>
-                point.longitude === nearestPoint.longitude &&
-                point.latitude === nearestPoint.latitude
-            );
-            if (index) {
-              const pathDone = race.path.coordinates.slice(0, index);
-              description = `distance done: ${positionHelper.computePathDistance(
-                ...pathDone
-              )}`;
-            }
-
             return (
               <MapView.Marker
-                coordinate={nearestPoint}
+                coordinate={nearestEdge.src}
                 title={trailRunner ? trailRunner.firstname : id}
-                description={description}
+                description="bla"
                 pinColor={getColor(id)}
                 key={id}
               />
