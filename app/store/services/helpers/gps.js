@@ -32,6 +32,33 @@ const computeElevationGain = (...edges) =>
     return elevationGain;
   }, 0);
 
+const partitionPath = (...edges) => {
+  const DIRECTION = {
+    UP: 0x1,
+    DOWN: 0x0
+  };
+
+  let direction = DIRECTION.UP;
+  const mask = 0x1;
+
+  return edges.reduce((accu, edge) => {
+    const delta = edge.dest.altitude - edge.src.altitude;
+    if (
+      (delta > 0 && direction === DIRECTION.DOWN) ||
+      (delta < 0 && direction === DIRECTION.UP)
+    ) {
+      // eslint-disable-next-line
+      direction ^= mask;
+      return [...accu, [{ edge, delta }]];
+    }
+    return [
+      ...accu.slice(0, accu.length - 1),
+      ...accu.slice(accu.length),
+      [...accu[accu.length - 1], { edge, delta }]
+    ];
+  }, []);
+};
+
 const findClosestEdge = (location, ...edges) => {
   const gaps = edges.reduce(
     (acc, edge) => [
@@ -57,5 +84,6 @@ export default {
   computeDistance,
   findClosestEdge,
   computeElevationGain,
-  computeDistanceBetweenLocations
+  computeDistanceBetweenLocations,
+  partitionPath
 };

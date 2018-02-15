@@ -61,6 +61,9 @@ export default class ElevationProfile extends Component {
   }
 
   static createAreaGraph(edges, graphWidth, graphHeight) {
+    // TODO: create area foreach partition
+    // const partitions = positionHelper.partitionPath(...edges);
+
     // Create our x-scale.
     const scaleX = ElevationProfile.createXScale(
       0,
