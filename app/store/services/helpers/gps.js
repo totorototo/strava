@@ -1,3 +1,16 @@
+const DIRECTION = {
+  UP: 0x1,
+  DOWN: 0x0
+};
+
+const ELEVATION_GRADE = {
+  SMALL: 0x0,
+  MEDIUM: 0x1,
+  LARGE: 0x2,
+  HUGE: 0x4,
+  NEGATIVE: 0x8
+};
+
 const computeDistanceBetweenLocations = (
   origin = { longitude: 0, latitude: 0 },
   destination = { longitude: 0, latitude: 0 }
@@ -32,12 +45,7 @@ const computeElevationGain = (...edges) =>
     return elevationGain;
   }, 0);
 
-const partitionPath = (...edges) => {
-  const DIRECTION = {
-    UP: 0x1,
-    DOWN: 0x0
-  };
-
+const defineElevationDirections = (...edges) => {
   let direction = DIRECTION.UP;
   const mask = 0x1;
 
@@ -56,6 +64,50 @@ const partitionPath = (...edges) => {
       ...accu.slice(accu.length),
       [...accu[accu.length - 1], { edge, delta }]
     ];
+  }, []);
+};
+
+const convertPercentToGrade = percent => {
+  let grade;
+  if (Math.abs(percent) < 5) {
+    grade = ELEVATION_GRADE.SMALL;
+  } else if (Math.abs(percent) >= 5 && Math.abs(percent) < 7) {
+    grade = ELEVATION_GRADE.MEDIUM;
+  } else if (Math.abs(percent) >= 7 && Math.abs(percent) < 10) {
+    grade = ELEVATION_GRADE.LARGE;
+  } else if (Math.abs(percent) >= 10) {
+    grade = ELEVATION_GRADE.HUGE;
+  }
+  if (percent < 0) {
+    // eslint-disable-next-line
+    grade |= ELEVATION_GRADE.NEGATIVE;
+  }
+  return grade;
+};
+
+const defineElevationGrades = (...edges) => {
+  // eslint-disable-next-line
+  let currentElevationGrade =
+    ELEVATION_GRADE.SMALL |
+    ELEVATION_GRADE.MEDIUM |
+    ELEVATION_GRADE.LARGE |
+    ELEVATION_GRADE.HUGE;
+
+  return edges.reduce((grades, edge) => {
+    const distance = computeDistance(edge) * 1000;
+    const elevation = edge.dest.altitude - edge.src.altitude;
+    const percent = 100 * elevation / distance;
+    const computedElevationGrade = convertPercentToGrade(percent);
+    // eslint-disable-next-line
+    if (computedElevationGrade & currentElevationGrade) {
+      return [
+        ...grades.slice(0, grades.length - 1),
+        ...grades.slice(grades.length),
+        [...grades[grades.length - 1], { edge, percent }]
+      ];
+    }
+    currentElevationGrade = computedElevationGrade;
+    return [...grades, [{ edge, percent }]];
   }, []);
 };
 
@@ -85,5 +137,6 @@ export default {
   findClosestEdge,
   computeElevationGain,
   computeDistanceBetweenLocations,
-  partitionPath
+  defineElevationDirections,
+  defineElevationGrades
 };
