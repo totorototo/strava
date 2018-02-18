@@ -4,11 +4,11 @@ const DIRECTION = {
 };
 
 const ELEVATION_GRADE = {
-  SMALL: 0x0,
-  MEDIUM: 0x1,
-  LARGE: 0x2,
-  HUGE: 0x4,
-  NEGATIVE: 0x8
+  SMALL: 1,
+  MEDIUM: 2,
+  LARGE: 4,
+  HUGE: 8,
+  NEGATIVE: 16
 };
 
 const computeDistanceBetweenLocations = (
@@ -87,12 +87,7 @@ const convertPercentToGrade = percent => {
 
 const defineElevationGrades = (...edges) => {
   // eslint-disable-next-line
-  let currentElevationGrade =
-    ELEVATION_GRADE.SMALL |
-    ELEVATION_GRADE.MEDIUM |
-    ELEVATION_GRADE.LARGE |
-    ELEVATION_GRADE.HUGE;
-
+  let currentElevationGrade;
   return edges.reduce((grades, edge) => {
     const distance = computeDistance(edge) * 1000;
     const elevation = edge.dest.altitude - edge.src.altitude;
