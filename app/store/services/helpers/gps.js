@@ -33,6 +33,10 @@ const computeElevationGain = (...edges) =>
   }, 0);
 
 const findClosestEdge = (location, ...edges) => {
+  if (edges.length <= 1) {
+    return edges[0];
+  }
+
   const gaps = edges.reduce(
     (acc, edge) => [
       ...acc,
@@ -45,12 +49,7 @@ const findClosestEdge = (location, ...edges) => {
     ],
     []
   );
-  const sortedEdges = gaps.sort((a, b) => a.distance - b.distance);
-  if (sortedEdges.length > 0) {
-    return sortedEdges[0].edge;
-  }
-
-  return null;
+  return gaps.sort((a, b) => a.distance - b.distance)[0].edge;
 };
 
 export default {
