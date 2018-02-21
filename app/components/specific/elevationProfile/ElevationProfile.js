@@ -15,6 +15,24 @@ const d3 = {
   d3Array
 };
 
+const ELEVATION_GRADE = {
+  SMALL: 0,
+  EASY: 1,
+  MEDIUM: 2,
+  DIFFICULT: 3,
+  HARD: 4,
+  UNKNOWN: 5
+};
+
+const ELEVATION_COLORS = {
+  SMALL: "#f4f6f5",
+  EASY: "#ECBC3E",
+  MEDIUM: "#EA8827",
+  DIFFICULT: "#E1351D",
+  HARD: "#96451F",
+  UNKNOWN: "#00451F"
+};
+
 export default class ElevationProfile extends Component {
   static propTypes = {
     path: PropTypes.shape({
@@ -53,57 +71,48 @@ export default class ElevationProfile extends Component {
     );
   }
 
-  // TODO: this could be done better! faster!
-  static computeDistance(edges, currentEdge) {
-    const index = edges.indexOf(currentEdge);
-    const pathDone = edges.slice(0, index);
-    return positionHelper.computeDistance(...pathDone);
-  }
+  // TODO: to be moved
+  static convertPercentToGrade = percent => {
+    if (Math.abs(percent) < 5) {
+      return ELEVATION_GRADE.SMALL;
+    } else if (Math.abs(percent) >= 5 && Math.abs(percent) < 7) {
+      return ELEVATION_GRADE.EASY;
+    } else if (Math.abs(percent) >= 7 && Math.abs(percent) < 10) {
+      return ELEVATION_GRADE.MEDIUM;
+    } else if (Math.abs(percent) >= 10 && Math.abs(percent) < 15) {
+      return ELEVATION_GRADE.DIFFICULT;
+    } else if (Math.abs(percent) >= 15) {
+      return ELEVATION_GRADE.HARD;
+    }
+    return ELEVATION_GRADE.UNKNOWN;
+  };
 
-  static createAreaGraph(edges, graphWidth, graphHeight) {
-    // temp
+  // TODO: to be moved
+  static convertGradeToColor = grade => {
+    if (grade === ELEVATION_GRADE.SMALL) {
+      return ELEVATION_COLORS.SMALL;
+    } else if (grade === ELEVATION_GRADE.EASY) {
+      return ELEVATION_COLORS.EASY;
+    } else if (grade === ELEVATION_GRADE.MEDIUM) {
+      return ELEVATION_COLORS.MEDIUM;
+    } else if (grade === ELEVATION_GRADE.HARD) {
+      return ELEVATION_COLORS.HARD;
+    } else if (grade === ELEVATION_GRADE.DIFFICULT) {
+      return ELEVATION_COLORS.DIFFICULT;
+    }
+    return ELEVATION_COLORS.UNKNOWN;
+  };
+
+  // TODO: to be moved
+  static addData = (...edges) => {
     let distanceDone = 0;
-
-    // helper
-    const convertPercentToGrade = percent => {
-      let grade;
-      if (Math.abs(percent) < 5) {
-        grade = "ELEVATION_GRADE.SMALL";
-      } else if (Math.abs(percent) >= 5 && Math.abs(percent) < 7) {
-        grade = "ELEVATION_GRADE.MEDIUM";
-      } else if (Math.abs(percent) >= 7 && Math.abs(percent) < 10) {
-        grade = "ELEVATION_GRADE.LARGE";
-      } else if (Math.abs(percent) >= 10 && Math.abs(percent) < 15) {
-        grade = "ELEVATION_GRADE.HUGE";
-      } else if (Math.abs(percent) >= 15) {
-        grade = "ELEVATION_GRADE.OHMYGOD";
-      }
-      return grade;
-    };
-
-    const convertGradeToColor = grade => {
-      if (grade === "ELEVATION_GRADE.SMALL") {
-        return "#f4f6f5";
-      } else if (grade === "ELEVATION_GRADE.MEDIUM") {
-        return "#ECBC3E";
-      } else if (grade === "ELEVATION_GRADE.LARGE") {
-        return "#EA8827";
-      } else if (grade === "ELEVATION_GRADE.HUGE") {
-        return "#E1351D";
-      } else if (grade === "ELEVATION_GRADE.OHMYGOD") {
-        return "#96451F";
-      }
-      return "#daaddd";
-    };
-
-    // add view model data
-    const updatedEdges = edges.reduce((accu, edge, index) => {
+    return edges.reduce((accu, edge, index) => {
       const length = positionHelper.computeDistance(edge);
       distanceDone += length;
       const elevation = (edge.dest.altitude - edge.src.altitude) / 1000;
       const percent = elevation / length * 100;
-      const grade = convertPercentToGrade(percent);
-      const color = convertGradeToColor(grade);
+      const grade = ElevationProfile.convertPercentToGrade(percent);
+      const color = ElevationProfile.convertGradeToColor(grade);
 
       const enhancedEdge = {
         edge,
@@ -116,10 +125,12 @@ export default class ElevationProfile extends Component {
       };
       return [...accu, enhancedEdge];
     }, []);
+  };
 
-    // grouping by
+  // TODO: to be moved
+  static groupBy = (...edges) => {
     let currentGrade = "";
-    const sortedEdges = updatedEdges.reduce((accu, edge) => {
+    return edges.reduce((accu, edge) => {
       if (currentGrade === edge.grade) {
         return [
           ...accu.slice(0, accu.length - 1),
@@ -130,6 +141,11 @@ export default class ElevationProfile extends Component {
       currentGrade = edge.grade;
       return [...accu, [edge]];
     }, []);
+  };
+
+  static createAreaGraph(edges, graphWidth, graphHeight) {
+    const updatedEdges = ElevationProfile.addData(...edges);
+    const sortedEdges = ElevationProfile.groupBy(...updatedEdges);
 
     // Create our x-scale.
     const scaleX = ElevationProfile.createXScale(
@@ -150,7 +166,7 @@ export default class ElevationProfile extends Component {
     // Create our y-scale.
     const scaleY = ElevationProfile.createYScale(0, extentY[1], graphHeight);
 
-    const areas = sortedEdges.map(section => {
+    return sortedEdges.map(section => {
       const areaShape = d3.shape
         .area()
         // For every x and y-point in our line shape we are given an item from our
@@ -166,8 +182,6 @@ export default class ElevationProfile extends Component {
         color: section[0].color
       };
     });
-
-    return areas;
   }
 
   render() {
