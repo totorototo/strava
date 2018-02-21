@@ -69,9 +69,11 @@ export default class RaceMap extends Component {
   render() {
     const { race, clubMembers } = this.props;
 
+    const region = positionHelper.computeRegion(...race.path.edges);
+
     const sampleRegion = {
-      latitude: race.path.edges[0].src.latitude,
-      longitude: race.path.edges[0].src.longitude,
+      latitude: (region.maxLatitude + region.minLatitude) / 2,
+      longitude: (region.maxLongitude + region.minLongitude) / 2,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA
     };
