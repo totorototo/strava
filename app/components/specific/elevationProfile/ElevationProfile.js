@@ -7,30 +7,13 @@ import * as d3Array from "d3-array";
 
 import positionHelper from "../../../store/services/helpers/gps";
 import styles from "./styles";
+import { ELEVATION_GRADE } from "../../../store/constants/elevation";
 
 const { Surface, Shape } = ART;
 const d3 = {
   scale,
   shape,
   d3Array
-};
-
-const ELEVATION_GRADE = {
-  SMALL: 0,
-  EASY: 1,
-  MEDIUM: 2,
-  DIFFICULT: 3,
-  HARD: 4,
-  UNKNOWN: 5
-};
-
-const ELEVATION_COLORS = {
-  SMALL: "#f4f6f5",
-  EASY: "#ECBC3E",
-  MEDIUM: "#EA8827",
-  DIFFICULT: "#E1351D",
-  HARD: "#96451F",
-  UNKNOWN: "#00451F"
 };
 
 export default class ElevationProfile extends Component {
@@ -71,8 +54,7 @@ export default class ElevationProfile extends Component {
     );
   }
 
-  // TODO: to be moved
-  static convertPercentToGrade = percent => {
+  static getElevationRange(percent) {
     if (Math.abs(percent) < 5) {
       return ELEVATION_GRADE.SMALL;
     } else if (Math.abs(percent) >= 5 && Math.abs(percent) < 7) {
@@ -85,67 +67,32 @@ export default class ElevationProfile extends Component {
       return ELEVATION_GRADE.HARD;
     }
     return ELEVATION_GRADE.UNKNOWN;
-  };
+  }
 
-  // TODO: to be moved
-  static convertGradeToColor = grade => {
-    if (grade === ELEVATION_GRADE.SMALL) {
-      return ELEVATION_COLORS.SMALL;
-    } else if (grade === ELEVATION_GRADE.EASY) {
-      return ELEVATION_COLORS.EASY;
-    } else if (grade === ELEVATION_GRADE.MEDIUM) {
-      return ELEVATION_COLORS.MEDIUM;
-    } else if (grade === ELEVATION_GRADE.HARD) {
-      return ELEVATION_COLORS.HARD;
-    } else if (grade === ELEVATION_GRADE.DIFFICULT) {
-      return ELEVATION_COLORS.DIFFICULT;
-    }
-    return ELEVATION_COLORS.UNKNOWN;
-  };
-
-  // TODO: to be moved
-  static addData = (...edges) => {
-    let distanceDone = 0;
-    return edges.reduce((accu, edge, index) => {
-      const length = positionHelper.computeDistance(edge);
-      distanceDone += length;
-      const elevation = (edge.dest.altitude - edge.src.altitude) / 1000;
-      const percent = elevation / length * 100;
-      const grade = ElevationProfile.convertPercentToGrade(percent);
-      const color = ElevationProfile.convertGradeToColor(grade);
-
-      const enhancedEdge = {
-        edge,
-        length,
-        percent,
-        index,
-        distanceDone,
-        grade,
-        color
-      };
-      return [...accu, enhancedEdge];
-    }, []);
-  };
-
-  // TODO: to be moved
+  // TODO: should be prototypeOn array and take a grouping fct that return the key of an item
   static groupBy = (...edges) => {
-    let currentGrade = "";
+    let currentElevationRange = "";
     return edges.reduce((accu, edge) => {
-      if (currentGrade === edge.grade) {
+      const elevationRange = ElevationProfile.getElevationRange(edge.percent);
+      if (currentElevationRange === elevationRange) {
         return [
           ...accu.slice(0, accu.length - 1),
           ...accu.slice(accu.length),
           [...accu[accu.length - 1], edge]
         ];
       }
-      currentGrade = edge.grade;
+      currentElevationRange = elevationRange;
       return [...accu, [edge]];
     }, []);
   };
 
   static createAreaGraph(edges, graphWidth, graphHeight) {
-    const updatedEdges = ElevationProfile.addData(...edges);
-    const sortedEdges = ElevationProfile.groupBy(...updatedEdges);
+    const getColor = d3.scale
+      .scaleThreshold()
+      .domain([5, 7, 10, 15])
+      .range(["#f2f0f7", "#ECBC3E", "#EA8827", "#E1351D", "#96451F"]);
+
+    const groupedEdges = ElevationProfile.groupBy(...edges);
 
     // Create our x-scale.
     const scaleX = ElevationProfile.createXScale(
@@ -166,20 +113,20 @@ export default class ElevationProfile extends Component {
     // Create our y-scale.
     const scaleY = ElevationProfile.createYScale(0, extentY[1], graphHeight);
 
-    return sortedEdges.map(section => {
+    return groupedEdges.map(section => {
       const areaShape = d3.shape
         .area()
         // For every x and y-point in our line shape we are given an item from our
         // array which we pass through our scale function so we map the domain value
         // to the range value.
         .x(d => scaleX(d.distanceDone))
-        .y1(d => scaleY(d.edge.src.altitude))
+        .y1(d => scaleY(d.src.altitude))
         .y0(extentY[1])
         .curve(d3.shape.curveNatural);
 
       return {
         path: areaShape(section),
-        color: section[0].color
+        color: getColor(Math.abs(section[0].percent))
       };
     });
   }
