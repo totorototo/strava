@@ -54,6 +54,14 @@ export default class ElevationProfile extends Component {
     );
   }
 
+  static createColorScale() {
+    return d3.scale
+      .scaleThreshold()
+      .domain([5, 7, 10, 15])
+      .range(["#f2f0f7", "#ECBC3E", "#EA8827", "#E1351D", "#96451F"]);
+  }
+
+  // TODO: here?
   static getElevationRange(percent) {
     if (Math.abs(percent) < 5) {
       return ELEVATION_GRADE.SMALL;
@@ -87,11 +95,6 @@ export default class ElevationProfile extends Component {
   };
 
   static createAreaGraph(edges, graphWidth, graphHeight) {
-    const getColor = d3.scale
-      .scaleThreshold()
-      .domain([5, 7, 10, 15])
-      .range(["#f2f0f7", "#ECBC3E", "#EA8827", "#E1351D", "#96451F"]);
-
     const groupedEdges = ElevationProfile.groupBy(...edges);
 
     // Create our x-scale.
@@ -100,6 +103,8 @@ export default class ElevationProfile extends Component {
       positionHelper.computeDistance(...edges),
       graphWidth
     );
+
+    const colorScale = ElevationProfile.createColorScale();
 
     // Collect all y values.
     const altitudes = edges.reduce(
@@ -126,7 +131,7 @@ export default class ElevationProfile extends Component {
 
       return {
         path: areaShape(section),
-        color: getColor(Math.abs(section[0].percent))
+        color: colorScale(Math.abs(section[0].percent))
       };
     });
   }
