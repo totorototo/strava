@@ -1,6 +1,5 @@
 import { coordinates, markers } from "../sagas/data/data";
 import positionHelper from "./helpers/gps";
-import { convertPercentToGrade } from "./helpers/event";
 
 const getEventEdges = (...locations) => {
   const result = locations.reduce((accu, location, index) => {
@@ -28,9 +27,8 @@ const getEdgesElevationDetails = (...edges) => {
     distanceDone += length;
     const elevation = (edge.dest.altitude - edge.src.altitude) / 1000;
     const percent = elevation / length * 100;
-    const grade = convertPercentToGrade(percent);
 
-    return [...accu, { ...edge, percent, index, distanceDone, grade }];
+    return [...accu, { ...edge, percent, index, distanceDone }];
   }, []);
 };
 
