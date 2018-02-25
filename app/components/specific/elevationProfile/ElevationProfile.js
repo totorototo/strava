@@ -6,7 +6,6 @@ import * as scale from "d3-scale";
 import * as shape from "d3-shape";
 import * as d3Array from "d3-array";
 
-import positionHelper from "../../../store/services/helpers/gps";
 import styles from "./styles";
 import { ELEVATION_GRADE } from "../../../store/constants/elevation";
 
@@ -40,14 +39,14 @@ const groupEdgesByRange = function(accu, item) {
   return accu;
 };
 
-const groupEdgesBySequence = function(result, value, index, collection) {
+const groupEdgesBySequence = function(accu, value, index, collection) {
   if (index > 0 && value.index - collection[index - 1].index === 1) {
-    const group = last(result);
+    const group = last(accu);
     group.push(value);
   } else {
-    result.push([value]);
+    accu.push([value]);
   }
-  return result;
+  return accu;
 };
 
 // eslint-disable-next-line no-extend-native
@@ -93,11 +92,11 @@ export default class ElevationProfile extends Component {
     );
   }
 
-  static createColorScale2() {
+  static createColorScale() {
     return d3.scale
       .scaleThreshold()
       .domain([1, 2, 3, 4])
-      .range(["#f2f0f7", "#ECBC3E", "#EA8827", "#E1351D", "#96451F"]);
+      .range(["#F4F6F5", "#ECBC3E", "#EA8827", "#E1351D", "#96451F"]);
   }
 
   static createAreaGraph(edges, graphWidth, graphHeight) {
@@ -109,19 +108,12 @@ export default class ElevationProfile extends Component {
     });
 
     // Create our x-scale.
-    const scaleX = ElevationProfile.createXScale(
-      0,
-      positionHelper.computeDistance(...edges),
-      graphWidth
-    );
+    const scaleX = ElevationProfile.createXScale(0, edges.length, graphWidth);
 
-    const colorScale = ElevationProfile.createColorScale2();
+    const colorScale = ElevationProfile.createColorScale();
 
     // Collect all y values.
-    const altitudes = edges.reduce(
-      (accu, location) => [...accu, location.src.altitude],
-      []
-    );
+    const altitudes = edges.map(location => location.src.altitude);
 
     // Get the min and max y value.
     const extentY = d3Array.extent(altitudes);
@@ -129,7 +121,7 @@ export default class ElevationProfile extends Component {
     // Create our y-scale.
     const scaleY = ElevationProfile.createYScale(0, extentY[1], graphHeight);
 
-    const test = Object.entries(
+    const groupedPaths = Object.entries(
       groupedEdgesBySequence
     ).map(([grade, sequences]) =>
       sequences.map(sequence => {
@@ -138,11 +130,10 @@ export default class ElevationProfile extends Component {
           // For every x and y-point in our line shape we are given an item from our
           // array which we pass through our scale function so we map the domain value
           // to the range value.
-          .x(d => scaleX(d.distanceDone))
+          .x(d => scaleX(d.index))
           .y1(d => scaleY(d.src.altitude))
-          .defined(d => typeof d.value !== "string")
           .y0(extentY[1])
-          .curve(d3.shape.curveNatural);
+          .curve(d3.shape.curveLinear);
 
         return {
           path: areaShape(sequence),
@@ -151,10 +142,10 @@ export default class ElevationProfile extends Component {
       })
     );
 
-    const sections = Object.values(test).map(sequences =>
+    const paths = Object.values(groupedPaths).map(sequences =>
       sequences.map(item => item)
     );
-    return flatten(sections);
+    return flatten(paths);
   }
 
   render() {
