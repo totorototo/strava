@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { last, flatten } from "lodash";
+import { xor, concat } from "lodash";
 import PropTypes from "prop-types";
 import { View, ART, Dimensions } from "react-native";
 import * as scale from "d3-scale";
@@ -31,27 +31,15 @@ const getRange = percent => {
   return ELEVATION_GRADE.UNKNOWN;
 };
 
-const groupEdgesByRange = function(accu, item) {
-  const val = getRange(item.percent);
-  // eslint-disable-next-line no-param-reassign
-  accu[val] = accu[val] || [];
-  accu[val].push(item);
-  return accu;
-};
-
-const groupEdgesBySequence = function(accu, value, index, collection) {
-  if (index > 0 && value.index - collection[index - 1].index === 1) {
-    const group = last(accu);
-    group.push(value);
-  } else {
-    accu.push([value]);
-  }
-  return accu;
-};
-
 // eslint-disable-next-line no-extend-native
-Array.prototype.groupBy = function(fn, accu) {
-  return this.reduce(fn, accu);
+Array.prototype.groupBy = function(fn) {
+  return this.reduce((accu, item, index, array) => {
+    const key = fn(item, item, array);
+    // eslint-disable-next-line no-param-reassign
+    accu[key] = accu[key] || [];
+    accu[key].push(item);
+    return accu;
+  }, {});
 };
 
 export default class ElevationProfile extends Component {
@@ -100,11 +88,17 @@ export default class ElevationProfile extends Component {
   }
 
   static createAreaGraph(edges, graphWidth, graphHeight) {
-    const groupedEdgesByRange = edges.groupBy(groupEdgesByRange, {});
+    const groupedEdgesByRange = edges.groupBy(item => getRange(item.percent));
 
-    const groupedEdgesBySequence = {};
-    Object.entries(groupedEdgesByRange).forEach(([range, section]) => {
-      groupedEdgesBySequence[range] = section.groupBy(groupEdgesBySequence, []);
+    const total = Array.from(Array(edges.length).keys());
+
+    // eslint-disable-next-line
+    const data = Object.entries(groupedEdgesByRange).map(([grade, section]) => {
+      const index = section.map(item => item.index);
+      const diff = xor(total, index);
+      const fake = diff.map(item => ({ index: item, fake: true }));
+      const concatData = concat(section, fake);
+      return concatData.sort((a, b) => a.index - b.index);
     });
 
     // Create our x-scale.
@@ -121,31 +115,23 @@ export default class ElevationProfile extends Component {
     // Create our y-scale.
     const scaleY = ElevationProfile.createYScale(0, extentY[1], graphHeight);
 
-    const groupedPaths = Object.entries(
-      groupedEdgesBySequence
-    ).map(([grade, sequences]) =>
-      sequences.map(sequence => {
-        const areaShape = d3.shape
-          .area()
-          // For every x and y-point in our line shape we are given an item from our
-          // array which we pass through our scale function so we map the domain value
-          // to the range value.
-          .x(d => scaleX(d.index))
-          .y1(d => scaleY(d.src.altitude))
-          .y0(extentY[1])
-          .curve(d3.shape.curveLinear);
+    return Object.entries(data).map(([grade, section]) => {
+      const areaShape = d3.shape
+        .area()
+        // For every x and y-point in our line shape we are given an item from our
+        // array which we pass through our scale function so we map the domain value
+        // to the range value.
+        .x(d => scaleX(d.index))
+        .y1(d => scaleY(d.src.altitude))
+        .y0(extentY[1])
+        .defined(d => !d.fake)
+        .curve(d3.shape.curveLinear);
 
-        return {
-          path: areaShape(sequence),
-          color: colorScale(grade)
-        };
-      })
-    );
-
-    const paths = Object.values(groupedPaths).map(sequences =>
-      sequences.map(item => item)
-    );
-    return flatten(paths);
+      return {
+        path: areaShape(section),
+        color: colorScale(grade)
+      };
+    });
   }
 
   render() {
@@ -162,7 +148,7 @@ export default class ElevationProfile extends Component {
               d={area.path}
               stroke={area.color}
               fill={area.color}
-              strokeWidth={1}
+              strokeWidth={0}
             />
           ))}
         </Surface>
