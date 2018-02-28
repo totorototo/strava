@@ -16,6 +16,7 @@ const d3 = {
   d3Array
 };
 
+// TODO: how? where? what?
 const getRange = percent => {
   if (Math.abs(percent) < 5) {
     return ELEVATION_GRADE.SMALL;
@@ -90,15 +91,18 @@ export default class ElevationProfile extends Component {
   static createAreaGraph(edges, graphWidth, graphHeight) {
     const groupedEdgesByRange = edges.groupBy(item => getRange(item.percent));
 
-    const total = Array.from(Array(edges.length).keys());
-
     // eslint-disable-next-line
     const data = Object.entries(groupedEdgesByRange).map(([grade, section]) => {
-      const index = section.map(item => item.index);
-      const diff = xor(total, index);
-      const fake = diff.map(item => ({ index: item, fake: true }));
-      const concatData = concat(section, fake);
-      return concatData.sort((a, b) => a.index - b.index);
+      const indices = section.map(item => item.index);
+      const missingValueIndices = xor(
+        Array.from(Array(edges.length).keys()),
+        indices
+      );
+      const fakeData = missingValueIndices.map(item => ({
+        index: item,
+        fake: true
+      }));
+      return concat(section, fakeData).sort((a, b) => a.index - b.index);
     });
 
     // Create our x-scale.
@@ -148,7 +152,7 @@ export default class ElevationProfile extends Component {
               d={area.path}
               stroke={area.color}
               fill={area.color}
-              strokeWidth={0}
+              strokeWidth={0.2}
             />
           ))}
         </Surface>
