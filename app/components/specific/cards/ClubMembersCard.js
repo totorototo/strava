@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import CardList from "../../common/cardList/CardList";
+import theme from "../../../theme/theme";
+import { getIconName } from "../../../routes/main/clubFeed/helper";
 
 export default class ClubMembersCard extends Component {
   static propTypes = {
@@ -22,7 +24,7 @@ export default class ClubMembersCard extends Component {
         title="MEMBERS"
         list={clubMembers.map(member => ({
           key: member.id,
-          image: member.profile,
+          image: { name: getIconName("runner"), color: theme.PrimaryColor },
           text: member.firstname
         }))}
       />

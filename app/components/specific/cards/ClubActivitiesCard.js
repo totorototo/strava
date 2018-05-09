@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import CardList from "../../common/cardList/CardList";
+import theme from "../../../theme/theme";
+import { getIconName } from "../../../routes/main/clubFeed/helper";
 
 export default class ClubActivitiesCard extends Component {
   static propTypes = {
@@ -19,7 +21,7 @@ export default class ClubActivitiesCard extends Component {
         title="ACTIVITIES"
         list={activities.map((activity, index) => ({
           key: index,
-          image: activity.athlete.profile,
+          image: { name: getIconName("runner"), color: theme.PrimaryColor },
           text: activity.name
         }))}
       />

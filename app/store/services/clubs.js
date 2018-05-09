@@ -4,6 +4,9 @@ import { pick } from "lodash";
 import { API_ENDPOINT, RESOURCES, METHODS } from "../constants/rest";
 import { callJSONApi } from "./helpers/api";
 
+const computeID = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
 export const listClubMembers = (token, id) => {
   const request = {
     endpoint: {
@@ -14,17 +17,21 @@ export const listClubMembers = (token, id) => {
   };
   return callJSONApi(request).then(
     response => {
+      const enhancedData = response.data.map(member => ({
+        ...member,
+        id: computeID(0, 100000).toString()
+      }));
       const memberSchema = new schema.Entity(
         "members",
         {},
         {
           idAttribute: "id",
           processStrategy: entity =>
-            pick(entity, ["firstname", "lastname", "profile", "id", "country"])
+            pick(entity, ["firstname", "lastname", "id"])
         }
       );
       const membersSchema = [memberSchema];
-      const normalizedData = normalize(response.data, membersSchema);
+      const normalizedData = normalize(enhancedData, membersSchema);
 
       return {
         ids: normalizedData.result,
@@ -78,6 +85,10 @@ export const listClubActivities = (token, id) => {
   };
   return callJSONApi(request).then(
     response => {
+      const enhancedData = response.data.map(activity => ({
+        ...activity,
+        id: computeID(0, 100000).toString()
+      }));
       const activitySchema = new schema.Entity(
         "Runs",
         {},
@@ -85,6 +96,7 @@ export const listClubActivities = (token, id) => {
           idAttribute: "id",
           processStrategy: entity =>
             pick(entity, [
+              "id",
               "type",
               "name",
               "athlete",
@@ -92,14 +104,13 @@ export const listClubActivities = (token, id) => {
               "achievement_count",
               "elapsed_time",
               "max_speed",
-              "calories",
               "total_elevation_gain"
             ])
         }
       );
 
       const activitiesSchema = [activitySchema];
-      const normalizedData = normalize(response.data, activitiesSchema);
+      const normalizedData = normalize(enhancedData, activitiesSchema);
 
       return {
         ids: normalizedData.result,

@@ -161,7 +161,7 @@ export default class ElevationProfile extends Component {
               d={area.path}
               stroke={area.color}
               fill={area.color}
-              strokeWidth={0.2}
+              strokeWidth={0.15}
             />
           ))}
         </Surface>
