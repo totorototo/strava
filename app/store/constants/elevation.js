@@ -8,7 +8,7 @@ export const ELEVATION_GRADE = {
 };
 
 export const ELEVATION_COLORS = {
-  SMALL: "#f4f6f5",
+  SMALL: "#F4F6F5",
   EASY: "#ECBC3E",
   MEDIUM: "#EA8827",
   DIFFICULT: "#E1351D",
