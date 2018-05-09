@@ -7,7 +7,10 @@ import * as shape from "d3-shape";
 import * as d3Array from "d3-array";
 
 import styles from "./styles";
-import { ELEVATION_GRADE } from "../../../store/constants/elevation";
+import {
+  ELEVATION_COLORS,
+  ELEVATION_GRADE
+} from "../../../store/constants/elevation";
 
 const { Surface, Shape } = ART;
 const d3 = {
@@ -85,7 +88,13 @@ export default class ElevationProfile extends Component {
     return d3.scale
       .scaleThreshold()
       .domain([1, 2, 3, 4])
-      .range(["#F4F6F5", "#ECBC3E", "#EA8827", "#E1351D", "#96451F"]);
+      .range([
+        ELEVATION_COLORS.SMALL,
+        ELEVATION_COLORS.EASY,
+        ELEVATION_COLORS.MEDIUM,
+        ELEVATION_COLORS.DIFFICULT,
+        ELEVATION_COLORS.HARD
+      ]);
   }
 
   static createAreaGraph(edges, graphWidth, graphHeight) {
