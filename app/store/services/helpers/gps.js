@@ -110,10 +110,20 @@ const findClosestEdge = (location, ...edges) => {
   return gaps.sort((a, b) => a.distance - b.distance)[0].edge;
 };
 
+const getCheckpointsIndices = (checkpoints = [], precision = 0.1, ...edges) =>
+  checkpoints.reduce(
+    (indices, checkpoint) => [
+      ...indices,
+      edges.findIndex(edge => checkpoint - edge.distanceDone < precision)
+    ],
+    []
+  );
+
 export default {
   computeDistance,
   findClosestEdge,
   computeElevationGain,
   computeDistanceBetweenLocations,
-  computeRegion
+  computeRegion,
+  getCheckpointsIndices
 };

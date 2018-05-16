@@ -6,6 +6,7 @@ import * as scale from "d3-scale";
 import * as shape from "d3-shape";
 import * as d3Array from "d3-array";
 
+import gps from "../../../store/services/helpers/gps";
 import styles from "./styles";
 import {
   ELEVATION_COLORS,
@@ -97,6 +98,40 @@ export default class ElevationProfile extends Component {
       ]);
   }
 
+  static createAxis(edges, graphWidth, graphHeight) {
+    const totalDistance = edges[edges.length - 1].distanceDone;
+    const intervalBetweenCheckPoints = 10;
+    const totalCheckPoints = Math.floor(
+      totalDistance / intervalBetweenCheckPoints
+    );
+
+    const checkPoints = [];
+    for (let i = 0; i <= totalCheckPoints; i += 1) {
+      checkPoints.push(intervalBetweenCheckPoints * i);
+    }
+
+    const ticksIndices = gps.getCheckpointsIndices(checkPoints, 0.1, ...edges);
+    const AxisData = ticksIndices.map(tickIndex => edges[tickIndex]);
+    // TODO: draw line dans ta face!
+
+    const scaleX = ElevationProfile.createXScale(0, edges.length, graphWidth);
+    const scaleY = ElevationProfile.createYScale(0, 0, graphHeight);
+
+    const lineShape = d3.shape
+      .line()
+      // For every x and y-point in our line shape we are given an item from our
+      // array which we pass through our scale function so we map the domain value
+      // to the range value.
+      .x(d => scaleX(d.index))
+      .y(scaleY(0));
+
+    return {
+      // Pass in our array of data to our line generator to produce the `d={}`
+      // attribute value that will go into our `<Shape />` component.
+      path: lineShape(AxisData)
+    };
+  }
+
   static createAreaGraph(edges, graphWidth, graphHeight) {
     const groupedEdgesByRange = edges.groupBy(item => getRange(item.percent));
 
@@ -152,6 +187,7 @@ export default class ElevationProfile extends Component {
     const { width } = Dimensions.get("window");
 
     const areas = ElevationProfile.createAreaGraph(path.edges, width, 100);
+    const axis = ElevationProfile.createAxis(path.edges, width, 100);
 
     return (
       <View style={styles.container}>
@@ -164,6 +200,7 @@ export default class ElevationProfile extends Component {
               strokeWidth={0.15}
             />
           ))}
+          <Shape d={axis.path} stroke="#000" strokeWidth={3} />
         </Surface>
       </View>
     );
