@@ -45,8 +45,6 @@ buck-out/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
-<<<<<<< ours
-
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
@@ -56,11 +54,7 @@ fastlane/screenshots
 *.tar
 android/keystore.properties
 
-=======
-*/fastlane/report.xml
-*/fastlane/Preview.html
-*/fastlane/screenshots
 
 # Bundle artifact
 *.jsbundle
->>>>>>> theirs
+
