@@ -1,9 +1,17 @@
 import { call, select, put, takeEvery } from "redux-saga/effects";
 
-import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
+import {
+  SET_CURRENT_CLUB_ID,
+  SET_CURRENT_USER_ID
+} from "../constants/actionTypes";
 import { updateEntity, setEntity } from "../actions/entities";
 import { setCurrentClubID } from "../actions/data";
-import { token, getCurrentUserID } from "../state/appState/selectors";
+import {
+  token,
+  getCurrentUserID,
+  getCurrentClubID,
+  getCurrentClubMembers
+} from "../state/appState/selectors";
 import {
   listClubMembers,
   listClubActivities,
@@ -11,8 +19,13 @@ import {
 } from "../services/clubs";
 import { getRankings } from "../services/activities";
 
-function* listActivities(clubID, membersIDs) {
+function* listActivities() {
+  const clubID = yield select(getCurrentClubID);
+  if (clubID === "loading") return;
+
+  const membersIDs = yield select(getCurrentClubMembers);
   const accessToken = yield select(token);
+
   const { ids, entities, error } = yield call(
     listClubActivities,
     accessToken,
@@ -21,6 +34,7 @@ function* listActivities(clubID, membersIDs) {
   if (!error) {
     yield put(updateEntity(clubID, "clubs", { activities: ids }));
     yield put(setEntity("activities", entities));
+    // TODO: strava api changed: activity and member id not set anymore!
     const { ranking } = yield call(getRankings, membersIDs, entities);
     yield put(updateEntity(clubID, "clubs", { ranking }));
   }
@@ -48,10 +62,10 @@ function* listMembers() {
 
     yield put(setEntity("athletes", athletes));
     yield put(setCurrentClubID(clubID));
-    yield listActivities(clubID, ids);
   }
 }
 
 export function* clubsSaga() {
   yield takeEvery(SET_CURRENT_USER_ID, listMembers);
+  yield takeEvery(SET_CURRENT_CLUB_ID, listActivities);
 }

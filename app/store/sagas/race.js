@@ -1,21 +1,14 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, call, takeEvery } from "redux-saga/effects";
 
 import { SET_CURRENT_USER_ID } from "../constants/actionTypes";
 import { setCurrentRaceID } from "../actions/data";
 import { setEntity } from "../actions/entities";
-import { markers, coordinates } from "./data/data";
+import { getEventDetails } from "../services/event";
 
 function* listRaces() {
-  // 1- mock strava api call
-  const entities = {};
   const raceID = 123456;
-  entities[raceID] = {
-    date: "2018-08-24T03:00:00+00:00",
-    checkPoints: markers,
-    path: {
-      coordinates
-    }
-  };
+  const entities = yield call(getEventDetails, raceID);
+
   yield put(setCurrentRaceID(raceID));
   yield put(setEntity("races", entities));
 }

@@ -94,7 +94,9 @@ export const getAthleteActivities = token => {
 export const getRankings = (members = [], activities = {}) => {
   const sortedActivitiesByAthlete = members.map(member => {
     const filteredIDs = Object.keys(activities).filter(
-      id => activities[id].athlete.id === member
+      id =>
+        activities[id].athlete.firstname === member.firstname &&
+        activities[id].athlete.lastname === member.lastname
     );
     return filteredIDs.map(id => activities[id]);
   });
@@ -107,20 +109,12 @@ export const getRankings = (members = [], activities = {}) => {
           total_elevation_gain:
             acc.total_elevation_gain + currentValue.total_elevation_gain,
           elapsed_time: acc.elapsed_time + currentValue.elapsed_time,
-          max_speed:
-            currentValue.max_speed > acc.max_speed
-              ? currentValue.max_speed
-              : acc.max_speed,
-          achievement_count:
-            acc.achievement_count + currentValue.achievement_count,
           name: currentValue.athlete.firstname
         }),
         {
           distance: 0,
           total_elevation_gain: 0,
           elapsed_time: 0,
-          max_speed: 0,
-          achievement_count: 0,
           name: ""
         }
       )
@@ -136,14 +130,6 @@ export const getRankings = (members = [], activities = {}) => {
       athlete: ""
     },
     elapsed_time: {
-      value: 0,
-      athlete: ""
-    },
-    max_speed: {
-      value: 0,
-      athlete: ""
-    },
-    achievement_count: {
       value: 0,
       athlete: ""
     }

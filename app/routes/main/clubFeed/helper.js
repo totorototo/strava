@@ -7,6 +7,7 @@ const mapping = {
   elevation: "landscape",
   duration: "timer",
   pace: "flash-on",
+  runner: "directions-run",
   "runs count": "plus-one"
 };
 

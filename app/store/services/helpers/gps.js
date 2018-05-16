@@ -1,4 +1,4 @@
-const computeDistance = (
+const computeDistanceBetweenLocations = (
   origin = { longitude: 0, latitude: 0 },
   destination = { longitude: 0, latitude: 0 }
 ) => {
@@ -16,51 +16,7 @@ const computeDistance = (
   return R * c / 1000;
 };
 
-const isInRegion = (
-  currentLocation = { longitude: 0, latitude: 0 },
-  reference = { longitude: 0, latitude: 0 },
-  Δλ = 0,
-  Δφ = 0
-) =>
-  Math.abs(currentLocation.longitude - reference.longitude) < Δλ &&
-  Math.abs(currentLocation.latitude - reference.latitude) < Δφ;
-
-const computePathDistance = (...locations) =>
-  locations.reduce((distance, currentPoint, index) => {
-    const nextPoint = locations[index + 1];
-    if (nextPoint) {
-      return distance + computeDistance(currentPoint, nextPoint);
-    }
-    return distance;
-  }, 0);
-
-const findClosestLocation = (locations = [], currentLocation = {}) => {
-  const distances = locations.map((currentPoint, index) => ({
-    index,
-    distance: computeDistance(currentLocation, currentPoint)
-  }));
-
-  const sortedDistances = distances.sort((a, b) => a.distance - b.distance);
-  if (sortedDistances.length > 0) {
-    return locations[sortedDistances[0].index];
-  }
-  return null;
-};
-
-const computeElevationGain = (...locations) =>
-  locations.reduce((elevationGain, currentLocation, index) => {
-    const previousPoint = locations[index - 1];
-    if (previousPoint) {
-      const Δφ = currentLocation.altitude - previousPoint.altitude;
-      if (Δφ > 0) {
-        return elevationGain + Δφ;
-      }
-      return elevationGain;
-    }
-    return elevationGain;
-  }, 0);
-
-const computeRegion = (locations = []) =>
+const computeRegionForLocations = (locations = []) =>
   locations.reduce(
     (region, currentLocation) => ({
       minLongitude:
@@ -88,11 +44,86 @@ const computeRegion = (locations = []) =>
     }
   );
 
+const computeRegion = (...edges) => {
+  const initialRegion = {
+    minLatitude: edges[0].src.latitude || 0,
+    maxLatitude: edges[0].src.latitude || 0,
+    minLongitude: edges[0].src.longitude || 0,
+    maxLongitude: edges[0].src.longitude || 0
+  };
+  return edges.reduce((region, edge) => {
+    const currentRegion = computeRegionForLocations([edge.src, edge.dest]);
+    return {
+      minLatitude:
+        currentRegion.minLatitude < region.minLatitude
+          ? currentRegion.minLatitude
+          : region.minLatitude,
+      maxLatitude:
+        currentRegion.maxLatitude > region.maxLatitude
+          ? currentRegion.maxLatitude
+          : region.maxLatitude,
+      minLongitude:
+        currentRegion.minLongitude < region.minLongitude
+          ? currentRegion.minLongitude
+          : region.minLongitude,
+      maxLongitude:
+        currentRegion.maxLongitude > region.maxLongitude
+          ? currentRegion.maxLongitude
+          : region.maxLongitude
+    };
+  }, initialRegion);
+};
+
+const computeDistance = (...edges) =>
+  edges.reduce(
+    (distance, edge) =>
+      distance + computeDistanceBetweenLocations(edge.src, edge.dest),
+    0
+  );
+
+const computeElevationGain = (...edges) =>
+  edges.reduce((elevationGain, edge) => {
+    const Δφ = edge.dest.altitude - edge.src.altitude;
+    if (Δφ > 0) {
+      return elevationGain + Δφ;
+    }
+    return elevationGain;
+  }, 0);
+
+const findClosestEdge = (location, ...edges) => {
+  if (edges.length <= 1) {
+    return edges[0];
+  }
+
+  const gaps = edges.reduce(
+    (acc, edge) => [
+      ...acc,
+      {
+        edge,
+        distance:
+          computeDistanceBetweenLocations(edge.src, location) +
+          computeDistanceBetweenLocations(edge.dest, location)
+      }
+    ],
+    []
+  );
+  return gaps.sort((a, b) => a.distance - b.distance)[0].edge;
+};
+
+const getCheckpointsIndices = (checkpoints = [], precision = 0.1, ...edges) =>
+  checkpoints.reduce(
+    (indices, checkpoint) => [
+      ...indices,
+      edges.findIndex(edge => checkpoint - edge.distanceDone < precision)
+    ],
+    []
+  );
+
 export default {
-  computeRegion,
   computeDistance,
-  isInRegion,
-  computePathDistance,
+  findClosestEdge,
   computeElevationGain,
-  findClosestLocation
+  computeDistanceBetweenLocations,
+  computeRegion,
+  getCheckpointsIndices
 };

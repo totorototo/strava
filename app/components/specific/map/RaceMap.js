@@ -25,10 +25,19 @@ export default class RaceMap extends Component {
     race: PropTypes.shape({
       date: PropTypes.string,
       path: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(
+        edges: PropTypes.arrayOf(
           PropTypes.shape({
-            latitude: PropTypes.number,
-            longitude: PropTypes.number
+            src: PropTypes.shape({
+              longitude: PropTypes.number,
+              latitude: PropTypes.number,
+              altitude: PropTypes.number
+            }),
+            dest: PropTypes.shape({
+              longitude: PropTypes.number,
+              latitude: PropTypes.number,
+              altitude: PropTypes.number
+            }),
+            length: PropTypes.number
           })
         )
       }),
@@ -60,17 +69,27 @@ export default class RaceMap extends Component {
   render() {
     const { race, clubMembers } = this.props;
 
+    const region = positionHelper.computeRegion(...race.path.edges);
+
     const sampleRegion = {
-      latitude: race.path.coordinates[0].latitude,
-      longitude: race.path.coordinates[0].longitude,
+      latitude: (region.maxLatitude + region.minLatitude) / 2,
+      longitude: (region.maxLongitude + region.minLongitude) / 2,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA
     };
 
+    const raceData = race.path.edges.reduce(
+      (locations, edge) => [
+        ...locations,
+        { longitude: edge.src.longitude, latitude: edge.src.latitude }
+      ],
+      []
+    );
+
     return (
       <MapView style={styles.map} initialRegion={sampleRegion}>
         <MapView.Polyline
-          coordinates={race.path.coordinates}
+          coordinates={raceData}
           strokeColor={theme.PrimaryColor}
           fillColor={theme.PrimaryColor}
           strokeWidth={3}
@@ -84,8 +103,8 @@ export default class RaceMap extends Component {
             pinColor={theme.PrimaryColor}
           />
         ))}
-        {race.locations &&
-          Object.entries(race.locations).map(([id, location]) => {
+        {race.positions &&
+          Object.entries(race.positions).map(([id, location]) => {
             const coordinate = {
               longitude:
                 (location.coords && location.coords.longitude) ||
@@ -95,33 +114,20 @@ export default class RaceMap extends Component {
                 race.path.coordinates[0].latitude
             };
 
-            const nearestPoint = positionHelper.findClosestLocation(
-              race.path.coordinates,
-              coordinate
+            const nearestEdge = positionHelper.findClosestEdge(
+              coordinate,
+              ...race.path.edges
             );
 
             const trailRunner = clubMembers.find(
               athlete => athlete.id === parseInt(id, 10)
             );
 
-            let description = "";
-            const index = race.path.coordinates.findIndex(
-              point =>
-                point.longitude === nearestPoint.longitude &&
-                point.latitude === nearestPoint.latitude
-            );
-            if (index) {
-              const pathDone = race.path.coordinates.slice(0, index);
-              description = `distance done: ${positionHelper.computePathDistance(
-                ...pathDone
-              )}`;
-            }
-
             return (
               <MapView.Marker
-                coordinate={nearestPoint}
+                coordinate={nearestEdge.src}
                 title={trailRunner ? trailRunner.firstname : id}
-                description={description}
+                description="bla"
                 pinColor={getColor(id)}
                 key={id}
               />

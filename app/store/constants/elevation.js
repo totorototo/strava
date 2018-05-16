@@ -1,0 +1,17 @@
+export const ELEVATION_GRADE = {
+  SMALL: 0,
+  EASY: 1,
+  MEDIUM: 2,
+  DIFFICULT: 3,
+  HARD: 4,
+  UNKNOWN: 5
+};
+
+export const ELEVATION_COLORS = {
+  SMALL: "#F4F6F5",
+  EASY: "#ECBC3E",
+  MEDIUM: "#EA8827",
+  DIFFICULT: "#E1351D",
+  HARD: "#96451F",
+  UNKNOWN: "#00451F"
+};

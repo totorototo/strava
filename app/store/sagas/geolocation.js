@@ -1,21 +1,26 @@
-import { call, takeEvery, select } from "redux-saga/effects";
+import { call, takeEvery, select, put } from "redux-saga/effects";
 
 import {
   getCurrentRaceID,
   getCurrentUserID
 } from "../state/appState/selectors";
 import { getCurrentAthleteLocation } from "../services/geolocation";
-import { writeData } from "../services/database";
 import { SHARE_LOCATION } from "../constants/actionTypes";
+import { updateEntity } from "../actions/entities";
 
 function* shareLocation() {
   const { position, error } = yield call(getCurrentAthleteLocation);
   if (!error && position) {
     const raceID = yield select(getCurrentRaceID);
     const userID = yield select(getCurrentUserID);
-    const key = `${raceID}/locations/${userID}`;
 
-    yield call(writeData, key, position);
+    yield put(
+      updateEntity(raceID, "races", {
+        positions: {
+          [userID]: position
+        }
+      })
+    );
   }
 }
 

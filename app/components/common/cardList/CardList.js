@@ -34,23 +34,23 @@ export default class CardList extends Component {
   render() {
     return (
       <Card title={this.props.title}>
-        {this.props.list.map(item =>
+        {this.props.list.map(item => (
           <View key={item.key} style={styles.item}>
-            {typeof item.image === "string"
-              ? <Image
-                  style={styles.image}
-                  source={{ uri: item.image.toString() }}
-                />
-              : <Icon
-                  style={styles.image}
-                  color={item.image.color}
-                  name={item.image.name}
-                />}
-            <Paragraph>
-              {item.text}
-            </Paragraph>
+            {typeof item.image === "string" ? (
+              <Image
+                style={styles.image}
+                source={{ uri: item.image.toString() }}
+              />
+            ) : (
+              <Icon
+                iconStyle={styles.image}
+                color={item.image.color}
+                name={item.image.name}
+              />
+            )}
+            <Paragraph>{item.text}</Paragraph>
           </View>
-        )}
+        ))}
       </Card>
     );
   }

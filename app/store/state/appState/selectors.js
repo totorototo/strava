@@ -8,3 +8,13 @@ export const getCurrentClubID = state =>
 
 export const getCurrentRaceID = state =>
   state.appState["@@/data"].currentRaceID;
+
+export const getCurrentClubMembers = state => {
+  if (state.appState["@@/data"].currentClubID === "loading") return [];
+  return (
+    state.entities.clubs[state.appState["@@/data"].currentClubID].members &&
+    state.entities.clubs[state.appState["@@/data"].currentClubID].members.map(
+      id => state.entities.athletes[id]
+    )
+  );
+};
