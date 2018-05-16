@@ -608,12 +608,6 @@
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
 				3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */,
-<<<<<<< ours
-				99B6258D1F01B13700B2FAF5 /* libthird-party.a */,
-				C3A47A371F83E9A800F5C010 /* libthird-party.a */,
-				99B6258F1F01B13700B2FAF5 /* libdouble-conversion.a */,
-				C3A47A391F83E9A800F5C010 /* libdouble-conversion.a */,
-=======
 				2DF0FFDF2056DD460020B375 /* libjsinspector.a */,
 				2DF0FFE12056DD460020B375 /* libjsinspector-tvOS.a */,
 				2DF0FFE32056DD460020B375 /* libthird-party.a */,
@@ -622,7 +616,7 @@
 				2DF0FFE92056DD460020B375 /* libdouble-conversion.a */,
 				2DF0FFEB2056DD460020B375 /* libprivatedata.a */,
 				2DF0FFED2056DD460020B375 /* libprivatedata-tvOS.a */,
->>>>>>> theirs
+
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1613,15 +1607,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "lybitos-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-<<<<<<< ours
+
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-=======
+					);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
->>>>>>> theirs
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.lybitos-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1644,15 +1637,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "lybitos-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-<<<<<<< ours
+
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-=======
+					);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
->>>>>>> theirs
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.lybitos-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
