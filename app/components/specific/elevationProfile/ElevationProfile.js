@@ -187,7 +187,6 @@ export default class ElevationProfile extends Component {
     const { width } = Dimensions.get("window");
 
     const areas = ElevationProfile.createAreaGraph(path.edges, width, 100);
-    const axis = ElevationProfile.createAxis(path.edges, width, 100);
 
     return (
       <View style={styles.container}>
@@ -200,7 +199,6 @@ export default class ElevationProfile extends Component {
               strokeWidth={0.15}
             />
           ))}
-          <Shape d={axis.path} stroke="#000" strokeWidth={3} />
         </Surface>
       </View>
     );
