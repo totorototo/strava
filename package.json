@@ -52,7 +52,8 @@
     "redux-saga": "^0.16.0",
     "reloaddux": "^0.0.9",
     "remote-redux-devtools": "^0.5.12",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
