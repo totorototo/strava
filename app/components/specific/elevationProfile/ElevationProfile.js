@@ -89,13 +89,7 @@ export default class ElevationProfile extends Component {
     return d3.scale
       .scaleThreshold()
       .domain([1, 2, 3, 4])
-      .range([
-        ELEVATION_COLORS.SMALL,
-        ELEVATION_COLORS.EASY,
-        ELEVATION_COLORS.MEDIUM,
-        ELEVATION_COLORS.DIFFICULT,
-        ELEVATION_COLORS.HARD
-      ]);
+      .range(Object.values(ELEVATION_COLORS));
   }
 
   static createAxis(edges, graphWidth, graphHeight) {
