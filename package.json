@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "http": "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8097 tcp:8097",
+    "http":
+      "adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:8097 tcp:8097",
     "remotedev": "remotedev --hostname=localhost --port=8000",
     "test": "jest",
     "lint": "eslint --quiet app",
@@ -21,13 +22,9 @@
     "postpublish": "git push origin master --follow-tags"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   },
   "dependencies": {
-    "@mapbox/togeojson": "^0.16.0",
     "d3-array": "^1.2.1",
     "d3-scale": "^2.0.0",
     "d3-shape": "^1.2.0",
