@@ -451,7 +451,7 @@ export const toGeoJSON = (() => {
         const l = pts.length;
         if (l < 2) return {}; // Invalid line in GeoJSON
         for (let d = 0; d < l; d += 1) {
-          const c = coordPair(pts[i]);
+          const c = coordPair(pts[d]);
           line.push(c.coordinates);
           if (c.time) times.push(c.time);
           if (c.heartRate || heartRates.length) {
