@@ -1,16 +1,16 @@
-import { coordinates, markers } from "../sagas/data/data";
+// import { coordinates, markers } from "../sagas/data/data";
 import positionHelper from "./helpers/gps";
 
 const getEventEdges = (...locations) => {
   const result = locations.reduce((accu, location, index) => {
-    if (coordinates[index + 1]) {
+    if (locations[index + 1]) {
       const length = positionHelper.computeDistanceBetweenLocations(
         location,
-        coordinates[index + 1]
+        locations[index + 1]
       );
       const edge = {
         src: location,
-        dest: coordinates[index + 1],
+        dest: locations[index + 1],
         length
       };
       return [...accu, edge];
@@ -32,14 +32,17 @@ const getEdgesElevationDetails = (...edges) => {
   }, []);
 };
 
-export const getEventDetails = (eventID = 0, withElevationDetails = true) => {
+export const getEventDetails = (
+  eventID = 0,
+  coordinates = [],
+  withElevationDetails = true
+) => {
   const entities = {};
 
   const edges = getEventEdges(...coordinates);
   const raceID = eventID;
   entities[raceID] = {
     date: "2018-08-24T03:00:00+00:00",
-    checkPoints: markers,
     path: { edges }
   };
 

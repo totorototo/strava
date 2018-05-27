@@ -16,3 +16,7 @@ export const toCoordinates = geoJSON =>
     ],
     []
   );
+
+export const getDetails = geoJSON => ({
+  name: geoJSON.features[0].properties.name
+});
