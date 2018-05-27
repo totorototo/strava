@@ -2,10 +2,9 @@ import RNFS from "react-native-fs";
 
 export const readDir = (
   path = `${RNFS.ExternalStorageDirectoryPath}/Download`
-) =>
-  RNFS.readDir(path).then(result =>
-    Promise.all([RNFS.stat(result[0].path), result[0].path])
-  );
+) => RNFS.readDir(path);
 
 export const readFile = (path = "", encoding = "utf8") =>
   RNFS.readFile(path, encoding);
+
+export const getStat = (path = "") => RNFS.stat(path);
