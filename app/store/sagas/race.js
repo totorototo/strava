@@ -16,7 +16,7 @@ function* listRaces() {
       const { contents } = yield call(readTrace, files[i][1]);
       const doc = yield call(toDoc, contents);
       const json = yield call(toGeoJSON, doc);
-      console.log(yield call(toCoordinates, json));
+      yield call(toCoordinates, json);
     }
   }
 
