@@ -150,7 +150,11 @@ export default class ElevationProfile extends Component {
     });
 
     // Create our x-scale.
-    const scaleX = ElevationProfile.createXScale(0, edges.length, graphWidth);
+    const scaleX = ElevationProfile.createXScale(
+      0,
+      gps.computeDistance(...edges),
+      graphWidth
+    );
 
     const colorScale = ElevationProfile.createColorScale();
 
@@ -161,7 +165,11 @@ export default class ElevationProfile extends Component {
     const extentY = d3Array.extent(altitudes);
 
     // Create our y-scale.
-    const scaleY = ElevationProfile.createYScale(0, extentY[1], graphHeight);
+    const scaleY = ElevationProfile.createYScale(
+      extentY[0],
+      extentY[1],
+      graphHeight
+    );
 
     return Object.entries(data).map(([grade, section]) => {
       const areaShape = d3.shape
@@ -169,7 +177,7 @@ export default class ElevationProfile extends Component {
         // For every x and y-point in our line shape we are given an item from our
         // array which we pass through our scale function so we map the domain value
         // to the range value.
-        .x(d => scaleX(d.index))
+        .x(d => scaleX(d.distanceDone))
         .y1(d => scaleY(d.src.altitude))
         .y0(extentY[1])
         .defined(d => !d.fake)
