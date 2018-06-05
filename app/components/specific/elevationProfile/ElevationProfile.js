@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { xor, concat } from "lodash";
 import PropTypes from "prop-types";
+import { xor, concat } from "lodash";
 import { View, ART, Dimensions } from "react-native";
 import * as scale from "d3-scale";
 import * as shape from "d3-shape";
