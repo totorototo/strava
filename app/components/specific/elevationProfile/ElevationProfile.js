@@ -48,26 +48,6 @@ Array.prototype.groupBy = function(fn) {
 };
 
 export default class ElevationProfile extends Component {
-  static propTypes = {
-    path: PropTypes.shape({
-      edges: PropTypes.arrayOf(
-        PropTypes.shape({
-          src: PropTypes.shape({
-            longitude: PropTypes.number,
-            latitude: PropTypes.number,
-            altitude: PropTypes.number
-          }),
-          dest: PropTypes.shape({
-            longitude: PropTypes.number,
-            latitude: PropTypes.number,
-            altitude: PropTypes.number
-          }),
-          length: PropTypes.number
-        })
-      )
-    }).isRequired
-  };
-
   static createXScale(start, end, rangeWidth) {
     return d3.scale
       .scaleLinear()
@@ -189,6 +169,26 @@ export default class ElevationProfile extends Component {
       };
     });
   }
+
+  static propTypes = {
+    path: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          src: PropTypes.shape({
+            longitude: PropTypes.number,
+            latitude: PropTypes.number,
+            altitude: PropTypes.number
+          }),
+          dest: PropTypes.shape({
+            longitude: PropTypes.number,
+            latitude: PropTypes.number,
+            altitude: PropTypes.number
+          }),
+          length: PropTypes.number
+        })
+      )
+    }).isRequired
+  };
 
   render() {
     const { path } = this.props;
