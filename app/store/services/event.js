@@ -1,5 +1,6 @@
 // import { coordinates, markers } from "../sagas/data/data";
 import positionHelper from "./helpers/gps";
+import { peaksFinder } from "./helpers/peaks";
 
 const getEventEdges = (...locations) => {
   const result = locations.reduce((accu, location, index) => {
@@ -49,6 +50,20 @@ export const getEventDetails = (
   if (withElevationDetails) {
     const detailedEdges = getEdgesElevationDetails(...edges);
     entities[raceID].path.edges = detailedEdges;
+
+    const elevations = coordinates.map(location => location.altitude);
+    const { ricker } = peaksFinder;
+    const find = peaksFinder
+      .findPeaks()
+      .kernel(ricker)
+      .gapThreshold(2)
+      .minLineLength(3)
+      .minSNR(1.5)
+      .widths([1, 2, 10]);
+    const pk = find(elevations);
+
+    const ppk = pk.map(item => detailedEdges[item.index]);
+    console.log(ppk);
   }
 
   return entities;
