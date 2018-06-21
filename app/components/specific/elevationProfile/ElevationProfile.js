@@ -78,9 +78,56 @@ export default class ElevationProfile extends Component {
       ]);
   }
 
+  static createYAxisTicks(edges, graphWidth, graphHeight) {
+    // Collect all y values.
+    const altitudes = edges.map(location => location.src.altitude);
+
+    // Get the min and max y value.
+    const extentY = d3Array.extent(altitudes);
+
+    const tickInterval = 600; // in meter
+    const tickCount = Math.floor(extentY[1] / tickInterval);
+
+    const ticks = [];
+    for (let i = 0; i <= tickCount; i += 1) {
+      const tick = tickInterval * i;
+      ticks.push(tick);
+    }
+
+    // Create our x-scale.
+    const scaleX = ElevationProfile.createXScale(
+      0,
+      gps.computeDistance(...edges),
+      graphWidth
+    );
+
+    // Create our y-scale.
+    const scaleY = ElevationProfile.createYScale(
+      extentY[0],
+      extentY[1],
+      graphHeight
+    );
+
+    const tks = ticks.map(tick => [{ x: 0, y: tick }, { x: 1, y: tick }]);
+
+    return tks.map(tick => {
+      const lineShape = d3.shape
+        .line()
+        // For every x and y-point in our line shape we are given an item from our
+        // array which we pass through our scale function so we map the domain value
+        // to the range value.
+        .x(d => scaleX(d.x))
+        .y(d => scaleY(d.y));
+
+      return {
+        path: lineShape(tick)
+      };
+    });
+  }
+
   static createXAxisTicks(edges, graphWidth, graphHeight) {
     const distance = gps.computeDistance(...edges);
-    const tickInterval = 10; // in kms
+    const tickInterval = 25; // in kms
     const checkPointNumber = Math.floor(distance / tickInterval);
 
     const checkPoints = [];
@@ -274,6 +321,7 @@ export default class ElevationProfile extends Component {
     const xAxis = ElevationProfile.createXAxis(path.edges, width, 100);
     const yAxis = ElevationProfile.createYAxis(path.edges, width, 100);
     const xTicks = ElevationProfile.createXAxisTicks(path.edges, width, 100);
+    const yTicks = ElevationProfile.createYAxisTicks(path.edges, width, 100);
 
     return (
       <View style={styles.container}>
@@ -289,6 +337,9 @@ export default class ElevationProfile extends Component {
           <Shape d={xAxis.path} stroke="#000" strokeWidth={3} />
           <Shape d={yAxis.path} stroke="#000" strokeWidth={3} />
           {xTicks.map(tick => (
+            <Shape d={tick.path} stroke="#000" strokeWidth={3} />
+          ))}
+          {yTicks.map(tick => (
             <Shape d={tick.path} stroke="#000" strokeWidth={3} />
           ))}
         </Surface>
