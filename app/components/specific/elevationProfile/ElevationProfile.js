@@ -37,7 +37,7 @@ const getRange = percent => {
 };
 
 // eslint-disable-next-line no-extend-native
-Array.prototype.groupBy = function(fn) {
+Array.prototype.groupBy = function groupBy(fn) {
   return this.reduce((accu, item, index, array) => {
     const key = fn(item, item, array);
     // eslint-disable-next-line no-param-reassign
@@ -78,23 +78,97 @@ export default class ElevationProfile extends Component {
       ]);
   }
 
-  static createAxis(edges, graphWidth, graphHeight) {
-    const totalDistance = edges[edges.length - 1].distanceDone;
-    const intervalBetweenCheckPoints = 10;
-    const totalCheckPoints = Math.floor(
-      totalDistance / intervalBetweenCheckPoints
-    );
+  static createXAxisTicks(edges, graphWidth, graphHeight) {
+    const distance = gps.computeDistance(...edges);
+    const tickInterval = 10; // in kms
+    const checkPointNumber = Math.floor(distance / tickInterval);
 
     const checkPoints = [];
-    for (let i = 0; i <= totalCheckPoints; i += 1) {
-      checkPoints.push(intervalBetweenCheckPoints * i);
+    for (let i = 0; i <= checkPointNumber; i += 1) {
+      const checkPointDistance = tickInterval * i;
+      checkPoints.push(checkPointDistance);
     }
 
     const ticksIndices = gps.getCheckpointsIndices(checkPoints, 0.1, ...edges);
-    const AxisData = ticksIndices.map(tickIndex => edges[tickIndex]);
-    // TODO: draw line dans ta face!
+    const filteredEdges = ticksIndices.map(index => edges[index]);
 
-    const scaleX = ElevationProfile.createXScale(0, edges.length, graphWidth);
+    // Create our x-scale.
+    const scaleX = ElevationProfile.createXScale(
+      0,
+      gps.computeDistance(...edges),
+      graphWidth
+    );
+
+    // Collect all y values.
+    const altitudes = edges.map(location => location.src.altitude);
+
+    // Get the min and max y value.
+    const extentY = d3Array.extent(altitudes);
+
+    // Create our y-scale.
+    const scaleY = ElevationProfile.createYScale(
+      extentY[0],
+      extentY[1],
+      graphHeight
+    );
+
+    return filteredEdges.map(edge => {
+      const areaShape = d3.shape
+        .line()
+        // For every x and y-point in our line shape we are given an item from our
+        // array which we pass through our scale function so we map the domain value
+        // to the range value.
+        .x(d => scaleX(d.distanceDone))
+        .y(d => scaleY(d.src.altitude));
+
+      return {
+        path: areaShape(edge)
+      };
+    });
+  }
+
+  static createYAxis(edges, graphWidth, graphHeight) {
+    // Collect all y values.
+    const altitudes = edges.map(location => location.src.altitude);
+
+    // Get the min and max y value.
+    const extentY = d3Array.extent(altitudes);
+
+    // Create our y-scale.
+    const scaleY = ElevationProfile.createYScale(
+      extentY[0],
+      extentY[1],
+      graphHeight
+    );
+
+    const scaleX = ElevationProfile.createXScale(0, 0, graphWidth);
+
+    const lineShape = d3.shape
+      .line()
+      // For every x and y-point in our line shape we are given an item from our
+      // array which we pass through our scale function so we map the domain value
+      // to the range value.
+      .x(scaleX(0))
+      .y(d => scaleY(d));
+
+    return {
+      // Pass in our array of data to our line generator to produce the `d={}`
+      // attribute value that will go into our `<Shape />` component.
+      path: lineShape(extentY)
+    };
+  }
+
+  static createXAxis(edges, graphWidth, graphHeight) {
+    // TODO: temp solution!!
+    const data = [];
+    data.push(edges[0]);
+    data.push(edges[edges.length - 1]);
+
+    const scaleX = ElevationProfile.createXScale(
+      0,
+      gps.computeDistance(...edges),
+      graphWidth
+    );
     const scaleY = ElevationProfile.createYScale(0, 0, graphHeight);
 
     const lineShape = d3.shape
@@ -102,13 +176,13 @@ export default class ElevationProfile extends Component {
       // For every x and y-point in our line shape we are given an item from our
       // array which we pass through our scale function so we map the domain value
       // to the range value.
-      .x(d => scaleX(d.index))
+      .x(d => scaleX(d.distanceDone))
       .y(scaleY(0));
 
     return {
       // Pass in our array of data to our line generator to produce the `d={}`
       // attribute value that will go into our `<Shape />` component.
-      path: lineShape(AxisData)
+      path: lineShape(data)
     };
   }
 
@@ -195,6 +269,9 @@ export default class ElevationProfile extends Component {
     const { width } = Dimensions.get("window");
 
     const areas = ElevationProfile.createAreaGraph(path.edges, width, 100);
+    const xAxis = ElevationProfile.createXAxis(path.edges, width, 100);
+    const yAxis = ElevationProfile.createYAxis(path.edges, width, 100);
+    // const xTicks = ElevationProfile.createXAxisTicks(path.edges, width, 100);
 
     return (
       <View style={styles.container}>
@@ -207,6 +284,8 @@ export default class ElevationProfile extends Component {
               strokeWidth={0.15}
             />
           ))}
+          <Shape d={xAxis.path} stroke="#000" strokeWidth={3} />
+          <Shape d={yAxis.path} stroke="#000" strokeWidth={3} />
         </Surface>
       </View>
     );
