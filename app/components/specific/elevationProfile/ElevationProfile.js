@@ -89,9 +89,6 @@ export default class ElevationProfile extends Component {
       checkPoints.push(checkPointDistance);
     }
 
-    const ticksIndices = gps.getCheckpointsIndices(checkPoints, 0.1, ...edges);
-    const filteredEdges = ticksIndices.map(index => edges[index]);
-
     // Create our x-scale.
     const scaleX = ElevationProfile.createXScale(
       0,
@@ -112,17 +109,22 @@ export default class ElevationProfile extends Component {
       graphHeight
     );
 
-    return filteredEdges.map(edge => {
-      const areaShape = d3.shape
+    const ticks = checkPoints.map(checkPoint => [
+      { x: checkPoint, y: extentY[0] },
+      { x: checkPoint, y: extentY[0] + 100 }
+    ]);
+
+    return ticks.map(tick => {
+      const lineShape = d3.shape
         .line()
         // For every x and y-point in our line shape we are given an item from our
         // array which we pass through our scale function so we map the domain value
         // to the range value.
-        .x(d => scaleX(d.distanceDone))
-        .y(d => scaleY(d.src.altitude));
+        .x(d => scaleX(d.x))
+        .y(d => scaleY(d.y));
 
       return {
-        path: areaShape(edge)
+        path: lineShape(tick)
       };
     });
   }
@@ -271,7 +273,7 @@ export default class ElevationProfile extends Component {
     const areas = ElevationProfile.createAreaGraph(path.edges, width, 100);
     const xAxis = ElevationProfile.createXAxis(path.edges, width, 100);
     const yAxis = ElevationProfile.createYAxis(path.edges, width, 100);
-    // const xTicks = ElevationProfile.createXAxisTicks(path.edges, width, 100);
+    const xTicks = ElevationProfile.createXAxisTicks(path.edges, width, 100);
 
     return (
       <View style={styles.container}>
@@ -286,6 +288,9 @@ export default class ElevationProfile extends Component {
           ))}
           <Shape d={xAxis.path} stroke="#000" strokeWidth={3} />
           <Shape d={yAxis.path} stroke="#000" strokeWidth={3} />
+          {xTicks.map(tick => (
+            <Shape d={tick.path} stroke="#000" strokeWidth={3} />
+          ))}
         </Surface>
       </View>
     );
