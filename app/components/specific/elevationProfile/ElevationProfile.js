@@ -293,6 +293,41 @@ export default class ElevationProfile extends Component {
     });
   }
 
+  static createAthleteMarker(edges, edge, graphWidth, graphHeight) {
+    // Collect all y values.
+    const altitudes = edges.map(location => location.src.altitude);
+
+    // Get the min and max y value.
+    const extentY = d3Array.extent(altitudes);
+
+    // Create our y-scale.
+    const scaleY = ElevationProfile.createYScale(
+      extentY[0],
+      extentY[1],
+      graphHeight
+    );
+
+    // Create our x-scale.
+    const scaleX = ElevationProfile.createXScale(
+      0,
+      gps.computeDistance(...edges),
+      graphWidth
+    );
+
+    const symbolShape = d3.shape.symbol();
+    // For every x and y-point in our line shape we are given an item from our
+    // array which we pass through our scale function so we map the domain value
+    // to the range value.
+
+    return {
+      // Pass in our array of data to our line generator to produce the `d={}`
+      // attribute value that will go into our `<Shape />` component.
+      path: symbolShape(),
+      x: scaleX(edge.distanceDone),
+      y: scaleY(edge.src.altitude)
+    };
+  }
+
   static propTypes = {
     path: PropTypes.shape({
       edges: PropTypes.arrayOf(
@@ -310,11 +345,21 @@ export default class ElevationProfile extends Component {
           length: PropTypes.number
         })
       )
-    }).isRequired
+    }).isRequired,
+    positions: PropTypes.arrayOf({
+      coords: PropTypes.shape({
+        latitude: PropTypes.string,
+        longitude: PropTypes.string
+      })
+    })
+  };
+
+  static defaultProps = {
+    positions: []
   };
 
   render() {
-    const { path } = this.props;
+    const { path, positions } = this.props;
     const { width } = Dimensions.get("window");
 
     const areas = ElevationProfile.createAreaGraph(path.edges, width, 100);
@@ -322,6 +367,26 @@ export default class ElevationProfile extends Component {
     const yAxis = ElevationProfile.createYAxis(path.edges, width, 100);
     const xTicks = ElevationProfile.createXAxisTicks(path.edges, width, 100);
     const yTicks = ElevationProfile.createYAxisTicks(path.edges, width, 100);
+
+    const athletesPositions = Object.entries(positions).reduce(
+      (accu, [id, value]) => {
+        const location = {
+          longitude: value.coords.longitude,
+          latitude: value.coords.latitude,
+          id
+        };
+        return [...accu, location];
+      },
+      []
+    );
+
+    const closestEdges = athletesPositions.map(pos =>
+      gps.findClosestEdge(pos, ...path.edges)
+    );
+
+    const markers = closestEdges.map(edge =>
+      ElevationProfile.createAthleteMarker(path.edges, edge, width, 100)
+    );
 
     return (
       <View style={styles.container}>
@@ -342,6 +407,16 @@ export default class ElevationProfile extends Component {
           {yTicks.map(tick => (
             <Shape d={tick.path} stroke="#000" strokeWidth={3} />
           ))}
+          {markers &&
+            markers.map(marker => (
+              <Shape
+                d={marker.path}
+                x={marker.x}
+                y={marker.y}
+                stroke="#000"
+                strokeWidth={3}
+              />
+            ))}
         </Surface>
       </View>
     );
