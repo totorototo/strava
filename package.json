@@ -41,6 +41,7 @@
     "react-native": "0.55.4",
     "react-native-config": "0.9.0",
     "react-native-elements": "0.18.2",
+    "react-native-fs": "^2.9.12",
     "react-native-maps": "^0.17.1",
     "react-native-progress": "^3.2.1",
     "react-native-vector-icons": "^4.2.0",
@@ -50,7 +51,8 @@
     "redux-saga": "^0.16.0",
     "reloaddux": "^0.0.9",
     "remote-redux-devtools": "^0.5.12",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",

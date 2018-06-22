@@ -94,15 +94,16 @@ export default class RaceMap extends Component {
           fillColor={theme.PrimaryColor}
           strokeWidth={3}
         />
-        {race.checkPoints.map(marker => (
-          <MapView.Marker
-            key={marker.title + marker.description}
-            coordinate={marker.coordinates}
-            title={marker.title}
-            description={marker.description}
-            pinColor={theme.PrimaryColor}
-          />
-        ))}
+        {race.checkPoints &&
+          race.checkPoints.map(marker => (
+            <MapView.Marker
+              key={marker.title + marker.description}
+              coordinate={marker.coordinates}
+              title={marker.title}
+              description={marker.description}
+              pinColor={theme.PrimaryColor}
+            />
+          ))}
         {race.positions &&
           Object.entries(race.positions).map(([id, location]) => {
             const coordinate = {

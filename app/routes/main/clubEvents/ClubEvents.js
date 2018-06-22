@@ -85,7 +85,7 @@ class ClubEvents extends Component {
       </CollapsableDrawer>,
       <View style={styles.bubble} key="3">
         <Link onPress={shareLocation}>Spot me!</Link>
-        <ElevationProfile path={race.path} />
+        <ElevationProfile path={race.path} positions={race.positions} />
       </View>
     ];
   }
