@@ -113,9 +113,6 @@ export default class ElevationProfile extends Component {
     return tks.map(tick => {
       const lineShape = d3.shape
         .line()
-        // For every x and y-point in our line shape we are given an item from our
-        // array which we pass through our scale function so we map the domain value
-        // to the range value.
         .x(d => scaleX(d.x))
         .y(d => scaleY(d.y));
 
@@ -164,9 +161,6 @@ export default class ElevationProfile extends Component {
     return ticks.map(tick => {
       const lineShape = d3.shape
         .line()
-        // For every x and y-point in our line shape we are given an item from our
-        // array which we pass through our scale function so we map the domain value
-        // to the range value.
         .x(d => scaleX(d.x))
         .y(d => scaleY(d.y));
 
@@ -194,15 +188,10 @@ export default class ElevationProfile extends Component {
 
     const lineShape = d3.shape
       .line()
-      // For every x and y-point in our line shape we are given an item from our
-      // array which we pass through our scale function so we map the domain value
-      // to the range value.
       .x(scaleX(0))
       .y(d => scaleY(d));
 
     return {
-      // Pass in our array of data to our line generator to produce the `d={}`
-      // attribute value that will go into our `<Shape />` component.
       path: lineShape(extentY)
     };
   }
@@ -222,15 +211,10 @@ export default class ElevationProfile extends Component {
 
     const lineShape = d3.shape
       .line()
-      // For every x and y-point in our line shape we are given an item from our
-      // array which we pass through our scale function so we map the domain value
-      // to the range value.
       .x(d => scaleX(d.distanceDone))
       .y(scaleY(0));
 
     return {
-      // Pass in our array of data to our line generator to produce the `d={}`
-      // attribute value that will go into our `<Shape />` component.
       path: lineShape(data)
     };
   }
@@ -277,9 +261,6 @@ export default class ElevationProfile extends Component {
     return Object.entries(data).map(([grade, section]) => {
       const areaShape = d3.shape
         .area()
-        // For every x and y-point in our line shape we are given an item from our
-        // array which we pass through our scale function so we map the domain value
-        // to the range value.
         .x(d => scaleX(d.distanceDone))
         .y1(d => scaleY(d.src.altitude))
         .y0(extentY[1])
@@ -315,13 +296,8 @@ export default class ElevationProfile extends Component {
     );
 
     const symbolShape = d3.shape.symbol();
-    // For every x and y-point in our line shape we are given an item from our
-    // array which we pass through our scale function so we map the domain value
-    // to the range value.
 
     return {
-      // Pass in our array of data to our line generator to produce the `d={}`
-      // attribute value that will go into our `<Shape />` component.
       path: symbolShape(),
       x: scaleX(edge.distanceDone),
       y: scaleY(edge.src.altitude)
